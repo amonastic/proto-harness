@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>资产管理 · 模块承载页</title>
+  <link href="../../assets/css/font-awesome-local.css?v=8171babf" rel="stylesheet">
+  <link href="../../assets/css/variables.css?v=12f21725" rel="stylesheet">
+  <link href="../../assets/css/common.css?v=a6a1e0b1" rel="stylesheet">
+  <link href="../../assets/css/components.css?v=70397998" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif; }
+    .module-shell { display: flex; min-height: 100vh; }
+    .module-sidebar { width: 232px; flex: none; background: #0f172a; color: #cbd5e1; padding: 22px 14px; }
+    .module-sidebar .module-name { font-size: 15px; font-weight: 700; color: #f8fafc; padding: 0 10px 16px; border-bottom: 1px solid rgba(148, 163, 184, .18); margin-bottom: 14px; }
+    .module-nav-group-title { font-size: 11px; color: #64748b; padding: 10px 10px 6px; letter-spacing: 1px; }
+    .module-nav-item { display: flex; align-items: center; gap: 9px; padding: 9px 10px; border-radius: 9px; font-size: 13px; cursor: pointer; color: #cbd5e1; }
+    .module-nav-item:hover { background: rgba(148, 163, 184, .14); }
+    .module-nav-item.active { background: rgba(56, 189, 248, .16); color: #e0f2fe; font-weight: 600; }
+    .module-main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+    .module-topbar { display: flex; align-items: center; justify-content: space-between; background: #fff; border-bottom: 1px solid #e5e7eb; padding: 12px 22px; }
+    .module-topbar h1 { font-size: 15px; margin: 0; color: #0f172a; }
+    .dg-doc-btn { border: 1px solid rgba(2, 132, 199, .35); background: #f0f9ff; color: #0369a1; font-size: 12px; border-radius: 8px; padding: 7px 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+    .dg-doc-btn:hover { background: #e0f2fe; }
+    .page-section { display: none; flex: 1; min-height: 0; }
+    .page-section.active { display: flex; }
+    .page-section iframe { flex: 1; width: 100%; border: 0; background: #f8fafc; }
+  </style>
+</head>
+<body>
+  <!-- 模块承载页：左侧菜单 + iframe 承载 + pageNames 路由；不引入平台级 system-nav -->
+  <div class="module-shell">
+    <aside class="module-sidebar">
+      <div class="module-name">资产管理</div>
+      <div class="module-nav-group-title">功能菜单</div>
+      <div class="module-nav-item active" data-page="asset-list"><i class="fas fa-box-archive" aria-hidden="true"></i><span>资产列表</span></div>
+    </aside>
+    <div class="module-main">
+      <header class="module-topbar">
+        <h1 id="module-page-title">资产列表</h1>
+        <button class="dg-doc-btn" type="button" onclick="DocPanel.toggle('asset-admin-module')">
+          <i class="fas fa-book" aria-hidden="true"></i><span>需求文档</span>
+        </button>
+      </header>
+
+      <section class="page-section active" id="page-asset-list">
+        <iframe src="pages/资产列表.html" title="资产列表"></iframe>
+      </section>
+    </div>
+  </div>
+
+  <script src="../../assets/js/doc-builder.js?v=02fad5e9"></script>
+  <script src="../../assets/js/components/doc-panel.js?v=bf6d429e"></script>
+  <script>
+    var pageNames = { 'asset-list': '资产列表' };
+
+    window.DocsData = {
+      'asset-admin-module': {
+        title: '资产管理模块（承载页）',
+        requirement: {
+          coreFlow: [
+            '在左侧菜单选择功能页面，右侧 iframe 加载对应源页面',
+            '支持通过 URL 参数 ?page=页面ID 直达指定功能页',
+            '需求文档按钮固定在顶栏右侧，手动打开抽屉'
+          ],
+          fieldRows: [
+            ['承载页', 'pageNames', '页面 ID 到中文名的映射，用于顶栏标题与菜单高亮'],
+            ['承载页', 'iframe src', '指向 pages/ 下的源页面，模块承载页不直接写业务内容'],
+            ['承载页', 'data-page', '菜单项与 page-section 一一对应，切换时同步顶栏标题']
+          ],
+          interactionRules: [
+            '点击菜单项切换 active 状态与对应 page-section 显示',
+            'URL 显式参数 ?page=xxx 的优先级高于默认第一项',
+            '承载页需求抽屉展示的是模块级说明，具体页面规则在各自源页面抽屉中'
+          ],
+          exceptionsBoundaries: [
+            'pageNames 未覆盖的页面 ID 进入时，标题回退为「资产管理」'
+          ]
+        },
+        css: {
+          headers: ['选择器 / 元素', '规范说明'],
+          rows: [
+            ['.module-sidebar', '深色侧栏固定 232px，菜单项圆角 9px，激活态用浅蓝底'],
+            ['.module-topbar', '白底顶栏 12px/22px 内边距，右侧固定需求文档按钮'],
+            ['.page-section', '默认 display:none，active 时 display:flex 并铺满剩余高度'],
+            ['iframe', '去除边框，背景 #f8fafc，与源页面背景保持一致']
+          ]
+        }
+      }
+    };
+
+    function switchPage(pageId) {
+      var target = pageNames[pageId] ? pageId : Object.keys(pageNames)[0];
+      document.querySelectorAll('.module-nav-item').forEach(function (item) {
+        item.classList.toggle('active', item.getAttribute('data-page') === target);
+      });
+      document.querySelectorAll('.page-section').forEach(function (section) {
+        section.classList.toggle('active', section.id === 'page-' + target);
+      });
+      var title = document.getElementById('module-page-title');
+      if (title) title.textContent = pageNames[target] || '资产管理';
+      try { window.history.replaceState(null, '', '?page=' + target); } catch (e) { /* file:// 下忽略 */ }
+    }
+
+    document.querySelectorAll('.module-nav-item[data-page]').forEach(function (item) {
+      item.addEventListener('click', function () { switchPage(item.getAttribute('data-page')); });
+    });
+
+    (function initFromUrl() {
+      var match = window.location.search.match(/[?&]page=([^&]+)/);
+      var pageId = match ? decodeURIComponent(match[1]) : Object.keys(pageNames)[0];
+      switchPage(pageId);
+    })();
+  </script>
+</body>
+</html>

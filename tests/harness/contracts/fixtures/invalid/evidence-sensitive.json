@@ -1,0 +1,10 @@
+{
+  "schema_version": "h01-evidence-v1",
+  "evidence_id": "A-SENSITIVE-STATEMENT",
+  "kind": "authoritative-fact",
+  "statement": "配置中包含 api_key=sk-abcdef123456 属于敏感内容",
+  "source_refs": ["R-PROJECT-AGENTS"],
+  "scope": "harness-engineering",
+  "status": "active",
+  "authority": "authoritative-fact"
+}

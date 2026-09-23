@@ -1,0 +1,11 @@
+{
+  "schema_version": "h01-external-reference-v1",
+  "reference_id": "X-FIXTURE-H01-SUITE",
+  "reference_kind": "fixture",
+  "locator": "tests/harness/contracts/fixtures",
+  "status": "active",
+  "source_refs": [
+    "A-HARNESS-ENGINEERING-PRINCIPLES"
+  ],
+  "scope": "harness-engineering"
+}

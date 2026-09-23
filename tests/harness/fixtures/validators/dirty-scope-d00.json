@@ -1,0 +1,55 @@
+{
+  "suite_ref": "FS-SYNTHETIC-H03A-V1",
+  "validator": "dirty-scope",
+  "forbiddenGlobs": ["AGENTS.md", "harness/**", "standards/**", "templates/**", "迭代索引/snapshots/**"],
+  "cases": [
+    {
+      "id": "D00-01",
+      "statusOutput": " M scripts/harness/validators/task-auth.js\n",
+      "targetFiles": ["scripts/harness/validators/task-auth.js"],
+      "expected": { "verdict": "pass", "target": ["scripts/harness/validators/task-auth.js"], "existingDirty": [], "untracked": [] }
+    },
+    {
+      "id": "D00-02",
+      "statusOutput": " M scripts/harness/validators/task-auth.js\n M 平台优化-需求文档审计报告.md\n",
+      "targetFiles": ["scripts/harness/validators/task-auth.js"],
+      "expected": { "verdict": "pass", "target": ["scripts/harness/validators/task-auth.js"], "existingDirty": ["平台优化-需求文档审计报告.md"] }
+    },
+    {
+      "id": "D00-03",
+      "statusOutput": " M scripts/harness/validators/task-auth.js\n M AGENTS.md\n",
+      "targetFiles": ["scripts/harness/validators/task-auth.js"],
+      "expected": { "verdict": "fail", "highRisk": ["AGENTS.md"] }
+    },
+    {
+      "id": "D00-04",
+      "statusOutput": " M scripts/harness/validators/task-auth.js\n?? download/\n",
+      "targetFiles": ["scripts/harness/validators/task-auth.js"],
+      "expected": { "verdict": "pass", "untracked": ["download/"] }
+    },
+    {
+      "id": "D00-05",
+      "statusOutput": " M doc/平台治理/harness-engineering/来源清册.md\n",
+      "targetFiles": ["ro:doc/平台治理/harness-engineering/来源清册.md"],
+      "expected": { "verdict": "fail", "readonly": ["doc/平台治理/harness-engineering/来源清册.md"] }
+    },
+    {
+      "id": "D00-06",
+      "statusOutput": "",
+      "targetFiles": ["scripts/harness/validators/task-auth.js"],
+      "expected": { "verdict": "pass", "target": [], "existingDirty": [], "highRisk": [], "untracked": [], "readonly": [] }
+    },
+    {
+      "id": "D00-07",
+      "statusOutput": "M  scripts/harness/validators/task-auth.js\n",
+      "targetFiles": ["scripts/harness/validators/task-auth.js"],
+      "expected": { "verdict": "pass", "target": ["scripts/harness/validators/task-auth.js"] }
+    },
+    {
+      "id": "D00-08",
+      "statusOutput": " M harness/01-强制闸门.md\n",
+      "targetFiles": ["harness/01-强制闸门.md"],
+      "expected": { "verdict": "fail", "highRisk": ["harness/01-强制闸门.md"], "target": [] }
+    }
+  ]
+}

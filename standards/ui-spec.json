@@ -1,0 +1,143 @@
+{
+  "version": "2.0.0",
+  "updatedAt": "2026-09-22",
+  "principles": [
+    "迭代页是索引页，不承载业务开发",
+    "平台入口页有导航，模块业务页无平台导航",
+    "Web文档抽屉默认关闭，App/小程序默认打开",
+    "需求文档默认抽屉优先，规范必须可机检"
+  ],
+  "rules": {
+    "designTokens": {
+      "requiredFile": "assets/css/variables.css"
+    },
+    "docButton": {
+      "requiredClass": "dg-doc-btn",
+      "allowedImplementation": [
+        "class dg-doc-btn",
+        "assets/js/components/doc-button.js",
+        "js/doc-panel.js (runtime normalize)"
+      ]
+    },
+    "docPanelMode": {
+      "web-manual-open": {
+        "forbiddenPatterns": [
+          "DocPanel.autoShow("
+        ],
+        "hint": "Web页面默认关闭抽屉，手动打开"
+      },
+      "mobile-auto-open": {
+        "requiredPatterns": [
+          "DocPanel.autoShow("
+        ],
+        "hint": "移动端页面默认自动展示抽屉"
+      },
+      "app-auto-open": {
+        "requiredPatterns": [
+          "DocPanel.autoShow("
+        ],
+        "hint": "App 页面默认自动展示抽屉"
+      },
+      "miniapp-auto-open": {
+        "requiredPatterns": [
+          "DocPanel.autoShow("
+        ],
+        "hint": "小程序页面默认自动展示抽屉"
+      }
+    },
+    "templateBoundaries": {
+      "platform-entry": {
+        "mustContainAny": [
+          "system-nav"
+        ],
+        "description": "平台入口页必须有系统导航"
+      },
+      "iteration-index": {
+        "mustContainAny": [
+          "system-nav"
+        ],
+        "description": "迭代索引页有导航，但只做聚合入口"
+      },
+      "module-page": {
+        "mustNotContain": [
+          "<nav class=\"system-nav\"",
+          "class=\"system-nav\""
+        ],
+        "description": "模块业务页不得包含平台级系统导航"
+      },
+      "portal-index": {
+        "mustNotContain": [
+          "<nav class=\"system-nav\"",
+          "class=\"system-nav\""
+        ],
+        "description": "总览入口页不使用左侧 system-nav"
+      }
+    },
+    "drawerWidth": {
+      "web": "780px",
+      "app": "780px",
+      "miniapp": "780px",
+      "mobile": "780px"
+    },
+    "docDeliveryStrategyDefault": "drawer-first"
+  },
+  "checks": {
+    "enforceHtmlRegistration": true,
+    "htmlTargets": [
+      "迭代索引",
+      "admin-portal",
+      "field-app",
+      "mini-program"
+    ],
+    "ignoreHtmlPatterns": [
+      ".claude/worktrees/"
+    ],
+    "pages": [
+      {
+        "path": "迭代索引/202606下.html",
+        "type": "iteration-index",
+        "platform": "web",
+        "docPanelMode": "web-manual-open",
+        "requiresDocButton": false,
+        "requiresTokens": false,
+        "docDeliveryStrategy": "none"
+      },
+      {
+        "path": "admin-portal/asset-admin/index.html",
+        "type": "module-page",
+        "platform": "web",
+        "docPanelMode": "web-manual-open",
+        "requiresDocButton": true,
+        "requiresTokens": false,
+        "docDeliveryStrategy": "drawer-first"
+      },
+      {
+        "path": "admin-portal/asset-admin/pages/资产列表.html",
+        "type": "module-page",
+        "platform": "web",
+        "docPanelMode": "web-manual-open",
+        "requiresDocButton": true,
+        "requiresTokens": false,
+        "docDeliveryStrategy": "drawer-first"
+      },
+      {
+        "path": "field-app/main/pages/订单列表.html",
+        "type": "module-page",
+        "platform": "app",
+        "docPanelMode": "app-auto-open",
+        "requiresDocButton": true,
+        "requiresTokens": false,
+        "docDeliveryStrategy": "drawer-first"
+      },
+      {
+        "path": "mini-program/main/pages/下单.html",
+        "type": "module-page",
+        "platform": "miniapp",
+        "docPanelMode": "miniapp-auto-open",
+        "requiresDocButton": true,
+        "requiresTokens": false,
+        "docDeliveryStrategy": "drawer-first"
+      }
+    ]
+  }
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>迭代索引 · 202606下</title>
+  <link href="../assets/css/font-awesome-local.css?v=8171babf" rel="stylesheet">
+  <link href="../assets/css/variables.css?v=12f21725" rel="stylesheet">
+  <link href="../assets/css/common.css?v=a6a1e0b1" rel="stylesheet">
+  <link href="../assets/css/components.css?v=70397998" rel="stylesheet">
+  <link href="../assets/css/nav-themes.css?v=3b8d7bed" rel="stylesheet">
+  <style>
+    .iteration-main { margin-left: 260px; padding: 28px 32px 80px; }
+    .iteration-head h1 { font-size: 22px; margin: 0 0 6px; color: #0f172a; }
+    .iteration-head p { font-size: 13px; color: #64748b; margin: 0 0 26px; line-height: 1.8; }
+    .iteration-group { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 18px 20px; margin-bottom: 18px; }
+    .iteration-group h2 { font-size: 15px; margin: 0 0 4px; color: #0f172a; }
+    .iteration-group .group-sub { font-size: 12px; color: #94a3b8; margin: 0 0 14px; }
+    .iteration-entry { display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid #eef2f7; background: #f8fafc; border-radius: 10px; padding: 12px 14px; }
+    .iteration-entry + .iteration-entry { margin-top: 10px; }
+    .iteration-entry .entry-name { font-size: 13px; color: #334155; font-weight: 600; }
+    .iteration-entry .entry-note { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+    .iteration-entry a.entry-link { flex: none; font-size: 12px; color: #0284c7; text-decoration: none; border: 1px solid rgba(2, 132, 199, .35); border-radius: 8px; padding: 6px 12px; }
+    .iteration-entry a.entry-link:hover { background: rgba(2, 132, 199, .08); }
+    .iteration-return { margin-top: 26px; display: flex; flex-direction: column; gap: 8px; }
+    .iteration-return a { font-size: 12px; color: #64748b; text-decoration: none; }
+    .iteration-return a:hover { color: #0284c7; }
+  </style>
+</head>
+<body>
+  <!-- 迭代索引页：只做入口聚合，不承载业务开发；真实页面在 admin-portal / field-app / mini-program -->
+  <nav class="system-nav" data-role="system-sidebar" data-title="迭代索引 202606下">
+    <div class="nav-group">
+      <div class="nav-group-title">202606下</div>
+      <div class="nav-item" data-page="asset-list"><i class="fas fa-box-archive" aria-hidden="true"></i><span>管理后台 · 资产列表</span></div>
+      <div class="nav-item" data-page="order-list"><i class="fas fa-list" aria-hidden="true"></i><span>移动端 App · 订单列表</span></div>
+      <div class="nav-item" data-page="order-create"><i class="fas fa-pen-to-square" aria-hidden="true"></i><span>小程序 · 下单页</span></div>
+    </div>
+  </nav>
+
+  <main class="main-content iteration-main">
+    <div class="iteration-head">
+      <h1>202606下 迭代总览</h1>
+      <p>本页聚合本期需求入口。迭代索引用 iframe 承载源页面，不在本页直接开发业务功能。</p>
+    </div>
+
+    <section class="iteration-group">
+      <h2>主题 A · 资产台账</h2>
+      <p class="group-sub">分组：管理后台</p>
+      <div class="iteration-entry">
+        <div>
+          <div class="entry-name">运维后台 · 资产列表</div>
+          <div class="entry-note">筛选 / 列表 / 需求抽屉；源页面 admin-portal/asset-admin/pages/资产列表.html</div>
+        </div>
+        <a class="entry-link" href="../admin-portal/asset-admin/index.html?page=asset-list" target="_blank" rel="noopener">打开设计稿</a>
+      </div>
+    </section>
+
+    <section class="iteration-group">
+      <h2>主题 B · 订单履约</h2>
+      <p class="group-sub">分组：移动端 App / 小程序</p>
+      <div class="iteration-entry">
+        <div>
+          <div class="entry-name">移动端 App · 订单列表</div>
+          <div class="entry-note">卡片列表 + 自动展开需求抽屉；源页面 field-app/main/pages/订单列表.html</div>
+        </div>
+        <a class="entry-link" href="../field-app/main/pages/订单列表.html" target="_blank" rel="noopener">打开设计稿</a>
+      </div>
+      <div class="iteration-entry">
+        <div>
+          <div class="entry-name">小程序 · 下单页</div>
+          <div class="entry-note">轻量表单 + 底部操作栏；源页面 mini-program/main/pages/下单.html</div>
+        </div>
+        <a class="entry-link" href="../mini-program/main/pages/下单.html" target="_blank" rel="noopener">打开设计稿</a>
+      </div>
+    </section>
+
+    <div class="iteration-return">
+      <a href="../index.html"><i class="fas fa-home" aria-hidden="true"></i> 返回总导航</a>
+    </div>
+  </main>
+
+  <script src="../assets/js/components/sidebar-standard.js?v=031fb429"></script>
+</body>
+</html>

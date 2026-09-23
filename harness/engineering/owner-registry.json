@@ -1,0 +1,44 @@
+{
+  "schema_version": "h01-owner-registry-v1",
+  "registry_id": "H01-OWNER-REGISTRY",
+  "source_refs": [
+    "A-HARNESS-ENGINEERING-PRINCIPLES",
+    "urn:h01:evidence.schema.json",
+    "urn:h01:task.schema.json",
+    "urn:h01:capability.schema.json",
+    "urn:h01:permission.schema.json",
+    "urn:h01:trace.schema.json",
+    "urn:h01:result.schema.json",
+    "urn:h01:checkpoint.schema.json",
+    "urn:h01:ruleset.schema.json",
+    "urn:h01:epoch.schema.json",
+    "urn:h01:external-reference.schema.json",
+    "urn:h01:provider.schema.json"
+  ],
+  "owners": [
+    { "owner_id": "OWNER-H01-EVIDENCE", "topic": "evidence-contract", "owner_kind": "project-governance", "status": "active", "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES", "urn:h01:evidence.schema.json"] },
+    { "owner_id": "OWNER-H01-TASK", "topic": "task-contract", "owner_kind": "project-governance", "status": "active", "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES", "urn:h01:task.schema.json"] },
+    { "owner_id": "OWNER-H01-CAPABILITY", "topic": "capability-contract", "owner_kind": "project-governance", "status": "active", "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES", "urn:h01:capability.schema.json"] },
+    { "owner_id": "OWNER-H01-PERMISSION", "topic": "permission-contract", "owner_kind": "project-governance", "status": "active", "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES", "urn:h01:permission.schema.json"] },
+    { "owner_id": "OWNER-H01-TRACE", "topic": "trace-contract", "owner_kind": "project-governance", "status": "active", "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES", "urn:h01:trace.schema.json"] },
+    { "owner_id": "OWNER-H01-RESULT", "topic": "result-contract", "owner_kind": "project-governance", "status": "active", "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES", "urn:h01:result.schema.json"] },
+    { "owner_id": "OWNER-H01-CHECKPOINT", "topic": "checkpoint-contract", "owner_kind": "project-governance", "status": "active", "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES", "urn:h01:checkpoint.schema.json"] },
+    { "owner_id": "OWNER-H01-RULESET", "topic": "ruleset-contract", "owner_kind": "project-governance", "status": "active", "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES", "urn:h01:ruleset.schema.json"] },
+    { "owner_id": "OWNER-H01-EPOCH", "topic": "epoch-contract", "owner_kind": "project-governance", "status": "active", "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES", "urn:h01:epoch.schema.json"] },
+    { "owner_id": "OWNER-H01-EXTERNAL-REFERENCE", "topic": "external-reference-contract", "owner_kind": "project-governance", "status": "active", "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES", "urn:h01:external-reference.schema.json"] },
+    { "owner_id": "OWNER-H01-PROVIDER", "topic": "provider-contract", "owner_kind": "project-governance", "status": "active", "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES", "urn:h01:provider.schema.json"] }
+  ],
+  "topics": [
+    { "topic_id": "evidence-contract", "active_owner_id": "OWNER-H01-EVIDENCE", "status": "active" },
+    { "topic_id": "task-contract", "active_owner_id": "OWNER-H01-TASK", "status": "active" },
+    { "topic_id": "capability-contract", "active_owner_id": "OWNER-H01-CAPABILITY", "status": "active" },
+    { "topic_id": "permission-contract", "active_owner_id": "OWNER-H01-PERMISSION", "status": "active" },
+    { "topic_id": "trace-contract", "active_owner_id": "OWNER-H01-TRACE", "status": "active" },
+    { "topic_id": "result-contract", "active_owner_id": "OWNER-H01-RESULT", "status": "active" },
+    { "topic_id": "checkpoint-contract", "active_owner_id": "OWNER-H01-CHECKPOINT", "status": "active" },
+    { "topic_id": "ruleset-contract", "active_owner_id": "OWNER-H01-RULESET", "status": "active" },
+    { "topic_id": "epoch-contract", "active_owner_id": "OWNER-H01-EPOCH", "status": "active" },
+    { "topic_id": "external-reference-contract", "active_owner_id": "OWNER-H01-EXTERNAL-REFERENCE", "status": "active" },
+    { "topic_id": "provider-contract", "active_owner_id": "OWNER-H01-PROVIDER", "status": "active" }
+  ]
+}

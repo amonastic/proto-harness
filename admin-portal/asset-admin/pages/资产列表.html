@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>资产列表</title>
+  <link href="../../../assets/css/font-awesome-local.css?v=8171babf" rel="stylesheet">
+  <link href="../../../assets/css/variables.css?v=12f21725" rel="stylesheet">
+  <link href="../../../assets/css/common.css?v=a6a1e0b1" rel="stylesheet">
+  <link href="../../../assets/css/components.css?v=70397998" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif; }
+    .list-topbar { display: flex; align-items: center; justify-content: space-between; background: #fff; border-bottom: 1px solid #e5e7eb; padding: 12px 22px; }
+    .list-topbar h1 { font-size: 15px; margin: 0; color: #0f172a; }
+    .dg-doc-btn { border: 1px solid rgba(2, 132, 199, .35); background: #f0f9ff; color: #0369a1; font-size: 12px; border-radius: 8px; padding: 7px 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+    .dg-doc-btn:hover { background: #e0f2fe; }
+    .list-body { padding: 18px 22px 60px; }
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; }
+    .filter-bar label { font-size: 12px; color: #64748b; }
+    .filter-bar input, .filter-bar select { height: 32px; border: 1px solid #d8dee6; border-radius: 8px; padding: 0 10px; font-size: 12px; color: #334155; background: #fff; }
+    .filter-bar input { width: 180px; }
+    .btn { height: 32px; border-radius: 8px; font-size: 12px; padding: 0 14px; cursor: pointer; border: 1px solid transparent; }
+    .btn-primary { background: #0284c7; color: #fff; }
+    .btn-plain { background: #fff; color: #475569; border-color: #d8dee6; }
+    .table-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    thead th { background: #f8fafc; color: #475569; text-align: left; font-weight: 600; padding: 11px 14px; border-bottom: 1px solid #e5e7eb; }
+    tbody td { padding: 11px 14px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:hover td { background: #f8fafc; }
+    .tag { display: inline-block; font-size: 11px; border-radius: 999px; padding: 2px 9px; }
+    .tag-inuse { background: #ecfdf5; color: #047857; }
+    .tag-idle { background: #f1f5f9; color: #475569; }
+    .tag-expiring { background: #fff7ed; color: #c2410c; }
+    .table-foot { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; font-size: 12px; color: #94a3b8; }
+    .pager { display: flex; gap: 6px; }
+    .pager span { min-width: 26px; height: 26px; line-height: 26px; text-align: center; border: 1px solid #e5e7eb; border-radius: 7px; background: #fff; color: #475569; cursor: default; }
+    .pager span.current { background: #0284c7; border-color: #0284c7; color: #fff; }
+  </style>
+</head>
+<body>
+  <header class="list-topbar">
+    <h1>资产列表</h1>
+    <button class="dg-doc-btn" type="button" onclick="DocPanel.toggle('asset-list')">
+      <i class="fas fa-book" aria-hidden="true"></i><span>需求文档</span>
+    </button>
+  </header>
+
+  <div class="list-body">
+    <section class="filter-bar">
+      <label for="kw">关键字</label>
+      <input id="kw" type="text" placeholder="资产编号 / 名称">
+      <label for="type">资产类型</label>
+      <select id="type">
+        <option>全部</option>
+        <option>标签类</option>
+        <option>设备类</option>
+      </select>
+      <label for="status">状态</label>
+      <select id="status">
+        <option>全部</option>
+        <option>使用中</option>
+        <option>闲置</option>
+        <option>临近到期</option>
+      </select>
+      <button class="btn btn-primary" type="button">查询</button>
+      <button class="btn btn-plain" type="button">重置</button>
+    </section>
+
+    <section class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>资产编号</th>
+            <th>资产名称</th>
+            <th>类型</th>
+            <th>归属站点</th>
+            <th>状态</th>
+            <th>到期日期</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>AS-2026-0001</td><td>标签打印机 A1</td><td>设备类</td><td>一号站点</td><td><span class="tag tag-inuse">使用中</span></td><td>2027-06-30</td></tr>
+          <tr><td>AS-2026-0002</td><td>资产标签（批次 06）</td><td>标签类</td><td>一号站点</td><td><span class="tag tag-inuse">使用中</span></td><td>2026-10-15</td></tr>
+          <tr><td>AS-2026-0003</td><td>扫码终端 B2</td><td>设备类</td><td>二号站点</td><td><span class="tag tag-expiring">临近到期</span></td><td>2026-10-05</td></tr>
+          <tr><td>AS-2026-0004</td><td>货架分隔板（组）</td><td>标签类</td><td>二号站点</td><td><span class="tag tag-idle">闲置</span></td><td>2027-01-20</td></tr>
+          <tr><td>AS-2026-0005</td><td>手持终端 C3</td><td>设备类</td><td>三号站点</td><td><span class="tag tag-inuse">使用中</span></td><td>2026-12-31</td></tr>
+        </tbody>
+      </table>
+      <div class="table-foot">
+        <span>共 5 条 · 每页 20 条</span>
+        <div class="pager"><span class="current">1</span><span>2</span><span>3</span></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="../../../assets/js/doc-builder.js?v=02fad5e9"></script>
+  <script src="../../../assets/js/components/doc-panel.js?v=bf6d429e"></script>
+  <script>
+    window.DocsData = {
+      'asset-list': {
+        title: '资产列表',
+        requirement: {
+          coreFlow: [
+            '按关键字 / 类型 / 状态组合筛选资产台账',
+            '列表展示资产编号、名称、类型、归属站点、状态与到期日期',
+            '临近到期资产以橙色标签提示，点击行进入资产详情（本期不含）'
+          ],
+          filterRows: [
+            ['关键字', '文本输入，支持资产编号与名称模糊匹配', '资产台账接口'],
+            ['资产类型', '下拉单选：全部 / 标签类 / 设备类', '类型字典'],
+            ['状态', '下拉单选：全部 / 使用中 / 闲置 / 临近到期', '状态字段']
+          ],
+          fieldRows: [
+            ['列表列', '资产编号', '唯一编号，等宽字体展示'],
+            ['列表列', '状态', '枚举标签：使用中（绿）/ 闲置（灰）/ 临近到期（橙）'],
+            ['列表列', '到期日期', 'YYYY-MM-DD；空值展示为 -'],
+            ['列表列', '归属站点', '站点名称，超长省略并悬浮展示全称']
+          ],
+          interactionRules: [
+            '查询按钮提交当前筛选条件并回到第一页',
+            '重置按钮清空筛选条件但不自动查询',
+            '分页仅展示页码占位，本期不实现真实翻页'
+          ],
+          exceptionsBoundaries: [
+            '筛选无结果时列表区展示空状态占位',
+            '资产编号重复属数据异常，列表按原值展示并在详情页提示'
+          ],
+          todoOpenQuestions: [
+            '资产导出能力是否需要在本期一并提供'
+          ]
+        },
+        css: {
+          headers: ['选择器 / 元素', '规范说明'],
+          rows: [
+            ['.filter-bar', '白底卡片，圆角 12px，控件间距 10px，输入框高 32px'],
+            ['table thead th', '浅灰底 #f8fafc，12.5px 字号，左对齐，行高由 11px 内边距撑开'],
+            ['.tag-inuse / .tag-idle / .tag-expiring', '状态标签统一 999px 圆角 + 11px 字号，绿 / 灰 / 橙三色语义'],
+            ['.table-foot', '列表底部信息条，左侧计数、右侧页码，12px 弱化字色']
+          ]
+        }
+      }
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "schema_version": "h01-evidence-v1",
+  "evidence_id": "O-OBSERVER-CLAIMS",
+  "kind": "observation",
+  "statement": "O 证据冒充权威事实",
+  "source_refs": ["R-PROJECT-AGENTS"],
+  "scope": "harness-engineering",
+  "status": "active",
+  "authority": "user-confirmed"
+}

@@ -1,0 +1,53 @@
+# 第三方组件与许可声明（NOTICE）
+
+本仓库（proto-harness）主体为 MIT 许可（见 `LICENSE`）。以下第三方资源与改编内容按其原始许可证使用，再分发时需保留对应版权声明与许可条款。
+
+## 1. 改编自开源项目的 skills（`docs/skills/`）
+
+部分 skill 的思路与结构改编自下列 MIT 许可项目，版权归原作者所有：
+
+| 项目 | 版权行 | 许可 | 说明 |
+| --- | --- | --- | --- |
+| [mattpocock/skills](https://github.com/mattpocock/skills) | `Copyright (c) 2026 Matt Pocock` | MIT | 本仓库 `engineering-diagnose`、`engineering-zoom-out`、`engineering-plan-grill`、`engineering-slice-plan`、`design-task-profiles`、`design-task-preflight`、`implementation-self-audit`、`independent-judgment` 沿用其 engineering 思路并按本仓库规则改造 |
+| [KKKKhazix/khazix-skills](https://github.com/KKKKhazix/khazix-skills) | `Copyright (c) 2026 数字生命卡兹克` | MIT | 本仓库 `neat-freak` 基于其 `neat-freak` v3.0 思路适配 |
+
+两个项目的 MIT 许可证全文：
+
+```
+MIT License
+
+Copyright (c) 2026 Matt Pocock
+Copyright (c) 2026 数字生命卡兹克
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+## 2. 字体（`assets/fonts/`、`assets/webfonts/`）
+
+| 资源 | 文件 | 许可 |
+| --- | --- | --- |
+| Font Awesome Free | `fa-regular-400.woff2`、`fa-solid-900.woff2`、`fa-brands-400.woff2` | 字体文件 SIL OFL 1.1；图标 CC BY 4.0；代码 MIT。详见 <https://fontawesome.com/license/free> |
+
+## 3. 前端依赖
+
+| 资源 | 文件 | 许可 |
+| --- | --- | --- |
+| Tailwind CSS | `assets/js/tailwind.min.js`（构建产物） | MIT License，<https://github.com/tailwindlabs/tailwindcss> |
+
+除上述内容外，仓库内脚本、规则文档、示例页面均为本仓库自研内容。

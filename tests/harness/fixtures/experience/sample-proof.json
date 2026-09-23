@@ -1,0 +1,22 @@
+{
+  "suite_ref": "FS-SYNTHETIC-H03D-V1",
+  "validator": "experience-proof",
+  "sample": {
+    "pageId": "page-save",
+    "entryPath": "pages/save.html",
+    "triggerAction": "click #btn-save",
+    "domAssertions": ["#result.visible", "text=保存成功"],
+    "screenshotPath": ".tmp/screenshots/save.png",
+    "checkType": "dom"
+  },
+  "rejectedSamples": [
+    {
+      "pageId": "page-save",
+      "entryPath": "pages/save.html",
+      "triggerAction": "click #btn-save",
+      "domAssertions": ["#result.visible"],
+      "screenshotPath": ".tmp/screenshots/save.png",
+      "checkType": "syntax-only"
+    }
+  ]
+}

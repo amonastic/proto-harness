@@ -1,0 +1,130 @@
+{
+  "version": "0.2.1",
+  "updatedAt": "2026-05-11",
+  "purpose": "为关键页面建立既有功能与信息结构基线，避免后续新增字段时误改未被指令覆盖的既有功能。",
+  "baselineRules": {
+    "defaultMode": "protect-existing",
+    "allowedChangeTypes": [
+      "safe-add",
+      "safe-reorder",
+      "visual-tightening",
+      "breaking-change"
+    ],
+    "defaultInterpretation": {
+      "safe-add": "允许新增字段、标签和紧凑信息位，不删除既有字段和动作，不新增说明区或额外功能模块",
+      "safe-reorder": "允许在不改变信息语义的前提下做局部重排，以容纳新增信息",
+      "visual-tightening": "允许压缩间距、重排布局，但保留既有功能和层级",
+      "breaking-change": "涉及删除字段、修改按钮语义、修改状态逻辑或删除既有区域，必须显式说明"
+    }
+  },
+  "requiredBaselineSections": [
+    "page-purpose",
+    "clone-source",
+    "change-type",
+    "protected-fields",
+    "protected-actions",
+    "protected-statuses",
+    "allowed-additions",
+    "do-not-change-without-explicit-request"
+  ],
+  "referenceBaselines": {
+    "selectionRule": "执行页面、抽屉或视觉统一前，先按平台确认成熟基准；如果用户点名的旧入口已跳转或不再承载真实内容，必须继续定位其当前承载页和 docs 数据源。",
+    "uiWeighting": {
+      "latestIterationIndex": 7,
+      "historicalExcellentUi": 3,
+      "rule": "最新迭代索引决定结构、入口、信息层级和页面组织，历史优秀 UI 用于视觉质感、间距、卡片和局部完成度收口；不得机械平均 CSS 数值。"
+    },
+    "platforms": {
+      "web": {
+        "purpose": "0-1 运维后台列表/台账页基准",
+        "primaryReferences": [
+          "admin-portal/asset-admin/index.html",
+          "admin-portal/asset-admin/js/docs.js#card-list"
+        ],
+        "legacyEntryNotes": [
+          "admin-portal/asset-admin/pages/资产列表.html 当前为旧入口跳转页，不作为 0-1 基准页面主体。"
+        ],
+        "whatToInherit": [
+          "列表页统计口径",
+          "筛选默认值",
+          "字段空值规则",
+          "操作显隐",
+          "字段与数据源关系",
+          "待确认项颗粒度"
+        ]
+      },
+      "app": {
+        "purpose": "移动端统计/列表类页面与抽屉基准",
+        "primaryReferences": [
+          "field-app/station-ops/pages/投递统计.html",
+          "field-app/station-ops/js/docs.js#delivery-stats"
+        ],
+        "iterationReferences": [
+          "迭代索引/202605下.html#demo-group"
+        ],
+        "notes": [
+          "投递统计实际登记在 202605上；202605下 分组用于迭代索引组织参考。"
+        ],
+        "whatToInherit": [
+          "手机模型与右侧控制面板组织",
+          "统计卡与明细区层级",
+          "移动端抽屉自动打开",
+          "轻量业务规则分节"
+        ]
+      },
+      "miniapp": {
+        "purpose": "小程序轻量首页、字段级需求与上传层基准",
+        "primaryReferences": [
+          "mini-program/main/小程序首页.html",
+          "mini-program/main/alipay/小程序首页.html",
+          "mini-program/shipping/pages/下单.html",
+          "mini-program/shipping/js/docs.js#order-create",
+          "mini-program/shipping/js/docs.js#package-photo-upload"
+        ],
+        "whatToInherit": [
+          "首页入口组织",
+          "独立渠道首页参数说明",
+          "单字段规则闭环",
+          "上传层状态与边界",
+          "小程序抽屉自动打开"
+        ],
+        "unificationRule": "三个样本合并为小程序轻量页基准，不拆成微信首页、支付宝首页、寄件下单三套平行规则。"
+      }
+    }
+  },
+  "iterationHighlight": {
+    "defaultMode": "inline-merge",
+    "description": "新版本需求默认融入现有文档，不新开抽屉 tab。",
+    "requiredFields": [
+      "iteration",
+      "changeType",
+      "affectedArea",
+      "changeSummary"
+    ],
+    "tagStyle": {
+      "labelPrefix": "",
+      "allowedVariants": [
+        "202604上",
+        "202604下",
+        "YYYYMM上",
+        "YYYYMM下",
+        "20260401",
+        "YYYYMMDD"
+      ],
+      "uiStyle": {
+        "text": "扁平极简标签",
+        "borderColor": "#1677FF",
+        "background": "#EBF5FF",
+        "textColor": "#1677FF",
+        "radius": "999px"
+      },
+      "docStyle": {
+        "formats": [
+          "[202604上]",
+          "[202604下]",
+          "[20260401]"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,4063 @@
+{
+  "schema_version": "h04-corpus-v1",
+  "built_at": "2026-08-21T06:42:32.953Z",
+  "fixture_count": 46,
+  "fixtures": [
+    {
+      "corpus_id": "C-i-index.html-01",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "malformed-index",
+      "source_page": "admin-portal/index.html",
+      "payload": {},
+      "expected": {
+        "verdict": "fail",
+        "reason": "index.html lacks menu and pageNames"
+      },
+      "priority": "P1"
+    },
+    {
+      "corpus_id": "C-店-门店后台-index.html-02",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "entry-defect",
+      "source_page": "admin-portal/store-admin/index.html",
+      "payload": {
+        "sourceDir": {
+          "path": "index.html",
+          "menuItems": [
+            {
+              "pageId": "range-value-settings",
+              "label": "range-value-settings",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "cabinet-home-settings",
+              "label": "cabinet-home-settings",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "station-switch-07",
+              "label": "station-switch-07",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "enterprise-monthly-bill",
+              "label": "enterprise-monthly-bill",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "enterprise-monthly-detail",
+              "label": "enterprise-monthly-detail",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "merchant-bill-list",
+              "label": "merchant-bill-list",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "merchant-bill-detail",
+              "label": "merchant-bill-detail",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "merchant-daily-bill-detail",
+              "label": "merchant-daily-bill-detail",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "merchant-invoice-apply",
+              "label": "merchant-invoice-apply",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "merchant-invoice-title",
+              "label": "merchant-invoice-title",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "alipay-sms-scheme",
+              "label": "alipay-sms-scheme",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "alipay-sms-meeting",
+              "label": "alipay-sms-meeting",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "station-switch",
+              "label": "station-switch",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "cabinet-visual",
+              "label": "cabinet-visual",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "return-record",
+              "label": "return-record",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "delivery-record",
+              "label": "delivery-record",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "intercept-line",
+              "label": "intercept-line",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "intercept-batch",
+              "label": "intercept-batch",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "station-list",
+              "label": "station-list",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "ad-config",
+              "label": "ad-config",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "tobacco-order-list",
+              "label": "tobacco-order-list",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "tobacco-order-detail",
+              "label": "tobacco-order-detail",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "sms-template",
+              "label": "sms-template",
+              "monthTag": "202604"
+            },
+            {
+              "pageId": "doorplate",
+              "label": "doorplate",
+              "monthTag": "202604"
+            },
+            {
+              "pageId": "compartment",
+              "label": "compartment",
+              "monthTag": "202604"
+            },
+            {
+              "pageId": "parcel-slot-fee",
+              "label": "parcel-slot-fee",
+              "monthTag": "202604"
+            },
+            {
+              "pageId": "customer-management",
+              "label": "customer-management",
+              "monthTag": "202604"
+            },
+            {
+              "pageId": "cust-batch-import",
+              "label": "cust-batch-import",
+              "monthTag": "202604"
+            },
+            {
+              "pageId": "overdue-free-user",
+              "label": "overdue-free-user",
+              "monthTag": "202604"
+            },
+            {
+              "pageId": "waybill-number-pool",
+              "label": "waybill-number-pool",
+              "monthTag": "202604"
+            }
+          ],
+          "iframeCarriers": [],
+          "pageNames": {
+            "alipay-sms-scheme": "支付宝代发短信方案说明",
+            "alipay-sms-meeting": "支付宝代发短信会议纪要",
+            "tobacco-order-list": "专项订单明细",
+            "tobacco-order-detail": "专项订单详情",
+            "station-switch": "站点业务开关",
+            "cabinet-visual": "设备可视化",
+            "sms-template": "短信模板",
+            "return-record": "退信记录",
+            "delivery-record": "投递记录",
+            "intercept-line": "拦截列表",
+            "intercept-batch": "单号拦截批量设置",
+            "station-list": "站点列表",
+            "ad-config": "小程序广告",
+            "parcel-slot-fee": "派件格口费",
+            "enterprise-monthly-bill": "企业月结账单",
+            "enterprise-monthly-detail": "企业月结订单明细",
+            "merchant-bill-list": "门店月账单",
+            "merchant-bill-detail": "每日账单列表",
+            "merchant-invoice-apply": "门店开票申请",
+            "merchant-daily-bill-detail": "每日账单明细（已废弃）",
+            "merchant-invoice-title": "开票抬头管理",
+            "customer-management": "客户管理",
+            "cust-batch-import": "客户批量导入",
+            "waybill-number-pool": "货单号使用情况",
+            "overdue-free-user": "超期免费用户",
+            "range-value-settings": "范围值设置",
+            "cabinet-home-settings": "设备首页设置"
+          },
+          "iterationRefs": [
+            "../admin-portal/工单投诉管理/index.html",
+            "../field-app/main/pages/盘库首页.html",
+            "../field-app/main/pages/扫码盘点.html",
+            "../field-app/main/pages/扫码盘点.html?mode=gun",
+            "../field-app/main/pages/盘库记录.html",
+            "../field-app/main/pages/逐单盘点扫描列表.html",
+            "../field-app/main/pages/我的钱包-充值.html",
+            "../field-app/main/pages/充值记录.html",
+            "../field-app/main/pages/提货号打印.html",
+            "../field-app/main/pages/提货码设置.html",
+            "../admin-portal/store-admin/pages/站点业务开关.html",
+            "../field-app/main/pages/扫码奖励.html",
+            "snapshots/202604上/门店后台-短信模板设置.html",
+            "../admin-portal/station-admin/pages/派件明细.html",
+            "snapshots/202604下/门店后台-短信模板设置.html",
+            "snapshots/202604下/门店后台-投递记录.html",
+            "snapshots/202604下/作业端APP-作业记录.html",
+            "snapshots/202605上/mini-program首页.html",
+            "../mini-program/main/支付宝小程序/支付宝首页.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信方案说明-v2.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信会议纪要.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/派件明细.html?view=detail",
+            "../mini-program/shipping/pages/下单.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../field-app/device-app/pages/揽收成功页.html",
+            "../field-app/station-ops/pages/已揽件.html",
+            "../admin-portal/maintain-admin/pages/运单详情-监控抓拍.html",
+            "../field-app/main/pages/首页.html",
+            "../field-app/main/pages/外送扫描.html",
+            "../field-app/station-ops/pages/格口追加.html",
+            "../field-app/station-ops/pages/首页.html",
+            "../field-app/main/pages/自定义签收类型.html",
+            "../field-app/main/pages/入库扫描-巴枪模式.html",
+            "../field-app/station-ops/pages/包裹回收.html",
+            "../field-app/station-ops/pages/在柜包裹.html",
+            "snapshots/202605下/门店后台-格口管理.html",
+            "snapshots/202604下/门店后台-退信记录.html",
+            "snapshots/202605下/门店后台-门牌号管理.html",
+            "snapshots/202604下/运维后台-退信记录.html",
+            "snapshots/202605下/运维后台-门牌号管理.html",
+            "snapshots/202606上/拦截列表.html",
+            "snapshots/202606上/包裹列表.html",
+            "snapshots/202606上/操作员-拦截列表.html",
+            "snapshots/202606上/单号拦截批量设置.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-首页.html",
+            "snapshots/202606上/门店小程序-站点业务开关.html",
+            "snapshots/202606上/门店小程序-客户列表.html",
+            "snapshots/202606上/门店小程序-客户导入.html",
+            "snapshots/202606上/门店小程序-客户表单.html?mode=add",
+            "snapshots/202606上/门店小程序-客户搜索.html",
+            "snapshots/202606上/设备端-包裹验视.html",
+            "snapshots/202606上/设备端-用户包裹拍摄.html",
+            "snapshots/202606上/运维后台-运单详情-监控抓拍.html",
+            "snapshots/202606上/shipping-下单结果页.html",
+            "snapshots/202606上/shipping-寄件详情.html",
+            "snapshots/202606上/运维后台-门店列表.html",
+            "snapshots/202606上/运维后台-公司详情.html",
+            "snapshots/202606上/运维后台-站点详情.html",
+            "snapshots/202606上/作业端APP-更多.html",
+            "snapshots/202606上/作业端APP-客户表单.html?mode=add",
+            "snapshots/202606下/作业端APP-客户管理.html",
+            "snapshots/202606下/作业端APP-客户管理-批量导入.html",
+            "snapshots/202606下/作业端APP-更多.html",
+            "snapshots/202606下/作业端APP-客户表单.html",
+            "snapshots/202606下/通信卡列表.html",
+            "snapshots/202606下/续费订单.html",
+            "snapshots/202606下/作业端APP-通信卡充值记录.html",
+            "snapshots/202606下/门店小程序-续费订单.html",
+            "snapshots/202606下/运维后台-小程序首页广告配置.html",
+            "snapshots/202606下/门店后台-小程序首页广告配置.html",
+            "snapshots/202606下/mini-program首页.html",
+            "snapshots/202606下/支付宝首页.html",
+            "snapshots/202607上/门店后台-门店月账单.html",
+            "snapshots/202607上/门店后台-每日账单列表.html",
+            "snapshots/202607上/运维后台-门店月账单.html",
+            "snapshots/202607上/运维后台-每日账单列表.html",
+            "snapshots/202607上/设备详情.html",
+            "snapshots/202607上/作业端APP-盘库首页.html",
+            "snapshots/202607上/作业端APP-逐单盘点扫描列表.html",
+            "snapshots/202607上/作业端APP-货架待盘列表.html",
+            "snapshots/202607上/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/作业端APP-设备详情.html",
+            "snapshots/202607下/作业端APP-滞留回收.html",
+            "snapshots/202607下/问题件扫描.html",
+            "snapshots/202607下/门店小程序-设备详情.html",
+            "snapshots/202607下/设备APP-待取件.html",
+            "snapshots/202607下/门店后台-快递设备可视化.html",
+            "snapshots/202607下/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/运维后台-门店开票记录.html",
+            "snapshots/202607下/运维后台-收费明细.html",
+            "snapshots/202607下/作业端APP-绑定银行卡.html",
+            "snapshots/202607下/作业端APP-提现.html",
+            "snapshots/202607下/门店后台-测试系统费批量设置.html",
+            "snapshots/202607下/门店后台-短信模板设置.html",
+            "snapshots/202607下/运维后台-门店列表编辑.html",
+            "snapshots/202607下/门店后台-超期免费用户.html",
+            "snapshots/202607下/作业端APP-站点信息.html",
+            "snapshots/202607下/作业端APP-站点信息-地图选点.html",
+            "../field-app/main/pages/设备信息.html",
+            "../field-app/main/pages/消息通知明细.html",
+            "../admin-portal/maintain-admin/pages/短信反馈记录.html",
+            "../mini-program/门店小程序/pages/首页.html",
+            "../mini-program/门店小程序/pages/滞留件管理.html",
+            "../mini-program/门店小程序/pages/滞留件管理-公司详情.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/运单详情.html",
+            "../field-app/station-ops/pages/轨迹推送失败.html",
+            "../field-app/station-ops/pages/站点管理.html",
+            "../admin-portal/maintain-admin/pages/通信卡到期预警与通知规则.html",
+            "../admin-portal/maintain-admin/pages/门店列表编辑.html",
+            "../field-app/设备 APP/pages/取件检索结果页.html",
+            "../field-app/设备 APP/pages/取件成功页.html",
+            "../field-app/main/pages/极速投柜.html"
+          ]
+        },
+        "pageId": "range-value-settings"
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "extraction_note": "真实菜单月份格式 202607（YYYYMM）与契约 monthTag 格式 /^\\d{6}[上下]$/ 不符，monthTag 判定如实 fail",
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-通-通信卡管理-index.html-03",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "malformed-index",
+      "source_page": "admin-portal/asset-admin/index.html",
+      "payload": {},
+      "expected": {
+        "verdict": "fail",
+        "reason": "index.html lacks menu and pageNames"
+      },
+      "priority": "P1"
+    },
+    {
+      "corpus_id": "C-站-服务站后台-index.html-04",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "entry-defect",
+      "source_page": "admin-portal/station-admin/index.html",
+      "payload": {
+        "sourceDir": {
+          "path": "index.html",
+          "menuItems": [
+            {
+              "pageId": "delivery-detail",
+              "label": "delivery-detail",
+              "monthTag": null
+            },
+            {
+              "pageId": "waybill-detail",
+              "label": "waybill-detail",
+              "monthTag": null
+            },
+            {
+              "pageId": "data-dashboard",
+              "label": "data-dashboard",
+              "monthTag": null
+            },
+            {
+              "pageId": "shipping-batch-order",
+              "label": "shipping-batch-order",
+              "monthTag": null
+            },
+            {
+              "pageId": "enterprise-user-mgmt",
+              "label": "enterprise-user-mgmt",
+              "monthTag": null
+            },
+            {
+              "pageId": "waybill-label-print",
+              "label": "waybill-label-print",
+              "monthTag": null
+            },
+            {
+              "pageId": "quick-shipping",
+              "label": "quick-shipping",
+              "monthTag": null
+            },
+            {
+              "pageId": "basic-settings",
+              "label": "basic-settings",
+              "monthTag": null
+            },
+            {
+              "pageId": "tobacco-order-list",
+              "label": "tobacco-order-list",
+              "monthTag": null
+            },
+            {
+              "pageId": "tobacco-order-detail",
+              "label": "tobacco-order-detail",
+              "monthTag": null
+            },
+            {
+              "pageId": "tobacco-store-mgmt",
+              "label": "tobacco-store-mgmt",
+              "monthTag": null
+            },
+            {
+              "pageId": "tobacco-store-import",
+              "label": "tobacco-store-import",
+              "monthTag": null
+            }
+          ],
+          "iframeCarriers": [
+            {
+              "pageId": null,
+              "src": "pages/派件明细.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "waybill-detail",
+              "src": "pages/运单详情.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "data-dashboard",
+              "src": "服务站数据大屏/index.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "shipping-batch-order",
+              "src": "pages/批量录单.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "enterprise-user-mgmt",
+              "src": "pages/企业用户管理.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "waybill-label-print",
+              "src": "pages/货单号标签打印.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "quick-shipping",
+              "src": "pages/快捷发单.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "tobacco-order-list",
+              "src": "pages/专项订单明细.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "tobacco-order-detail",
+              "src": "pages/专项订单详情.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "tobacco-store-mgmt",
+              "src": "pages/专项门店资料.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "tobacco-store-import",
+              "src": "pages/专项门店导入.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "basic-settings",
+              "src": "pages/基本设置.html",
+              "monthComment": null
+            }
+          ],
+          "pageNames": {
+            "delivery-detail": "派件明细",
+            "waybill-detail": "运单详情",
+            "data-dashboard": "服务站数据大屏",
+            "shipping-batch-order": "批量录单",
+            "enterprise-user-mgmt": "企业用户管理",
+            "waybill-label-print": "货单号管理",
+            "quick-shipping": "快捷发单",
+            "tobacco-order-list": "专项订单明细",
+            "tobacco-order-detail": "专项订单详情",
+            "tobacco-store-mgmt": "门店资料管理",
+            "tobacco-store-import": "门店资料导入",
+            "basic-settings": "基本设置"
+          },
+          "iterationRefs": [
+            "../admin-portal/工单投诉管理/index.html",
+            "../field-app/main/pages/盘库首页.html",
+            "../field-app/main/pages/扫码盘点.html",
+            "../field-app/main/pages/扫码盘点.html?mode=gun",
+            "../field-app/main/pages/盘库记录.html",
+            "../field-app/main/pages/逐单盘点扫描列表.html",
+            "../field-app/main/pages/我的钱包-充值.html",
+            "../field-app/main/pages/充值记录.html",
+            "../field-app/main/pages/提货号打印.html",
+            "../field-app/main/pages/提货码设置.html",
+            "../admin-portal/store-admin/pages/站点业务开关.html",
+            "../field-app/main/pages/扫码奖励.html",
+            "snapshots/202604上/门店后台-短信模板设置.html",
+            "../admin-portal/station-admin/pages/派件明细.html",
+            "snapshots/202604下/门店后台-短信模板设置.html",
+            "snapshots/202604下/门店后台-投递记录.html",
+            "snapshots/202604下/作业端APP-作业记录.html",
+            "snapshots/202605上/mini-program首页.html",
+            "../mini-program/main/支付宝小程序/支付宝首页.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信方案说明-v2.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信会议纪要.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/派件明细.html?view=detail",
+            "../mini-program/shipping/pages/下单.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../field-app/device-app/pages/揽收成功页.html",
+            "../field-app/station-ops/pages/已揽件.html",
+            "../admin-portal/maintain-admin/pages/运单详情-监控抓拍.html",
+            "../field-app/main/pages/首页.html",
+            "../field-app/main/pages/外送扫描.html",
+            "../field-app/station-ops/pages/格口追加.html",
+            "../field-app/station-ops/pages/首页.html",
+            "../field-app/main/pages/自定义签收类型.html",
+            "../field-app/main/pages/入库扫描-巴枪模式.html",
+            "../field-app/station-ops/pages/包裹回收.html",
+            "../field-app/station-ops/pages/在柜包裹.html",
+            "snapshots/202605下/门店后台-格口管理.html",
+            "snapshots/202604下/门店后台-退信记录.html",
+            "snapshots/202605下/门店后台-门牌号管理.html",
+            "snapshots/202604下/运维后台-退信记录.html",
+            "snapshots/202605下/运维后台-门牌号管理.html",
+            "snapshots/202606上/拦截列表.html",
+            "snapshots/202606上/包裹列表.html",
+            "snapshots/202606上/操作员-拦截列表.html",
+            "snapshots/202606上/单号拦截批量设置.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-首页.html",
+            "snapshots/202606上/门店小程序-站点业务开关.html",
+            "snapshots/202606上/门店小程序-客户列表.html",
+            "snapshots/202606上/门店小程序-客户导入.html",
+            "snapshots/202606上/门店小程序-客户表单.html?mode=add",
+            "snapshots/202606上/门店小程序-客户搜索.html",
+            "snapshots/202606上/设备端-包裹验视.html",
+            "snapshots/202606上/设备端-用户包裹拍摄.html",
+            "snapshots/202606上/运维后台-运单详情-监控抓拍.html",
+            "snapshots/202606上/shipping-下单结果页.html",
+            "snapshots/202606上/shipping-寄件详情.html",
+            "snapshots/202606上/运维后台-门店列表.html",
+            "snapshots/202606上/运维后台-公司详情.html",
+            "snapshots/202606上/运维后台-站点详情.html",
+            "snapshots/202606上/作业端APP-更多.html",
+            "snapshots/202606上/作业端APP-客户表单.html?mode=add",
+            "snapshots/202606下/作业端APP-客户管理.html",
+            "snapshots/202606下/作业端APP-客户管理-批量导入.html",
+            "snapshots/202606下/作业端APP-更多.html",
+            "snapshots/202606下/作业端APP-客户表单.html",
+            "snapshots/202606下/通信卡列表.html",
+            "snapshots/202606下/续费订单.html",
+            "snapshots/202606下/作业端APP-通信卡充值记录.html",
+            "snapshots/202606下/门店小程序-续费订单.html",
+            "snapshots/202606下/运维后台-小程序首页广告配置.html",
+            "snapshots/202606下/门店后台-小程序首页广告配置.html",
+            "snapshots/202606下/mini-program首页.html",
+            "snapshots/202606下/支付宝首页.html",
+            "snapshots/202607上/门店后台-门店月账单.html",
+            "snapshots/202607上/门店后台-每日账单列表.html",
+            "snapshots/202607上/运维后台-门店月账单.html",
+            "snapshots/202607上/运维后台-每日账单列表.html",
+            "snapshots/202607上/设备详情.html",
+            "snapshots/202607上/作业端APP-盘库首页.html",
+            "snapshots/202607上/作业端APP-逐单盘点扫描列表.html",
+            "snapshots/202607上/作业端APP-货架待盘列表.html",
+            "snapshots/202607上/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/作业端APP-设备详情.html",
+            "snapshots/202607下/作业端APP-滞留回收.html",
+            "snapshots/202607下/问题件扫描.html",
+            "snapshots/202607下/门店小程序-设备详情.html",
+            "snapshots/202607下/设备APP-待取件.html",
+            "snapshots/202607下/门店后台-快递设备可视化.html",
+            "snapshots/202607下/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/运维后台-门店开票记录.html",
+            "snapshots/202607下/运维后台-收费明细.html",
+            "snapshots/202607下/作业端APP-绑定银行卡.html",
+            "snapshots/202607下/作业端APP-提现.html",
+            "snapshots/202607下/门店后台-测试系统费批量设置.html",
+            "snapshots/202607下/门店后台-短信模板设置.html",
+            "snapshots/202607下/运维后台-门店列表编辑.html",
+            "snapshots/202607下/门店后台-超期免费用户.html",
+            "snapshots/202607下/作业端APP-站点信息.html",
+            "snapshots/202607下/作业端APP-站点信息-地图选点.html",
+            "../field-app/main/pages/设备信息.html",
+            "../field-app/main/pages/消息通知明细.html",
+            "../admin-portal/maintain-admin/pages/短信反馈记录.html",
+            "../mini-program/门店小程序/pages/首页.html",
+            "../mini-program/门店小程序/pages/滞留件管理.html",
+            "../mini-program/门店小程序/pages/滞留件管理-公司详情.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/运单详情.html",
+            "../field-app/station-ops/pages/轨迹推送失败.html",
+            "../field-app/station-ops/pages/站点管理.html",
+            "../admin-portal/maintain-admin/pages/通信卡到期预警与通知规则.html",
+            "../admin-portal/maintain-admin/pages/门店列表编辑.html",
+            "../field-app/设备 APP/pages/取件检索结果页.html",
+            "../field-app/设备 APP/pages/取件成功页.html",
+            "../field-app/main/pages/极速投柜.html"
+          ]
+        },
+        "pageId": "delivery-detail"
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-站-服务站后台-服务站数据大屏-05",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "malformed-index",
+      "source_page": "admin-portal/station-admin/服务站数据大屏/index.html",
+      "payload": {},
+      "expected": {
+        "verdict": "fail",
+        "reason": "index.html lacks menu and pageNames"
+      },
+      "priority": "P1"
+    },
+    {
+      "corpus_id": "C-运-运维后台-index.html-06",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "entry-defect",
+      "source_page": "admin-portal/maintain-admin/index.html",
+      "payload": {
+        "sourceDir": {
+          "path": "index.html",
+          "menuItems": [
+            {
+              "pageId": "tobacco-order-list",
+              "label": "tobacco-order-list",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "tobacco-order-detail",
+              "label": "tobacco-order-detail",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "merchant-bill-list",
+              "label": "merchant-bill-list",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "merchant-invoice-record-list",
+              "label": "merchant-invoice-record-list",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "merchant-bill-detail",
+              "label": "merchant-bill-detail",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "diyi-charge-detail",
+              "label": "diyi-charge-detail",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "ops-sms-feedback-record",
+              "label": "ops-sms-feedback-record",
+              "monthTag": "202608"
+            },
+            {
+              "pageId": "iot-expiry-alert",
+              "label": "iot-expiry-alert",
+              "monthTag": "202608"
+            },
+            {
+              "pageId": "pickup-records",
+              "label": "pickup-records",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "delivery-records",
+              "label": "delivery-records",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "customer-list",
+              "label": "customer-list",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "merchant-list",
+              "label": "merchant-list",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "merchant-list-edit",
+              "label": "merchant-list-edit",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "company-detail",
+              "label": "company-detail",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "site-list",
+              "label": "site-list",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "site-detail",
+              "label": "site-detail",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "site-customer-list",
+              "label": "site-customer-list",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "ad-config",
+              "label": "ad-config",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "doorplate",
+              "label": "doorplate",
+              "monthTag": "202604"
+            },
+            {
+              "pageId": "order-detail-monitor",
+              "label": "order-detail-monitor",
+              "monthTag": "202604"
+            },
+            {
+              "pageId": "sms-push-display",
+              "label": "sms-push-display",
+              "monthTag": "202604"
+            },
+            {
+              "pageId": "ops-invoice-application",
+              "label": "ops-invoice-application",
+              "monthTag": "202604"
+            },
+            {
+              "pageId": "ops-invoice-application-detail",
+              "label": "ops-invoice-application-detail",
+              "monthTag": "202604"
+            },
+            {
+              "pageId": "ops-tax-rate-config",
+              "label": "ops-tax-rate-config",
+              "monthTag": "202604"
+            }
+          ],
+          "iframeCarriers": [
+            {
+              "pageId": "tobacco-order-list",
+              "src": "pages/专项订单明细.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "tobacco-order-detail",
+              "src": "pages/专项订单详情.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "merchant-bill-list",
+              "src": "pages/门店月账单.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "merchant-invoice-record-list",
+              "src": "pages/门店开票记录.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "merchant-bill-detail",
+              "src": "pages/门店月账单详情.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "diyi-charge-detail",
+              "src": "pages/收费明细.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "diyi-charge-detail",
+              "src": "pages/退信记录.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "doorplate",
+              "src": "pages/门牌号管理.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "delivery-records",
+              "src": "pages/投递记录.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "customer-list",
+              "src": "pages/客户管理.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "merchant-list",
+              "src": "pages/门店列表.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "merchant-list-edit",
+              "src": "pages/门店列表编辑.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "company-detail",
+              "src": "pages/公司详情.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "site-list",
+              "src": "pages/站点列表.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "site-detail",
+              "src": "pages/站点详情.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "site-customer-list",
+              "src": "pages/站点客户列表.html?siteName=%E5%BE%85%E9%80%89%E8%AF%BE2%E5%8F%B7%E7%AE%B1",
+              "monthComment": null
+            },
+            {
+              "pageId": "ad-config",
+              "src": "pages/小程序首页广告配置.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "order-detail-monitor",
+              "src": "pages/运单详情-监控抓拍.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "sms-push-display",
+              "src": "pages/消息推送设置展示.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "ops-invoice-application",
+              "src": "pages/开票申请列表.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "ops-invoice-application-detail",
+              "src": "pages/开票申请详情.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "ops-tax-rate-config",
+              "src": "pages/税率配置.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "ops-sms-feedback-record",
+              "src": "pages/短信反馈记录.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "iot-expiry-alert",
+              "src": "pages/通信卡到期预警与通知规则.html",
+              "monthComment": null
+            }
+          ],
+          "pageNames": {
+            "tobacco-order-list": "专项订单明细",
+            "tobacco-order-detail": "专项订单详情",
+            "merchant-bill-list": "门店月账单",
+            "merchant-invoice-record-list": "门店开票记录",
+            "merchant-bill-detail": "每日账单列表",
+            "diyi-charge-detail": "收费明细",
+            "pickup-records": "退信记录",
+            "doorplate": "门牌号管理",
+            "delivery-records": "投递记录",
+            "customer-list": "客户管理",
+            "merchant-list": "门店列表",
+            "merchant-list-edit": "编辑门店",
+            "company-detail": "公司详情",
+            "site-list": "站点列表",
+            "site-detail": "站点详情",
+            "site-customer-list": "站点客户列表",
+            "ad-config": "小程序广告",
+            "order-detail-monitor": "运单详情 - 人脸抓拍",
+            "sms-push-display": "消息推送设置展示",
+            "ops-invoice-application": "开票申请",
+            "ops-invoice-application-detail": "开票申请详情",
+            "ops-tax-rate-config": "税率配置",
+            "ops-sms-feedback-record": "短信反馈记录",
+            "iot-expiry-alert": "通信卡到期预警与通知规则"
+          },
+          "iterationRefs": [
+            "../admin-portal/工单投诉管理/index.html",
+            "../field-app/main/pages/盘库首页.html",
+            "../field-app/main/pages/扫码盘点.html",
+            "../field-app/main/pages/扫码盘点.html?mode=gun",
+            "../field-app/main/pages/盘库记录.html",
+            "../field-app/main/pages/逐单盘点扫描列表.html",
+            "../field-app/main/pages/我的钱包-充值.html",
+            "../field-app/main/pages/充值记录.html",
+            "../field-app/main/pages/提货号打印.html",
+            "../field-app/main/pages/提货码设置.html",
+            "../admin-portal/store-admin/pages/站点业务开关.html",
+            "../field-app/main/pages/扫码奖励.html",
+            "snapshots/202604上/门店后台-短信模板设置.html",
+            "../admin-portal/station-admin/pages/派件明细.html",
+            "snapshots/202604下/门店后台-短信模板设置.html",
+            "snapshots/202604下/门店后台-投递记录.html",
+            "snapshots/202604下/作业端APP-作业记录.html",
+            "snapshots/202605上/mini-program首页.html",
+            "../mini-program/main/支付宝小程序/支付宝首页.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信方案说明-v2.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信会议纪要.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/派件明细.html?view=detail",
+            "../mini-program/shipping/pages/下单.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../field-app/device-app/pages/揽收成功页.html",
+            "../field-app/station-ops/pages/已揽件.html",
+            "../admin-portal/maintain-admin/pages/运单详情-监控抓拍.html",
+            "../field-app/main/pages/首页.html",
+            "../field-app/main/pages/外送扫描.html",
+            "../field-app/station-ops/pages/格口追加.html",
+            "../field-app/station-ops/pages/首页.html",
+            "../field-app/main/pages/自定义签收类型.html",
+            "../field-app/main/pages/入库扫描-巴枪模式.html",
+            "../field-app/station-ops/pages/包裹回收.html",
+            "../field-app/station-ops/pages/在柜包裹.html",
+            "snapshots/202605下/门店后台-格口管理.html",
+            "snapshots/202604下/门店后台-退信记录.html",
+            "snapshots/202605下/门店后台-门牌号管理.html",
+            "snapshots/202604下/运维后台-退信记录.html",
+            "snapshots/202605下/运维后台-门牌号管理.html",
+            "snapshots/202606上/拦截列表.html",
+            "snapshots/202606上/包裹列表.html",
+            "snapshots/202606上/操作员-拦截列表.html",
+            "snapshots/202606上/单号拦截批量设置.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-首页.html",
+            "snapshots/202606上/门店小程序-站点业务开关.html",
+            "snapshots/202606上/门店小程序-客户列表.html",
+            "snapshots/202606上/门店小程序-客户导入.html",
+            "snapshots/202606上/门店小程序-客户表单.html?mode=add",
+            "snapshots/202606上/门店小程序-客户搜索.html",
+            "snapshots/202606上/设备端-包裹验视.html",
+            "snapshots/202606上/设备端-用户包裹拍摄.html",
+            "snapshots/202606上/运维后台-运单详情-监控抓拍.html",
+            "snapshots/202606上/shipping-下单结果页.html",
+            "snapshots/202606上/shipping-寄件详情.html",
+            "snapshots/202606上/运维后台-门店列表.html",
+            "snapshots/202606上/运维后台-公司详情.html",
+            "snapshots/202606上/运维后台-站点详情.html",
+            "snapshots/202606上/作业端APP-更多.html",
+            "snapshots/202606上/作业端APP-客户表单.html?mode=add",
+            "snapshots/202606下/作业端APP-客户管理.html",
+            "snapshots/202606下/作业端APP-客户管理-批量导入.html",
+            "snapshots/202606下/作业端APP-更多.html",
+            "snapshots/202606下/作业端APP-客户表单.html",
+            "snapshots/202606下/通信卡列表.html",
+            "snapshots/202606下/续费订单.html",
+            "snapshots/202606下/作业端APP-通信卡充值记录.html",
+            "snapshots/202606下/门店小程序-续费订单.html",
+            "snapshots/202606下/运维后台-小程序首页广告配置.html",
+            "snapshots/202606下/门店后台-小程序首页广告配置.html",
+            "snapshots/202606下/mini-program首页.html",
+            "snapshots/202606下/支付宝首页.html",
+            "snapshots/202607上/门店后台-门店月账单.html",
+            "snapshots/202607上/门店后台-每日账单列表.html",
+            "snapshots/202607上/运维后台-门店月账单.html",
+            "snapshots/202607上/运维后台-每日账单列表.html",
+            "snapshots/202607上/设备详情.html",
+            "snapshots/202607上/作业端APP-盘库首页.html",
+            "snapshots/202607上/作业端APP-逐单盘点扫描列表.html",
+            "snapshots/202607上/作业端APP-货架待盘列表.html",
+            "snapshots/202607上/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/作业端APP-设备详情.html",
+            "snapshots/202607下/作业端APP-滞留回收.html",
+            "snapshots/202607下/问题件扫描.html",
+            "snapshots/202607下/门店小程序-设备详情.html",
+            "snapshots/202607下/设备APP-待取件.html",
+            "snapshots/202607下/门店后台-快递设备可视化.html",
+            "snapshots/202607下/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/运维后台-门店开票记录.html",
+            "snapshots/202607下/运维后台-收费明细.html",
+            "snapshots/202607下/作业端APP-绑定银行卡.html",
+            "snapshots/202607下/作业端APP-提现.html",
+            "snapshots/202607下/门店后台-测试系统费批量设置.html",
+            "snapshots/202607下/门店后台-短信模板设置.html",
+            "snapshots/202607下/运维后台-门店列表编辑.html",
+            "snapshots/202607下/门店后台-超期免费用户.html",
+            "snapshots/202607下/作业端APP-站点信息.html",
+            "snapshots/202607下/作业端APP-站点信息-地图选点.html",
+            "../field-app/main/pages/设备信息.html",
+            "../field-app/main/pages/消息通知明细.html",
+            "../admin-portal/maintain-admin/pages/短信反馈记录.html",
+            "../mini-program/门店小程序/pages/首页.html",
+            "../mini-program/门店小程序/pages/滞留件管理.html",
+            "../mini-program/门店小程序/pages/滞留件管理-公司详情.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/运单详情.html",
+            "../field-app/station-ops/pages/轨迹推送失败.html",
+            "../field-app/station-ops/pages/站点管理.html",
+            "../admin-portal/maintain-admin/pages/通信卡到期预警与通知规则.html",
+            "../admin-portal/maintain-admin/pages/门店列表编辑.html",
+            "../field-app/设备 APP/pages/取件检索结果页.html",
+            "../field-app/设备 APP/pages/取件成功页.html",
+            "../field-app/main/pages/极速投柜.html"
+          ]
+        },
+        "pageId": "tobacco-order-list"
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "extraction_note": "真实菜单月份格式 202607（YYYYMM）与契约 monthTag 格式 /^\\d{6}[上下]$/ 不符，monthTag 判定如实 fail",
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-工-工单投诉管理-index.html-07",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "malformed-index",
+      "source_page": "admin-portal/工单投诉管理/index.html",
+      "payload": {},
+      "expected": {
+        "verdict": "fail",
+        "reason": "index.html lacks menu and pageNames"
+      },
+      "priority": "P1"
+    },
+    {
+      "corpus_id": "C-i-index.html-08",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "malformed-index",
+      "source_page": "field-app/index.html",
+      "payload": {},
+      "expected": {
+        "verdict": "fail",
+        "reason": "index.html lacks menu and pageNames"
+      },
+      "priority": "P1"
+    },
+    {
+      "corpus_id": "C-终-设备 APP-index.html-09",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "entry-defect",
+      "source_page": "field-app/设备 APP/index.html",
+      "payload": {
+        "sourceDir": {
+          "path": "index.html",
+          "menuItems": [
+            {
+              "pageId": "pickup-search-result",
+              "label": "pickup-search-result",
+              "monthTag": "202608"
+            },
+            {
+              "pageId": "pickup-success-aggregate",
+              "label": "pickup-success-aggregate",
+              "monthTag": "202608"
+            },
+            {
+              "pageId": "tobacco-pickup-home",
+              "label": "tobacco-pickup-home",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "tobacco-pending-cells",
+              "label": "tobacco-pending-cells",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "tobacco-pickup-result",
+              "label": "tobacco-pickup-result",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "pickup-success",
+              "label": "pickup-success",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "pickup-open-success",
+              "label": "pickup-open-success",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "pickup-open-success-large-group",
+              "label": "pickup-open-success-large-group",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "user-package-photo",
+              "label": "user-package-photo",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "package-inspection",
+              "label": "package-inspection",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "cabinet-home",
+              "label": "cabinet-home",
+              "monthTag": "202603"
+            },
+            {
+              "pageId": "mailbox",
+              "label": "mailbox",
+              "monthTag": "202603"
+            },
+            {
+              "pageId": "storage-main",
+              "label": "storage-main",
+              "monthTag": "202603"
+            }
+          ],
+          "iframeCarriers": [
+            {
+              "pageId": "tobacco-pickup-home",
+              "src": "pages/专项取件码输入.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "tobacco-pending-cells",
+              "src": "pages/专项待取格口.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "tobacco-pickup-result",
+              "src": "pages/专项取件结果.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "tobacco-pickup-result",
+              "src": "pages/设备首页.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "mailbox",
+              "src": "pages/取信件.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "pickup-success",
+              "src": "pages/揽收成功页.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "pickup-open-success",
+              "src": "pages/取件开柜成功页.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "pickup-search-result",
+              "src": "pages/取件检索结果页.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "pickup-success-aggregate",
+              "src": "pages/取件成功页.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "pickup-open-success-large-group",
+              "src": "pages/取件开柜成功页-室内大柜组.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "storage-main",
+              "src": "pages/存取物主界面.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "package-inspection",
+              "src": "pages/包裹验视.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "user-package-photo",
+              "src": "pages/用户包裹拍摄.html",
+              "monthComment": null
+            }
+          ],
+          "pageNames": {
+            "tobacco-pickup-home": "专项取件首页",
+            "tobacco-pending-cells": "专项待取格口",
+            "tobacco-pickup-result": "专项取件结果",
+            "cabinet-home": "设备首页",
+            "mailbox": "demo二期 · 取信件",
+            "pickup-success": "揽收成功页",
+            "pickup-open-success": "取件开柜成功页",
+            "pickup-open-success-large-group": "取件开柜成功页 · 室内大柜组",
+            "pickup-search-result": "取件检索结果页",
+            "pickup-success-aggregate": "取件成功页",
+            "storage-main": "存取物主界面",
+            "package-inspection": "包裹验视",
+            "user-package-photo": "用户包裹拍摄"
+          },
+          "iterationRefs": [
+            "../admin-portal/工单投诉管理/index.html",
+            "../field-app/main/pages/盘库首页.html",
+            "../field-app/main/pages/扫码盘点.html",
+            "../field-app/main/pages/扫码盘点.html?mode=gun",
+            "../field-app/main/pages/盘库记录.html",
+            "../field-app/main/pages/逐单盘点扫描列表.html",
+            "../field-app/main/pages/我的钱包-充值.html",
+            "../field-app/main/pages/充值记录.html",
+            "../field-app/main/pages/提货号打印.html",
+            "../field-app/main/pages/提货码设置.html",
+            "../admin-portal/store-admin/pages/站点业务开关.html",
+            "../field-app/main/pages/扫码奖励.html",
+            "snapshots/202604上/门店后台-短信模板设置.html",
+            "../admin-portal/station-admin/pages/派件明细.html",
+            "snapshots/202604下/门店后台-短信模板设置.html",
+            "snapshots/202604下/门店后台-投递记录.html",
+            "snapshots/202604下/作业端APP-作业记录.html",
+            "snapshots/202605上/mini-program首页.html",
+            "../mini-program/main/支付宝小程序/支付宝首页.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信方案说明-v2.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信会议纪要.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/派件明细.html?view=detail",
+            "../mini-program/shipping/pages/下单.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../field-app/device-app/pages/揽收成功页.html",
+            "../field-app/station-ops/pages/已揽件.html",
+            "../admin-portal/maintain-admin/pages/运单详情-监控抓拍.html",
+            "../field-app/main/pages/首页.html",
+            "../field-app/main/pages/外送扫描.html",
+            "../field-app/station-ops/pages/格口追加.html",
+            "../field-app/station-ops/pages/首页.html",
+            "../field-app/main/pages/自定义签收类型.html",
+            "../field-app/main/pages/入库扫描-巴枪模式.html",
+            "../field-app/station-ops/pages/包裹回收.html",
+            "../field-app/station-ops/pages/在柜包裹.html",
+            "snapshots/202605下/门店后台-格口管理.html",
+            "snapshots/202604下/门店后台-退信记录.html",
+            "snapshots/202605下/门店后台-门牌号管理.html",
+            "snapshots/202604下/运维后台-退信记录.html",
+            "snapshots/202605下/运维后台-门牌号管理.html",
+            "snapshots/202606上/拦截列表.html",
+            "snapshots/202606上/包裹列表.html",
+            "snapshots/202606上/操作员-拦截列表.html",
+            "snapshots/202606上/单号拦截批量设置.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-首页.html",
+            "snapshots/202606上/门店小程序-站点业务开关.html",
+            "snapshots/202606上/门店小程序-客户列表.html",
+            "snapshots/202606上/门店小程序-客户导入.html",
+            "snapshots/202606上/门店小程序-客户表单.html?mode=add",
+            "snapshots/202606上/门店小程序-客户搜索.html",
+            "snapshots/202606上/设备端-包裹验视.html",
+            "snapshots/202606上/设备端-用户包裹拍摄.html",
+            "snapshots/202606上/运维后台-运单详情-监控抓拍.html",
+            "snapshots/202606上/shipping-下单结果页.html",
+            "snapshots/202606上/shipping-寄件详情.html",
+            "snapshots/202606上/运维后台-门店列表.html",
+            "snapshots/202606上/运维后台-公司详情.html",
+            "snapshots/202606上/运维后台-站点详情.html",
+            "snapshots/202606上/作业端APP-更多.html",
+            "snapshots/202606上/作业端APP-客户表单.html?mode=add",
+            "snapshots/202606下/作业端APP-客户管理.html",
+            "snapshots/202606下/作业端APP-客户管理-批量导入.html",
+            "snapshots/202606下/作业端APP-更多.html",
+            "snapshots/202606下/作业端APP-客户表单.html",
+            "snapshots/202606下/通信卡列表.html",
+            "snapshots/202606下/续费订单.html",
+            "snapshots/202606下/作业端APP-通信卡充值记录.html",
+            "snapshots/202606下/门店小程序-续费订单.html",
+            "snapshots/202606下/运维后台-小程序首页广告配置.html",
+            "snapshots/202606下/门店后台-小程序首页广告配置.html",
+            "snapshots/202606下/mini-program首页.html",
+            "snapshots/202606下/支付宝首页.html",
+            "snapshots/202607上/门店后台-门店月账单.html",
+            "snapshots/202607上/门店后台-每日账单列表.html",
+            "snapshots/202607上/运维后台-门店月账单.html",
+            "snapshots/202607上/运维后台-每日账单列表.html",
+            "snapshots/202607上/设备详情.html",
+            "snapshots/202607上/作业端APP-盘库首页.html",
+            "snapshots/202607上/作业端APP-逐单盘点扫描列表.html",
+            "snapshots/202607上/作业端APP-货架待盘列表.html",
+            "snapshots/202607上/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/作业端APP-设备详情.html",
+            "snapshots/202607下/作业端APP-滞留回收.html",
+            "snapshots/202607下/问题件扫描.html",
+            "snapshots/202607下/门店小程序-设备详情.html",
+            "snapshots/202607下/设备APP-待取件.html",
+            "snapshots/202607下/门店后台-快递设备可视化.html",
+            "snapshots/202607下/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/运维后台-门店开票记录.html",
+            "snapshots/202607下/运维后台-收费明细.html",
+            "snapshots/202607下/作业端APP-绑定银行卡.html",
+            "snapshots/202607下/作业端APP-提现.html",
+            "snapshots/202607下/门店后台-测试系统费批量设置.html",
+            "snapshots/202607下/门店后台-短信模板设置.html",
+            "snapshots/202607下/运维后台-门店列表编辑.html",
+            "snapshots/202607下/门店后台-超期免费用户.html",
+            "snapshots/202607下/作业端APP-站点信息.html",
+            "snapshots/202607下/作业端APP-站点信息-地图选点.html",
+            "../field-app/main/pages/设备信息.html",
+            "../field-app/main/pages/消息通知明细.html",
+            "../admin-portal/maintain-admin/pages/短信反馈记录.html",
+            "../mini-program/门店小程序/pages/首页.html",
+            "../mini-program/门店小程序/pages/滞留件管理.html",
+            "../mini-program/门店小程序/pages/滞留件管理-公司详情.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/运单详情.html",
+            "../field-app/station-ops/pages/轨迹推送失败.html",
+            "../field-app/station-ops/pages/站点管理.html",
+            "../admin-portal/maintain-admin/pages/通信卡到期预警与通知规则.html",
+            "../admin-portal/maintain-admin/pages/门店列表编辑.html",
+            "../field-app/设备 APP/pages/取件检索结果页.html",
+            "../field-app/设备 APP/pages/取件成功页.html",
+            "../field-app/main/pages/极速投柜.html"
+          ]
+        },
+        "pageId": "pickup-search-result"
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "extraction_note": "真实菜单月份格式 202608（YYYYMM）与契约 monthTag 格式 /^\\d{6}[上下]$/ 不符，monthTag 判定如实 fail",
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-操-作业端APP-index.html-10",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "entry-defect",
+      "source_page": "field-app/main/index.html",
+      "payload": {
+        "sourceDir": {
+          "path": "index.html",
+          "menuItems": [
+            {
+              "pageId": "app-subcabinet-delivery",
+              "label": "app-subcabinet-delivery",
+              "monthTag": "202608"
+            },
+            {
+              "pageId": "app-send-home",
+              "label": "app-send-home",
+              "monthTag": "202608"
+            },
+            {
+              "pageId": "app-extreme-speed",
+              "label": "app-extreme-speed",
+              "monthTag": "202608"
+            },
+            {
+              "pageId": "app-notification-detail",
+              "label": "app-notification-detail",
+              "monthTag": "202608"
+            },
+            {
+              "pageId": "app-cabinet-info",
+              "label": "app-cabinet-info",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "app-cabinet-detail",
+              "label": "app-cabinet-detail",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "app-cabinet-home-settings",
+              "label": "app-cabinet-home-settings",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "app-home",
+              "label": "app-home",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "bind-device",
+              "label": "bind-device",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "custom-sign-type",
+              "label": "custom-sign-type",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "inbound-scan-gun",
+              "label": "inbound-scan-gun",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "shelf-map-settings",
+              "label": "shelf-map-settings",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "app-message",
+              "label": "app-message",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "customer-mgmt",
+              "label": "customer-mgmt",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "agent-order-create",
+              "label": "agent-order-create",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "inventory-smart-divider",
+              "label": "inventory-smart-divider",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "site-info",
+              "label": "site-info",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "iot-card-list",
+              "label": "iot-card-list",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "iot-card-detail",
+              "label": "iot-card-detail",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "iot-renew",
+              "label": "iot-renew",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "iot-recharge-record",
+              "label": "iot-recharge-record",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "enterprise-user-mgmt",
+              "label": "enterprise-user-mgmt",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "quick-shipping",
+              "label": "quick-shipping",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "scan-reward",
+              "label": "scan-reward",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "inventory-home",
+              "label": "inventory-home",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "inventory-warning",
+              "label": "inventory-warning",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "inventory-warning-gun",
+              "label": "inventory-warning-gun",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "inventory-records",
+              "label": "inventory-records",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "inventory-single-scan-list",
+              "label": "inventory-single-scan-list",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "wallet-recharge",
+              "label": "wallet-recharge",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "recharge-records",
+              "label": "recharge-records",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "pickup-print",
+              "label": "pickup-print",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "pickup-setting",
+              "label": "pickup-setting",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "about",
+              "label": "about",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "inventory-pending-packages",
+              "label": "inventory-pending-packages",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "package-list",
+              "label": "package-list",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "payment",
+              "label": "payment",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "shipping-est-cost",
+              "label": "shipping-est-cost",
+              "monthTag": "202606"
+            }
+          ],
+          "iframeCarriers": [
+            {
+              "pageId": null,
+              "src": "pages/首页.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "app-send-home",
+              "src": "pages/寄件首页.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "app-extreme-speed",
+              "src": "pages/极速投柜.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "app-notification-detail",
+              "src": "pages/消息通知明细.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "scan-reward",
+              "src": "pages/扫码奖励.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "app-more",
+              "src": "pages/更多.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "inventory-home",
+              "src": "pages/盘库首页.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "inventory-warning",
+              "src": "pages/扫码盘点.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "inventory-warning-gun",
+              "src": "pages/扫码盘点.html?mode=gun",
+              "monthComment": null
+            },
+            {
+              "pageId": "inventory-smart-divider",
+              "src": "pages/电子智能隔板盘库.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "agent-order-create",
+              "src": "pages/新建寄件-未选企业.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "inventory-records",
+              "src": "pages/盘库记录.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "inventory-single-scan-list",
+              "src": "pages/逐单盘点扫描列表.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "inventory-pending-packages",
+              "src": "pages/货架待盘列表.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "wallet-recharge",
+              "src": "pages/我的钱包-充值.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "iot-card-list",
+              "src": "pages/通信卡列表.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "iot-card-detail",
+              "src": "pages/卡详情.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "iot-renew",
+              "src": "pages/续费.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "bind-device",
+              "src": "pages/绑定设备.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "custom-sign-type",
+              "src": "pages/自定义签收类型.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "inbound-scan-gun",
+              "src": "pages/入库扫描-巴枪模式.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "shelf-map-settings",
+              "src": "pages/货架地图设置.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "app-message",
+              "src": "pages/消息.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "customer-mgmt",
+              "src": "pages/客户管理.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "site-info",
+              "src": "pages/站点信息.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "app-cabinet-info",
+              "src": "pages/设备信息.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "app-cabinet-detail",
+              "src": "pages/设备详情.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "app-cabinet-home-settings",
+              "src": "../admin-portal/store-admin/pages/设备首页设置.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "app-subcabinet-delivery",
+              "src": "pages/副柜投递.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "iot-recharge-record",
+              "src": "pages/通信卡充值记录.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "enterprise-user-mgmt",
+              "src": "pages/企业用户管理.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "quick-shipping",
+              "src": "pages/快捷发单.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "recharge-records",
+              "src": "pages/充值记录.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "pickup-print",
+              "src": "pages/提货号打印.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "pickup-setting",
+              "src": "pages/提货码设置.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "about",
+              "src": "pages/关于版本.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "package-list",
+              "src": "pages/包裹列表.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "payment",
+              "src": "../payment.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "shipping-est-cost",
+              "src": "pages/寄件详情-预估费用.html",
+              "monthComment": null
+            }
+          ],
+          "pageNames": {
+            "app-home": "首页",
+            "app-send-home": "寄件首页",
+            "scan-reward": "扫码奖励",
+            "app-more": "更多",
+            "inventory-home": "盘点首页",
+            "inventory-warning": "扫码盘点",
+            "inventory-warning-gun": "扫码盘点（巴枪）",
+            "inventory-smart-divider": "电子智能隔板盘库",
+            "inventory-records": "盘点记录",
+            "inventory-single-scan-list": "逐单盘点",
+            "inventory-pending-packages": "货架待盘",
+            "wallet-recharge": "我的钱包-充值",
+            "recharge-records": "充值记录",
+            "pickup-print": "提货号打印",
+            "pickup-setting": "提货码设置",
+            "about": "关于版本",
+            "package-list": "包裹列表",
+            "payment": "聚合支付",
+            "shipping-est-cost": "寄件详情",
+            "agent-order-create": "自建订单",
+            "iot-card-list": "通信卡列表",
+            "iot-card-detail": "卡详情",
+            "iot-renew": "续费",
+            "bind-device": "绑定设备",
+            "custom-sign-type": "自定义签收类型",
+            "inbound-scan-gun": "入库扫描（巴枪）",
+            "shelf-map-settings": "货架地图",
+            "app-message": "消息",
+            "customer-mgmt": "客户管理",
+            "site-info": "站点信息",
+            "app-cabinet-info": "设备信息",
+            "app-cabinet-detail": "设备详情",
+            "app-cabinet-home-settings": "设备首页设置",
+            "app-subcabinet-delivery": "副柜投递",
+            "app-notification-detail": "消息通知明细",
+            "iot-recharge-record": "续费记录",
+            "enterprise-user-mgmt": "企业用户管理",
+            "quick-shipping": "快捷发单",
+            "app-extreme-speed": "极速投柜"
+          },
+          "iterationRefs": [
+            "../admin-portal/工单投诉管理/index.html",
+            "../field-app/main/pages/盘库首页.html",
+            "../field-app/main/pages/扫码盘点.html",
+            "../field-app/main/pages/扫码盘点.html?mode=gun",
+            "../field-app/main/pages/盘库记录.html",
+            "../field-app/main/pages/逐单盘点扫描列表.html",
+            "../field-app/main/pages/我的钱包-充值.html",
+            "../field-app/main/pages/充值记录.html",
+            "../field-app/main/pages/提货号打印.html",
+            "../field-app/main/pages/提货码设置.html",
+            "../admin-portal/store-admin/pages/站点业务开关.html",
+            "../field-app/main/pages/扫码奖励.html",
+            "snapshots/202604上/门店后台-短信模板设置.html",
+            "../admin-portal/station-admin/pages/派件明细.html",
+            "snapshots/202604下/门店后台-短信模板设置.html",
+            "snapshots/202604下/门店后台-投递记录.html",
+            "snapshots/202604下/作业端APP-作业记录.html",
+            "snapshots/202605上/mini-program首页.html",
+            "../mini-program/main/支付宝小程序/支付宝首页.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信方案说明-v2.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信会议纪要.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/派件明细.html?view=detail",
+            "../mini-program/shipping/pages/下单.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../field-app/device-app/pages/揽收成功页.html",
+            "../field-app/station-ops/pages/已揽件.html",
+            "../admin-portal/maintain-admin/pages/运单详情-监控抓拍.html",
+            "../field-app/main/pages/首页.html",
+            "../field-app/main/pages/外送扫描.html",
+            "../field-app/station-ops/pages/格口追加.html",
+            "../field-app/station-ops/pages/首页.html",
+            "../field-app/main/pages/自定义签收类型.html",
+            "../field-app/main/pages/入库扫描-巴枪模式.html",
+            "../field-app/station-ops/pages/包裹回收.html",
+            "../field-app/station-ops/pages/在柜包裹.html",
+            "snapshots/202605下/门店后台-格口管理.html",
+            "snapshots/202604下/门店后台-退信记录.html",
+            "snapshots/202605下/门店后台-门牌号管理.html",
+            "snapshots/202604下/运维后台-退信记录.html",
+            "snapshots/202605下/运维后台-门牌号管理.html",
+            "snapshots/202606上/拦截列表.html",
+            "snapshots/202606上/包裹列表.html",
+            "snapshots/202606上/操作员-拦截列表.html",
+            "snapshots/202606上/单号拦截批量设置.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-首页.html",
+            "snapshots/202606上/门店小程序-站点业务开关.html",
+            "snapshots/202606上/门店小程序-客户列表.html",
+            "snapshots/202606上/门店小程序-客户导入.html",
+            "snapshots/202606上/门店小程序-客户表单.html?mode=add",
+            "snapshots/202606上/门店小程序-客户搜索.html",
+            "snapshots/202606上/设备端-包裹验视.html",
+            "snapshots/202606上/设备端-用户包裹拍摄.html",
+            "snapshots/202606上/运维后台-运单详情-监控抓拍.html",
+            "snapshots/202606上/shipping-下单结果页.html",
+            "snapshots/202606上/shipping-寄件详情.html",
+            "snapshots/202606上/运维后台-门店列表.html",
+            "snapshots/202606上/运维后台-公司详情.html",
+            "snapshots/202606上/运维后台-站点详情.html",
+            "snapshots/202606上/作业端APP-更多.html",
+            "snapshots/202606上/作业端APP-客户表单.html?mode=add",
+            "snapshots/202606下/作业端APP-客户管理.html",
+            "snapshots/202606下/作业端APP-客户管理-批量导入.html",
+            "snapshots/202606下/作业端APP-更多.html",
+            "snapshots/202606下/作业端APP-客户表单.html",
+            "snapshots/202606下/通信卡列表.html",
+            "snapshots/202606下/续费订单.html",
+            "snapshots/202606下/作业端APP-通信卡充值记录.html",
+            "snapshots/202606下/门店小程序-续费订单.html",
+            "snapshots/202606下/运维后台-小程序首页广告配置.html",
+            "snapshots/202606下/门店后台-小程序首页广告配置.html",
+            "snapshots/202606下/mini-program首页.html",
+            "snapshots/202606下/支付宝首页.html",
+            "snapshots/202607上/门店后台-门店月账单.html",
+            "snapshots/202607上/门店后台-每日账单列表.html",
+            "snapshots/202607上/运维后台-门店月账单.html",
+            "snapshots/202607上/运维后台-每日账单列表.html",
+            "snapshots/202607上/设备详情.html",
+            "snapshots/202607上/作业端APP-盘库首页.html",
+            "snapshots/202607上/作业端APP-逐单盘点扫描列表.html",
+            "snapshots/202607上/作业端APP-货架待盘列表.html",
+            "snapshots/202607上/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/作业端APP-设备详情.html",
+            "snapshots/202607下/作业端APP-滞留回收.html",
+            "snapshots/202607下/问题件扫描.html",
+            "snapshots/202607下/门店小程序-设备详情.html",
+            "snapshots/202607下/设备APP-待取件.html",
+            "snapshots/202607下/门店后台-快递设备可视化.html",
+            "snapshots/202607下/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/运维后台-门店开票记录.html",
+            "snapshots/202607下/运维后台-收费明细.html",
+            "snapshots/202607下/作业端APP-绑定银行卡.html",
+            "snapshots/202607下/作业端APP-提现.html",
+            "snapshots/202607下/门店后台-测试系统费批量设置.html",
+            "snapshots/202607下/门店后台-短信模板设置.html",
+            "snapshots/202607下/运维后台-门店列表编辑.html",
+            "snapshots/202607下/门店后台-超期免费用户.html",
+            "snapshots/202607下/作业端APP-站点信息.html",
+            "snapshots/202607下/作业端APP-站点信息-地图选点.html",
+            "../field-app/main/pages/设备信息.html",
+            "../field-app/main/pages/消息通知明细.html",
+            "../admin-portal/maintain-admin/pages/短信反馈记录.html",
+            "../mini-program/门店小程序/pages/首页.html",
+            "../mini-program/门店小程序/pages/滞留件管理.html",
+            "../mini-program/门店小程序/pages/滞留件管理-公司详情.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/运单详情.html",
+            "../field-app/station-ops/pages/轨迹推送失败.html",
+            "../field-app/station-ops/pages/站点管理.html",
+            "../admin-portal/maintain-admin/pages/通信卡到期预警与通知规则.html",
+            "../admin-portal/maintain-admin/pages/门店列表编辑.html",
+            "../field-app/设备 APP/pages/取件检索结果页.html",
+            "../field-app/设备 APP/pages/取件成功页.html",
+            "../field-app/main/pages/极速投柜.html"
+          ]
+        },
+        "pageId": "app-subcabinet-delivery"
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "extraction_note": "真实菜单月份格式 202608（YYYYMM）与契约 monthTag 格式 /^\\d{6}[上下]$/ 不符，monthTag 判定如实 fail",
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-操-field-app/station-ops-index.html-11",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "entry-defect",
+      "source_page": "field-app/station-ops/index.html",
+      "payload": {
+        "sourceDir": {
+          "path": "index.html",
+          "menuItems": [
+            {
+              "pageId": "delivery-stats",
+              "label": "delivery-stats",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "pending-pickup",
+              "label": "pending-pickup",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "compartment-append",
+              "label": "compartment-append",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "package-recycle",
+              "label": "package-recycle",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "batch-delivery",
+              "label": "batch-delivery",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "newspaper-record",
+              "label": "newspaper-record",
+              "monthTag": "202605"
+            },
+            {
+              "pageId": "intercept-line",
+              "label": "intercept-line",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "app-message",
+              "label": "app-message",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "courier-more",
+              "label": "courier-more",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "courier-customer-form",
+              "label": "courier-customer-form",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "delivery-record",
+              "label": "delivery-record",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "courier-package-detail",
+              "label": "courier-package-detail",
+              "monthTag": "202608"
+            },
+            {
+              "pageId": "courier-track-fail",
+              "label": "courier-track-fail",
+              "monthTag": "202608"
+            },
+            {
+              "pageId": "courier-withdraw",
+              "label": "courier-withdraw",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "courier-bank-card",
+              "label": "courier-bank-card",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "cabinet-detail",
+              "label": "cabinet-detail",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "station-manage",
+              "label": "station-manage",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "smart-shelf",
+              "label": "smart-shelf",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "home",
+              "label": "home",
+              "monthTag": "202607"
+            },
+            {
+              "pageId": "auth-method-dialog",
+              "label": "auth-method-dialog",
+              "monthTag": "202607"
+            }
+          ],
+          "iframeCarriers": [
+            {
+              "pageId": null,
+              "src": "pages/包裹回收.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "pending-pickup",
+              "src": "pages/已揽件.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "compartment-append",
+              "src": "pages/格口追加.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "station-manage",
+              "src": "pages/站点管理.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "station-storage",
+              "src": "pages/扣费包裹记录.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "smart-shelf",
+              "src": "pages/智能货架-空值.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "home",
+              "src": "pages/首页.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "auth-method-dialog",
+              "src": "pages/认证方式选择弹窗.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "batch-delivery",
+              "src": "pages/demo二期-普邮投递-首页.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "delivery-stats",
+              "src": "pages/投递件量统计.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "newspaper-record",
+              "src": "pages/作业记录.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "intercept-line",
+              "src": "pages/拦截列表.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "app-message",
+              "src": "pages/消息.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "courier-more",
+              "src": "pages/更多.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "courier-customer-form",
+              "src": "pages/客户管理-客户表单.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "delivery-record",
+              "src": "pages/投递记录.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "courier-package-detail",
+              "src": "pages/派件包裹详情.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "courier-track-fail",
+              "src": "pages/轨迹推送失败.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "courier-bank-card",
+              "src": "pages/绑定银行卡.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "courier-withdraw",
+              "src": "pages/提现.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "cabinet-detail",
+              "src": "pages/可视化投柜.html",
+              "monthComment": null
+            }
+          ],
+          "pageNames": {
+            "home": "首页",
+            "package-recycle": "包裹回收",
+            "pending-pickup": "已揽件",
+            "compartment-append": "格口追加",
+            "station-manage": "站点管理",
+            "station-storage": "入库包裹",
+            "smart-shelf": "智能货架",
+            "batch-delivery": "普邮投递",
+            "delivery-stats": "投递件量统计",
+            "auth-method-dialog": "认证方式选择弹窗",
+            "newspaper-record": "作业记录",
+            "intercept-line": "拦截列表",
+            "app-message": "消息",
+            "courier-more": "更多",
+            "courier-customer-form": "客户表单",
+            "delivery-record": "投递记录",
+            "courier-withdraw": "提现",
+            "courier-bank-card": "绑定银行卡",
+            "cabinet-detail": "可视化投柜",
+            "courier-package-detail": "派件包裹详情",
+            "courier-track-fail": "轨迹推送失败"
+          },
+          "iterationRefs": [
+            "../admin-portal/工单投诉管理/index.html",
+            "../field-app/main/pages/盘库首页.html",
+            "../field-app/main/pages/扫码盘点.html",
+            "../field-app/main/pages/扫码盘点.html?mode=gun",
+            "../field-app/main/pages/盘库记录.html",
+            "../field-app/main/pages/逐单盘点扫描列表.html",
+            "../field-app/main/pages/我的钱包-充值.html",
+            "../field-app/main/pages/充值记录.html",
+            "../field-app/main/pages/提货号打印.html",
+            "../field-app/main/pages/提货码设置.html",
+            "../admin-portal/store-admin/pages/站点业务开关.html",
+            "../field-app/main/pages/扫码奖励.html",
+            "snapshots/202604上/门店后台-短信模板设置.html",
+            "../admin-portal/station-admin/pages/派件明细.html",
+            "snapshots/202604下/门店后台-短信模板设置.html",
+            "snapshots/202604下/门店后台-投递记录.html",
+            "snapshots/202604下/作业端APP-作业记录.html",
+            "snapshots/202605上/mini-program首页.html",
+            "../mini-program/main/支付宝小程序/支付宝首页.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信方案说明-v2.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信会议纪要.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/派件明细.html?view=detail",
+            "../mini-program/shipping/pages/下单.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../field-app/device-app/pages/揽收成功页.html",
+            "../field-app/station-ops/pages/已揽件.html",
+            "../admin-portal/maintain-admin/pages/运单详情-监控抓拍.html",
+            "../field-app/main/pages/首页.html",
+            "../field-app/main/pages/外送扫描.html",
+            "../field-app/station-ops/pages/格口追加.html",
+            "../field-app/station-ops/pages/首页.html",
+            "../field-app/main/pages/自定义签收类型.html",
+            "../field-app/main/pages/入库扫描-巴枪模式.html",
+            "../field-app/station-ops/pages/包裹回收.html",
+            "../field-app/station-ops/pages/在柜包裹.html",
+            "snapshots/202605下/门店后台-格口管理.html",
+            "snapshots/202604下/门店后台-退信记录.html",
+            "snapshots/202605下/门店后台-门牌号管理.html",
+            "snapshots/202604下/运维后台-退信记录.html",
+            "snapshots/202605下/运维后台-门牌号管理.html",
+            "snapshots/202606上/拦截列表.html",
+            "snapshots/202606上/包裹列表.html",
+            "snapshots/202606上/操作员-拦截列表.html",
+            "snapshots/202606上/单号拦截批量设置.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-首页.html",
+            "snapshots/202606上/门店小程序-站点业务开关.html",
+            "snapshots/202606上/门店小程序-客户列表.html",
+            "snapshots/202606上/门店小程序-客户导入.html",
+            "snapshots/202606上/门店小程序-客户表单.html?mode=add",
+            "snapshots/202606上/门店小程序-客户搜索.html",
+            "snapshots/202606上/设备端-包裹验视.html",
+            "snapshots/202606上/设备端-用户包裹拍摄.html",
+            "snapshots/202606上/运维后台-运单详情-监控抓拍.html",
+            "snapshots/202606上/shipping-下单结果页.html",
+            "snapshots/202606上/shipping-寄件详情.html",
+            "snapshots/202606上/运维后台-门店列表.html",
+            "snapshots/202606上/运维后台-公司详情.html",
+            "snapshots/202606上/运维后台-站点详情.html",
+            "snapshots/202606上/作业端APP-更多.html",
+            "snapshots/202606上/作业端APP-客户表单.html?mode=add",
+            "snapshots/202606下/作业端APP-客户管理.html",
+            "snapshots/202606下/作业端APP-客户管理-批量导入.html",
+            "snapshots/202606下/作业端APP-更多.html",
+            "snapshots/202606下/作业端APP-客户表单.html",
+            "snapshots/202606下/通信卡列表.html",
+            "snapshots/202606下/续费订单.html",
+            "snapshots/202606下/作业端APP-通信卡充值记录.html",
+            "snapshots/202606下/门店小程序-续费订单.html",
+            "snapshots/202606下/运维后台-小程序首页广告配置.html",
+            "snapshots/202606下/门店后台-小程序首页广告配置.html",
+            "snapshots/202606下/mini-program首页.html",
+            "snapshots/202606下/支付宝首页.html",
+            "snapshots/202607上/门店后台-门店月账单.html",
+            "snapshots/202607上/门店后台-每日账单列表.html",
+            "snapshots/202607上/运维后台-门店月账单.html",
+            "snapshots/202607上/运维后台-每日账单列表.html",
+            "snapshots/202607上/设备详情.html",
+            "snapshots/202607上/作业端APP-盘库首页.html",
+            "snapshots/202607上/作业端APP-逐单盘点扫描列表.html",
+            "snapshots/202607上/作业端APP-货架待盘列表.html",
+            "snapshots/202607上/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/作业端APP-设备详情.html",
+            "snapshots/202607下/作业端APP-滞留回收.html",
+            "snapshots/202607下/问题件扫描.html",
+            "snapshots/202607下/门店小程序-设备详情.html",
+            "snapshots/202607下/设备APP-待取件.html",
+            "snapshots/202607下/门店后台-快递设备可视化.html",
+            "snapshots/202607下/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/运维后台-门店开票记录.html",
+            "snapshots/202607下/运维后台-收费明细.html",
+            "snapshots/202607下/作业端APP-绑定银行卡.html",
+            "snapshots/202607下/作业端APP-提现.html",
+            "snapshots/202607下/门店后台-测试系统费批量设置.html",
+            "snapshots/202607下/门店后台-短信模板设置.html",
+            "snapshots/202607下/运维后台-门店列表编辑.html",
+            "snapshots/202607下/门店后台-超期免费用户.html",
+            "snapshots/202607下/作业端APP-站点信息.html",
+            "snapshots/202607下/作业端APP-站点信息-地图选点.html",
+            "../field-app/main/pages/设备信息.html",
+            "../field-app/main/pages/消息通知明细.html",
+            "../admin-portal/maintain-admin/pages/短信反馈记录.html",
+            "../mini-program/门店小程序/pages/首页.html",
+            "../mini-program/门店小程序/pages/滞留件管理.html",
+            "../mini-program/门店小程序/pages/滞留件管理-公司详情.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/运单详情.html",
+            "../field-app/station-ops/pages/轨迹推送失败.html",
+            "../field-app/station-ops/pages/站点管理.html",
+            "../admin-portal/maintain-admin/pages/通信卡到期预警与通知规则.html",
+            "../admin-portal/maintain-admin/pages/门店列表编辑.html",
+            "../field-app/设备 APP/pages/取件检索结果页.html",
+            "../field-app/设备 APP/pages/取件成功页.html",
+            "../field-app/main/pages/极速投柜.html"
+          ]
+        },
+        "pageId": "delivery-stats"
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "extraction_note": "真实菜单月份格式 202605（YYYYMM）与契约 monthTag 格式 /^\\d{6}[上下]$/ 不符，monthTag 判定如实 fail",
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-影-影像采集App-index.html-12",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "entry-defect",
+      "source_page": "field-app/影像采集App/index.html",
+      "payload": {
+        "sourceDir": {
+          "path": "index.html",
+          "menuItems": [
+            {
+              "pageId": "home",
+              "label": "home",
+              "monthTag": null
+            }
+          ],
+          "iframeCarriers": [
+            {
+              "pageId": null,
+              "src": "pages/首页.html",
+              "monthComment": null
+            }
+          ],
+          "pageNames": {},
+          "iterationRefs": [
+            "../admin-portal/工单投诉管理/index.html",
+            "../field-app/main/pages/盘库首页.html",
+            "../field-app/main/pages/扫码盘点.html",
+            "../field-app/main/pages/扫码盘点.html?mode=gun",
+            "../field-app/main/pages/盘库记录.html",
+            "../field-app/main/pages/逐单盘点扫描列表.html",
+            "../field-app/main/pages/我的钱包-充值.html",
+            "../field-app/main/pages/充值记录.html",
+            "../field-app/main/pages/提货号打印.html",
+            "../field-app/main/pages/提货码设置.html",
+            "../admin-portal/store-admin/pages/站点业务开关.html",
+            "../field-app/main/pages/扫码奖励.html",
+            "snapshots/202604上/门店后台-短信模板设置.html",
+            "../admin-portal/station-admin/pages/派件明细.html",
+            "snapshots/202604下/门店后台-短信模板设置.html",
+            "snapshots/202604下/门店后台-投递记录.html",
+            "snapshots/202604下/作业端APP-作业记录.html",
+            "snapshots/202605上/mini-program首页.html",
+            "../mini-program/main/支付宝小程序/支付宝首页.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信方案说明-v2.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信会议纪要.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/派件明细.html?view=detail",
+            "../mini-program/shipping/pages/下单.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../field-app/device-app/pages/揽收成功页.html",
+            "../field-app/station-ops/pages/已揽件.html",
+            "../admin-portal/maintain-admin/pages/运单详情-监控抓拍.html",
+            "../field-app/main/pages/首页.html",
+            "../field-app/main/pages/外送扫描.html",
+            "../field-app/station-ops/pages/格口追加.html",
+            "../field-app/station-ops/pages/首页.html",
+            "../field-app/main/pages/自定义签收类型.html",
+            "../field-app/main/pages/入库扫描-巴枪模式.html",
+            "../field-app/station-ops/pages/包裹回收.html",
+            "../field-app/station-ops/pages/在柜包裹.html",
+            "snapshots/202605下/门店后台-格口管理.html",
+            "snapshots/202604下/门店后台-退信记录.html",
+            "snapshots/202605下/门店后台-门牌号管理.html",
+            "snapshots/202604下/运维后台-退信记录.html",
+            "snapshots/202605下/运维后台-门牌号管理.html",
+            "snapshots/202606上/拦截列表.html",
+            "snapshots/202606上/包裹列表.html",
+            "snapshots/202606上/操作员-拦截列表.html",
+            "snapshots/202606上/单号拦截批量设置.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-首页.html",
+            "snapshots/202606上/门店小程序-站点业务开关.html",
+            "snapshots/202606上/门店小程序-客户列表.html",
+            "snapshots/202606上/门店小程序-客户导入.html",
+            "snapshots/202606上/门店小程序-客户表单.html?mode=add",
+            "snapshots/202606上/门店小程序-客户搜索.html",
+            "snapshots/202606上/设备端-包裹验视.html",
+            "snapshots/202606上/设备端-用户包裹拍摄.html",
+            "snapshots/202606上/运维后台-运单详情-监控抓拍.html",
+            "snapshots/202606上/shipping-下单结果页.html",
+            "snapshots/202606上/shipping-寄件详情.html",
+            "snapshots/202606上/运维后台-门店列表.html",
+            "snapshots/202606上/运维后台-公司详情.html",
+            "snapshots/202606上/运维后台-站点详情.html",
+            "snapshots/202606上/作业端APP-更多.html",
+            "snapshots/202606上/作业端APP-客户表单.html?mode=add",
+            "snapshots/202606下/作业端APP-客户管理.html",
+            "snapshots/202606下/作业端APP-客户管理-批量导入.html",
+            "snapshots/202606下/作业端APP-更多.html",
+            "snapshots/202606下/作业端APP-客户表单.html",
+            "snapshots/202606下/通信卡列表.html",
+            "snapshots/202606下/续费订单.html",
+            "snapshots/202606下/作业端APP-通信卡充值记录.html",
+            "snapshots/202606下/门店小程序-续费订单.html",
+            "snapshots/202606下/运维后台-小程序首页广告配置.html",
+            "snapshots/202606下/门店后台-小程序首页广告配置.html",
+            "snapshots/202606下/mini-program首页.html",
+            "snapshots/202606下/支付宝首页.html",
+            "snapshots/202607上/门店后台-门店月账单.html",
+            "snapshots/202607上/门店后台-每日账单列表.html",
+            "snapshots/202607上/运维后台-门店月账单.html",
+            "snapshots/202607上/运维后台-每日账单列表.html",
+            "snapshots/202607上/设备详情.html",
+            "snapshots/202607上/作业端APP-盘库首页.html",
+            "snapshots/202607上/作业端APP-逐单盘点扫描列表.html",
+            "snapshots/202607上/作业端APP-货架待盘列表.html",
+            "snapshots/202607上/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/作业端APP-设备详情.html",
+            "snapshots/202607下/作业端APP-滞留回收.html",
+            "snapshots/202607下/问题件扫描.html",
+            "snapshots/202607下/门店小程序-设备详情.html",
+            "snapshots/202607下/设备APP-待取件.html",
+            "snapshots/202607下/门店后台-快递设备可视化.html",
+            "snapshots/202607下/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/运维后台-门店开票记录.html",
+            "snapshots/202607下/运维后台-收费明细.html",
+            "snapshots/202607下/作业端APP-绑定银行卡.html",
+            "snapshots/202607下/作业端APP-提现.html",
+            "snapshots/202607下/门店后台-测试系统费批量设置.html",
+            "snapshots/202607下/门店后台-短信模板设置.html",
+            "snapshots/202607下/运维后台-门店列表编辑.html",
+            "snapshots/202607下/门店后台-超期免费用户.html",
+            "snapshots/202607下/作业端APP-站点信息.html",
+            "snapshots/202607下/作业端APP-站点信息-地图选点.html",
+            "../field-app/main/pages/设备信息.html",
+            "../field-app/main/pages/消息通知明细.html",
+            "../admin-portal/maintain-admin/pages/短信反馈记录.html",
+            "../mini-program/门店小程序/pages/首页.html",
+            "../mini-program/门店小程序/pages/滞留件管理.html",
+            "../mini-program/门店小程序/pages/滞留件管理-公司详情.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/运单详情.html",
+            "../field-app/station-ops/pages/轨迹推送失败.html",
+            "../field-app/station-ops/pages/站点管理.html",
+            "../admin-portal/maintain-admin/pages/通信卡到期预警与通知规则.html",
+            "../admin-portal/maintain-admin/pages/门店列表编辑.html",
+            "../field-app/设备 APP/pages/取件检索结果页.html",
+            "../field-app/设备 APP/pages/取件成功页.html",
+            "../field-app/main/pages/极速投柜.html"
+          ]
+        },
+        "pageId": "home"
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-i-index.html-13",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "malformed-index",
+      "source_page": "mini-program/index.html",
+      "payload": {},
+      "expected": {
+        "verdict": "fail",
+        "reason": "index.html lacks menu and pageNames"
+      },
+      "priority": "P1"
+    },
+    {
+      "corpus_id": "C-店-门店小程序-index.html-14",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "entry-defect",
+      "source_page": "mini-program/门店小程序/index.html",
+      "payload": {
+        "sourceDir": {
+          "path": "index.html",
+          "menuItems": [
+            {
+              "pageId": "mini-home",
+              "label": "mini-home",
+              "monthTag": null
+            },
+            {
+              "pageId": "iot-card-list",
+              "label": "iot-card-list",
+              "monthTag": null
+            },
+            {
+              "pageId": "iot-card-detail",
+              "label": "iot-card-detail",
+              "monthTag": null
+            },
+            {
+              "pageId": "iot-renew",
+              "label": "iot-renew",
+              "monthTag": null
+            },
+            {
+              "pageId": "iot-renew-order",
+              "label": "iot-renew-order",
+              "monthTag": null
+            },
+            {
+              "pageId": "cust-site-switch",
+              "label": "cust-site-switch",
+              "monthTag": null
+            },
+            {
+              "pageId": "cust-list",
+              "label": "cust-list",
+              "monthTag": null
+            },
+            {
+              "pageId": "cust-import",
+              "label": "cust-import",
+              "monthTag": null
+            },
+            {
+              "pageId": "cust-form",
+              "label": "cust-form",
+              "monthTag": null
+            },
+            {
+              "pageId": "cust-search",
+              "label": "cust-search",
+              "monthTag": null
+            },
+            {
+              "pageId": "overstay-mgmt",
+              "label": "overstay-mgmt",
+              "monthTag": null
+            },
+            {
+              "pageId": "overstay-company",
+              "label": "overstay-company",
+              "monthTag": null
+            },
+            {
+              "pageId": "monitor-detail",
+              "label": "monitor-detail",
+              "monthTag": null
+            }
+          ],
+          "iframeCarriers": [
+            {
+              "pageId": "mini-home",
+              "src": "pages/首页.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "mini-home",
+              "src": "pages/通信卡列表.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "iot-card-detail",
+              "src": "pages/卡详情.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "iot-renew",
+              "src": "pages/续费.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "iot-renew-order",
+              "src": "pages/续费订单.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "monitor-detail",
+              "src": "pages/监控详情.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "cust-site-switch",
+              "src": "pages/站点业务开关.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "cust-list",
+              "src": "pages/客户管理-客户列表.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "cust-import",
+              "src": "pages/客户管理-客户导入.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "cust-form",
+              "src": "pages/客户管理-客户表单.html?mode=add",
+              "monthComment": null
+            },
+            {
+              "pageId": "cust-search",
+              "src": "pages/客户管理-搜索.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "overstay-mgmt",
+              "src": "pages/滞留件管理.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "overstay-company",
+              "src": "pages/滞留件管理-公司详情.html",
+              "monthComment": null
+            }
+          ],
+          "pageNames": {
+            "mini-home": "首页",
+            "iot-card-list": "通信卡列表",
+            "iot-card-detail": "卡详情",
+            "iot-renew": "续费",
+            "iot-renew-order": "续费记录",
+            "monitor-detail": "监控详情",
+            "cust-site-switch": "站点业务开关",
+            "cust-list": "客户管理-客户列表",
+            "cust-import": "客户管理-客户导入",
+            "cust-form": "客户管理-客户表单",
+            "cust-search": "客户管理-搜索",
+            "overstay-mgmt": "滞留件管理",
+            "overstay-company": "滞留件管理-公司详情"
+          },
+          "iterationRefs": [
+            "../admin-portal/工单投诉管理/index.html",
+            "../field-app/main/pages/盘库首页.html",
+            "../field-app/main/pages/扫码盘点.html",
+            "../field-app/main/pages/扫码盘点.html?mode=gun",
+            "../field-app/main/pages/盘库记录.html",
+            "../field-app/main/pages/逐单盘点扫描列表.html",
+            "../field-app/main/pages/我的钱包-充值.html",
+            "../field-app/main/pages/充值记录.html",
+            "../field-app/main/pages/提货号打印.html",
+            "../field-app/main/pages/提货码设置.html",
+            "../admin-portal/store-admin/pages/站点业务开关.html",
+            "../field-app/main/pages/扫码奖励.html",
+            "snapshots/202604上/门店后台-短信模板设置.html",
+            "../admin-portal/station-admin/pages/派件明细.html",
+            "snapshots/202604下/门店后台-短信模板设置.html",
+            "snapshots/202604下/门店后台-投递记录.html",
+            "snapshots/202604下/作业端APP-作业记录.html",
+            "snapshots/202605上/mini-program首页.html",
+            "../mini-program/main/支付宝小程序/支付宝首页.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信方案说明-v2.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信会议纪要.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/派件明细.html?view=detail",
+            "../mini-program/shipping/pages/下单.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../field-app/device-app/pages/揽收成功页.html",
+            "../field-app/station-ops/pages/已揽件.html",
+            "../admin-portal/maintain-admin/pages/运单详情-监控抓拍.html",
+            "../field-app/main/pages/首页.html",
+            "../field-app/main/pages/外送扫描.html",
+            "../field-app/station-ops/pages/格口追加.html",
+            "../field-app/station-ops/pages/首页.html",
+            "../field-app/main/pages/自定义签收类型.html",
+            "../field-app/main/pages/入库扫描-巴枪模式.html",
+            "../field-app/station-ops/pages/包裹回收.html",
+            "../field-app/station-ops/pages/在柜包裹.html",
+            "snapshots/202605下/门店后台-格口管理.html",
+            "snapshots/202604下/门店后台-退信记录.html",
+            "snapshots/202605下/门店后台-门牌号管理.html",
+            "snapshots/202604下/运维后台-退信记录.html",
+            "snapshots/202605下/运维后台-门牌号管理.html",
+            "snapshots/202606上/拦截列表.html",
+            "snapshots/202606上/包裹列表.html",
+            "snapshots/202606上/操作员-拦截列表.html",
+            "snapshots/202606上/单号拦截批量设置.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-首页.html",
+            "snapshots/202606上/门店小程序-站点业务开关.html",
+            "snapshots/202606上/门店小程序-客户列表.html",
+            "snapshots/202606上/门店小程序-客户导入.html",
+            "snapshots/202606上/门店小程序-客户表单.html?mode=add",
+            "snapshots/202606上/门店小程序-客户搜索.html",
+            "snapshots/202606上/设备端-包裹验视.html",
+            "snapshots/202606上/设备端-用户包裹拍摄.html",
+            "snapshots/202606上/运维后台-运单详情-监控抓拍.html",
+            "snapshots/202606上/shipping-下单结果页.html",
+            "snapshots/202606上/shipping-寄件详情.html",
+            "snapshots/202606上/运维后台-门店列表.html",
+            "snapshots/202606上/运维后台-公司详情.html",
+            "snapshots/202606上/运维后台-站点详情.html",
+            "snapshots/202606上/作业端APP-更多.html",
+            "snapshots/202606上/作业端APP-客户表单.html?mode=add",
+            "snapshots/202606下/作业端APP-客户管理.html",
+            "snapshots/202606下/作业端APP-客户管理-批量导入.html",
+            "snapshots/202606下/作业端APP-更多.html",
+            "snapshots/202606下/作业端APP-客户表单.html",
+            "snapshots/202606下/通信卡列表.html",
+            "snapshots/202606下/续费订单.html",
+            "snapshots/202606下/作业端APP-通信卡充值记录.html",
+            "snapshots/202606下/门店小程序-续费订单.html",
+            "snapshots/202606下/运维后台-小程序首页广告配置.html",
+            "snapshots/202606下/门店后台-小程序首页广告配置.html",
+            "snapshots/202606下/mini-program首页.html",
+            "snapshots/202606下/支付宝首页.html",
+            "snapshots/202607上/门店后台-门店月账单.html",
+            "snapshots/202607上/门店后台-每日账单列表.html",
+            "snapshots/202607上/运维后台-门店月账单.html",
+            "snapshots/202607上/运维后台-每日账单列表.html",
+            "snapshots/202607上/设备详情.html",
+            "snapshots/202607上/作业端APP-盘库首页.html",
+            "snapshots/202607上/作业端APP-逐单盘点扫描列表.html",
+            "snapshots/202607上/作业端APP-货架待盘列表.html",
+            "snapshots/202607上/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/作业端APP-设备详情.html",
+            "snapshots/202607下/作业端APP-滞留回收.html",
+            "snapshots/202607下/问题件扫描.html",
+            "snapshots/202607下/门店小程序-设备详情.html",
+            "snapshots/202607下/设备APP-待取件.html",
+            "snapshots/202607下/门店后台-快递设备可视化.html",
+            "snapshots/202607下/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/运维后台-门店开票记录.html",
+            "snapshots/202607下/运维后台-收费明细.html",
+            "snapshots/202607下/作业端APP-绑定银行卡.html",
+            "snapshots/202607下/作业端APP-提现.html",
+            "snapshots/202607下/门店后台-测试系统费批量设置.html",
+            "snapshots/202607下/门店后台-短信模板设置.html",
+            "snapshots/202607下/运维后台-门店列表编辑.html",
+            "snapshots/202607下/门店后台-超期免费用户.html",
+            "snapshots/202607下/作业端APP-站点信息.html",
+            "snapshots/202607下/作业端APP-站点信息-地图选点.html",
+            "../field-app/main/pages/设备信息.html",
+            "../field-app/main/pages/消息通知明细.html",
+            "../admin-portal/maintain-admin/pages/短信反馈记录.html",
+            "../mini-program/门店小程序/pages/首页.html",
+            "../mini-program/门店小程序/pages/滞留件管理.html",
+            "../mini-program/门店小程序/pages/滞留件管理-公司详情.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/运单详情.html",
+            "../field-app/station-ops/pages/轨迹推送失败.html",
+            "../field-app/station-ops/pages/站点管理.html",
+            "../admin-portal/maintain-admin/pages/通信卡到期预警与通知规则.html",
+            "../admin-portal/maintain-admin/pages/门店列表编辑.html",
+            "../field-app/设备 APP/pages/取件检索结果页.html",
+            "../field-app/设备 APP/pages/取件成功页.html",
+            "../field-app/main/pages/极速投柜.html"
+          ]
+        },
+        "pageId": "mini-home"
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-寄-寄件小程序-index.html-15",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "entry-defect",
+      "source_page": "mini-program/shipping/index.html",
+      "payload": {
+        "sourceDir": {
+          "path": "index.html",
+          "menuItems": [
+            {
+              "pageId": "order",
+              "label": "order",
+              "monthTag": null
+            },
+            {
+              "pageId": "order-result",
+              "label": "order-result",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "delivery-detail",
+              "label": "delivery-detail",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "send-order-list",
+              "label": "send-order-list",
+              "monthTag": "202606"
+            },
+            {
+              "pageId": "package-list",
+              "label": "package-list",
+              "monthTag": "202606"
+            }
+          ],
+          "iframeCarriers": [
+            {
+              "pageId": null,
+              "src": "pages/下单.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "send-order-list",
+              "src": "pages/寄件订单列表.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "package-list",
+              "src": "pages/包裹列表.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "order-result",
+              "src": "pages/下单结果页.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "delivery-detail",
+              "src": "pages/寄件详情.html",
+              "monthComment": null
+            }
+          ],
+          "pageNames": {
+            "package-list": "包裹列表",
+            "order-result": "下单结果页",
+            "delivery-detail": "寄件详情"
+          },
+          "iterationRefs": [
+            "../admin-portal/工单投诉管理/index.html",
+            "../field-app/main/pages/盘库首页.html",
+            "../field-app/main/pages/扫码盘点.html",
+            "../field-app/main/pages/扫码盘点.html?mode=gun",
+            "../field-app/main/pages/盘库记录.html",
+            "../field-app/main/pages/逐单盘点扫描列表.html",
+            "../field-app/main/pages/我的钱包-充值.html",
+            "../field-app/main/pages/充值记录.html",
+            "../field-app/main/pages/提货号打印.html",
+            "../field-app/main/pages/提货码设置.html",
+            "../admin-portal/store-admin/pages/站点业务开关.html",
+            "../field-app/main/pages/扫码奖励.html",
+            "snapshots/202604上/门店后台-短信模板设置.html",
+            "../admin-portal/station-admin/pages/派件明细.html",
+            "snapshots/202604下/门店后台-短信模板设置.html",
+            "snapshots/202604下/门店后台-投递记录.html",
+            "snapshots/202604下/作业端APP-作业记录.html",
+            "snapshots/202605上/mini-program首页.html",
+            "../mini-program/main/支付宝小程序/支付宝首页.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信方案说明-v2.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信会议纪要.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/派件明细.html?view=detail",
+            "../mini-program/shipping/pages/下单.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../field-app/device-app/pages/揽收成功页.html",
+            "../field-app/station-ops/pages/已揽件.html",
+            "../admin-portal/maintain-admin/pages/运单详情-监控抓拍.html",
+            "../field-app/main/pages/首页.html",
+            "../field-app/main/pages/外送扫描.html",
+            "../field-app/station-ops/pages/格口追加.html",
+            "../field-app/station-ops/pages/首页.html",
+            "../field-app/main/pages/自定义签收类型.html",
+            "../field-app/main/pages/入库扫描-巴枪模式.html",
+            "../field-app/station-ops/pages/包裹回收.html",
+            "../field-app/station-ops/pages/在柜包裹.html",
+            "snapshots/202605下/门店后台-格口管理.html",
+            "snapshots/202604下/门店后台-退信记录.html",
+            "snapshots/202605下/门店后台-门牌号管理.html",
+            "snapshots/202604下/运维后台-退信记录.html",
+            "snapshots/202605下/运维后台-门牌号管理.html",
+            "snapshots/202606上/拦截列表.html",
+            "snapshots/202606上/包裹列表.html",
+            "snapshots/202606上/操作员-拦截列表.html",
+            "snapshots/202606上/单号拦截批量设置.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-首页.html",
+            "snapshots/202606上/门店小程序-站点业务开关.html",
+            "snapshots/202606上/门店小程序-客户列表.html",
+            "snapshots/202606上/门店小程序-客户导入.html",
+            "snapshots/202606上/门店小程序-客户表单.html?mode=add",
+            "snapshots/202606上/门店小程序-客户搜索.html",
+            "snapshots/202606上/设备端-包裹验视.html",
+            "snapshots/202606上/设备端-用户包裹拍摄.html",
+            "snapshots/202606上/运维后台-运单详情-监控抓拍.html",
+            "snapshots/202606上/shipping-下单结果页.html",
+            "snapshots/202606上/shipping-寄件详情.html",
+            "snapshots/202606上/运维后台-门店列表.html",
+            "snapshots/202606上/运维后台-公司详情.html",
+            "snapshots/202606上/运维后台-站点详情.html",
+            "snapshots/202606上/作业端APP-更多.html",
+            "snapshots/202606上/作业端APP-客户表单.html?mode=add",
+            "snapshots/202606下/作业端APP-客户管理.html",
+            "snapshots/202606下/作业端APP-客户管理-批量导入.html",
+            "snapshots/202606下/作业端APP-更多.html",
+            "snapshots/202606下/作业端APP-客户表单.html",
+            "snapshots/202606下/通信卡列表.html",
+            "snapshots/202606下/续费订单.html",
+            "snapshots/202606下/作业端APP-通信卡充值记录.html",
+            "snapshots/202606下/门店小程序-续费订单.html",
+            "snapshots/202606下/运维后台-小程序首页广告配置.html",
+            "snapshots/202606下/门店后台-小程序首页广告配置.html",
+            "snapshots/202606下/mini-program首页.html",
+            "snapshots/202606下/支付宝首页.html",
+            "snapshots/202607上/门店后台-门店月账单.html",
+            "snapshots/202607上/门店后台-每日账单列表.html",
+            "snapshots/202607上/运维后台-门店月账单.html",
+            "snapshots/202607上/运维后台-每日账单列表.html",
+            "snapshots/202607上/设备详情.html",
+            "snapshots/202607上/作业端APP-盘库首页.html",
+            "snapshots/202607上/作业端APP-逐单盘点扫描列表.html",
+            "snapshots/202607上/作业端APP-货架待盘列表.html",
+            "snapshots/202607上/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/作业端APP-设备详情.html",
+            "snapshots/202607下/作业端APP-滞留回收.html",
+            "snapshots/202607下/问题件扫描.html",
+            "snapshots/202607下/门店小程序-设备详情.html",
+            "snapshots/202607下/设备APP-待取件.html",
+            "snapshots/202607下/门店后台-快递设备可视化.html",
+            "snapshots/202607下/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/运维后台-门店开票记录.html",
+            "snapshots/202607下/运维后台-收费明细.html",
+            "snapshots/202607下/作业端APP-绑定银行卡.html",
+            "snapshots/202607下/作业端APP-提现.html",
+            "snapshots/202607下/门店后台-测试系统费批量设置.html",
+            "snapshots/202607下/门店后台-短信模板设置.html",
+            "snapshots/202607下/运维后台-门店列表编辑.html",
+            "snapshots/202607下/门店后台-超期免费用户.html",
+            "snapshots/202607下/作业端APP-站点信息.html",
+            "snapshots/202607下/作业端APP-站点信息-地图选点.html",
+            "../field-app/main/pages/设备信息.html",
+            "../field-app/main/pages/消息通知明细.html",
+            "../admin-portal/maintain-admin/pages/短信反馈记录.html",
+            "../mini-program/门店小程序/pages/首页.html",
+            "../mini-program/门店小程序/pages/滞留件管理.html",
+            "../mini-program/门店小程序/pages/滞留件管理-公司详情.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/运单详情.html",
+            "../field-app/station-ops/pages/轨迹推送失败.html",
+            "../field-app/station-ops/pages/站点管理.html",
+            "../admin-portal/maintain-admin/pages/通信卡到期预警与通知规则.html",
+            "../admin-portal/maintain-admin/pages/门店列表编辑.html",
+            "../field-app/设备 APP/pages/取件检索结果页.html",
+            "../field-app/设备 APP/pages/取件成功页.html",
+            "../field-app/main/pages/极速投柜.html"
+          ]
+        },
+        "pageId": "order"
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-用-用户小程序-index.html-16",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "entry-defect",
+      "source_page": "mini-program/main/index.html",
+      "payload": {
+        "sourceDir": {
+          "path": "index.html",
+          "menuItems": [
+            {
+              "pageId": "mailbox",
+              "label": "mailbox",
+              "monthTag": null
+            },
+            {
+              "pageId": "mailbox-pickup-home",
+              "label": "mailbox-pickup-home",
+              "monthTag": null
+            },
+            {
+              "pageId": "enterprise-shipping-order",
+              "label": "enterprise-shipping-order",
+              "monthTag": null
+            },
+            {
+              "pageId": "shipping-shipping-address",
+              "label": "shipping-shipping-address",
+              "monthTag": null
+            },
+            {
+              "pageId": "shipping-receiver-address",
+              "label": "shipping-receiver-address",
+              "monthTag": null
+            },
+            {
+              "pageId": "shipping-shipping-address-add",
+              "label": "shipping-shipping-address-add",
+              "monthTag": null
+            },
+            {
+              "pageId": "shipping-receiver-address-add",
+              "label": "shipping-receiver-address-add",
+              "monthTag": null
+            },
+            {
+              "pageId": "mini-shelf-map",
+              "label": "mini-shelf-map",
+              "monthTag": null
+            },
+            {
+              "pageId": "enterprise-shipping-detail",
+              "label": "enterprise-shipping-detail",
+              "monthTag": null
+            },
+            {
+              "pageId": "storage-page",
+              "label": "storage-page",
+              "monthTag": null
+            },
+            {
+              "pageId": "alipay-home",
+              "label": "alipay-home",
+              "monthTag": null
+            },
+            {
+              "pageId": "alipay-suspected-package",
+              "label": "alipay-suspected-package",
+              "monthTag": null
+            },
+            {
+              "pageId": "alipay-package-detail",
+              "label": "alipay-package-detail",
+              "monthTag": null
+            }
+          ],
+          "iframeCarriers": [
+            {
+              "pageId": null,
+              "src": "./我的信箱.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "mailbox-pickup-home",
+              "src": "./mini-program首页.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "enterprise-shipping-order",
+              "src": "./企业寄件下单.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "shipping-shipping-address",
+              "src": "./寄件地址簿.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "shipping-receiver-address",
+              "src": "./收件地址簿.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "shipping-shipping-address-add",
+              "src": "./新增寄件地址.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "shipping-receiver-address-add",
+              "src": "./新增收件地址.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "mini-shelf-map",
+              "src": "./货架地图.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "enterprise-shipping-detail",
+              "src": "./企业寄件订单详情.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "alipay-home",
+              "src": "./支付宝小程序/支付宝首页.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "alipay-suspected-package",
+              "src": "./支付宝小程序/疑似包裹.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "storage-page",
+              "src": "./存物页面.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "alipay-package-detail",
+              "src": "./支付宝小程序/包裹详情.html",
+              "monthComment": null
+            }
+          ],
+          "pageNames": {},
+          "iterationRefs": [
+            "../admin-portal/工单投诉管理/index.html",
+            "../field-app/main/pages/盘库首页.html",
+            "../field-app/main/pages/扫码盘点.html",
+            "../field-app/main/pages/扫码盘点.html?mode=gun",
+            "../field-app/main/pages/盘库记录.html",
+            "../field-app/main/pages/逐单盘点扫描列表.html",
+            "../field-app/main/pages/我的钱包-充值.html",
+            "../field-app/main/pages/充值记录.html",
+            "../field-app/main/pages/提货号打印.html",
+            "../field-app/main/pages/提货码设置.html",
+            "../admin-portal/store-admin/pages/站点业务开关.html",
+            "../field-app/main/pages/扫码奖励.html",
+            "snapshots/202604上/门店后台-短信模板设置.html",
+            "../admin-portal/station-admin/pages/派件明细.html",
+            "snapshots/202604下/门店后台-短信模板设置.html",
+            "snapshots/202604下/门店后台-投递记录.html",
+            "snapshots/202604下/作业端APP-作业记录.html",
+            "snapshots/202605上/mini-program首页.html",
+            "../mini-program/main/支付宝小程序/支付宝首页.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信方案说明-v2.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信会议纪要.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/派件明细.html?view=detail",
+            "../mini-program/shipping/pages/下单.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../field-app/device-app/pages/揽收成功页.html",
+            "../field-app/station-ops/pages/已揽件.html",
+            "../admin-portal/maintain-admin/pages/运单详情-监控抓拍.html",
+            "../field-app/main/pages/首页.html",
+            "../field-app/main/pages/外送扫描.html",
+            "../field-app/station-ops/pages/格口追加.html",
+            "../field-app/station-ops/pages/首页.html",
+            "../field-app/main/pages/自定义签收类型.html",
+            "../field-app/main/pages/入库扫描-巴枪模式.html",
+            "../field-app/station-ops/pages/包裹回收.html",
+            "../field-app/station-ops/pages/在柜包裹.html",
+            "snapshots/202605下/门店后台-格口管理.html",
+            "snapshots/202604下/门店后台-退信记录.html",
+            "snapshots/202605下/门店后台-门牌号管理.html",
+            "snapshots/202604下/运维后台-退信记录.html",
+            "snapshots/202605下/运维后台-门牌号管理.html",
+            "snapshots/202606上/拦截列表.html",
+            "snapshots/202606上/包裹列表.html",
+            "snapshots/202606上/操作员-拦截列表.html",
+            "snapshots/202606上/单号拦截批量设置.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-首页.html",
+            "snapshots/202606上/门店小程序-站点业务开关.html",
+            "snapshots/202606上/门店小程序-客户列表.html",
+            "snapshots/202606上/门店小程序-客户导入.html",
+            "snapshots/202606上/门店小程序-客户表单.html?mode=add",
+            "snapshots/202606上/门店小程序-客户搜索.html",
+            "snapshots/202606上/设备端-包裹验视.html",
+            "snapshots/202606上/设备端-用户包裹拍摄.html",
+            "snapshots/202606上/运维后台-运单详情-监控抓拍.html",
+            "snapshots/202606上/shipping-下单结果页.html",
+            "snapshots/202606上/shipping-寄件详情.html",
+            "snapshots/202606上/运维后台-门店列表.html",
+            "snapshots/202606上/运维后台-公司详情.html",
+            "snapshots/202606上/运维后台-站点详情.html",
+            "snapshots/202606上/作业端APP-更多.html",
+            "snapshots/202606上/作业端APP-客户表单.html?mode=add",
+            "snapshots/202606下/作业端APP-客户管理.html",
+            "snapshots/202606下/作业端APP-客户管理-批量导入.html",
+            "snapshots/202606下/作业端APP-更多.html",
+            "snapshots/202606下/作业端APP-客户表单.html",
+            "snapshots/202606下/通信卡列表.html",
+            "snapshots/202606下/续费订单.html",
+            "snapshots/202606下/作业端APP-通信卡充值记录.html",
+            "snapshots/202606下/门店小程序-续费订单.html",
+            "snapshots/202606下/运维后台-小程序首页广告配置.html",
+            "snapshots/202606下/门店后台-小程序首页广告配置.html",
+            "snapshots/202606下/mini-program首页.html",
+            "snapshots/202606下/支付宝首页.html",
+            "snapshots/202607上/门店后台-门店月账单.html",
+            "snapshots/202607上/门店后台-每日账单列表.html",
+            "snapshots/202607上/运维后台-门店月账单.html",
+            "snapshots/202607上/运维后台-每日账单列表.html",
+            "snapshots/202607上/设备详情.html",
+            "snapshots/202607上/作业端APP-盘库首页.html",
+            "snapshots/202607上/作业端APP-逐单盘点扫描列表.html",
+            "snapshots/202607上/作业端APP-货架待盘列表.html",
+            "snapshots/202607上/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/作业端APP-设备详情.html",
+            "snapshots/202607下/作业端APP-滞留回收.html",
+            "snapshots/202607下/问题件扫描.html",
+            "snapshots/202607下/门店小程序-设备详情.html",
+            "snapshots/202607下/设备APP-待取件.html",
+            "snapshots/202607下/门店后台-快递设备可视化.html",
+            "snapshots/202607下/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/运维后台-门店开票记录.html",
+            "snapshots/202607下/运维后台-收费明细.html",
+            "snapshots/202607下/作业端APP-绑定银行卡.html",
+            "snapshots/202607下/作业端APP-提现.html",
+            "snapshots/202607下/门店后台-测试系统费批量设置.html",
+            "snapshots/202607下/门店后台-短信模板设置.html",
+            "snapshots/202607下/运维后台-门店列表编辑.html",
+            "snapshots/202607下/门店后台-超期免费用户.html",
+            "snapshots/202607下/作业端APP-站点信息.html",
+            "snapshots/202607下/作业端APP-站点信息-地图选点.html",
+            "../field-app/main/pages/设备信息.html",
+            "../field-app/main/pages/消息通知明细.html",
+            "../admin-portal/maintain-admin/pages/短信反馈记录.html",
+            "../mini-program/门店小程序/pages/首页.html",
+            "../mini-program/门店小程序/pages/滞留件管理.html",
+            "../mini-program/门店小程序/pages/滞留件管理-公司详情.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/运单详情.html",
+            "../field-app/station-ops/pages/轨迹推送失败.html",
+            "../field-app/station-ops/pages/站点管理.html",
+            "../admin-portal/maintain-admin/pages/通信卡到期预警与通知规则.html",
+            "../admin-portal/maintain-admin/pages/门店列表编辑.html",
+            "../field-app/设备 APP/pages/取件检索结果页.html",
+            "../field-app/设备 APP/pages/取件成功页.html",
+            "../field-app/main/pages/极速投柜.html"
+          ]
+        },
+        "pageId": "mailbox"
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-站-服务站小程序-index.html-17",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "entry-defect",
+      "source_page": "mini-program/服务站小程序/index.html",
+      "payload": {
+        "sourceDir": {
+          "path": "index.html",
+          "menuItems": [
+            {
+              "pageId": "login",
+              "label": "login",
+              "monthTag": null
+            },
+            {
+              "pageId": "home",
+              "label": "home",
+              "monthTag": null
+            },
+            {
+              "pageId": "bind",
+              "label": "bind",
+              "monthTag": null
+            },
+            {
+              "pageId": "scan",
+              "label": "scan",
+              "monthTag": null
+            },
+            {
+              "pageId": "depart",
+              "label": "depart",
+              "monthTag": null
+            },
+            {
+              "pageId": "records",
+              "label": "records",
+              "monthTag": null
+            },
+            {
+              "pageId": "detail",
+              "label": "detail",
+              "monthTag": null
+            },
+            {
+              "pageId": "search",
+              "label": "search",
+              "monthTag": null
+            },
+            {
+              "pageId": "profile",
+              "label": "profile",
+              "monthTag": null
+            }
+          ],
+          "iframeCarriers": [],
+          "pageNames": {},
+          "iterationRefs": [
+            "../admin-portal/工单投诉管理/index.html",
+            "../field-app/main/pages/盘库首页.html",
+            "../field-app/main/pages/扫码盘点.html",
+            "../field-app/main/pages/扫码盘点.html?mode=gun",
+            "../field-app/main/pages/盘库记录.html",
+            "../field-app/main/pages/逐单盘点扫描列表.html",
+            "../field-app/main/pages/我的钱包-充值.html",
+            "../field-app/main/pages/充值记录.html",
+            "../field-app/main/pages/提货号打印.html",
+            "../field-app/main/pages/提货码设置.html",
+            "../admin-portal/store-admin/pages/站点业务开关.html",
+            "../field-app/main/pages/扫码奖励.html",
+            "snapshots/202604上/门店后台-短信模板设置.html",
+            "../admin-portal/station-admin/pages/派件明细.html",
+            "snapshots/202604下/门店后台-短信模板设置.html",
+            "snapshots/202604下/门店后台-投递记录.html",
+            "snapshots/202604下/作业端APP-作业记录.html",
+            "snapshots/202605上/mini-program首页.html",
+            "../mini-program/main/支付宝小程序/支付宝首页.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信方案说明-v2.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信会议纪要.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/派件明细.html?view=detail",
+            "../mini-program/shipping/pages/下单.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../field-app/device-app/pages/揽收成功页.html",
+            "../field-app/station-ops/pages/已揽件.html",
+            "../admin-portal/maintain-admin/pages/运单详情-监控抓拍.html",
+            "../field-app/main/pages/首页.html",
+            "../field-app/main/pages/外送扫描.html",
+            "../field-app/station-ops/pages/格口追加.html",
+            "../field-app/station-ops/pages/首页.html",
+            "../field-app/main/pages/自定义签收类型.html",
+            "../field-app/main/pages/入库扫描-巴枪模式.html",
+            "../field-app/station-ops/pages/包裹回收.html",
+            "../field-app/station-ops/pages/在柜包裹.html",
+            "snapshots/202605下/门店后台-格口管理.html",
+            "snapshots/202604下/门店后台-退信记录.html",
+            "snapshots/202605下/门店后台-门牌号管理.html",
+            "snapshots/202604下/运维后台-退信记录.html",
+            "snapshots/202605下/运维后台-门牌号管理.html",
+            "snapshots/202606上/拦截列表.html",
+            "snapshots/202606上/包裹列表.html",
+            "snapshots/202606上/操作员-拦截列表.html",
+            "snapshots/202606上/单号拦截批量设置.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-首页.html",
+            "snapshots/202606上/门店小程序-站点业务开关.html",
+            "snapshots/202606上/门店小程序-客户列表.html",
+            "snapshots/202606上/门店小程序-客户导入.html",
+            "snapshots/202606上/门店小程序-客户表单.html?mode=add",
+            "snapshots/202606上/门店小程序-客户搜索.html",
+            "snapshots/202606上/设备端-包裹验视.html",
+            "snapshots/202606上/设备端-用户包裹拍摄.html",
+            "snapshots/202606上/运维后台-运单详情-监控抓拍.html",
+            "snapshots/202606上/shipping-下单结果页.html",
+            "snapshots/202606上/shipping-寄件详情.html",
+            "snapshots/202606上/运维后台-门店列表.html",
+            "snapshots/202606上/运维后台-公司详情.html",
+            "snapshots/202606上/运维后台-站点详情.html",
+            "snapshots/202606上/作业端APP-更多.html",
+            "snapshots/202606上/作业端APP-客户表单.html?mode=add",
+            "snapshots/202606下/作业端APP-客户管理.html",
+            "snapshots/202606下/作业端APP-客户管理-批量导入.html",
+            "snapshots/202606下/作业端APP-更多.html",
+            "snapshots/202606下/作业端APP-客户表单.html",
+            "snapshots/202606下/通信卡列表.html",
+            "snapshots/202606下/续费订单.html",
+            "snapshots/202606下/作业端APP-通信卡充值记录.html",
+            "snapshots/202606下/门店小程序-续费订单.html",
+            "snapshots/202606下/运维后台-小程序首页广告配置.html",
+            "snapshots/202606下/门店后台-小程序首页广告配置.html",
+            "snapshots/202606下/mini-program首页.html",
+            "snapshots/202606下/支付宝首页.html",
+            "snapshots/202607上/门店后台-门店月账单.html",
+            "snapshots/202607上/门店后台-每日账单列表.html",
+            "snapshots/202607上/运维后台-门店月账单.html",
+            "snapshots/202607上/运维后台-每日账单列表.html",
+            "snapshots/202607上/设备详情.html",
+            "snapshots/202607上/作业端APP-盘库首页.html",
+            "snapshots/202607上/作业端APP-逐单盘点扫描列表.html",
+            "snapshots/202607上/作业端APP-货架待盘列表.html",
+            "snapshots/202607上/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/作业端APP-设备详情.html",
+            "snapshots/202607下/作业端APP-滞留回收.html",
+            "snapshots/202607下/问题件扫描.html",
+            "snapshots/202607下/门店小程序-设备详情.html",
+            "snapshots/202607下/设备APP-待取件.html",
+            "snapshots/202607下/门店后台-快递设备可视化.html",
+            "snapshots/202607下/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/运维后台-门店开票记录.html",
+            "snapshots/202607下/运维后台-收费明细.html",
+            "snapshots/202607下/作业端APP-绑定银行卡.html",
+            "snapshots/202607下/作业端APP-提现.html",
+            "snapshots/202607下/门店后台-测试系统费批量设置.html",
+            "snapshots/202607下/门店后台-短信模板设置.html",
+            "snapshots/202607下/运维后台-门店列表编辑.html",
+            "snapshots/202607下/门店后台-超期免费用户.html",
+            "snapshots/202607下/作业端APP-站点信息.html",
+            "snapshots/202607下/作业端APP-站点信息-地图选点.html",
+            "../field-app/main/pages/设备信息.html",
+            "../field-app/main/pages/消息通知明细.html",
+            "../admin-portal/maintain-admin/pages/短信反馈记录.html",
+            "../mini-program/门店小程序/pages/首页.html",
+            "../mini-program/门店小程序/pages/滞留件管理.html",
+            "../mini-program/门店小程序/pages/滞留件管理-公司详情.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/运单详情.html",
+            "../field-app/station-ops/pages/轨迹推送失败.html",
+            "../field-app/station-ops/pages/站点管理.html",
+            "../admin-portal/maintain-admin/pages/通信卡到期预警与通知规则.html",
+            "../admin-portal/maintain-admin/pages/门店列表编辑.html",
+            "../field-app/设备 APP/pages/取件检索结果页.html",
+            "../field-app/设备 APP/pages/取件成功页.html",
+            "../field-app/main/pages/极速投柜.html"
+          ]
+        },
+        "pageId": "login"
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-操-门禁-index.html-18",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "entry-defect",
+      "source_page": "mini-program/门禁/index.html",
+      "payload": {
+        "sourceDir": {
+          "path": "index.html",
+          "menuItems": [
+            {
+              "pageId": "home",
+              "label": "home",
+              "monthTag": null
+            },
+            {
+              "pageId": "station-list",
+              "label": "station-list",
+              "monthTag": null
+            },
+            {
+              "pageId": "result",
+              "label": "result",
+              "monthTag": null
+            },
+            {
+              "pageId": "fail",
+              "label": "fail",
+              "monthTag": null
+            },
+            {
+              "pageId": "code",
+              "label": "code",
+              "monthTag": null
+            },
+            {
+              "pageId": "me",
+              "label": "me",
+              "monthTag": null
+            }
+          ],
+          "iframeCarriers": [
+            {
+              "pageId": null,
+              "src": "./pages/门禁首页.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "station-list",
+              "src": "./pages/切换站点.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "result",
+              "src": "./pages/开门结果.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "fail",
+              "src": "./pages/开门失败.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "code",
+              "src": "./pages/专属码.html",
+              "monthComment": null
+            },
+            {
+              "pageId": "me",
+              "src": "./pages/我的.html",
+              "monthComment": null
+            }
+          ],
+          "pageNames": {},
+          "iterationRefs": [
+            "../admin-portal/工单投诉管理/index.html",
+            "../field-app/main/pages/盘库首页.html",
+            "../field-app/main/pages/扫码盘点.html",
+            "../field-app/main/pages/扫码盘点.html?mode=gun",
+            "../field-app/main/pages/盘库记录.html",
+            "../field-app/main/pages/逐单盘点扫描列表.html",
+            "../field-app/main/pages/我的钱包-充值.html",
+            "../field-app/main/pages/充值记录.html",
+            "../field-app/main/pages/提货号打印.html",
+            "../field-app/main/pages/提货码设置.html",
+            "../admin-portal/store-admin/pages/站点业务开关.html",
+            "../field-app/main/pages/扫码奖励.html",
+            "snapshots/202604上/门店后台-短信模板设置.html",
+            "../admin-portal/station-admin/pages/派件明细.html",
+            "snapshots/202604下/门店后台-短信模板设置.html",
+            "snapshots/202604下/门店后台-投递记录.html",
+            "snapshots/202604下/作业端APP-作业记录.html",
+            "snapshots/202605上/mini-program首页.html",
+            "../mini-program/main/支付宝小程序/支付宝首页.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信方案说明-v2.html",
+            "../admin-portal/store-admin/pages/支付宝代发短信会议纪要.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/派件明细.html?view=detail",
+            "../mini-program/shipping/pages/下单.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../field-app/device-app/pages/揽收成功页.html",
+            "../field-app/station-ops/pages/已揽件.html",
+            "../admin-portal/maintain-admin/pages/运单详情-监控抓拍.html",
+            "../field-app/main/pages/首页.html",
+            "../field-app/main/pages/外送扫描.html",
+            "../field-app/station-ops/pages/格口追加.html",
+            "../field-app/station-ops/pages/首页.html",
+            "../field-app/main/pages/自定义签收类型.html",
+            "../field-app/main/pages/入库扫描-巴枪模式.html",
+            "../field-app/station-ops/pages/包裹回收.html",
+            "../field-app/station-ops/pages/在柜包裹.html",
+            "snapshots/202605下/门店后台-格口管理.html",
+            "snapshots/202604下/门店后台-退信记录.html",
+            "snapshots/202605下/门店后台-门牌号管理.html",
+            "snapshots/202604下/运维后台-退信记录.html",
+            "snapshots/202605下/运维后台-门牌号管理.html",
+            "snapshots/202606上/拦截列表.html",
+            "snapshots/202606上/包裹列表.html",
+            "snapshots/202606上/操作员-拦截列表.html",
+            "snapshots/202606上/单号拦截批量设置.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-消息.html",
+            "snapshots/202606上/作业端APP-首页.html",
+            "snapshots/202606上/门店小程序-站点业务开关.html",
+            "snapshots/202606上/门店小程序-客户列表.html",
+            "snapshots/202606上/门店小程序-客户导入.html",
+            "snapshots/202606上/门店小程序-客户表单.html?mode=add",
+            "snapshots/202606上/门店小程序-客户搜索.html",
+            "snapshots/202606上/设备端-包裹验视.html",
+            "snapshots/202606上/设备端-用户包裹拍摄.html",
+            "snapshots/202606上/运维后台-运单详情-监控抓拍.html",
+            "snapshots/202606上/shipping-下单结果页.html",
+            "snapshots/202606上/shipping-寄件详情.html",
+            "snapshots/202606上/运维后台-门店列表.html",
+            "snapshots/202606上/运维后台-公司详情.html",
+            "snapshots/202606上/运维后台-站点详情.html",
+            "snapshots/202606上/作业端APP-更多.html",
+            "snapshots/202606上/作业端APP-客户表单.html?mode=add",
+            "snapshots/202606下/作业端APP-客户管理.html",
+            "snapshots/202606下/作业端APP-客户管理-批量导入.html",
+            "snapshots/202606下/作业端APP-更多.html",
+            "snapshots/202606下/作业端APP-客户表单.html",
+            "snapshots/202606下/通信卡列表.html",
+            "snapshots/202606下/续费订单.html",
+            "snapshots/202606下/作业端APP-通信卡充值记录.html",
+            "snapshots/202606下/门店小程序-续费订单.html",
+            "snapshots/202606下/运维后台-小程序首页广告配置.html",
+            "snapshots/202606下/门店后台-小程序首页广告配置.html",
+            "snapshots/202606下/mini-program首页.html",
+            "snapshots/202606下/支付宝首页.html",
+            "snapshots/202607上/门店后台-门店月账单.html",
+            "snapshots/202607上/门店后台-每日账单列表.html",
+            "snapshots/202607上/运维后台-门店月账单.html",
+            "snapshots/202607上/运维后台-每日账单列表.html",
+            "snapshots/202607上/设备详情.html",
+            "snapshots/202607上/作业端APP-盘库首页.html",
+            "snapshots/202607上/作业端APP-逐单盘点扫描列表.html",
+            "snapshots/202607上/作业端APP-货架待盘列表.html",
+            "snapshots/202607上/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/作业端APP-设备详情.html",
+            "snapshots/202607下/作业端APP-滞留回收.html",
+            "snapshots/202607下/问题件扫描.html",
+            "snapshots/202607下/门店小程序-设备详情.html",
+            "snapshots/202607下/设备APP-待取件.html",
+            "snapshots/202607下/门店后台-快递设备可视化.html",
+            "snapshots/202607下/门店后台-站点业务开关编辑.html",
+            "snapshots/202607下/运维后台-门店开票记录.html",
+            "snapshots/202607下/运维后台-收费明细.html",
+            "snapshots/202607下/作业端APP-绑定银行卡.html",
+            "snapshots/202607下/作业端APP-提现.html",
+            "snapshots/202607下/门店后台-测试系统费批量设置.html",
+            "snapshots/202607下/门店后台-短信模板设置.html",
+            "snapshots/202607下/运维后台-门店列表编辑.html",
+            "snapshots/202607下/门店后台-超期免费用户.html",
+            "snapshots/202607下/作业端APP-站点信息.html",
+            "snapshots/202607下/作业端APP-站点信息-地图选点.html",
+            "../field-app/main/pages/设备信息.html",
+            "../field-app/main/pages/消息通知明细.html",
+            "../admin-portal/maintain-admin/pages/短信反馈记录.html",
+            "../mini-program/门店小程序/pages/首页.html",
+            "../mini-program/门店小程序/pages/滞留件管理.html",
+            "../mini-program/门店小程序/pages/滞留件管理-公司详情.html",
+            "../admin-portal/store-admin/pages/站点业务开关编辑.html",
+            "../admin-portal/station-admin/pages/运单详情.html",
+            "../field-app/station-ops/pages/轨迹推送失败.html",
+            "../field-app/station-ops/pages/站点管理.html",
+            "../admin-portal/maintain-admin/pages/通信卡到期预警与通知规则.html",
+            "../admin-portal/maintain-admin/pages/门店列表编辑.html",
+            "../field-app/设备 APP/pages/取件检索结果页.html",
+            "../field-app/设备 APP/pages/取件成功页.html",
+            "../field-app/main/pages/极速投柜.html"
+          ]
+        },
+        "pageId": "home"
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-IT-INDEX-19",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "snapshot-pollution",
+      "source_page": "迭代索引",
+      "payload": {
+        "iteration": "202603上",
+        "activeIteration": "202612下",
+        "iframes": [
+          {
+            "src": "../admin-portal/工单投诉管理/index.html",
+            "line": null
+          }
+        ],
+        "knownDebt": []
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-IT-INDEX-20",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "snapshot-pollution",
+      "source_page": "迭代索引",
+      "payload": {
+        "iteration": "202603下",
+        "activeIteration": "202612下",
+        "iframes": [
+          {
+            "src": "../field-app/main/pages/盘库首页.html",
+            "line": null
+          }
+        ],
+        "knownDebt": []
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-IT-INDEX-21",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "snapshot-pollution",
+      "source_page": "迭代索引",
+      "payload": {
+        "iteration": "202603下",
+        "activeIteration": "202612下",
+        "iframes": [
+          {
+            "src": "../field-app/main/pages/扫码盘点.html",
+            "line": null
+          }
+        ],
+        "knownDebt": []
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-IT-INDEX-22",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "snapshot-pollution",
+      "source_page": "迭代索引",
+      "payload": {
+        "iteration": "202604上",
+        "activeIteration": "202612下",
+        "iframes": [
+          {
+            "src": "../admin-portal/store-admin/pages/站点业务开关.html",
+            "line": null
+          }
+        ],
+        "knownDebt": []
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-IT-INDEX-23",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "snapshot-pollution",
+      "source_page": "迭代索引",
+      "payload": {
+        "iteration": "202604上",
+        "activeIteration": "202612下",
+        "iframes": [
+          {
+            "src": "../field-app/main/pages/扫码奖励.html",
+            "line": null
+          }
+        ],
+        "knownDebt": []
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-IT-INDEX-24",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "snapshot-pollution",
+      "source_page": "迭代索引",
+      "payload": {
+        "iteration": "202605上",
+        "activeIteration": "202612下",
+        "iframes": [
+          {
+            "src": "../mini-program/main/支付宝小程序/支付宝首页.html",
+            "line": null
+          }
+        ],
+        "knownDebt": []
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-IT-INDEX-25",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "snapshot-pollution",
+      "source_page": "迭代索引",
+      "payload": {
+        "iteration": "202605上",
+        "activeIteration": "202612下",
+        "iframes": [
+          {
+            "src": "../admin-portal/store-admin/pages/支付宝代发短信方案说明-v2.html",
+            "line": null
+          }
+        ],
+        "knownDebt": []
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-IT-INDEX-26",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "snapshot-pollution",
+      "source_page": "迭代索引",
+      "payload": {
+        "iteration": "202605下",
+        "activeIteration": "202612下",
+        "iframes": [
+          {
+            "src": "../field-app/main/pages/自定义签收类型.html",
+            "line": null
+          }
+        ],
+        "knownDebt": []
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-IT-INDEX-27",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "snapshot-pollution",
+      "source_page": "迭代索引",
+      "payload": {
+        "iteration": "202605下",
+        "activeIteration": "202612下",
+        "iframes": [
+          {
+            "src": "../field-app/main/pages/入库扫描-巴枪模式.html",
+            "line": null
+          }
+        ],
+        "knownDebt": []
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-IT-INDEX-28",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "snapshot-pollution",
+      "source_page": "迭代索引",
+      "payload": {
+        "iteration": "202608上",
+        "activeIteration": "202612下",
+        "iframes": [
+          {
+            "src": "../field-app/main/pages/设备信息.html",
+            "line": null
+          }
+        ],
+        "knownDebt": []
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-IT-INDEX-29",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "snapshot-pollution",
+      "source_page": "迭代索引",
+      "payload": {
+        "iteration": "202608上",
+        "activeIteration": "202612下",
+        "iframes": [
+          {
+            "src": "../field-app/main/pages/消息通知明细.html",
+            "line": null
+          }
+        ],
+        "knownDebt": []
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-IT-INDEX-30",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "snapshot-pollution",
+      "source_page": "迭代索引",
+      "payload": {
+        "iteration": "202608下",
+        "activeIteration": "202612下",
+        "iframes": [
+          {
+            "src": "../field-app/设备 APP/pages/取件检索结果页.html",
+            "line": null
+          }
+        ],
+        "knownDebt": []
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-IT-INDEX-31",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "snapshot-pollution",
+      "source_page": "迭代索引",
+      "payload": {
+        "iteration": "202608下",
+        "activeIteration": "202612下",
+        "iframes": [
+          {
+            "src": "../field-app/设备 APP/pages/取件成功页.html",
+            "line": null
+          }
+        ],
+        "knownDebt": []
+      },
+      "expected": {
+        "verdict": "fail"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-PC-01",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "permission-control",
+      "source_page": "admin-portal/store-admin/pages/终端操作权限.html",
+      "payload": {
+        "scenario": "门店后台终端使用权限页缺少“禁止投递操作员”名单维护入口",
+        "source_page": "admin-portal/store-admin/pages/终端操作权限.html"
+      },
+      "expected": {
+        "verdict": "fail",
+        "reason": "permission-control: 缺少禁止名单维护入口"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-PC-02",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "permission-control",
+      "source_page": "admin-portal/store-admin/pages/终端操作权限.html",
+      "payload": {
+        "scenario": "终端使用权限配置未说明角色权限边界，任何角色均可修改禁止名单",
+        "source_page": "admin-portal/store-admin/pages/终端操作权限.html"
+      },
+      "expected": {
+        "verdict": "fail",
+        "reason": "permission-control: 角色权限边界缺失"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-PC-03",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "permission-control",
+      "source_page": "admin-portal/store-admin/pages/终端操作权限.html",
+      "payload": {
+        "scenario": "禁止名单已配置但设备投递环节未按名单拦截",
+        "source_page": "admin-portal/store-admin/pages/终端操作权限.html"
+      },
+      "expected": {
+        "verdict": "fail",
+        "reason": "permission-control: 禁止名单未在消费端生效"
+      },
+      "priority": "P1"
+    },
+    {
+      "corpus_id": "C-PC-04",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "permission-control",
+      "source_page": "admin-portal/store-admin/pages/终端操作权限.html",
+      "payload": {
+        "scenario": "终端使用权限页未区分“允许使用/禁止投递”两类规则，规则语义混乱",
+        "source_page": "admin-portal/store-admin/pages/终端操作权限.html"
+      },
+      "expected": {
+        "verdict": "fail",
+        "reason": "permission-control: 规则分类缺失"
+      },
+      "priority": "P1"
+    },
+    {
+      "corpus_id": "C-PC-05",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "permission-control",
+      "source_page": "admin-portal/store-admin/pages/终端操作权限.html",
+      "payload": {
+        "scenario": "门店后台终端使用权限页正常，含禁止名单维护入口、角色权限说明与投递拦截提示",
+        "source_page": "admin-portal/store-admin/pages/终端操作权限.html"
+      },
+      "expected": {
+        "verdict": "pass",
+        "reason": "permission-control: 权限控制闭环完整"
+      },
+      "priority": "P2"
+    },
+    {
+      "corpus_id": "C-FA-01",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "feature-addition",
+      "source_page": "admin-portal/store-admin/pages/终端操作权限.html",
+      "payload": {
+        "scenario": "新增设备禁止操作员功能，但源目录菜单与页面承载未注册，页面不可达",
+        "source_page": "admin-portal/store-admin/pages/终端操作权限.html"
+      },
+      "expected": {
+        "verdict": "fail",
+        "reason": "feature-addition: 入口注册缺失"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-FA-02",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "feature-addition",
+      "source_page": "admin-portal/store-admin/pages/终端操作权限.html",
+      "payload": {
+        "scenario": "新增禁止名单功能未同步权限控制，任意角色可增删名单",
+        "source_page": "admin-portal/store-admin/pages/终端操作权限.html"
+      },
+      "expected": {
+        "verdict": "fail",
+        "reason": "feature-addition: 权限控制未同步"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-FA-03",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "feature-addition",
+      "source_page": "admin-portal/store-admin/pages/终端操作权限.html",
+      "payload": {
+        "scenario": "新增功能需求说明未明确禁止名单上限与生效范围",
+        "source_page": "admin-portal/store-admin/pages/终端操作权限.html"
+      },
+      "expected": {
+        "verdict": "fail",
+        "reason": "feature-addition: 生效范围未定义"
+      },
+      "priority": "P1"
+    },
+    {
+      "corpus_id": "C-FA-04",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "feature-addition",
+      "source_page": "admin-portal/store-admin/pages/终端操作权限.html",
+      "payload": {
+        "scenario": "新增设备禁止操作员功能页面正常，含入口、名单维护与提示说明",
+        "source_page": "admin-portal/store-admin/pages/终端操作权限.html"
+      },
+      "expected": {
+        "verdict": "pass",
+        "reason": "feature-addition: 功能新增闭环完整"
+      },
+      "priority": "P1"
+    },
+    {
+      "corpus_id": "C-FA-05",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "feature-addition",
+      "source_page": "admin-portal/store-admin/pages/终端操作权限.html",
+      "payload": {
+        "scenario": "新增功能影响既有投递流程但页面未做风险与异常说明",
+        "source_page": "admin-portal/store-admin/pages/终端操作权限.html"
+      },
+      "expected": {
+        "verdict": "fail",
+        "reason": "feature-addition: 既有流程影响未说明"
+      },
+      "priority": "P2"
+    },
+    {
+      "corpus_id": "C-CP-01",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "cross-platform",
+      "source_page": "admin-portal/store-admin/pages/终端操作权限.html",
+      "payload": {
+        "scenario": "门店后台支持设备禁止名单，但小程序/设备消费端未同步拦截提示",
+        "source_page": "admin-portal/store-admin/pages/终端操作权限.html"
+      },
+      "expected": {
+        "verdict": "fail",
+        "reason": "cross-platform: 消费端未同步"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-CP-02",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "cross-platform",
+      "source_page": "admin-portal/store-admin/pages/终端操作权限.html",
+      "payload": {
+        "scenario": "跨端需求仅实现门店后台配置，未声明小程序消费端与数据下发",
+        "source_page": "admin-portal/store-admin/pages/终端操作权限.html"
+      },
+      "expected": {
+        "verdict": "fail",
+        "reason": "cross-platform: 消费端声明缺失"
+      },
+      "priority": "P0"
+    },
+    {
+      "corpus_id": "C-CP-03",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "cross-platform",
+      "source_page": "admin-portal/store-admin/pages/终端操作权限.html",
+      "payload": {
+        "scenario": "门店后台与小程序均支持设备禁止名单，两端状态与提示一致",
+        "source_page": "admin-portal/store-admin/pages/终端操作权限.html"
+      },
+      "expected": {
+        "verdict": "pass",
+        "reason": "cross-platform: 跨端同步完整"
+      },
+      "priority": "P1"
+    },
+    {
+      "corpus_id": "C-CP-04",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "cross-platform",
+      "source_page": "admin-portal/store-admin/pages/终端操作权限.html",
+      "payload": {
+        "scenario": "跨端功能未说明配置端到消费端的名单数据下发链路",
+        "source_page": "admin-portal/store-admin/pages/终端操作权限.html"
+      },
+      "expected": {
+        "verdict": "fail",
+        "reason": "cross-platform: 数据下发链路未说明"
+      },
+      "priority": "P1"
+    },
+    {
+      "corpus_id": "C-CP-05",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "cross-platform",
+      "source_page": "admin-portal/store-admin/pages/终端操作权限.html",
+      "payload": {
+        "scenario": "跨端需求未确认门店角色与站点员工角色的权限边界",
+        "source_page": "admin-portal/store-admin/pages/终端操作权限.html"
+      },
+      "expected": {
+        "verdict": "fail",
+        "reason": "cross-platform: 角色边界未确认"
+      },
+      "priority": "P2"
+    }
+  ]
+}

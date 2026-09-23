@@ -1,0 +1,1222 @@
+{
+  "schemaVersion": "1.0.0",
+  "updatedAt": "2026-09-09",
+  "purpose": "登记仓库规则载体、canonical 归属、镜像关系与重复主题；供只读规则审计使用。",
+  "policy": {
+    "mainEntry": "AGENTS.md",
+    "mirrorStrategy": "validate-only",
+    "mirrorGrowth": "frozen",
+    "notes": [
+      "archive 条目只作为过程材料登记，不参与当前规则优先级。",
+      "ui-ux-pro-max 当前存在 legacy 与 searchable 两个已验证内容变体，分别冻结为两个镜像组。",
+      ".github/prompts 下仅 PROMPT.md 视为规则载体；data、scripts 与缓存属于能力载荷，不纳入规则地图。",
+      "规则地图不登记 standards/ui-spec.json 内的业务页面清单内容，只登记该标准文件本身。"
+    ]
+  },
+  "discovery": [
+    {
+      "kind": "exact",
+      "paths": [
+        "AGENTS.md",
+        "DEVELOPMENT.md",
+        "CLAUDE.md",
+        "产品-规则说明.md"
+      ]
+    },
+    {
+      "kind": "glob",
+      "pattern": "harness/**/*.md"
+    },
+    {
+      "kind": "glob",
+      "pattern": "standards/*.{json,md}"
+    },
+    {
+      "kind": "glob",
+      "pattern": ".codebuddy/rules/*.mdc"
+    },
+    {
+      "kind": "glob",
+      "pattern": ".agents/skills/*/SKILL.md"
+    },
+    {
+      "kind": "glob",
+      "pattern": ".claude/skills/*/SKILL.md"
+    },
+    {
+      "kind": "glob",
+      "pattern": ".codex/skills/*/SKILL.md"
+    },
+    {
+      "kind": "glob",
+      "pattern": ".codebuddy/skills/*/SKILL.md"
+    },
+    {
+      "kind": "glob",
+      "pattern": ".kiro/settings/rules/*.md"
+    },
+    {
+      "kind": "glob",
+      "pattern": ".github/prompts/**/PROMPT.md"
+    }
+  ],
+  "files": [
+    {
+      "path": ".agents/skills/design-task-preflight/SKILL.md",
+      "layer": "工具适配",
+      "role": "canonical",
+      "mirrorGroup": "skill:design-task-preflight"
+    },
+    {
+      "path": ".agents/skills/design-task-profiles/SKILL.md",
+      "layer": "工具适配",
+      "role": "canonical",
+      "mirrorGroup": "skill:design-task-profiles"
+    },
+    {
+      "path": ".agents/skills/engineering-diagnose/SKILL.md",
+      "layer": "工具适配",
+      "role": "canonical",
+      "mirrorGroup": "skill:engineering-diagnose"
+    },
+    {
+      "path": ".agents/skills/engineering-plan-grill/SKILL.md",
+      "layer": "工具适配",
+      "role": "canonical",
+      "mirrorGroup": "skill:engineering-plan-grill"
+    },
+    {
+      "path": ".agents/skills/engineering-slice-plan/SKILL.md",
+      "layer": "工具适配",
+      "role": "canonical",
+      "mirrorGroup": "skill:engineering-slice-plan"
+    },
+    {
+      "path": ".agents/skills/engineering-zoom-out/SKILL.md",
+      "layer": "工具适配",
+      "role": "canonical",
+      "mirrorGroup": "skill:engineering-zoom-out"
+    },
+    {
+      "path": ".agents/skills/implementation-self-audit/SKILL.md",
+      "layer": "工具适配",
+      "role": "canonical",
+      "mirrorGroup": "skill:implementation-self-audit"
+    },
+    {
+      "path": ".agents/skills/independent-judgment/SKILL.md",
+      "layer": "工具适配",
+      "role": "canonical",
+      "mirrorGroup": "skill:independent-judgment"
+    },
+    {
+      "path": ".agents/skills/design-taste-frontend/SKILL.md",
+      "layer": "工具适配",
+      "role": "canonical",
+      "mirrorGroup": "skill:design-taste-frontend"
+    },
+    {
+      "path": ".agents/skills/impeccable/SKILL.md",
+      "layer": "工具适配",
+      "role": "canonical",
+      "mirrorGroup": "skill:impeccable"
+    },
+    {
+      "path": ".agents/skills/neat-freak/SKILL.md",
+      "layer": "工具适配",
+      "role": "canonical",
+      "mirrorGroup": "skill:neat-freak"
+    },
+    {
+      "path": ".agents/skills/source-command-kiro-steering-custom/SKILL.md",
+      "layer": "工具适配",
+      "role": "canonical",
+      "responsibility": "工具专属 skill，当前无跨工具母本"
+    },
+    {
+      "path": ".agents/skills/source-command-kiro-steering/SKILL.md",
+      "layer": "工具适配",
+      "role": "canonical",
+      "responsibility": "工具专属 skill，当前无跨工具母本"
+    },
+    {
+      "path": ".agents/skills/ui-ux-pro-max/SKILL.md",
+      "layer": "工具适配",
+      "role": "canonical",
+      "mirrorGroup": "skill:ui-ux-pro-max:legacy"
+    },
+    {
+      "path": ".claude/skills/design-task-preflight/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/design-task-preflight/SKILL.md",
+      "mirrorGroup": "skill:design-task-preflight"
+    },
+    {
+      "path": ".claude/skills/design-task-profiles/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/design-task-profiles/SKILL.md",
+      "mirrorGroup": "skill:design-task-profiles"
+    },
+    {
+      "path": ".claude/skills/engineering-diagnose/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/engineering-diagnose/SKILL.md",
+      "mirrorGroup": "skill:engineering-diagnose"
+    },
+    {
+      "path": ".claude/skills/engineering-plan-grill/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/engineering-plan-grill/SKILL.md",
+      "mirrorGroup": "skill:engineering-plan-grill"
+    },
+    {
+      "path": ".claude/skills/engineering-slice-plan/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/engineering-slice-plan/SKILL.md",
+      "mirrorGroup": "skill:engineering-slice-plan"
+    },
+    {
+      "path": ".claude/skills/engineering-zoom-out/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/engineering-zoom-out/SKILL.md",
+      "mirrorGroup": "skill:engineering-zoom-out"
+    },
+    {
+      "path": ".claude/skills/implementation-self-audit/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/implementation-self-audit/SKILL.md",
+      "mirrorGroup": "skill:implementation-self-audit"
+    },
+    {
+      "path": ".claude/skills/independent-judgment/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/independent-judgment/SKILL.md",
+      "mirrorGroup": "skill:independent-judgment"
+    },
+    {
+      "path": ".claude/skills/design-taste-frontend/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/design-taste-frontend/SKILL.md",
+      "mirrorGroup": "skill:design-taste-frontend"
+    },
+    {
+      "path": ".claude/skills/impeccable/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/impeccable/SKILL.md",
+      "mirrorGroup": "skill:impeccable"
+    },
+    {
+      "path": ".claude/skills/neat-freak/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/neat-freak/SKILL.md",
+      "mirrorGroup": "skill:neat-freak"
+    },
+    {
+      "path": ".claude/skills/ui-ux-pro-max/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/ui-ux-pro-max/SKILL.md",
+      "mirrorGroup": "skill:ui-ux-pro-max:legacy"
+    },
+    {
+      "path": ".codebuddy/rules/AI_主规则.mdc",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": "AGENTS.md",
+      "mirrorGroup": "codebuddy-rule:AI_主规则"
+    },
+    {
+      "path": ".codebuddy/rules/CLAUDE.mdc",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": "CLAUDE.md",
+      "mirrorGroup": "codebuddy-rule:CLAUDE"
+    },
+    {
+      "path": ".codebuddy/rules/Design_Task_Preflight.mdc",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/design-task-preflight/SKILL.md",
+      "mirrorGroup": "codebuddy-rule:Design_Task_Preflight"
+    },
+    {
+      "path": ".codebuddy/rules/Design_Task_Profiles.mdc",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/design-task-profiles/SKILL.md",
+      "mirrorGroup": "codebuddy-rule:Design_Task_Profiles"
+    },
+    {
+      "path": ".codebuddy/rules/DEVELOPMENT.mdc",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": "DEVELOPMENT.md",
+      "mirrorGroup": "codebuddy-rule:DEVELOPMENT"
+    },
+    {
+      "path": ".codebuddy/rules/Engineering_Diagnose.mdc",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/engineering-diagnose/SKILL.md",
+      "mirrorGroup": "codebuddy-rule:Engineering_Diagnose"
+    },
+    {
+      "path": ".codebuddy/rules/Engineering_Plan_Grill.mdc",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/engineering-plan-grill/SKILL.md",
+      "mirrorGroup": "codebuddy-rule:Engineering_Plan_Grill"
+    },
+    {
+      "path": ".codebuddy/rules/Engineering_Slice_Plan.mdc",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/engineering-slice-plan/SKILL.md",
+      "mirrorGroup": "codebuddy-rule:Engineering_Slice_Plan"
+    },
+    {
+      "path": ".codebuddy/rules/Engineering_Zoom_Out.mdc",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/engineering-zoom-out/SKILL.md",
+      "mirrorGroup": "codebuddy-rule:Engineering_Zoom_Out"
+    },
+    {
+      "path": ".codebuddy/rules/Implementation_Self_Audit.mdc",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/implementation-self-audit/SKILL.md",
+      "mirrorGroup": "codebuddy-rule:Implementation_Self_Audit"
+    },
+    {
+      "path": ".codebuddy/rules/Independent_Judgment.mdc",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/independent-judgment/SKILL.md",
+      "mirrorGroup": "codebuddy-rule:Independent_Judgment"
+    },
+    {
+      "path": ".codebuddy/skills/design-task-preflight/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/design-task-preflight/SKILL.md",
+      "mirrorGroup": "skill:design-task-preflight"
+    },
+    {
+      "path": ".codebuddy/skills/design-task-profiles/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/design-task-profiles/SKILL.md",
+      "mirrorGroup": "skill:design-task-profiles"
+    },
+    {
+      "path": ".codebuddy/skills/engineering-diagnose/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/engineering-diagnose/SKILL.md",
+      "mirrorGroup": "skill:engineering-diagnose"
+    },
+    {
+      "path": ".codebuddy/skills/engineering-plan-grill/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/engineering-plan-grill/SKILL.md",
+      "mirrorGroup": "skill:engineering-plan-grill"
+    },
+    {
+      "path": ".codebuddy/skills/engineering-slice-plan/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/engineering-slice-plan/SKILL.md",
+      "mirrorGroup": "skill:engineering-slice-plan"
+    },
+    {
+      "path": ".codebuddy/skills/engineering-zoom-out/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/engineering-zoom-out/SKILL.md",
+      "mirrorGroup": "skill:engineering-zoom-out"
+    },
+    {
+      "path": ".codebuddy/skills/implementation-self-audit/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/implementation-self-audit/SKILL.md",
+      "mirrorGroup": "skill:implementation-self-audit"
+    },
+    {
+      "path": ".codebuddy/skills/independent-judgment/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/independent-judgment/SKILL.md",
+      "mirrorGroup": "skill:independent-judgment"
+    },
+    {
+      "path": ".codebuddy/skills/design-taste-frontend/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/design-taste-frontend/SKILL.md",
+      "mirrorGroup": "skill:design-taste-frontend"
+    },
+    {
+      "path": ".codebuddy/skills/neat-freak/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/neat-freak/SKILL.md",
+      "mirrorGroup": "skill:neat-freak"
+    },
+    {
+      "path": ".codebuddy/skills/ui-ux-pro-max/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".codex/skills/ui-ux-pro-max/SKILL.md",
+      "mirrorGroup": "skill:ui-ux-pro-max:searchable"
+    },
+    {
+      "path": ".codex/skills/design-task-preflight/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/design-task-preflight/SKILL.md",
+      "mirrorGroup": "skill:design-task-preflight"
+    },
+    {
+      "path": ".codex/skills/design-task-profiles/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/design-task-profiles/SKILL.md",
+      "mirrorGroup": "skill:design-task-profiles"
+    },
+    {
+      "path": ".codex/skills/engineering-diagnose/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/engineering-diagnose/SKILL.md",
+      "mirrorGroup": "skill:engineering-diagnose"
+    },
+    {
+      "path": ".codex/skills/engineering-plan-grill/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/engineering-plan-grill/SKILL.md",
+      "mirrorGroup": "skill:engineering-plan-grill"
+    },
+    {
+      "path": ".codex/skills/engineering-slice-plan/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/engineering-slice-plan/SKILL.md",
+      "mirrorGroup": "skill:engineering-slice-plan"
+    },
+    {
+      "path": ".codex/skills/engineering-zoom-out/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/engineering-zoom-out/SKILL.md",
+      "mirrorGroup": "skill:engineering-zoom-out"
+    },
+    {
+      "path": ".codex/skills/implementation-self-audit/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/implementation-self-audit/SKILL.md",
+      "mirrorGroup": "skill:implementation-self-audit"
+    },
+    {
+      "path": ".codex/skills/independent-judgment/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/independent-judgment/SKILL.md",
+      "mirrorGroup": "skill:independent-judgment"
+    },
+    {
+      "path": ".codex/skills/neat-freak/SKILL.md",
+      "layer": "工具适配",
+      "role": "mirror",
+      "source": ".agents/skills/neat-freak/SKILL.md",
+      "mirrorGroup": "skill:neat-freak"
+    },
+    {
+      "path": ".codex/skills/ui-ux-pro-max/SKILL.md",
+      "layer": "工具适配",
+      "role": "canonical",
+      "mirrorGroup": "skill:ui-ux-pro-max:searchable"
+    },
+    {
+      "path": ".github/prompts/ui-ux-pro-max/PROMPT.md",
+      "layer": "工具适配",
+      "role": "reference",
+      "responsibility": "GitHub Prompt 入口"
+    },
+    {
+      "path": ".kiro/settings/rules/design-discovery-full.md",
+      "layer": "流程",
+      "role": "reference",
+      "responsibility": "候选 kiro/cc-sdd 流程，默认未启用"
+    },
+    {
+      "path": ".kiro/settings/rules/design-discovery-light.md",
+      "layer": "流程",
+      "role": "reference",
+      "responsibility": "候选 kiro/cc-sdd 流程，默认未启用"
+    },
+    {
+      "path": ".kiro/settings/rules/design-principles.md",
+      "layer": "流程",
+      "role": "reference",
+      "responsibility": "候选 kiro/cc-sdd 流程，默认未启用"
+    },
+    {
+      "path": ".kiro/settings/rules/design-review-gate.md",
+      "layer": "流程",
+      "role": "reference",
+      "responsibility": "候选 kiro/cc-sdd 流程，默认未启用"
+    },
+    {
+      "path": ".kiro/settings/rules/design-review.md",
+      "layer": "流程",
+      "role": "reference",
+      "responsibility": "候选 kiro/cc-sdd 流程，默认未启用"
+    },
+    {
+      "path": ".kiro/settings/rules/design-synthesis.md",
+      "layer": "流程",
+      "role": "reference",
+      "responsibility": "候选 kiro/cc-sdd 流程，默认未启用"
+    },
+    {
+      "path": ".kiro/settings/rules/ears-format.md",
+      "layer": "流程",
+      "role": "reference",
+      "responsibility": "候选 kiro/cc-sdd 流程，默认未启用"
+    },
+    {
+      "path": ".kiro/settings/rules/gap-analysis.md",
+      "layer": "流程",
+      "role": "reference",
+      "responsibility": "候选 kiro/cc-sdd 流程，默认未启用"
+    },
+    {
+      "path": ".kiro/settings/rules/requirements-review-gate.md",
+      "layer": "流程",
+      "role": "reference",
+      "responsibility": "候选 kiro/cc-sdd 流程，默认未启用"
+    },
+    {
+      "path": ".kiro/settings/rules/steering-principles.md",
+      "layer": "流程",
+      "role": "reference",
+      "responsibility": "候选 kiro/cc-sdd 流程，默认未启用"
+    },
+    {
+      "path": ".kiro/settings/rules/tasks-generation.md",
+      "layer": "流程",
+      "role": "reference",
+      "responsibility": "候选 kiro/cc-sdd 流程，默认未启用"
+    },
+    {
+      "path": ".kiro/settings/rules/tasks-parallel-analysis.md",
+      "layer": "流程",
+      "role": "reference",
+      "responsibility": "候选 kiro/cc-sdd 流程，默认未启用"
+    },
+    {
+      "path": "doc/UI-设计工作流.md",
+      "layer": "项目资料",
+      "role": "reference",
+      "responsibility": "UI 设计专项工作流手册：需求澄清/设计系统/实现/对抗审查/修复复验的场景化 skill 链，由 harness 疑问句式与视觉三查触发"
+    },
+    {
+      "path": "产品-规则说明.md",
+      "layer": "工具适配",
+      "role": "reference",
+      "responsibility": "面向产品的人读简版"
+    },
+    {
+      "path": "AGENTS.md",
+      "layer": "主入口",
+      "role": "canonical",
+      "responsibility": "项目唯一主入口"
+    },
+    {
+      "path": "CLAUDE.md",
+      "layer": "工具适配",
+      "role": "reference",
+      "responsibility": "Claude 工具薄入口，服从 AGENTS.md"
+    },
+    {
+      "path": "DEVELOPMENT.md",
+      "layer": "实现规则",
+      "role": "canonical",
+      "responsibility": "页面结构、交互、样式与原型实现"
+    },
+    {
+      "path": "harness/00-执行总入口.md",
+      "layer": "harness",
+      "role": "canonical"
+    },
+    {
+      "path": "harness/01-强制闸门.md",
+      "layer": "harness",
+      "role": "canonical"
+    },
+    {
+      "path": "harness/02-纠偏与接力.md",
+      "layer": "harness",
+      "role": "canonical"
+    },
+    {
+      "path": "harness/03-任务契约.md",
+      "layer": "harness",
+      "role": "canonical"
+    },
+    {
+      "path": "harness/04-规则准入与治理.md",
+      "layer": "harness",
+      "role": "canonical"
+    },
+    {
+      "path": "harness/05-验证与交付.md",
+      "layer": "harness",
+      "role": "canonical"
+    },
+    {
+      "path": "harness/10-页面与抽屉执行.md",
+      "layer": "harness",
+      "role": "canonical"
+    },
+    {
+      "path": "harness/20-协作Prompt模板.md",
+      "layer": "harness",
+      "role": "canonical",
+      "responsibility": "项目三角色自动路由、接力边界和专项审阅补充"
+    },
+    {
+      "path": "harness/roles/需求聚焦者.md",
+      "layer": "harness",
+      "role": "canonical",
+      "responsibility": "第一性原理需求聚焦、批判性访谈和需求基线"
+    },
+    {
+      "path": "harness/roles/指导审阅者.md",
+      "layer": "harness",
+      "role": "canonical",
+      "responsibility": "批判性指导发包和执行后对抗审阅"
+    },
+    {
+      "path": "harness/roles/通用执行者.md",
+      "layer": "harness",
+      "role": "canonical",
+      "responsibility": "通用任务包执行、决策分级、验证和交付"
+    },
+    {
+      "path": "harness/roles/抽屉审查者.md",
+      "layer": "harness",
+      "role": "canonical",
+      "responsibility": "需求抽屉与 CSS 规范四项专项审查：转写忠实度、越权自查（含老功能增量识别）、阅读体验、CSS 规范联动"
+    },
+    {
+      "path": "harness/rules/风格基线-移动作业端.md",
+      "layer": "harness",
+      "role": "canonical"
+    },
+    {
+      "path": "harness/cold-storage.md",
+      "layer": "harness",
+      "role": "canonical",
+      "responsibility": "规则冷宫归档区：低频规则物理移出与原位指针回链、白名单、条目格式"
+    },
+    {
+      "path": "harness/archive/95-规则体系第三方审阅报告-20260709.md",
+      "layer": "过程材料",
+      "role": "archived"
+    },
+    {
+      "path": "harness/archive/96-规则体系重构任务包-第一批-20260709.md",
+      "layer": "过程材料",
+      "role": "archived"
+    },
+    {
+      "path": "harness/archive/97-规则体系重构第一批收口记录-20260710.md",
+      "layer": "过程材料",
+      "role": "archived"
+    },
+    {
+      "path": "harness/archive/98-规则体系重构任务包-第二批-20260710.md",
+      "layer": "过程材料",
+      "role": "archived"
+    },
+    {
+      "path": "harness/archive/98A-规则体系重构任务包-收官批-20260710.md",
+      "layer": "过程材料",
+      "role": "archived"
+    },
+    {
+      "path": "harness/archive/99-规则体系重构收官记录-20260710.md",
+      "layer": "过程材料",
+      "role": "archived"
+    },
+    {
+      "path": "harness/archive/100-规则ROI评分-配置区视觉与迭代菜单-20260826.md",
+      "layer": "过程材料",
+      "role": "archived",
+      "responsibility": "20260826 配置区视觉规则与迭代菜单端名规则的 ROI 评分记录（并行会话产出）"
+    },
+    {
+      "path": "harness/archive/101-视觉发病复盘与规则沉淀含冷宫治理-20260826.md",
+      "layer": "过程材料",
+      "role": "archived",
+      "responsibility": "20260826 视觉发病复盘、6 条规则沉淀、ROI 评分元规则与冷宫治理机制的决策链存档"
+    },
+    {
+      "path": "harness/README.md",
+      "layer": "harness",
+      "role": "canonical"
+    },
+    {
+      "path": "harness/engineering/README.md",
+      "layer": "工程说明",
+      "role": "canonical",
+      "owner": "harness-engineering",
+      "responsibility": "H01 结构化工程契约（schema、owner registry、验证入口）目录说明"
+    },
+    {
+      "path": "standards/design-over-spec.md",
+      "layer": "标准",
+      "role": "canonical"
+    },
+    {
+      "path": "standards/design-tokens.json",
+      "layer": "标准",
+      "role": "canonical"
+    },
+    {
+      "path": "standards/doc-spec.json",
+      "layer": "标准",
+      "role": "canonical"
+    },
+    {
+      "path": "standards/module-spec.json",
+      "layer": "标准",
+      "role": "canonical"
+    },
+    {
+      "path": "standards/page-baseline-spec.json",
+      "layer": "标准",
+      "role": "canonical"
+    },
+    {
+      "path": "standards/page-type-guide.md",
+      "layer": "标准",
+      "role": "canonical"
+    },
+    {
+      "path": "standards/platform-rules.json",
+      "layer": "标准",
+      "role": "canonical"
+    },
+    {
+      "path": "standards/requirement-baseline-schema.json",
+      "layer": "标准",
+      "role": "canonical",
+      "responsibility": "需求基线输出 schema（requirement-interview 任务结构化输出验证，P8.1）"
+    },
+    {
+      "path": "standards/requirement-template.json",
+      "layer": "标准",
+      "role": "canonical",
+      "responsibility": "需求模板：老 harness 需求字段定义与需求抽屉节模板（P10.2）"
+    },
+    {
+      "path": "standards/rule-map.json",
+      "layer": "标准",
+      "role": "canonical"
+    },
+    {
+      "path": "standards/rule-system-upgrade.md",
+      "layer": "标准",
+      "role": "reference"
+    },
+    {
+      "path": "memory/MEMORY.md",
+      "layer": "记忆",
+      "role": "canonical",
+      "responsibility": "跨模型共享项目记忆索引；非规则，冲突时规则优先"
+    },
+    {
+      "path": "memory/梳理规则.md",
+      "layer": "记忆",
+      "role": "canonical",
+      "responsibility": "记忆写入触发条件与当日梳理流程"
+    },
+    {
+      "path": "templates/规则任务包模板.md",
+      "layer": "模板",
+      "role": "canonical",
+      "responsibility": "规则治理任务包四段式模板"
+    },
+    {
+      "path": "templates/执行者最终答复模板.md",
+      "layer": "模板",
+      "role": "canonical",
+      "responsibility": "执行者改动、证据与未越界答复模板"
+    },
+    {
+      "path": "standards/授权词表.md",
+      "layer": "标准",
+      "role": "canonical",
+      "responsibility": "L2/L3 授权表达与非授权表达的待确认词表"
+    },
+    {
+      "path": "standards/ui-consistency-rules.json",
+      "layer": "标准",
+      "role": "canonical"
+    },
+    {
+      "path": "standards/ui-spec.json",
+      "layer": "标准",
+      "role": "canonical"
+    },
+    {
+      "path": "standards/workflow-definition-schema.json",
+      "layer": "标准",
+      "role": "canonical",
+      "responsibility": "workflow 定义输出 schema（harness:run --workflow 步骤编排验证，P9.1）"
+    },
+    {
+      "path": "harness/engineering/adapters/deepseek.json",
+      "layer": "工程契约",
+      "role": "canonical",
+      "owner": "harness-engineering",
+      "responsibility": "H09 DeepSeek adapter 机器契约（model/base_url/error_mapping，P5 新增）"
+    },
+    {
+      "path": "harness/engineering/adapters/deepseek.md",
+      "layer": "工程说明",
+      "role": "canonical",
+      "owner": "harness-engineering",
+      "responsibility": "H09 DeepSeek adapter 人读说明（P5 新增）"
+    },
+    {
+      "path": "scripts/harness/lib/shadow/runner.js",
+      "layer": "工程脚本",
+      "role": "canonical",
+      "owner": "harness-engineering",
+      "responsibility": "H10A 影子观察核心（P6）"
+    },
+    {
+      "path": "scripts/harness/lib/shadow/logger.js",
+      "layer": "工程脚本",
+      "role": "canonical",
+      "owner": "harness-engineering",
+      "responsibility": "H10A 观察日志与周合并（P6，用户裁决 C3）"
+    },
+    {
+      "path": "scripts/harness/lib/shadow/intervention.js",
+      "layer": "工程脚本",
+      "role": "canonical",
+      "owner": "harness-engineering",
+      "responsibility": "H10A 干预信号检测（P6，用户裁决阈值）"
+    },
+    {
+      "path": "scripts/harness/lib/shadow/differ.js",
+      "layer": "工程脚本",
+      "role": "canonical",
+      "owner": "harness-engineering",
+      "responsibility": "H10A diff 提取与写入（P6）"
+    },
+    {
+      "path": "scripts/harness/lib/shadow/parallel.js",
+      "layer": "工程脚本",
+      "role": "canonical",
+      "owner": "harness-engineering",
+      "responsibility": "H10C 多模型并行调度（P7）"
+    },
+    {
+      "path": "scripts/harness/lib/shadow/comparator.js",
+      "layer": "工程脚本",
+      "role": "canonical",
+      "owner": "harness-engineering",
+      "responsibility": "H10C 跨模型对比报告（P7）"
+    },
+    {
+      "path": "harness/rules/既有功能视觉遮罩细则.md",
+      "layer": "项目资料",
+      "role": "reference",
+      "responsibility": "既有功能视觉遮罩专项细则：触发词命中时读取的方案D/完全遮罩执行基线，由 DEVELOPMENT.md 钩子行触发"
+    },
+    {
+      "path": "harness/rules/业务逻辑审查细则.md",
+      "layer": "项目资料",
+      "role": "reference",
+      "responsibility": "业务逻辑审查专项细则：对象/动作/状态/记录四模型拆解+边界压测+风险定级+输出结构，由 harness/10 钩子行触发"
+    },
+    {
+      "path": "harness/rules/历史快照安全审阅.md",
+      "layer": "项目资料",
+      "role": "reference",
+      "responsibility": "历史快照与迭代引用安全审阅模板：iframe 指向/快照元信息/docs 依赖/入口一致性七步强制检查与阻塞口径，由 harness/20 钩子行触发"
+    },
+    {
+      "path": "harness/rules/需求分组导出能力.md",
+      "layer": "项目资料",
+      "role": "reference",
+      "responsibility": "迭代需求分组导出专项细则：触发词命中即视为该能力 L3 授权，导出脚本用法/下载入口范式/只含当前迭代区块口径/禁止行为，由 harness/00 钩子行触发"
+    }
+  ],
+  "mirrorGroups": [
+    {
+      "id": "codebuddy-rule:CLAUDE",
+      "source": "CLAUDE.md",
+      "mirrors": [
+        ".codebuddy/rules/CLAUDE.mdc"
+      ],
+      "status": "frozen",
+      "comparison": "normalized-body",
+      "divergence": false
+    },
+    {
+      "id": "codebuddy-rule:Design_Task_Preflight",
+      "source": ".agents/skills/design-task-preflight/SKILL.md",
+      "mirrors": [
+        ".codebuddy/rules/Design_Task_Preflight.mdc"
+      ],
+      "status": "frozen",
+      "comparison": "normalized-body",
+      "divergence": false
+    },
+    {
+      "id": "codebuddy-rule:Design_Task_Profiles",
+      "source": ".agents/skills/design-task-profiles/SKILL.md",
+      "mirrors": [
+        ".codebuddy/rules/Design_Task_Profiles.mdc"
+      ],
+      "status": "frozen",
+      "comparison": "normalized-body",
+      "divergence": false
+    },
+    {
+      "id": "codebuddy-rule:DEVELOPMENT",
+      "source": "DEVELOPMENT.md",
+      "mirrors": [
+        ".codebuddy/rules/DEVELOPMENT.mdc"
+      ],
+      "status": "frozen",
+      "comparison": "normalized-body",
+      "divergence": false
+    },
+    {
+      "id": "codebuddy-rule:Engineering_Diagnose",
+      "source": ".agents/skills/engineering-diagnose/SKILL.md",
+      "mirrors": [
+        ".codebuddy/rules/Engineering_Diagnose.mdc"
+      ],
+      "status": "frozen",
+      "comparison": "normalized-body",
+      "divergence": false
+    },
+    {
+      "id": "codebuddy-rule:Engineering_Plan_Grill",
+      "source": ".agents/skills/engineering-plan-grill/SKILL.md",
+      "mirrors": [
+        ".codebuddy/rules/Engineering_Plan_Grill.mdc"
+      ],
+      "status": "frozen",
+      "comparison": "normalized-body",
+      "divergence": false
+    },
+    {
+      "id": "codebuddy-rule:Engineering_Slice_Plan",
+      "source": ".agents/skills/engineering-slice-plan/SKILL.md",
+      "mirrors": [
+        ".codebuddy/rules/Engineering_Slice_Plan.mdc"
+      ],
+      "status": "frozen",
+      "comparison": "normalized-body",
+      "divergence": false
+    },
+    {
+      "id": "codebuddy-rule:Engineering_Zoom_Out",
+      "source": ".agents/skills/engineering-zoom-out/SKILL.md",
+      "mirrors": [
+        ".codebuddy/rules/Engineering_Zoom_Out.mdc"
+      ],
+      "status": "frozen",
+      "comparison": "normalized-body",
+      "divergence": false
+    },
+    {
+      "id": "codebuddy-rule:Implementation_Self_Audit",
+      "source": ".agents/skills/implementation-self-audit/SKILL.md",
+      "mirrors": [
+        ".codebuddy/rules/Implementation_Self_Audit.mdc"
+      ],
+      "status": "frozen",
+      "comparison": "normalized-body",
+      "divergence": false
+    },
+    {
+      "id": "codebuddy-rule:Independent_Judgment",
+      "source": ".agents/skills/independent-judgment/SKILL.md",
+      "mirrors": [
+        ".codebuddy/rules/Independent_Judgment.mdc"
+      ],
+      "status": "frozen",
+      "comparison": "normalized-body",
+      "divergence": false
+    },
+    {
+      "id": "codebuddy-rule:AI_主规则",
+      "source": "AGENTS.md",
+      "mirrors": [
+        ".codebuddy/rules/AI_主规则.mdc"
+      ],
+      "status": "frozen",
+      "comparison": "normalized-body",
+      "divergence": false
+    },
+    {
+      "id": "skill:design-task-preflight",
+      "source": ".agents/skills/design-task-preflight/SKILL.md",
+      "mirrors": [
+        ".claude/skills/design-task-preflight/SKILL.md",
+        ".codex/skills/design-task-preflight/SKILL.md",
+        ".codebuddy/skills/design-task-preflight/SKILL.md"
+      ],
+      "status": "frozen",
+      "comparison": "exact",
+      "divergence": false
+    },
+    {
+      "id": "skill:design-task-profiles",
+      "source": ".agents/skills/design-task-profiles/SKILL.md",
+      "mirrors": [
+        ".claude/skills/design-task-profiles/SKILL.md",
+        ".codex/skills/design-task-profiles/SKILL.md",
+        ".codebuddy/skills/design-task-profiles/SKILL.md"
+      ],
+      "status": "frozen",
+      "comparison": "exact",
+      "divergence": false
+    },
+    {
+      "id": "skill:engineering-diagnose",
+      "source": ".agents/skills/engineering-diagnose/SKILL.md",
+      "mirrors": [
+        ".claude/skills/engineering-diagnose/SKILL.md",
+        ".codex/skills/engineering-diagnose/SKILL.md",
+        ".codebuddy/skills/engineering-diagnose/SKILL.md"
+      ],
+      "status": "frozen",
+      "comparison": "exact",
+      "divergence": false
+    },
+    {
+      "id": "skill:engineering-plan-grill",
+      "source": ".agents/skills/engineering-plan-grill/SKILL.md",
+      "mirrors": [
+        ".claude/skills/engineering-plan-grill/SKILL.md",
+        ".codex/skills/engineering-plan-grill/SKILL.md",
+        ".codebuddy/skills/engineering-plan-grill/SKILL.md"
+      ],
+      "status": "frozen",
+      "comparison": "exact",
+      "divergence": false
+    },
+    {
+      "id": "skill:engineering-slice-plan",
+      "source": ".agents/skills/engineering-slice-plan/SKILL.md",
+      "mirrors": [
+        ".claude/skills/engineering-slice-plan/SKILL.md",
+        ".codex/skills/engineering-slice-plan/SKILL.md",
+        ".codebuddy/skills/engineering-slice-plan/SKILL.md"
+      ],
+      "status": "frozen",
+      "comparison": "exact",
+      "divergence": false
+    },
+    {
+      "id": "skill:engineering-zoom-out",
+      "source": ".agents/skills/engineering-zoom-out/SKILL.md",
+      "mirrors": [
+        ".claude/skills/engineering-zoom-out/SKILL.md",
+        ".codex/skills/engineering-zoom-out/SKILL.md",
+        ".codebuddy/skills/engineering-zoom-out/SKILL.md"
+      ],
+      "status": "frozen",
+      "comparison": "exact",
+      "divergence": false
+    },
+    {
+      "id": "skill:implementation-self-audit",
+      "source": ".agents/skills/implementation-self-audit/SKILL.md",
+      "mirrors": [
+        ".claude/skills/implementation-self-audit/SKILL.md",
+        ".codex/skills/implementation-self-audit/SKILL.md",
+        ".codebuddy/skills/implementation-self-audit/SKILL.md"
+      ],
+      "status": "frozen",
+      "comparison": "exact",
+      "divergence": false
+    },
+    {
+      "id": "skill:independent-judgment",
+      "source": ".agents/skills/independent-judgment/SKILL.md",
+      "mirrors": [
+        ".claude/skills/independent-judgment/SKILL.md",
+        ".codex/skills/independent-judgment/SKILL.md",
+        ".codebuddy/skills/independent-judgment/SKILL.md"
+      ],
+      "status": "frozen",
+      "comparison": "exact",
+      "divergence": false
+    },
+    {
+      "id": "skill:neat-freak",
+      "source": ".agents/skills/neat-freak/SKILL.md",
+      "mirrors": [
+        ".claude/skills/neat-freak/SKILL.md",
+        ".codex/skills/neat-freak/SKILL.md",
+        ".codebuddy/skills/neat-freak/SKILL.md"
+      ],
+      "status": "frozen",
+      "comparison": "exact",
+      "divergence": false
+    },
+    {
+      "id": "skill:design-taste-frontend",
+      "source": ".agents/skills/design-taste-frontend/SKILL.md",
+      "mirrors": [
+        ".claude/skills/design-taste-frontend/SKILL.md",
+        ".codebuddy/skills/design-taste-frontend/SKILL.md"
+      ],
+      "status": "frozen",
+      "comparison": "exact",
+      "divergence": false
+    },
+    {
+      "id": "skill:impeccable",
+      "source": ".agents/skills/impeccable/SKILL.md",
+      "mirrors": [
+        ".claude/skills/impeccable/SKILL.md"
+      ],
+      "status": "frozen",
+      "comparison": "exact",
+      "divergence": false
+    },
+    {
+      "id": "skill:ui-ux-pro-max:legacy",
+      "source": ".agents/skills/ui-ux-pro-max/SKILL.md",
+      "mirrors": [
+        ".claude/skills/ui-ux-pro-max/SKILL.md"
+      ],
+      "status": "frozen",
+      "comparison": "exact",
+      "divergence": false
+    },
+    {
+      "id": "skill:ui-ux-pro-max:searchable",
+      "source": ".codex/skills/ui-ux-pro-max/SKILL.md",
+      "mirrors": [
+        ".codebuddy/skills/ui-ux-pro-max/SKILL.md"
+      ],
+      "status": "frozen",
+      "comparison": "exact",
+      "divergence": false
+    }
+  ],
+  "topics": [
+    {
+      "id": "strong-correction",
+      "name": "强纠偏重梳理",
+      "canonical": "AGENTS.md#强纠偏信号重梳理红线",
+      "copies": [
+        "harness/02-纠偏与接力.md",
+        "harness/01-强制闸门.md"
+      ],
+      "divergence": false
+    },
+    {
+      "id": "relay-five-layers",
+      "name": "接力材料五分层",
+      "canonical": "harness/02-纠偏与接力.md",
+      "copies": [
+        "AGENTS.md#跨会话事故与执行者接力红线",
+        "harness/01-强制闸门.md"
+      ],
+      "divergence": false
+    },
+    {
+      "id": "authorization-and-state",
+      "name": "授权原文与状态判定",
+      "canonical": "standards/授权词表.md",
+      "copies": [
+        "AGENTS.md#开工默认流程",
+        "harness/00-执行总入口.md",
+        "harness/01-强制闸门.md",
+        "harness/02-纠偏与接力.md"
+      ],
+      "divergence": false
+    },
+    {
+      "id": "handshake-shan",
+      "name": "山握手",
+      "canonical": "AGENTS.md#对话称呼握手规则",
+      "copies": [
+        "harness/00-执行总入口.md",
+        "harness/02-纠偏与接力.md"
+      ],
+      "divergence": false
+    },
+    {
+      "id": "mcp-preference",
+      "name": "MCP 使用偏好",
+      "canonical": "AGENTS.md#MCP-使用偏好",
+      "copies": [
+        "harness/00-执行总入口.md",
+        ".codebuddy/rules/AI_主规则.mdc"
+      ],
+      "divergence": false
+    },
+    {
+      "id": "overlay-plan-d",
+      "name": "既有功能视觉遮罩方案 D",
+      "canonical": "harness/rules/既有功能视觉遮罩细则.md",
+      "copies": [
+        "AGENTS.md",
+        "harness/00-执行总入口.md"
+      ],
+      "divergence": false
+    },
+    {
+      "id": "drawer-mature-baseline",
+      "name": "需求抽屉成熟基准",
+      "canonical": "standards/doc-spec.json",
+      "copies": [
+        "harness/10-页面与抽屉执行.md",
+        "DEVELOPMENT.md"
+      ],
+      "divergence": false
+    },
+    {
+      "id": "project-role-routing",
+      "name": "项目三角色自动路由",
+      "canonical": "harness/20-协作Prompt模板.md#自动路由",
+      "copies": [
+        "AGENTS.md#项目角色自动路由",
+        "harness/README.md"
+      ],
+      "divergence": false
+    }
+  ]
+}

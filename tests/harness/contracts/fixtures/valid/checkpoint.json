@@ -1,0 +1,15 @@
+{
+  "schema_version": "h01-checkpoint-v1",
+  "checkpoint_id": "CHECKPOINT-H01-SLICE-B",
+  "trace_id": "TRACE-H01-COMPLETE",
+  "last_event_sequence": 2,
+  "state": "RUNNING",
+  "snapshot_ref": "X-SNAPSHOT-H01-B",
+  "input_digest": "abc123",
+  "resumable": true,
+  "status": "active",
+  "scope": "harness-engineering",
+  "source_refs": [
+    "A-HARNESS-ENGINEERING-PRINCIPLES"
+  ]
+}

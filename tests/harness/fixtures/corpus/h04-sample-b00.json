@@ -1,0 +1,86 @@
+{
+  "schema_version": "h04-corpus-v1",
+  "built_at": "2026-08-12T00:00:00.000Z",
+  "fixture_count": 5,
+  "fixtures": [
+    {
+      "corpus_id": "C-S-ENTRY-01",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "entry-defect",
+      "source_page": "admin-portal/store-admin/index.html",
+      "payload": {
+        "sourceDir": {
+          "path": "admin-portal/store-admin/index.html",
+          "menuItems": [{ "pageId": "page-a", "label": "页面甲", "monthTag": "202608上" }],
+          "iframeCarriers": [{ "pageId": "page-a", "src": "pages/page-a.html", "monthComment": "202608上" }],
+          "pageNames": { "page-a": "页面甲" },
+          "iterationRefs": []
+        },
+        "pageId": "page-a"
+      },
+      "expected": { "verdict": "pass" }
+    },
+    {
+      "corpus_id": "C-S-ENTRY-02",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "entry-defect",
+      "source_page": "admin-portal/maintain-admin/index.html",
+      "payload": {
+        "sourceDir": {
+          "path": "admin-portal/maintain-admin/index.html",
+          "menuItems": [],
+          "iframeCarriers": [],
+          "pageNames": {},
+          "iterationRefs": ["page-missing"]
+        },
+        "pageId": "page-missing"
+      },
+      "expected": { "verdict": "fail" }
+    },
+    {
+      "corpus_id": "C-S-DRAWER-01",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "drawer-defect",
+      "source_page": "admin-portal/store-admin/js/docs/doc-a.js",
+      "payload": {
+        "docsData": {
+          "entries": [{ "docId": "doc-a", "pageId": "page-a", "scriptOrder": 0 }],
+          "scriptLoadOrder": ["assets/js/doc-panel.js", "js/docs.js"]
+        },
+        "docId": "doc-a"
+      },
+      "expected": { "verdict": "pass" }
+    },
+    {
+      "corpus_id": "C-S-SNAP-01",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "snapshot-pollution",
+      "source_page": "迭代索引/202607上.html",
+      "payload": {
+        "iteration": "202607上",
+        "activeIteration": "202608上",
+        "iframes": [{ "src": "../../admin-portal/store-admin/pages/page-a.html", "line": 1 }],
+        "knownDebt": []
+      },
+      "expected": { "verdict": "fail" }
+    },
+    {
+      "corpus_id": "C-S-DIRTY-01",
+      "task_id": "TASK-H04-CORPUS",
+      "scenario_type": "entry-defect",
+      "source_page": "admin-portal/store-admin/index.html",
+      "baseline_dirty_warning": true,
+      "payload": {
+        "sourceDir": {
+          "path": "admin-portal/store-admin/index.html",
+          "menuItems": [{ "pageId": "page-a", "label": "页面甲", "monthTag": "202608上" }],
+          "iframeCarriers": [{ "pageId": "page-a", "src": "pages/page-a.html", "monthComment": "202608上" }],
+          "pageNames": { "page-a": "页面甲" },
+          "iterationRefs": []
+        },
+        "pageId": "page-a"
+      },
+      "expected": { "verdict": "pass" }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "h01-checkpoint-v1",
+  "checkpoint_id": "CHECKPOINT-H01-NO-SEQUENCE",
+  "trace_id": "TRACE-H01-COMPLETE",
+  "state": "RUNNING",
+  "snapshot_ref": "X-SNAPSHOT-H01-NOSEQ",
+  "input_digest": "abc789",
+  "resumable": false,
+  "status": "active"
+}

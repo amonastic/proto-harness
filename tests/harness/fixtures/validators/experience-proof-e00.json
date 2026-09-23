@@ -1,0 +1,102 @@
+{
+  "suite_ref": "FS-SYNTHETIC-H03D-V1",
+  "validator": "experience-proof",
+  "cases": [
+    {
+      "id": "E00-01",
+      "proof": {
+        "pageId": "page-save",
+        "entryPath": "pages/save.html",
+        "triggerAction": "click #btn-save",
+        "domAssertions": ["#result.visible", "text=保存成功"],
+        "screenshotPath": ".tmp/screenshots/save.png",
+        "checkType": "dom"
+      },
+      "expected": { "verdict": "pass", "checks": { "entryBound": true, "triggerBound": true, "domAsserted": true, "screenshotRecorded": true, "notSyntaxOnly": true } }
+    },
+    {
+      "id": "E00-02",
+      "proof": {
+        "pageId": "page-save",
+        "entryPath": null,
+        "triggerAction": "click #btn-save",
+        "domAssertions": ["#result.visible"],
+        "screenshotPath": ".tmp/screenshots/save.png",
+        "checkType": "dom"
+      },
+      "expected": { "verdict": "fail", "checks": { "entryBound": false }, "violationsIncludes": ["缺真实入口路径"] }
+    },
+    {
+      "id": "E00-03",
+      "proof": {
+        "pageId": "page-save",
+        "entryPath": "pages/save.html",
+        "triggerAction": null,
+        "domAssertions": ["#result.visible"],
+        "screenshotPath": ".tmp/screenshots/save.png",
+        "checkType": "dom"
+      },
+      "expected": { "verdict": "fail", "checks": { "triggerBound": false }, "violationsIncludes": ["缺触发动作"] }
+    },
+    {
+      "id": "E00-04",
+      "proof": {
+        "pageId": "page-save",
+        "entryPath": "pages/save.html",
+        "triggerAction": "click #btn-save",
+        "domAssertions": [],
+        "screenshotPath": ".tmp/screenshots/save.png",
+        "checkType": "dom"
+      },
+      "expected": { "verdict": "fail", "checks": { "domAsserted": false }, "violationsIncludes": ["缺 DOM 断言"] }
+    },
+    {
+      "id": "E00-05",
+      "proof": {
+        "pageId": "page-save",
+        "entryPath": "pages/save.html",
+        "triggerAction": "click #btn-save",
+        "domAssertions": ["#result.visible"],
+        "screenshotPath": null,
+        "checkType": "dom"
+      },
+      "expected": { "verdict": "fail", "checks": { "screenshotRecorded": false }, "violationsIncludes": ["缺截图路径记录"] }
+    },
+    {
+      "id": "E00-06",
+      "proof": {
+        "pageId": "page-save",
+        "entryPath": "pages/save.html",
+        "triggerAction": "click #btn-save",
+        "domAssertions": ["#result.visible"],
+        "screenshotPath": ".tmp/screenshots/save.png",
+        "checkType": "syntax-only"
+      },
+      "expected": { "verdict": "fail", "checks": { "notSyntaxOnly": false }, "violationsIncludes": ["检查类型不合格"] }
+    },
+    {
+      "id": "E00-07",
+      "proof": {
+        "pageId": "page-save",
+        "entryPath": "pages/save.html",
+        "triggerAction": "click #btn-save",
+        "domAssertions": ["#result.visible"],
+        "screenshotPath": ".tmp/screenshots/save.png",
+        "checkType": "search-only"
+      },
+      "expected": { "verdict": "fail", "checks": { "notSyntaxOnly": false }, "violationsIncludes": ["检查类型不合格"] }
+    },
+    {
+      "id": "E00-08",
+      "proof": {
+        "pageId": "page-save",
+        "entryPath": "pages/save.html#drawer",
+        "triggerAction": "open drawer",
+        "domAssertions": [],
+        "screenshotPath": ".tmp/screenshots/save.png",
+        "checkType": "dom"
+      },
+      "expected": { "verdict": "fail", "checks": { "entryBound": true, "domAsserted": false }, "violationsIncludes": ["缺 DOM 断言"] }
+    }
+  ]
+}

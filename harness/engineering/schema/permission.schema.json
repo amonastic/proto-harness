@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:h01:permission.schema.json",
+  "title": "H01 Permission",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "permission_id", "task_id", "status", "authorization_quote", "object", "actions", "valid_from", "valid_until", "forbidden_scopes", "source_refs", "issuer", "scope"],
+  "properties": {
+    "schema_version": { "const": "h01-permission-v1" },
+    "scope": { "type": "string", "minLength": 1 },
+    "permission_id": { "type": "string", "minLength": 1, "pattern": "^PERM-[A-Z0-9][A-Z0-9-]*$" },
+    "task_id": { "type": "string", "minLength": 1, "pattern": "^TASK-[A-Z0-9][A-Z0-9-]*$" },
+    "status": { "type": "string", "enum": ["AUTHORIZED", "REQUESTED", "DENIED", "EXPIRED", "REVOKED"] },
+    "authorization_quote": { "type": "string" },
+    "object": { "type": "string", "minLength": 1 },
+    "actions": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "valid_from": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$" },
+    "valid_until": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$" },
+    "forbidden_scopes": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "source_refs": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "issuer": { "type": "string", "minLength": 1 }
+  }
+}

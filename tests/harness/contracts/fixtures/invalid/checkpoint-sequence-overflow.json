@@ -1,0 +1,13 @@
+{
+  "schema_version": "h01-checkpoint-v1",
+  "checkpoint_id": "CHECKPOINT-H01F-OVERFLOW",
+  "trace_id": "TRACE-H01-COMPLETE",
+  "last_event_sequence": 99,
+  "state": "COMPLETED",
+  "snapshot_ref": "X-SNAPSHOT-H01F-OVERFLOW",
+  "input_digest": "h01f-overflow",
+  "resumable": true,
+  "status": "active",
+  "scope": "harness-engineering",
+  "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES"]
+}

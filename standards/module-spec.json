@@ -1,0 +1,188 @@
+{
+  "version": "0.2.1",
+  "updatedAt": "2026-04-20",
+  "usageBoundary": {
+    "role": "模块元数据与轻量抽屉结构的结构化规则源。",
+    "mainEntry": "AGENTS.md",
+    "docReference": "standards/doc-spec.json",
+    "note": "本文件保留字段约束与结构模板，不承担开工入口职责。"
+  },
+  "schema": {
+    "requiredFields": [
+      "id",
+      "name",
+      "platform",
+      "entry",
+      "developmentMode",
+      "icon",
+      "docSource",
+      "docDeliveryStrategy",
+      "pageTypes",
+      "docPanel",
+      "sharedComponents"
+    ],
+    "platformEnum": [
+      "web",
+      "app",
+      "miniapp"
+    ],
+    "developmentModeEnum": [
+      "iterative-extension",
+      "zero-to-one-module"
+    ],
+    "pageTypeEnum": [
+      "platform-entry",
+      "portal-index",
+      "iteration-index",
+      "list-page",
+      "detail-page",
+      "form-page",
+      "dialog-page"
+    ]
+  },
+  "docPanelModes": [
+    "none",
+    "manual-open",
+    "auto-open"
+  ],
+  "docStructureRules": {
+    "defaultMode": "lightweight-drawer",
+    "description": "模块级需求抽屉默认采用轻量结构，直接进入业务规则、字段和边界。",
+    "referenceSpec": "standards/doc-spec.json",
+    "templates": {
+      "simple-page": [
+        "页面内容",
+        "交互规则",
+        "边界说明"
+      ],
+      "standard-page": [
+        "核心流程",
+        "状态与分支",
+        "字段说明",
+        "交互规则",
+        "异常与边界",
+        "待确认项"
+      ]
+    },
+    "preferredSections": [
+      "页面内容",
+      "交互规则",
+      "边界说明"
+    ],
+    "avoidSections": [
+      "页面定位",
+      "角色与入口",
+      "测试注意事项",
+      "验收标准"
+    ],
+    "staticPrototypeDefault": true,
+    "staticPrototypeRule": "模块页面原型默认按静态页面交付，仅保留页面跳转、对话框打开关闭、抽屉打开关闭、页签切换；其他业务交互需用户明确要求后才可开发。",
+    "prototypeNotImplementationRule": "文档里写到图片预览、上传删除、按钮点击结果等交互时，默认是需求表达，不要求在设计稿中真实实现功能。"
+  },
+  "recommendedFields": {
+    "statusSet": [
+      "pending",
+      "processing",
+      "success",
+      "closed"
+    ],
+    "iconSource": [
+      "font-awesome",
+      "local-svg"
+    ],
+    "sharedComponents": [
+      "doc-button",
+      "doc-panel",
+      "sidebar-standard",
+      "modal",
+      "tooltip"
+    ]
+  },
+  "example": {
+    "id": "dg-app-recharge-record",
+    "name": "充值记录",
+    "platform": "app",
+    "entry": "field-app/main/pages/充值记录.html",
+    "developmentMode": "iterative-extension",
+    "icon": {
+      "name": "fa-wallet",
+      "source": "font-awesome"
+    },
+    "docSource": "field-app/main/pages/需求文档.md",
+    "pageTypes": [
+      "list-page",
+      "detail-page"
+    ],
+    "docPanel": "auto-open",
+    "sharedComponents": [
+      "doc-button",
+      "doc-panel"
+    ],
+    "docDeliveryStrategy": "drawer-first",
+    "docStructure": {
+      "mode": "lightweight-drawer",
+      "sections": [
+        "页面内容",
+        "交互规则",
+        "边界说明"
+      ],
+      "omittedSections": [
+        "页面定位",
+        "角色与入口",
+        "测试注意事项",
+        "验收标准"
+      ]
+    }
+  },
+  "docDeliveryStrategyEnum": [
+    "drawer-first",
+    "drawer-only",
+    "md-required",
+    "none"
+  ],
+  "modules": {
+    "demo-app-order-form": {
+      "id": "demo-app-order-form",
+      "name": "站点代客下单（示例）",
+      "platform": "app",
+      "entry": "field-app/station-ops/pages/作业下单-月结.html",
+      "entryAltStates": [
+        "field-app/station-ops/pages/作业下单-未选企业.html",
+        "field-app/station-ops/pages/作业下单-企业选择.html"
+      ],
+      "developmentMode": "iterative-extension",
+      "icon": {
+        "name": "fa-cart-plus",
+        "source": "font-awesome"
+      },
+      "docSource": "迭代索引/202606上.html#demo-order-form",
+      "pageTypes": [
+        "form-page"
+      ],
+      "docPanel": "manual-open",
+      "sharedComponents": [
+        "doc-button",
+        "doc-panel"
+      ],
+      "docDeliveryStrategy": "drawer-first",
+      "cloneSource": "field-app/main/pages/费用详情.html",
+      "changeType": "safe-add",
+      "iterationTag": "[202606上]",
+      "belongsToIterationIndex": "迭代索引/202606上.html",
+      "docStructure": {
+        "mode": "lightweight-drawer",
+        "sections": [
+          "页面内容",
+          "交互规则",
+          "边界说明"
+        ],
+        "omittedSections": [
+          "页面定位",
+          "角色与入口",
+          "测试注意事项",
+          "验收标准"
+        ]
+      }
+    }
+  }
+}

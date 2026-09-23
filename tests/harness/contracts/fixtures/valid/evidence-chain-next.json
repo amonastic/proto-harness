@@ -1,0 +1,10 @@
+{
+  "schema_version": "h01-evidence-v1",
+  "evidence_id": "D-CHAIN-NEXT",
+  "kind": "decision",
+  "statement": "合法 supersedes 链的接收端（active，无 supersedes）",
+  "source_refs": ["R-PROJECT-AGENTS"],
+  "scope": "harness-engineering",
+  "status": "active",
+  "authority": "user-confirmed"
+}

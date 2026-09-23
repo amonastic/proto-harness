@@ -1,0 +1,19 @@
+{
+  "schema_version": "h01-epoch-v2",
+  "epoch_id": "EPOCH-H01-SMOKE",
+  "ruleset_id": "RULESET-H01-BASE",
+  "provider_ref": "P-LONGCAT-2-0",
+  "judge_ref": "J-CODEX-INDEPENDENT-TASK-SELECTED",
+  "host": "local",
+  "tools": [
+    "validate-contract"
+  ],
+  "permissions": [
+    "PERM-H01-VALIDATE"
+  ],
+  "status": "selected-pending-smoke",
+  "source_refs": [
+    "A-HARNESS-ENGINEERING-PRINCIPLES"
+  ],
+  "scope": "harness-engineering"
+}

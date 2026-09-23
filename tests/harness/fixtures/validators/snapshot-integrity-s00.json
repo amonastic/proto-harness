@@ -1,0 +1,90 @@
+{
+  "suite_ref": "FS-SYNTHETIC-H03C-V1",
+  "validator": "snapshot-integrity",
+  "cases": [
+    {
+      "id": "S00-01",
+      "snapshotGraph": {
+        "iteration": "202607上",
+        "content": "<html>干净快照，无 docs 引用</html>",
+        "menuCount": 3,
+        "iframeCount": 3,
+        "pageNamesCount": 3,
+        "footerCount": 1,
+        "hasMeta": true
+      },
+      "knownDebt": [],
+      "expected": { "verdict": "pass", "newCount": 0, "debtCount": 0 }
+    },
+    {
+      "id": "S00-02",
+      "snapshotGraph": {
+        "iteration": "202607上",
+        "content": "<script src=\"../admin-portal/maintain-admin/js/docs.js\"></script>",
+        "menuCount": 3,
+        "iframeCount": 3,
+        "pageNamesCount": 3,
+        "footerCount": 1,
+        "hasMeta": true
+      },
+      "knownDebt": [],
+      "expected": { "verdict": "fail", "newCount": 1, "newIncludes": "可变需求数据源" }
+    },
+    {
+      "id": "S00-03",
+      "snapshotGraph": {
+        "iteration": "202607上",
+        "content": "<html>无元信息注释</html>",
+        "menuCount": 3,
+        "iframeCount": 3,
+        "pageNamesCount": 3,
+        "footerCount": 1,
+        "hasMeta": false
+      },
+      "knownDebt": [],
+      "expected": { "verdict": "fail", "newCount": 1, "newIncludes": "缺少快照元信息注释" }
+    },
+    {
+      "id": "S00-04",
+      "snapshotGraph": {
+        "iteration": "202607上",
+        "content": "<html>计数不一致</html>",
+        "menuCount": 3,
+        "iframeCount": 2,
+        "pageNamesCount": 3,
+        "footerCount": 1,
+        "hasMeta": true
+      },
+      "knownDebt": [],
+      "expected": { "verdict": "fail", "newCount": 1, "newIncludes": "menu/iframe/pageNames 数量不一致：menu=3, iframe=2, pageNames=3" }
+    },
+    {
+      "id": "S00-05",
+      "snapshotGraph": {
+        "iteration": "202607上",
+        "content": "<script src=\"../admin-portal/maintain-admin/js/doc-panel.js\"></script>",
+        "menuCount": 3,
+        "iframeCount": 3,
+        "pageNamesCount": 3,
+        "footerCount": 1,
+        "hasMeta": true
+      },
+      "knownDebt": ["快照仍引用三端可变需求数据源：\"../admin-portal/maintain-admin/js/doc-panel.js"],
+      "expected": { "verdict": "pass", "newCount": 0, "debtCount": 1 }
+    },
+    {
+      "id": "S00-06",
+      "snapshotGraph": {
+        "iteration": "202607上",
+        "content": "<script src=\"../admin-portal/maintain-admin/js/docs.js\"></script>",
+        "menuCount": 3,
+        "iframeCount": 3,
+        "pageNamesCount": 3,
+        "footerCount": 1,
+        "hasMeta": false
+      },
+      "knownDebt": [],
+      "expected": { "verdict": "fail", "newCount": 2, "newIncludes": ["可变需求数据源", "缺少快照元信息注释"] }
+    }
+  ]
+}

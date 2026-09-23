@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模块名 - 页面名</title>
+  <script src="../../assets/js/tailwind.min.js?v=20260622164834"></script>
+  <link href="../../assets/css/font-awesome.min.css?v=20260622164834" rel="stylesheet">
+  <link href="../../assets/css/font-awesome-local.css?v=20260622164834" rel="stylesheet">
+  <link href="../../assets/css/variables.css?v=20260622164834" rel="stylesheet">
+  <link href="../../assets/css/common.css?v=20260622164834" rel="stylesheet">
+  <link href="../../assets/css/components.css?v=20260622164834" rel="stylesheet">
+</head>
+<body>
+  <nav class="system-nav dg-sidebar" data-role="system-sidebar">
+    <!-- 左侧导航：统一使用 nav-item/nav-group-title -->
+  </nav>
+
+  <main class="dg-main-content">
+    <header class="top-bar" style="padding:12px 24px;background:#fff;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center;">
+      <h1 style="margin:0;font-size:16px;">页面标题</h1>
+      <button class="dg-doc-btn" onclick="toggleDocPanel?.()">
+        <i class="fas fa-book"></i>
+        <span>需求文档</span>
+      </button>
+    </header>
+
+    <section style="padding:16px;">
+      页面内容
+    </section>
+  </main>
+
+  <script src="../../assets/js/components/sidebar-standard.js?v=20260622164834"></script>
+  <script src="../../assets/js/components/doc-button.js?v=20260622164834"></script>
+</body>
+</html>

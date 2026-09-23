@@ -1,0 +1,133 @@
+{
+  "version": "0.1.0",
+  "updatedAt": "2026-03-17",
+  "scopeDefaults": {
+    "managedRoots": [
+      "admin-portal",
+      "field-app",
+      "mini-program"
+    ],
+    "excludedRoots": [
+      "零散设计"
+    ],
+    "defaultRequirements": {
+      "requiresDocDrawer": true,
+      "requiresDesignTokens": true
+    }
+  },
+  "platforms": {
+    "web": {
+      "docPanelMode": "manual-open",
+      "pagePatterns": {
+        "platform-entry": {
+          "mustContain": [
+            "system-nav"
+          ]
+        },
+        "list-page": {
+          "recommendedSections": [
+            "page-header",
+            "filter-bar",
+            "data-table-or-card-list",
+            "doc-entry"
+          ]
+        },
+        "detail-page": {
+          "recommendedSections": [
+            "back-link",
+            "summary-card",
+            "detail-section",
+            "timeline-or-records",
+            "doc-entry"
+          ]
+        }
+      }
+    },
+    "app": {
+      "docPanelMode": "auto-open",
+      "pagePatterns": {
+        "list-page": {
+          "recommendedSections": [
+            "top-bar",
+            "sticky-actions",
+            "card-list",
+            "safe-area-bottom"
+          ]
+        },
+        "detail-page": {
+          "recommendedSections": [
+            "top-bar",
+            "status-card",
+            "info-groups",
+            "bottom-actions",
+            "safe-area-bottom"
+          ]
+        }
+      }
+    },
+    "miniapp": {
+      "docPanelMode": "auto-open",
+      "pagePatterns": {
+        "list-page": {
+          "recommendedSections": [
+            "top-bar",
+            "light-filter",
+            "list-content",
+            "empty-state",
+            "safe-area-bottom"
+          ]
+        },
+        "detail-page": {
+          "recommendedSections": [
+            "top-bar",
+            "status-summary",
+            "info-section",
+            "tips-section",
+            "bottom-actions"
+          ]
+        }
+      }
+    }
+  },
+  "sharedRules": {
+    "module-page": {
+      "mustNotContain": [
+        "<nav class=\"system-nav\"",
+        "class=\"system-nav\""
+      ]
+    },
+    "developmentModes": {
+      "iterative-extension": {
+        "description": "基于线上已有页面或既有原型复刻改造，适合门店后台、运维后台、作业端 App、用户端 App、用户小程序、门店小程序等持续迭代页面。",
+        "workflow": [
+          "复刻最接近页面",
+          "重构局部信息层级或卡片结构",
+          "补齐公共资源与需求抽屉",
+          "登记并跑校验"
+        ]
+      },
+      "zero-to-one-module": {
+        "description": "全新模块的 0-1 搭建，适合工单、资产管理这类独立模块。",
+        "workflow": [
+          "先定义模块边界与页面清单",
+          "建立模块首页与子页面结构",
+          "补需求文档与模块说明",
+          "按批次接入校验"
+        ]
+      }
+    },
+    "docEntry": {
+      "preferredClass": "dg-doc-btn",
+      "allowedImplementations": [
+        "assets/js/components/doc-button.js",
+        "assets/js/components/doc-panel.js",
+        "js/doc-panel.js"
+      ]
+    },
+    "layoutTokens": {
+      "mustReference": [
+        "assets/css/variables.css"
+      ]
+    }
+  }
+}

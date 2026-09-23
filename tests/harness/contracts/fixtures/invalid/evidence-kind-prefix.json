@@ -1,0 +1,10 @@
+{
+  "schema_version": "h01-evidence-v1",
+  "evidence_id": "A-PREFIX-KIND-MISMATCH",
+  "kind": "observation",
+  "statement": "A 前缀但 kind 是 observation",
+  "source_refs": ["R-PROJECT-AGENTS"],
+  "scope": "harness-engineering",
+  "status": "active",
+  "authority": "observation"
+}

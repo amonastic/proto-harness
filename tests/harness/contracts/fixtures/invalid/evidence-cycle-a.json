@@ -1,0 +1,11 @@
+{
+  "schema_version": "h01-evidence-v1",
+  "evidence_id": "D-CYCLE-A",
+  "kind": "decision",
+  "statement": "循环链节点 A",
+  "source_refs": ["R-PROJECT-AGENTS"],
+  "scope": "harness-engineering",
+  "status": "superseded",
+  "authority": "user-confirmed",
+  "supersedes": ["D-CYCLE-B"]
+}

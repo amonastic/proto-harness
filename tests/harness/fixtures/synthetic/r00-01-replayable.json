@@ -1,0 +1,14 @@
+{
+  "fixture_suite_ref": "FS-SYNTHETIC-H02-V1",
+  "oracle_ref": "ORACLE-SYNTHETIC-H02-V1",
+  "adapter_ref": "ADAPTER-LOCAL-FIXTURE-H02-V1",
+  "task_id": "TASK-H02-SYNTH-V1",
+  "ruleset_id": "RULESET-H02-SYNTH-V1",
+  "epoch_id": "EPOCH-H02-SYNTH-V1",
+  "permission": { "capability": "run-synthetic-tool", "risk": "low" },
+  "steps": [
+    { "tool": "synth-echo", "args": { "value": "alpha" }, "behavior": "success", "exit_code": 0 },
+    { "tool": "synth-echo", "args": { "value": "beta" }, "behavior": "success", "exit_code": 0 },
+    { "tool": "synth-echo", "args": { "value": "gamma" }, "behavior": "success", "exit_code": 0 }
+  ]
+}

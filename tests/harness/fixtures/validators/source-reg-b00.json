@@ -1,0 +1,102 @@
+{
+  "suite_ref": "FS-SYNTHETIC-H03B-V1",
+  "validator": "source-registration",
+  "cases": [
+    {
+      "id": "B00-01",
+      "pageId": "page-a",
+      "sourceDir": {
+        "path": "admin-portal/maintain-admin/index.html",
+        "menuItems": [{ "pageId": "page-a", "label": "页面甲", "monthTag": "202608上" }],
+        "iframeCarriers": [{ "pageId": "page-a", "src": "pages/page-a.html", "monthComment": "202608上" }],
+        "pageNames": { "page-a": "页面甲" },
+        "iterationRefs": []
+      },
+      "expected": { "verdict": "pass", "checks": { "menu": true, "carrier": true, "pageNames": true, "monthTag": true, "notIterationOnly": true }, "violationsIncludes": [] }
+    },
+    {
+      "id": "B00-02",
+      "pageId": "page-a",
+      "sourceDir": {
+        "path": "admin-portal/maintain-admin/index.html",
+        "menuItems": [],
+        "iframeCarriers": [{ "pageId": "page-a", "src": "pages/page-a.html", "monthComment": "202608上" }],
+        "pageNames": { "page-a": "页面甲" },
+        "iterationRefs": []
+      },
+      "expected": { "verdict": "fail", "checks": { "menu": false }, "violationsIncludes": ["缺菜单项"] }
+    },
+    {
+      "id": "B00-03",
+      "pageId": "page-a",
+      "sourceDir": {
+        "path": "admin-portal/maintain-admin/index.html",
+        "menuItems": [{ "pageId": "page-a", "label": "页面甲", "monthTag": "202608上" }],
+        "iframeCarriers": [],
+        "pageNames": { "page-a": "页面甲" },
+        "iterationRefs": []
+      },
+      "expected": { "verdict": "fail", "checks": { "carrier": false }, "violationsIncludes": ["缺 iframe 承载区"] }
+    },
+    {
+      "id": "B00-04",
+      "pageId": "page-a",
+      "sourceDir": {
+        "path": "admin-portal/maintain-admin/index.html",
+        "menuItems": [{ "pageId": "page-a", "label": "页面甲", "monthTag": "202608上" }],
+        "iframeCarriers": [{ "pageId": "page-a", "src": "pages/page-a.html", "monthComment": "202608上" }],
+        "pageNames": {},
+        "iterationRefs": []
+      },
+      "expected": { "verdict": "fail", "checks": { "pageNames": false }, "violationsIncludes": ["pageNames 缺对应 pageId"] }
+    },
+    {
+      "id": "B00-05",
+      "pageId": "page-a",
+      "sourceDir": {
+        "path": "admin-portal/maintain-admin/index.html",
+        "menuItems": [{ "pageId": "page-a", "label": "页面甲", "monthTag": "202608" }],
+        "iframeCarriers": [{ "pageId": "page-a", "src": "pages/page-a.html", "monthComment": "202608" }],
+        "pageNames": { "page-a": "页面甲" },
+        "iterationRefs": []
+      },
+      "expected": { "verdict": "fail", "checks": { "monthTag": false }, "violationsIncludes": ["月份标签格式不合法或缺失"] }
+    },
+    {
+      "id": "B00-06",
+      "pageId": "page-c",
+      "sourceDir": {
+        "path": "admin-portal/maintain-admin/index.html",
+        "menuItems": [],
+        "iframeCarriers": [],
+        "pageNames": {},
+        "iterationRefs": ["page-c"]
+      },
+      "expected": { "verdict": "fail", "checks": { "menu": false, "notIterationOnly": false }, "violationsIncludes": ["仅迭代引用"] }
+    },
+    {
+      "id": "B00-07",
+      "pageId": "page-a",
+      "sourceDir": {
+        "path": "admin-portal/maintain-admin/index.html",
+        "menuItems": [{ "pageId": "page-a", "label": "页面甲", "monthTag": "202608上" }],
+        "iframeCarriers": [{ "pageId": "page-a", "src": "pages/page-a.html", "monthComment": "202608上" }],
+        "pageNames": { "page-a": "页面甲" },
+        "iterationRefs": []
+      },
+      "expected": { "verdict": "pass", "checks": { "monthTag": true } }
+    },
+    {
+      "id": "B00-08",
+      "pageId": "page-a",
+      "sourceDir": {
+        "path": "admin-portal/maintain-admin/index.html",
+        "menuItems": [{ "pageId": "page-a", "label": "页面甲", "monthTag": "202608上" }],
+        "iframeCarriers": [{ "pageId": "page-a", "src": "pages/page-a.html", "monthComment": "202608上" }],
+        "pageNames": { "page-a": "页面甲" },
+        "iterationRefs": ["page-a"]
+      },
+      "expected": { "verdict": "pass", "checks": { "notIterationOnly": true } }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": "h01-trace-v1",
+  "trace_id": "TRACE-H01-INCOMPLETE-IDENTITY",
+  "run_id": "RUN-H01-0002",
+  "task_id": "TASK-H01-01",
+  "events": [
+    {
+      "sequence": 1,
+      "state_from": "PENDING",
+      "state_to": "COMPLETED",
+      "event_type": "verification",
+      "result_code": "OK",
+      "tool_result": { "tool": "validate-contract", "summary": "检查通过" }
+    }
+  ],
+  "terminal_state": "COMPLETED",
+  "status": "completed"
+}

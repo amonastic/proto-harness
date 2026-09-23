@@ -1,0 +1,31 @@
+{
+  "suite_ref": "FS-SYNTHETIC-H03B-V1",
+  "validator": "copy-boundary",
+  "cases": [
+    {
+      "id": "C00-01",
+      "pageBodyText": "这是完全正常的页面正文，没有任何边界词。",
+      "expected": { "verdict": "pass", "hitCount": 0 }
+    },
+    {
+      "id": "C00-02",
+      "pageBodyText": "本页展示查询结果。开发说明：此区块由后端接口驱动。",
+      "expected": { "verdict": "fail", "hitCount": 1, "terms": ["开发说明"] }
+    },
+    {
+      "id": "C00-03",
+      "pageBodyText": "测试提示：模拟操作仅用于演示。开发说明另见附录。",
+      "expected": { "verdict": "fail", "hitCount": 3, "terms": ["测试提示", "模拟操作", "开发说明"] }
+    },
+    {
+      "id": "C00-04",
+      "pageBodyText": "TODO: 该区块待接入真实数据。",
+      "expected": { "verdict": "fail", "hitCount": 1, "terms": ["TODO"] }
+    },
+    {
+      "id": "C00-05",
+      "pageBodyText": "",
+      "expected": { "verdict": "pass", "hitCount": 0 }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "h01-trace-v1",
+  "trace_id": "TRACE-H01-NO-TOOL-EVENT",
+  "run_id": "RUN-H01-0003",
+  "task_id": "TASK-H01-01",
+  "ruleset_id": "RULESET-H01-BASE",
+  "epoch_id": "EPOCH-H01-SMOKE",
+  "fixture_suite_ref": "X-FIXTURE-H01-SUITE",
+  "oracle_ref": "X-ORACLE-H01-RULES",
+  "adapter_ref": "X-ADAPTER-H01-LOCAL",
+  "events": [
+    {
+      "sequence": 1,
+      "state_from": "PENDING",
+      "state_to": "COMPLETED",
+      "event_type": "model",
+      "result_code": "OK"
+    }
+  ],
+  "terminal_state": "COMPLETED",
+  "status": "completed"
+}

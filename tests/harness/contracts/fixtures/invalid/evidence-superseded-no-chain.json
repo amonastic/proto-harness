@@ -1,0 +1,10 @@
+{
+  "schema_version": "h01-evidence-v1",
+  "evidence_id": "D-SUPERSEDED-NO-CHAIN",
+  "kind": "decision",
+  "statement": "已废弃决策但缺少 supersedes 链",
+  "source_refs": ["R-PROJECT-AGENTS"],
+  "scope": "harness-engineering",
+  "status": "superseded",
+  "authority": "user-confirmed"
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "h08-migration-suite-v1",
+  "purpose": "H08 规则迁移双跑套件：对每个 fixture 分别用旧版规则包与候选规则包各运行一次，比较 Oracle 输出生成 before/after/verdict（improved/unchanged/regressed）。",
+  "created_at": "2026-08-13",
+  "task_package": "doc/平台治理/20260813-任务包-P4-H08规则迁移双跑.md",
+  "fixtures": [],
+  "notes": [
+    "空套件占位：P4 台账阶段无候选规则包（66 条独立载体全部 keep、未修改任何规则文件正文），不存在旧版 vs 候选规则包对比对象，未产出真实双跑 fixture。",
+    "双跑命令 harness:regress 待后续批次实现（2026-08-13 用户裁决：P4 不补建）；当前套件定义有效但无法运行，双跑在命令实现后补跑。",
+    "双跑 fixture 补建随 regress 命令实现一起做，不在 P4 范围内（2026-08-13 用户裁决）；届时从 tests/harness/fixtures/corpus/corpus.json（31 条语料）选取覆盖全部迁移动作类型的样本填充本套件。",
+    "当前阶段无双跑执行，属预期，非错误。命令与 fixture 缺口记录见 doc/平台治理/harness-engineering/规则迁移台账.md 第 5、8 节。"
+  ]
+}

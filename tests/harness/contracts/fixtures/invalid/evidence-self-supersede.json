@@ -1,0 +1,11 @@
+{
+  "schema_version": "h01-evidence-v1",
+  "evidence_id": "D-SELF-SUPERSEDE",
+  "kind": "decision",
+  "statement": "证据自引用自身为 supersedes",
+  "source_refs": ["R-PROJECT-AGENTS"],
+  "scope": "harness-engineering",
+  "status": "superseded",
+  "authority": "user-confirmed",
+  "supersedes": ["D-SELF-SUPERSEDE"]
+}

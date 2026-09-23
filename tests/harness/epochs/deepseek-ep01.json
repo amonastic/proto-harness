@@ -1,0 +1,178 @@
+{
+  "schema_version": "h01-epoch-v2",
+  "epoch_id": "EPOCH-DEEPSEEK-EP01",
+  "ruleset_id": "RULESET-H01-BASE",
+  "provider_ref": "P-DEEPSEEK-V4-FLASH",
+  "judge_ref": "J-GENERIC-JUDGE",
+  "host": "local",
+  "tools": [
+    "harness:qualify"
+  ],
+  "permissions": [
+    "PERM-H09-QUALIFY-READONLY"
+  ],
+  "status": "selected-pending-smoke",
+  "source_refs": [
+    "A-HARNESS-ENGINEERING-PRINCIPLES",
+    "D-USER-SWITCH-PROVIDER",
+    "D-USER-P5-DEEPSEEK"
+  ],
+  "scope": "harness-engineering",
+  "fixtures": [
+    {
+      "corpus_id": "C-i-index.html-01",
+      "priority": "P1",
+      "required_runs": 3
+    },
+    {
+      "corpus_id": "C-店-门店后台-index.html-02",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-通-通信卡管理-index.html-03",
+      "priority": "P1",
+      "required_runs": 3
+    },
+    {
+      "corpus_id": "C-站-服务站后台-index.html-04",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-站-服务站后台-服务站数据大屏-05",
+      "priority": "P1",
+      "required_runs": 3
+    },
+    {
+      "corpus_id": "C-运-运维后台-index.html-06",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-工-工单投诉管理-index.html-07",
+      "priority": "P1",
+      "required_runs": 3
+    },
+    {
+      "corpus_id": "C-i-index.html-08",
+      "priority": "P1",
+      "required_runs": 3
+    },
+    {
+      "corpus_id": "C-终-设备 APP-index.html-09",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-操-作业端APP-index.html-10",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-操-field-app/station-ops-index.html-11",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-影-影像采集App-index.html-12",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-i-index.html-13",
+      "priority": "P1",
+      "required_runs": 3
+    },
+    {
+      "corpus_id": "C-店-门店小程序-index.html-14",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-寄-寄件小程序-index.html-15",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-用-用户小程序-index.html-16",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-站-服务站小程序-index.html-17",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-操-门禁-index.html-18",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-IT-INDEX-19",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-IT-INDEX-20",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-IT-INDEX-21",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-IT-INDEX-22",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-IT-INDEX-23",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-IT-INDEX-24",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-IT-INDEX-25",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-IT-INDEX-26",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-IT-INDEX-27",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-IT-INDEX-28",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-IT-INDEX-29",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-IT-INDEX-30",
+      "priority": "P0",
+      "required_runs": 5
+    },
+    {
+      "corpus_id": "C-IT-INDEX-31",
+      "priority": "P0",
+      "required_runs": 5
+    }
+  ]
+}

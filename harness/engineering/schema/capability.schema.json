@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:h01:capability.schema.json",
+  "title": "H01 Capability",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "capability_id", "owner_id", "action", "target", "risk", "status", "source_refs", "scope"],
+  "properties": {
+    "schema_version": { "const": "h01-capability-v1" },
+    "scope": { "type": "string", "minLength": 1 },
+    "capability_id": { "type": "string", "minLength": 1, "pattern": "^CAP-[A-Z0-9][A-Z0-9-]*$" },
+    "owner_id": { "type": "string", "minLength": 1 },
+    "action": { "type": "string", "minLength": 1 },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "scope"],
+      "properties": {
+        "kind": { "type": "string", "minLength": 1 },
+        "scope": { "type": "string", "minLength": 1 }
+      }
+    },
+    "risk": { "type": "string", "enum": ["read-only", "reversible-write", "destructive-write", "external-call"] },
+    "status": { "type": "string", "minLength": 1 },
+    "source_refs": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
+  }
+}

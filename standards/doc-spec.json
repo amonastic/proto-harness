@@ -1,0 +1,602 @@
+{
+  "version": "0.2.7",
+  "updatedAt": "2026-06-09",
+  "scope": {
+    "targets": [
+      "admin-portal/**/doc/需求文档.md",
+      "field-app/**/doc/需求文档.md",
+      "field-app/**/pages/需求文档.md",
+      "mini-program/**/doc/需求文档.md",
+      "mini-program/**/pages/需求文档.md"
+    ],
+    "exclude": {
+      "markers": [
+        "audit:skip-doc",
+        "audit:skip-temporary"
+      ]
+    }
+  },
+  "usageBoundary": {
+    "role": "需求抽屉与文档的结构化规则源，同时服务文档审计脚本。",
+    "mainEntry": "AGENTS.md",
+    "implementationReference": "DEVELOPMENT.md",
+    "note": "本文件保留完整规则，不承担开工入口职责。"
+  },
+  "writingStyle": {
+    "tone": [
+      "陈述句优先",
+      "先结论后说明",
+      "少口语化描述",
+      "状态和条件表达明确",
+      "抽屉正文优先使用语义级结构样式，不依赖宽泛 utility 兼容",
+      "抽屉默认直入业务规则，不铺垫页面定位、角色介绍、测试套话"
+    ],
+    "sectionOrganization": [
+      "需求抽屉按功能分区闭环，不按抽象维度拆分",
+      "每个功能区（按钮/筛选/统计等）内自包含：字段定义 + 交互规则 + 边界说明，读者不需要跨分节拼图",
+      "状态枚举定义归字段说明，按钮显隐规则归功能区（actionGroups），不得在状态与分支中重复",
+      "statesBranches 仅用于存在跨按钮状态流转的页面（如订单状态机）；列表页/详情页/表单页默认不使用该分节",
+      "interactionRules 和 exceptionsBoundaries 仅在不使用 actionGroups 时作为回退结构；使用 actionGroups 时不得再出现这两个独立分节",
+      "relationRows（字段与接口关联）只写页面展示字段与后端接口/数据源的对应关系；第一列必须是页面上真实展示的字段名（如卡号、到期时间、站点名称）",
+      "relationRows 禁止写入：按钮动作及其接口来源（归功能区 key:接口）、动作结果回写链路（归功能区 key:行为）、导入/提交等操作处理结果（归功能区 key:结果）",
+      "按钮的接口来源只写一次：优先在功能区 actionGroups 中用 { key: '接口', value: '...' } 闭环，不在 relationRows 中重复"
+    ],
+    "avoid": [
+      "大概",
+      "差不多",
+      "看情况",
+      "先这样",
+      "应该是",
+      "用通配式 border/background 规则兜所有标题和内容块",
+      "只让需求文档页有排版，CSS规范页原始文本直出"
+    ]
+  },
+  "drawerPresentationRules": {
+    "mustFollowMatureReference": true,
+    "referenceRule": "修改需求文档抽屉或CSS规范抽屉前，必须先对照仓库内至少一个成熟模块页面，不允许脱离既有样式体系直接重写。",
+    "referencePriority": {
+      "web": [
+        "admin-portal/asset-admin/index.html",
+        "admin-portal/asset-admin/js/docs.js#card-list"
+      ],
+      "app": [
+        "field-app/station-ops/pages/投递统计.html",
+        "field-app/station-ops/js/docs.js#delivery-stats"
+      ],
+      "miniapp": [
+        "mini-program/main/小程序首页.html",
+        "mini-program/main/alipay/小程序首页.html",
+        "mini-program/shipping/pages/下单.html"
+      ]
+    },
+    "sharedTypographyBaseline": true,
+    "sharedTypographyRule": "需求文档 Tab 与 CSS规范 Tab 必须共享同一套正文排版基线，包括标题、正文、列表、表格、代码标签和提示块。",
+    "forbiddenImplementationPatterns": [
+      "大范围 utility class 模拟去兜正文",
+      "通配式 border/background 规则污染标题与分节样式",
+      "只修单个 Tab，导致另一个 Tab 排版失效",
+      "只写按钮定位，不写按钮视觉外观"
+    ],
+    "buttonRule": "需求文档按钮必须沿用成熟页面的固定位置与视觉样式，统一放在手机模型右侧。",
+    "contentRule": "抽屉正文只允许补语义级样式，不允许把标题、卡片块、表格、代码标签混成同一层宽泛兼容规则。",
+    "shellVsContentRule": "需求抽屉必须区分外壳组件接入与正文结构达标：doc-panel.js、DocPanel.toggle/autoShow、按钮位置和抽屉宽度只能证明外壳可用，不能替代正文按成熟抽屉进行结构化组织。若成熟基线使用 doc-rule-card、doc-rule-line、doc-plain-table、doc-section-danger 等结构，目标抽屉正文必须复用同等颗粒度；不得只用 h3、ul、table 包装普通文案后判定为已符合抽屉规范。",
+    "denseFieldStructureRule": "筛选字段、表单字段、导入字段、列表字段等字段密集型说明不得使用单个 doc-rule-card 承载 5 条以上长句规则，也不得机械拆成一字段一张纵向大卡片；默认优先使用 doc-plain-table 或 buildRequirementDoc 的 filterRows、fieldRows 做紧凑表格。只有列宽足够、首列短且不会被压缩成逐字换行时，才允许用 doc-plain-table；字段 / 控件与默认值 / 输入限制、字段 / 展示规则 / 输入限制、字段 / 默认值 / 规则等三列表格必须同时满足语义列宽规则。功能动作分组需要动作、结果、接口、边界时，才使用 actionGroups 或 doc-rule-card。无法判断时参考 迭代索引/202606下.html?page=iot-card-list 的 0-1 需求说明区｜202605 下及历史基线 的组织格式，只复用结构样式，不照搬业务字段。",
+    "tableReadabilityRule": "需求抽屉内的 doc-plain-table 必须先满足可读性：首列不得逐字竖排或单字换行，关键名词不得被压成一字一行；若结构是“元素名/动作名较短 + 展示规则较长”，优先改用 doc-rule-line、规则卡或分组列表承载，或明确设置首列合理宽度与不换行策略后再使用表格。",
+    "tableSemanticWidthRule": "需求抽屉表格必须按列语义分配宽度，不得默认等宽。字段密集型三列表格如“字段 / 控件与默认值 / 输入限制”“字段 / 展示规则 / 输入限制”“字段 / 默认值 / 规则”应采用约 16% / 32% / 52% 的列宽；第一列仅承载字段名，必须 nowrap，禁止占用过宽；第三列承载输入限制、枚举、边界说明等长文本，必须获得最大宽度。若第三列仍出现密集换行或阅读困难，必须改用 doc-rule-card + doc-rule-line、分组规则卡或纵向规则行，不得继续使用表格。修改后必须通过真实渲染截图确认列宽合理。",
+    "ruleCardColumnRule": "需求抽屉使用 doc-rule-card 承载多个独立业务点时，默认一行一张卡片，避免两列卡片压缩阅读宽度。只有短枚举、短字段清单、状态色块清单等单卡内容很短且无长句说明时，才允许多列网格，且最多两列；确需两列时在页面级放宽 .doc-rule-grid{grid-template-columns:repeat(2,1fr)} 并截图确认可读。订单卡、页面结构、操作按钮、CSS 颜色覆盖等需要逐条阅读的规则必须使用单列卡片。doc-rule-grid 默认渲染为单列；页面级不得放宽为三列及以上。",
+"cardInternalGroupingRule": "单张 doc-rule-card 内容超过约 150 字或承载多个子维度时，卡片内部必须再分组：按功能/按钮/交互/边界等维度用小标题、doc-rule-line 分段或留白间隔拆开，禁止把多维度长文挤在同一卡片里连续排版。宁可拆成多张卡片或卡片内纵向分段让读者多滚动，也不得密集成块；开发测试靠分点定位规则，密集成块会导致漏读。",
+    "versionLayeringRule": "从 202606下 起，同一源页面被多个迭代持续引用时，需求抽屉必须按版本区块倒序组织：当前迭代区块置顶并默认展开，0-1 需求说明区和历史迭代区块默认收起；迭代内日期增量写入对应迭代区块内部，不再把历史规则和本期增量散落到同一正文中反复打标签。当前迭代区块只能承载本期新增、调整、删除、迁移、重命名、状态变化、字段变化、入口变化、权限变化和导入导出变化；不得把未变化的历史线上流程、旧接口链路、旧操作按钮、历史基线说明或旧参考文档搬入当前区块。",
+    "versionBlockStyleRule": "持续迭代抽屉应使用共享 docVersionBlock / buildVersionedRequirementDoc 结构，区块外层使用 doc-version-block，当前迭代使用 doc-version-block-current，高亮 badge 使用 doc-version-badge，正文放入 doc-version-body；不得用普通标题、散落标签或禁用态灰块替代版本区块。",
+    "executionMatrixRequired": true,
+    "executionMatrixRule": "修改需求抽屉正文前必须逐页输出执行矩阵：目标页面、正文数据源、按钮/外壳数据源、成熟复用源、目标 docId、当前结构类型、计划采用结构类型、禁止写入内容、验证方式。未输出矩阵不得修改抽屉正文。",
+    "hardFailRules": [
+      "未定位抽屉正文数据源",
+      "未声明成熟复用源或 clone-source",
+      "只接入 doc-panel.js、DocPanel.toggle/autoShow、按钮或宽度，却声称需求抽屉已符合规范",
+      "成熟基线使用规则卡或结构化表格时，目标正文仍主要是裸 h3 + ul + table",
+      "筛选字段、表单字段、导入字段、列表字段等字段密集型说明仍使用单个 doc-rule-card 承载 5 条以上长句规则，或机械拆成一字段一张纵向大卡片，导致抽屉阅读密度过高、正文列拥挤溢出或卡片堆叠过重",
+      "需求抽屉表格首列出现逐字竖排、单字换行、关键名词被压缩成一字一行，或截图可见列宽挤压但仍未改用 doc-rule-line、规则卡、分组列表或合理列宽策略",
+      "字段密集型三列表格使用默认等宽，导致第一列字段名占用过宽、第三列输入限制或说明列被挤压换行；未使用语义列宽、首列 nowrap、加宽说明列，且未改用规则卡、doc-rule-line 或分组规则行",
+      "多个独立业务规则点被放进同一张长卡，或拆成规则卡后仍以两列/多列展示导致阅读宽度被压缩；除短枚举或短字段清单外，订单卡、页面结构、操作按钮、CSS 颜色覆盖等规则卡必须单列展示",
+      "正文缺少规则卡、结构化表格、版本标签或边界分区，且未说明合理原因",
+      "正文写入执行者备注、测试提示、开发备注、原型实现限制或排错说明",
+      "从 202606下 起的持续迭代抽屉仍把新迭代增量散落写入历史需求正文，未使用当前迭代区块 + 历史需求区块分层",
+      "当前迭代区块混入未变化的历史流程、旧接口链路、旧操作按钮、历史基线说明、旧参考文档或与本期开发验证无关的说明，导致开发测试无法快速判断本期到底改什么",
+      "当前迭代区块只写「沿用基线 / 无新增」类占位说明或挂载说明，而没有真实本期增量内容（新增、调整、删除、迁移、重命名、状态、字段、入口、权限、导入导出），导致开发无法判断本期改什么",
+      "持续迭代抽屉使用版本分层文案但未接入 doc-version-block 结构，导致当前迭代、历史迭代和 0-1 需求说明区无法展开收起",
+      "跨端同一需求章节骨架无理由漂移",
+      "反复否定旧方案或未交付方案，而不是描述当前有效业务口径",
+      "CSS规范 Tab 被破坏、丢失或未说明沿用"
+    ],
+    "businessCompletenessRules": {
+      "conciseBusinessWording": "需求抽屉必须用最短可执行业务口径表达规则，不写推理过程、开发测试心理预判或防误解长句。",
+      "defaultValueRequired": "筛选项、表单项、导入字段和开关类字段必须写默认值；复选框视觉但单选职能时必须明确样式和业务行为差异。",
+      "longTextOverflowRequired": "列表长文本字段必须写最大长度、超出展示方式、hover 气泡完整展示和复制能力；未确认时写待确认。",
+      "scopeRequired": "唯一性、重复校验和权限范围必须写清站点、门店、账号、公司等业务作用域；作用域无依据时写待确认。",
+      "confirmRequiredForInvalidatingActions": "取消、删除、作废、解绑、停用等失效类操作必须写二次确认，确认文案保持精简。",
+      "operationLogRequiredFields": "凡要求写操作日志，必须写清记录时机、时间取值、操作内容文案组成、账号取值、展示位置、操作列是否有按钮。",
+      "markerVsRuleSeparation": "当前包裹标记解除与拦截规则取消必须分开写；不得混用当前包裹标记和后台规则。",
+      "filterNoFillerQueryRules": "筛选查询区只写筛选项、控件类型、默认值、输入限制、数据来源和空结果规则；不得为每个字段重复写按该字段查询、非空时查询等无信息量说明。查询、重置、清空这类列表通用按钮不得作为独立需求规则写入正文；只有按钮存在本期新增的业务限制、状态变化、危险后果或差异化反馈时，才在对应功能区写该差异。",
+      "noInventedDefaultRules": "不得虚构不存在的默认值、默认计费、默认金额、默认品牌或默认规则；业务只有为空时只写为空，不写不套用某默认规则。",
+      "listFieldDisplayOnly": "列表字段分区只写展示规则，包括来源、为空展示、脱敏、截断、hover、复制和状态标签；必填、格式、失败归类、重复校验、后续链路归表单或导入功能区。",
+      "noGenericPageScopeSection": "不得单独堆一个空泛的页面范围、页面定位、角色说明分区来替代业务规则；入口、对象、作用域等必要信息必须并入第一个相关功能区，且不能重复罗列页面已有控件。",
+      "inputCharacterLimitRequired": "筛选输入框、搜索框、表单输入框、导入字段、费用/重量等输入类字段必须写最大字符数或数值位数、允许字符类型和默认值；若是完全未调整的既有字段，只能写按既有逻辑，不得半写规则漏掉长度。",
+      "optionDisplayMustMatchSource": "枚举、标签、付款方式、状态值和组合值必须先对照当前页面或成熟来源的真实展示；不得自行合并、改名或发明展示文案。若成熟来源以多个独立标签并列展示，抽屉、页面和 CSS 规范必须保持并列标签口径。",
+      "newPromptCopyRequired": "页面新增或调整提示文案、说明条、弱提示、警告条时，需求抽屉必须写明触发条件、展示位置、精确文案和隐藏条件；不得只写业务分支而漏掉页面可见提示。",
+      "cardStructureRequired": "列表卡片、客户卡片、订单卡片、信息组等卡片组必须写清组成结构、主次层级、标题行左右内容、标签组位置、长文本截断和空值展示；不得只写卡片展示哪些字段。",
+      "cssStateColorPairRequired": "CSS 规范 Tab 写状态标签、付款标签、提示条、按钮选中态、错误态、禁用态时，必须同时写背景色、文字色、边框色或说明无边框、字号、圆角和间距；不得只写其中一种颜色。",
+      "cssActualElementCoverageRequired": "CSS 规范 Tab 必须先列出本页实际可见元素，再覆盖页面背景、容器、主/辅/弱文字、分隔线、图标、状态、标签、按钮、弹窗、空态、反馈等相关色彩；不得只写少量主色或用“沿用既有样式”一句话替代元素级颜色说明。"
+    },
+    "baselineSource": "app",
+    "readingExperience": {
+      "webWidth": "780px",
+      "appWidth": "780px",
+      "miniappWidth": "780px",
+      "bodyFontSize": "15px",
+      "tableFontSize": "13px",
+      "sectionTitleSize": "17px",
+      "lineHeight": "1.85"
+    },
+    "uiWeighting": {
+      "latestIterationIndex": 7,
+      "historicalExcellentUi": 3,
+      "rule": "新页面或改版页面的视觉收口先以最新迭代索引确定结构和入口，再用历史优秀 UI 收口视觉细节；不是机械拼接或数值平均。"
+    },
+    "forbiddenDrawerContent": [
+      "模拟操作",
+      "仅设计稿可见",
+      "开发备注",
+      "测试按钮",
+      "场景切换器"
+    ],
+    "closeButtonRule": "抽屉关闭按钮必须复用仓库内成熟页面的默认视觉样式；不得单页自创高对比/异形方案。若图标字体存在渲染风险，优先使用成熟页同款字符或稳定方案。",
+    "implementationCleanlinessRule": "重写抽屉内容后必须检查是否残留字符串拼接片段（如 `+`, `'</table>'`, `'<tr` 等）泄漏到正文。",
+    "pendingReviewCardRule": "用户明确说明某条口径待确认、需评审会/领导/技术/客户等角色后续确认时，该内容必须在需求抽屉中独立成卡展示，不得混在普通规则卡正文里：卡片标题旁加行内徽标（class=review-flag，高级灰底 #F7F8FA、红边 rgba(229,72,77,0.35)、红字 #E5484D、圆角 4px、10px 字号，文案写明确认角色如「评审会讨论」）；整卡通过 CSS 数据源 .doc-rich-content .doc-rule-card:has(.review-flag) 规则加红框 rgba(229,72,77,0.45) 1.5px 与浅红底 #FFFAFA；同一抽屉的 CSS 数据源必须同步登记「评审标记卡样式」说明条。标记仅在对应角色确认口径后移除；用户未明确说明待确认时不得擅自加标记卡。参考实现：field-app/main/js/docs/pickup-number-setting.js 的「并发扫描分配」卡片。"
+  },
+  "mobileLayoutPatterns": {
+    "bottomActionBar": {
+      "pattern": "padding-reserve + absolute-snap",
+      "description": "移动端手机模型内底部固定操作栏，使用内容区 padding 预留空间 + 操作栏 absolute 贴底的可靠模式。禁止用 position:fixed（会穿出手机模型）或动态切换 bottom 值（不稳定）。",
+      "requiredStructure": {
+        ".content-area": "position: absolute; top: [nav-height]; left: 0; right: 0; bottom: 0; overflow-y: auto; padding-bottom: [bar-height + indicator-gap];",
+        ".bottom-action-bar": "position: absolute; left: 0; right: 0; bottom: 0; z-index: 200; padding: [vertical] 16px [indicator-padding];",
+        ".home-indicator": "position: absolute; bottom: 6~8px; z-index: >=200;"
+      },
+      "forbiddenApproaches": [
+        "position:fixed（相对浏览器视口定位，穿出手机模型）",
+        "动态切换 .content-area 的 bottom 值（with-actionbar class 切换方案在滚动容器中不可靠）",
+        "z-index 低于内容区层级（导致被滚动内容遮挡）"
+      ],
+      "referencePage": "field-app/main/pages/卡详情.html",
+      "lessonLearned": "20260420 报刊记录页底部栏问题反复试错后，最终回到 `卡详情.html` 的成熟实现。",
+      "updatedAt": "2026-04-20"
+    }
+  },
+  "inlineScriptRules": {
+    "syntaxValidationRequired": true,
+    "syntaxValidationRule": "修改 HTML 内联 <script> 块后，必须通过 Node.js --check 或等效工具验证语法正确性。语法错误会导致整个 script 块不执行，所有函数未注册，表现为“按钮点不了/功能全失效”但无明确报错。",
+    "nestedTernaryForbidden": "禁止在内联脚本中使用超过 2 层嵌套的三元运算符，尤其是模板字符串拼接场景。改用 if-else if 链替代。深层嵌套在引号转义+分号场景下极易触发 SyntaxError: Unexpected token。",
+    "commonSymptomsOfBrokenScript": [
+      "onclick 绑定的全局函数调用无反应",
+      "DOMContentLoaded 回调未触发",
+      "DocPanel.autoShow 不生效（需求文档抽屉不出现）",
+      "页面加载后控制台无任何自定义 console.log 输出"
+    ],
+    "debugChecklist": [
+      "1. 打开浏览器 DevTools → Console 查看是否有红色 SyntaxError",
+      "2. 提取 <script> 内容到临时 .js 文件，运行 node --check 验证语法",
+      "3. 检查圆括号 ()、方括号 []、花括号 {} 是否成对平衡",
+      "4. 确认模板字符串内的引号没有破坏外层字符串边界"
+    ],
+    "lessonLearned": "20260420 报刊记录页因深层三元表达式触发 SyntaxError，导致详情点击失效。",
+    "updatedAt": "2026-04-20"
+  },
+  "developmentWorkflowRules": {
+    "checkBeforeInvent": {
+      "rule": "实现布局、交互、组件模式前，必须先在同平台或同模块目录搜索已验证的成熟实现；未对照成熟页面，不得从零自创方案。",
+      "searchScope": "先搜索同模块 pages/ 目录下的其他 HTML 文件，再扩大到同级平台目录",
+      "whatToCheck": [
+        "DOM 结构层级",
+        "CSS 定位方式",
+        "JS 事件绑定模式",
+        "组件引用路径",
+        "公共资源接入方式"
+      ],
+      "allowedAfterReference": "基于成熟页面做 safe-add / visual-tightening 改造",
+      "forbiddenWithoutReference": "直接编写全新布局逻辑、尝试多种 CSS 方案反复试错、引入未经验证的设计模式",
+      "lessonLearned": "20260420 报刊记录页底部栏问题多轮试错后，最终复用同目录 `卡详情.html` 的成熟实现。",
+      "updatedAt": "2026-04-20"
+    },
+    "staticPrototypeDefault": {
+      "rule": "需求原型默认按静态页面交付，仅保留页面跳转、对话框打开关闭、抽屉打开关闭、页签切换；其他业务交互需用户明确要求。",
+      "allowedInteractions": [
+        "页面跳转",
+        "对话框打开关闭",
+        "抽屉打开关闭",
+        "页签切换"
+      ],
+      "forbiddenByDefault": [
+        "控件之间互斥禁用",
+        "依赖其他控件值的实时显隐",
+        "实时联动校验",
+        "为演示业务规则额外补写动态 mock 逻辑"
+      ],
+      "prototypeNotImplementationRule": "需求抽屉描述的是页面应有的交互口径，不等于当前设计稿必须把功能真实实现出来。除非用户明确要求，不要因为文档写了“支持预览/删除/切换”就补完整功能代码。",
+      "updatedAt": "2026-04-20"
+    },
+    "webZeroToOneDrawerWriting": {
+      "rule": "针对 Web 端 0-1 或规则尚未收清的后台业务页，需求抽屉必须先写清统计口径、筛选默认值、字段规则、操作显隐、双状态关系和待确认项，禁止先写套话后写规则。",
+      "referenceBaseline": "Web 0-1 后台优先以运维后台通信卡管理首页的列表抽屉为基准，旧入口跳转页只作入口兼容，不作为基准本体。",
+      "preferredStructureByPageType": {
+        "list-page": [
+          "页面内容",
+          "交互规则",
+          "边界说明",
+          "待确认项"
+        ],
+        "detail-page": [
+          "页面内容",
+          "交互规则",
+          "边界说明",
+          "待确认项"
+        ],
+        "complex-state-page": [
+          "核心流程",
+          "状态与分支",
+          "字段说明",
+          "交互规则",
+          "异常与边界",
+          "待确认项"
+        ]
+      },
+      "mustClarifyFirst": [
+        "顶部统计卡是否跟随当前筛选结果联动",
+        "每个筛选控件的默认值",
+        "字段为空时如何展示",
+        "异常值或冲突值如何展示",
+        "操作列在不同状态下的显隐规则",
+        "刷新状态是刷新页面展示还是补查业务结果",
+        "双状态列（如支付状态/充值状态）之间的关系"
+      ],
+      "forbiddenGuesses": [
+        "把未确认的业务状态直接写成既定规则",
+        "把供应商是否提供失败/取消/超时状态当作已知事实",
+        "把经验性推断的按钮显隐写成正式结论",
+        "把原型表达直接等价成真实功能实现要求"
+      ],
+      "mustMoveToTodoOpenQuestions": [
+        "任何超过当前已确认口径的业务推断",
+        "接口是否提供某状态或错误码",
+        "统计卡究竟按哪一列状态计算",
+        "是否展示供应商原始单号/支付单号",
+        "导出字段范围"
+      ],
+      "writingChecklist": [
+        "统计卡必须写定义，不只写名称",
+        "筛选项必须写默认值",
+        "列表字段必须写空值规则",
+        "操作列必须写显隐矩阵",
+        "待确认项必须具体到问题，不写空泛描述"
+      ],
+      "updatedAt": "2026-04-21"
+    }
+  },
+  "iterationMergeRules": {
+    "defaultMode": "inline-merge",
+    "description": "新版本需求默认融入现有文档，不单独新增抽屉 tab。",
+    "mustExplainInPlace": true,
+    "requiredMarkers": [
+      "所属迭代"
+    ],
+    "preferredTagFormat": "[202604上]",
+    "tagVisualRule": "版本标签只展示迭代值或指定日期，扁平极简、三端统一，不允许 Web / App / 小程序分别使用花哨样式",
+    "placementRule": "版本标记必须优先内联到被改动的具体字段、规则、边界、验收项、测试项中，不允许只在文档顶部增加摘要块替代正文定位。",
+    "mustInclude": [
+      "变更属于哪个迭代",
+      "影响了哪个字段或模块",
+      "新增逻辑是什么",
+      "原有逻辑是否保持不变"
+    ],
+    "preferredPlacement": [
+      "字段说明中的对应字段项",
+      "交互规则中的对应规则项",
+      "异常与边界中的对应条目"
+    ],
+    "existingVsCurrentIterationRule": "既有功能迭代的需求抽屉应将已上线基线与当前迭代变更分区展示；既有逻辑使用低强调分区，当前迭代使用扁平橙色版本标签或高亮分区。",
+    "existingVsCurrentBoundary": "既有逻辑分区表示仍然有效且沿用，不得做成禁用态或不可读灰置；当前迭代分区只承载本轮需要开发、联调、验证的新增或调整。",
+    "mixedRuleForbidden": "不得将旧规则和当前迭代规则混写在同一条字段、规则或边界说明中。",
+    "forbiddenPatterns": [
+      "仅顶部本期新增摘要，不在正文模块中标注具体变更",
+      "版本信息与具体变更条目分离",
+      "既有逻辑和当前迭代规则混写在同一条说明中"
+    ],
+    "forbiddenInPageContent": [
+      "默认排序说明",
+      "本期新增说明文案",
+      "新增字段用途说明",
+      "原有逻辑保持不变说明",
+      "开发提示或测试提示"
+    ],
+    "allowedTagFormats": [
+      "[202604上]",
+      "[202604下]",
+      "[20260401]"
+    ],
+    "tagExamples": [
+      "[202604上]",
+      "[202604下]",
+      "[20260401]"
+    ],
+    "existingLogicRule": "若需求明确为沿用既有逻辑，正文必须直接写明“沿用既有逻辑/复用既有控件和输入限制/复用既有异常反馈”，不得擅自扩写为新能力。"
+  },
+  "sectionTemplates": {
+    "simple-page": {
+      "description": "适用于单页操作页、简单详情页、照片上传页、简单弹窗等轻量页面。",
+      "requiredSections": [
+        "页面内容",
+        "交互规则",
+        "边界说明"
+      ],
+      "optionalSections": [
+        "待确认项"
+      ]
+    },
+    "standard-page": {
+      "description": "适用于多状态、多业务分支、跨角色或配置复杂页面。",
+      "requiredSections": [
+        "核心流程",
+        "状态与分支",
+        "字段说明",
+        "交互规则",
+        "异常与边界"
+      ],
+      "optionalSections": [
+        "待确认项"
+      ]
+    },
+    "web-zero-to-one-list-page": {
+      "description": "适用于 Web 端 0-1 或规则尚未收清的后台列表/台账页。优先先写统计口径、筛选规则、字段规则和操作显隐，再补边界与待确认。",
+      "requiredSections": [
+        "页面内容",
+        "交互规则",
+        "边界说明"
+      ],
+      "optionalSections": [
+        "待确认项"
+      ]
+    },
+    "sync-dialog-complex": {
+      "description": "适用于迭代索引中需要同步到多端的虚拟目录对话框，该端与主承接页存在明确差异。三个区块结构。",
+      "requiredSections": [
+        "同步页面",
+        "同步内容",
+        "差异点"
+      ],
+      "optionalSections": []
+    },
+    "sync-dialog-simple": {
+      "description": "适用于迭代索引中需要同步到多端的虚拟目录对话框，该端仅需同步结果，无复杂差异。单段文字即可。",
+      "requiredSections": [
+        "同步说明"
+      ],
+      "optionalSections": []
+    }
+  },
+  "requiredSections": [
+    {
+      "key": "core-flow",
+      "title": "核心流程",
+      "aliases": [
+        "核心流程",
+        "操作流程",
+        "页面功能规划",
+        "页面功能"
+      ]
+    },
+    {
+      "key": "states-branches",
+      "title": "状态与分支",
+      "aliases": [
+        "状态与分支",
+        "状态流转规则",
+        "按钮配置规则",
+        "状态判断逻辑"
+      ]
+    },
+    {
+      "key": "field-spec",
+      "title": "字段说明",
+      "aliases": [
+        "字段说明",
+        "列表字段",
+        "信息展示",
+        "表单字段",
+        "投诉单信息字段"
+      ]
+    },
+    {
+      "key": "interaction-rules",
+      "title": "交互规则",
+      "aliases": [
+        "交互规则",
+        "前端交互设计",
+        "交互设计",
+        "交互反馈"
+      ]
+    },
+    {
+      "key": "exceptions-boundaries",
+      "title": "异常与边界",
+      "aliases": [
+        "异常与边界",
+        "业务限制",
+        "接口限制汇总",
+        "常见问题与解决方案"
+      ]
+    },
+    {
+      "key": "todo-open-questions",
+      "title": "待确认项",
+      "aliases": [
+        "待确认项",
+        "开放问题",
+        "风险与待定事项"
+      ]
+    }
+  ],
+  "qualityChecks": {
+    "recommendedMinSections": 3,
+    "mustMentionAny": {
+      "states": [
+        "状态",
+        "待处理",
+        "处理中",
+        "已完成",
+        "已关闭"
+      ],
+      "limits": [
+        "限制",
+        "异常",
+        "边界",
+        "提示",
+        "校验"
+      ]
+    },
+    "versionMarkers": [
+      "所属迭代",
+      "202604上",
+      "202604下",
+      "20260401"
+    ],
+    "testingMarkers": [
+      "测试",
+      "回归",
+      "注意事项"
+    ],
+    "versionTagPatterns": [
+      "\\[\\d{6}[上下]\\]",
+      "\\[\\d{8}\\]"
+    ]
+  },
+  "reporting": {
+    "showSkippedDocs": true
+  },
+  "deliveryPolicy": {
+    "defaultStrategy": "drawer-first",
+    "strategies": {
+      "drawer-first": "默认策略，先完成页面抽屉文档；普通迭代页不强制新增需求文档.md。",
+      "drawer-only": "仅输出页面抽屉文档，适用于小改动、局部迭代或纯页面收口。",
+      "md-required": "用户明确要求、大需求/跨多页需求、或 0-1 独立模块时，必须同时产出需求文档.md。"
+    },
+    "mustHaveDrawerArtifact": true,
+    "mdRequiredWhen": [
+      "user-explicit-request",
+      "large-or-cross-page-demand",
+      "zero-to-one-module"
+    ],
+    "forbiddenPatterns": [
+      "只写 md 不补页面抽屉文档",
+      "把需求文档.md 当作普通迭代页的默认唯一交付"
+    ]
+  },
+  "listPageDrawerRules": {
+    "focus": [
+      "筛选条件",
+      "列表字段",
+      "必要操作入口",
+      "异常与边界"
+    ],
+    "description": "列表页需求抽屉默认聚焦筛选与列表本身，不展开无关二级弹窗细节。",
+    "forbidden": [
+      "在列表页抽屉中大段描述非本次范围的弹窗/详情页交互",
+      "把层级、禁用样式、静态占位等非业务事项写成默认测试点或验收点",
+      "为不会出现的非法场景补 toast 或补“待开发实现”废话",
+      "把交互说明误写成必须真实落代码的功能实现要求"
+    ],
+    "existingFeatureRule": "若操作列承接既有功能，抽屉只写“沿用既有功能/定位到既有链路”，不扩写具体实现。"
+  },
+  "scopeDisciplineRules": {
+    "minimumAssumption": "用户已明确排除的范围，不得自行补成交互、提示、测试项、验收项或新增需求。",
+    "mandatoryFilterRule": "若页面存在必填筛选或前置条件，抽屉必须同时写明“不满足时页面如何表现”以及至少一个可测试示例值。",
+    "fakeInteractionRule": "静态按钮、静态入口位、既有功能承接位，不得被改写成新的默认交互，除非用户明确要求。",
+    "noRealFeatureImplementationByDefault": "抽屉描述交互时，默认只表达产品规则，不要求同步补齐设计稿中的真实功能代码实现。"
+  },
+  "designOverRules": {
+    "referenceSpec": "standards/design-over-spec.md",
+    "targetingRule": "design over 只能标当前正在收口且用户认可的具体页面，不得顺手扩散到同组其他页面。",
+    "requiredChecks": [
+      "本次需求范围已落齐",
+      "页面与需求抽屉口径一致",
+      "无明显误导性假交互或假文案",
+      "用户可见文案未暴露技术实现细节（接口名、服务名、系统代号等）",
+      "页面无辅助文本或副标题泛滥",
+      "控件状态已传达的信息不得再用文字重复说明"
+    ],
+    "requiredOutputFields": [
+      "结论",
+      "检查对象",
+      "对照标杆",
+      "通过项",
+      "阻塞项",
+      "建议动作"
+    ],
+    "mobileBenchmarkPages": [
+      "field-app/main/pages/扫码盘点.html",
+      "field-app/main/js/docs.js#inventory-warning",
+      "field-app/main/js/doc-panel.js",
+      "field-app/station-ops/pages/编号投递.html",
+      "field-app/station-ops/js/docs.js#doorplate-delivery",
+      "field-app/station-ops/js/doc-panel.js"
+    ],
+    "blockingExamples": [
+      "用户刚指出的问题尚未修正",
+      "抽屉和页面实际控件不一致",
+      "仍存在明显拼接残渣或样式污染"
+    ]
+  },
+  "syncDialogRules": {
+    "description": "迭代索引中「同步目录」对话框的内容写作规则。当需求要求同口径同步到多端，但本次只为一个端做了设计页面时，其他端以虚拟目录+对话框形式体现。",
+    "namingFormat": "同步 · {端名}",
+    "placement": "同一需求分组内，主承接页之后、其他无关页面之前",
+    "mainPagePrefix": "主承接页目录名加端前缀（如「运维后台 · 运单详情」），明确归属",
+    "noPageCreated": true,
+    "dialogStructure": {
+      "complex": {
+        "when": "该端与主承接页存在明确差异（如权限不同、字段缺失、展示形式不同）",
+        "sections": [
+          {
+            "key": "sync-page",
+            "title": "同步页面",
+            "rule": "写明该端的具体页面路径，如「门店后台 > 数据中心 > 派件明细 > 运单详情 > 消息信息模块」"
+          },
+          {
+            "key": "sync-content",
+            "title": "同步内容",
+            "rule": "写与主承接页相同的口径，参考来源统一写「与运维后台同口径」（运维后台为主承接页时），不写「与服务站后台同口径」"
+          },
+          {
+            "key": "sync-diff",
+            "title": "差异点",
+            "rule": "只写该端与主承接页的不同之处，如某功能不展示、权限不同。不重复主承接页已有口径，不写泛化描述，权限差异写明确（展示/不展示），不写未确认的实现方式"
+          }
+        ]
+      },
+      "simple": {
+        "when": "该端仅需同步结果，无复杂差异",
+        "sections": [
+          {
+            "key": "sync-note",
+            "title": "同步说明",
+            "rule": "单段文字说明需同步什么结果，与主承接页同口径即可。不需要三段式结构"
+          }
+        ]
+      }
+    },
+    "dialogInteraction": {
+      "escClose": true,
+      "closeButton": true,
+      "confirmButton": true
+    },
+    "referencePage": "迭代索引/202605上.html"
+  }
+}

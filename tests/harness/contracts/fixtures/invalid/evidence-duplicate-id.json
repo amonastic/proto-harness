@@ -1,0 +1,10 @@
+{
+  "schema_version": "h01-evidence-v1",
+  "evidence_id": "A-HARNESS-ENGINEERING-PRINCIPLES",
+  "kind": "authoritative-fact",
+  "statement": "与 valid/evidence.json 重复的主 ID",
+  "source_refs": ["R-PROJECT-AGENTS"],
+  "scope": "harness-engineering",
+  "status": "active",
+  "authority": "authoritative-fact"
+}

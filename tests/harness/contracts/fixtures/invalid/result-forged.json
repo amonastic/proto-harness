@@ -1,0 +1,9 @@
+{
+  "schema_version": "h01-result-v1",
+  "result_id": "RESULT-H01-FORGED",
+  "trace_id": "TRACE-H01-NOT-EXIST",
+  "status": "SUCCEEDED",
+  "summary": "伪造完成结果，但 Trace 不存在且无完成证据",
+  "completion_evidence_refs": [],
+  "created_by": "executor"
+}

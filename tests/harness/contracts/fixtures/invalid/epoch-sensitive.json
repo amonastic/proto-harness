@@ -1,0 +1,16 @@
+{
+  "schema_version": "h01-epoch-v2",
+  "epoch_id": "EPOCH-H01-SENSITIVE",
+  "ruleset_id": "RULESET-H01-BASE",
+  "provider_ref": "P-LONGCAT-2-0",
+  "judge_ref": "J-CODEX-INDEPENDENT-TASK-SELECTED",
+  "host": "local",
+  "tools": [
+    "credential_store_reader"
+  ],
+  "permissions": [],
+  "status": "selected-pending-smoke",
+  "source_refs": [
+    "A-HARNESS-ENGINEERING-PRINCIPLES"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": "workflow-v1",
+  "description": "workflow 定义输出 schema，用于 harness:run --workflow 的步骤编排验证（任务包 P9.1 §5.2 契约）",
+  "type": "object",
+  "required": ["workflow_id", "steps"],
+  "properties": {
+    "workflow_id": { "type": "string", "description": "workflow 唯一标识，如 new-page" },
+    "description": { "type": "string", "description": "workflow 用途说明" },
+    "steps": {
+      "type": "array",
+      "description": "步骤列表，按数组顺序执行（当前为线性 DAG）",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["step_id", "task"],
+        "properties": {
+          "step_id": { "type": "string", "description": "步骤内唯一标识" },
+          "task": { "type": "string", "description": "对应的 task adapter 名" },
+          "input_from": { "type": "string", "description": "可选：前一步 output 名作为本步输入（缺省为 workflow 原始 input）" },
+          "output": { "type": "string", "description": "可选：本步产物在上下文中的键名，供后续步骤 input_from 引用" }
+        }
+      }
+    }
+  }
+}

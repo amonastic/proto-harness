@@ -1,0 +1,11 @@
+{
+  "schema_version": "h01-checkpoint-v1",
+  "checkpoint_id": "CHECKPOINT-H01-SKIP",
+  "trace_id": "TRACE-H01-COMPLETE",
+  "last_event_sequence": 0,
+  "state": "RUNNING",
+  "snapshot_ref": "X-SNAPSHOT-H01-SKIP",
+  "input_digest": "abc456",
+  "resumable": true,
+  "status": "active"
+}

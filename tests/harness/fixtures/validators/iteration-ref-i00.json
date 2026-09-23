@@ -1,0 +1,66 @@
+{
+  "suite_ref": "FS-SYNTHETIC-H03C-V1",
+  "validator": "iteration-reference",
+  "activeIteration": "202608上",
+  "cases": [
+    {
+      "id": "I00-01",
+      "iteration": "202608上",
+      "iframes": [{ "src": "../../admin-portal/maintain-admin/pages/x.html", "line": 1 }],
+      "knownDebt": [],
+      "expected": { "verdict": "pass", "isHistorical": false, "newCount": 0, "debtCount": 0 }
+    },
+    {
+      "id": "I00-02",
+      "iteration": "202607下",
+      "iframes": [{ "src": "../../admin-portal/maintain-admin/pages/x.html", "line": 2 }],
+      "knownDebt": [],
+      "expected": { "verdict": "fail", "isHistorical": true, "newCount": 1, "newIncludes": "历史迭代不得直接引用源页面" }
+    },
+    {
+      "id": "I00-03",
+      "iteration": "202607上",
+      "iframes": [{ "src": "snapshots/202607上/x.html", "line": 3 }],
+      "knownDebt": [],
+      "expected": { "verdict": "pass", "isHistorical": true, "newCount": 0 }
+    },
+    {
+      "id": "I00-04",
+      "iteration": "202607上",
+      "iframes": [{ "src": "snapshots/202608上/x.html", "line": 4 }],
+      "knownDebt": [],
+      "expected": { "verdict": "fail", "isHistorical": true, "newCount": 1, "newIncludes": "快照目录应为 snapshots/202607上/，实际为 snapshots/202608上/" }
+    },
+    {
+      "id": "I00-05",
+      "iteration": "202607上",
+      "iframes": [{ "src": "../../admin-portal/maintain-admin/pages/debt.html", "line": 5 }],
+      "knownDebt": ["历史迭代不得直接引用源页面：../../admin-portal/maintain-admin/pages/debt.html"],
+      "expected": { "verdict": "pass", "isHistorical": true, "newCount": 0, "debtCount": 1 }
+    },
+    {
+      "id": "I00-06",
+      "iteration": "202607上",
+      "iframes": [],
+      "knownDebt": [],
+      "expected": { "verdict": "pass", "isHistorical": true, "newCount": 0, "debtCount": 0 }
+    },
+    {
+      "id": "I00-07",
+      "iteration": "202607上",
+      "iframes": [{ "src": "snapshots/202607上/x.html", "line": 7 }],
+      "knownDebt": [],
+      "expected": { "verdict": "pass", "isHistorical": true, "newCount": 0 }
+    },
+    {
+      "id": "I00-08",
+      "iteration": "202607上",
+      "iframes": [
+        { "src": "../../admin-portal/maintain-admin/pages/new.html", "line": 8 },
+        { "src": "snapshots/202608上/old.html", "line": 9 }
+      ],
+      "knownDebt": ["历史迭代快照目录应为 snapshots/202607上/，实际为 snapshots/202608上/：snapshots/202608上/old.html"],
+      "expected": { "verdict": "fail", "isHistorical": true, "newCount": 1, "newIncludes": "历史迭代不得直接引用源页面", "debtCount": 1 }
+    }
+  ]
+}

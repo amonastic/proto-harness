@@ -1,0 +1,17 @@
+{
+  "schema_version": "h01-epoch-v2",
+  "epoch_id": "EPOCH-H01F-NO-JUDGE",
+  "ruleset_id": "RULESET-H01-BASE",
+  "provider_ref": "P-LONGCAT-2-0",
+  "judge_ref": "J-FORGED-JUDGE-NOT-EXIST",
+  "host": "local",
+  "tools": [
+    "validate-contract"
+  ],
+  "permissions": [],
+  "status": "selected-pending-smoke",
+  "scope": "harness-engineering",
+  "source_refs": [
+    "A-HARNESS-ENGINEERING-PRINCIPLES"
+  ]
+}

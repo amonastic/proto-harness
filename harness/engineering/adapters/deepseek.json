@@ -1,0 +1,43 @@
+{
+  "schema_version": "h09-adapter-v1",
+  "adapter_id": "ADAPTER-DEEPSEEK-H09-V1",
+  "provider_ref": "P-DEEPSEEK-V4-FLASH",
+  "model_id": "deepseek-chat",
+  "base_url": "https://api.deepseek.com",
+  "context_window": 128000,
+  "context_window_note": "deepseek-chat 官方 context 声明值（V3.x 后为 128K；Roo-Code 2025-06 已更新为 128k）。以官方文档与 provider runtime config() 实测为准。",
+  "roles": ["execution"],
+  "protocol": {
+    "request_schema": "urn:h02:provider-request-v1",
+    "result_schema": "urn:h02:provider-result-v1"
+  },
+  "reuses": [
+    "scripts/harness/providers/execution-runtime.js",
+    "scripts/harness/providers/judge-runtime.js"
+  ],
+  "interface_contract": ["describe()", "config()", "buildContextId()", "call({runId, taskId, prompt})"],
+  "error_mapping": {
+    "api_failure": {
+      "description": "网络/认证/quota 等调用层失败",
+      "signals": ["H02A_EXECUTION_API_KEY_MISSING", "H02A_EXECUTION_CALL_FAILED", "DeepSeek API HTTP 401", "DeepSeek API HTTP 429", "DeepSeek API HTTP 5xx", "timeout 30s"]
+    },
+    "model_refusal": {
+      "description": "模型端 safety/policy 拒绝或空完成",
+      "signals": ["empty completion", "content policy refusal", "zero choices"]
+    },
+    "format_error": {
+      "description": "输出解析失败（verdict JSON 不可解析或缺少 verdict 字段）",
+      "signals": ["verdict JSON parse failure", "missing verdict field"]
+    },
+    "semantic_failure": {
+      "description": "输出可解析但与 fixture.expected.verdict 不一致",
+      "signals": ["verdict mismatch with fixture.expected"]
+    }
+  },
+  "permission_scope": "L0-L4 按任务族准入（harness:qualify 产出；P5 只准入 DeepSeek，不授予笼统全局写入）",
+  "qualify_command": "npm run harness:qualify -- --provider deepseek --matrix tests/harness/epochs/qualification-matrix.json --out .harness-runtime/qualification/deepseek.json",
+  "env_required": ["DEEPSEEK_API_KEY"],
+  "env_optional": ["DEEPSEEK_BASE_URL", "DEEPSEEK_MODEL_ID"],
+  "source_refs": ["D-USER-SWITCH-PROVIDER", "D-USER-P5-DEEPSEEK", "urn:h01:provider.schema.json", "urn:h02:provider-request-v1"],
+  "scope": "harness-engineering"
+}

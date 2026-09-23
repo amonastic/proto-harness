@@ -1,0 +1,103 @@
+{
+  "schema_version": "requirement-baseline-v1",
+  "description": "需求基线输出 schema，用于 requirement-interview 任务的结构化输出验证",
+  "type": "object",
+  "required": ["title", "target", "roles_and_platforms", "core_flows", "acceptance_criteria", "scope"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "需求标题，简明展示完整意思，避免冗余修饰词"
+    },
+    "target": {
+      "type": "string",
+      "description": "根问题：真正解决什么，影响谁"
+    },
+    "roles_and_platforms": {
+      "type": "object",
+      "description": "角色与端",
+      "required": ["roles", "platforms", "frontend_impact", "backend_impact"],
+      "properties": {
+        "roles": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "涉及角色（门店、站点员工、操作员、用户等）"
+        },
+        "platforms": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "涉及端（门店后台、门店小程序、作业端 App、用户端 App 等）"
+        },
+        "frontend_impact": {
+          "type": "string",
+          "description": "前端影响（入口、配置页、展示状态、操作按钮等）"
+        },
+        "backend_impact": {
+          "type": "string",
+          "description": "后端影响（配置存储、接口下发、权限控制、状态计算等）"
+        }
+      }
+    },
+    "core_flows": {
+      "type": "array",
+      "description": "核心流程（操作步骤或状态流转）",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "data_and_permission": {
+      "type": "object",
+      "description": "数据权限与依赖",
+      "properties": {
+        "data_source": {
+          "type": "string",
+          "description": "数据来源（配置端、消费端、触发端）"
+        },
+        "permission_control": {
+          "type": "string",
+          "description": "权限控制（角色可见性、操作权限、端权限）"
+        }
+      }
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "description": "验收标准（可测试、可验证）",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "scope": {
+      "type": "object",
+      "required": ["in_scope", "out_of_scope"],
+      "properties": {
+        "in_scope": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "本次范围内"
+        },
+        "out_of_scope": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "明确不做"
+        }
+      }
+    },
+    "risks_and_boundaries": {
+      "type": "array",
+      "description": "异常边界、风险点",
+      "items": { "type": "string" }
+    },
+    "confirmed_facts": {
+      "type": "array",
+      "description": "用户已确认项",
+      "items": { "type": "string" }
+    },
+    "inferred_assumptions": {
+      "type": "array",
+      "description": "推断项（待用户确认）",
+      "items": { "type": "string" }
+    },
+    "key_decisions": {
+      "type": "array",
+      "description": "关键决策依据",
+      "items": { "type": "string" }
+    }
+  }
+}

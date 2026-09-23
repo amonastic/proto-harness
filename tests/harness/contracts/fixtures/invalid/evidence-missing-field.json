@@ -1,0 +1,6 @@
+{
+  "schema_version": "h01-evidence-v1",
+  "evidence_id": "A-MISSING-FIELDS",
+  "kind": "authoritative-fact",
+  "statement": "缺 scope 与 authority 字段"
+}

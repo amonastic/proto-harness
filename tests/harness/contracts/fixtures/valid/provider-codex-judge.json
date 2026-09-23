@@ -1,0 +1,10 @@
+{
+  "schema_version": "h01-provider-v1",
+  "provider_id": "J-CODEX-INDEPENDENT-TASK-SELECTED",
+  "role": "judge-selected",
+  "status": "selected-pending-smoke",
+  "request_schema": "urn:h01:judge-request",
+  "result_schema": "urn:h01:judge-result",
+  "scope": "harness-engineering",
+  "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES"]
+}

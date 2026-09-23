@@ -1,0 +1,15 @@
+{
+  "schema_version": "h01-permission-v1",
+  "scope": "harness-engineering",
+  "permission_id": "PERM-P3-TEST-EXPIRED",
+  "task_id": "TASK-P3-TEST",
+  "status": "AUTHORIZED",
+  "authorization_quote": "test fixture",
+  "object": "tests/harness/fixtures/synthetic/r00-08-resume.json",
+  "actions": ["execute-fixture"],
+  "valid_from": "2020-01-01T00:00:00Z",
+  "valid_until": "2020-12-31T23:59:59Z",
+  "forbidden_scopes": ["production"],
+  "source_refs": ["D-USER-SWITCH-PROVIDER"],
+  "issuer": "P3-test-fixture"
+}

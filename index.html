@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>proto-harness 示例项目 · 总导航</title>
+  <link href="assets/css/font-awesome-local.css?v=8171babf" rel="stylesheet">
+  <link href="assets/css/variables.css?v=12f21725" rel="stylesheet">
+  <link href="assets/css/common.css?v=a6a1e0b1" rel="stylesheet">
+  <link href="assets/css/components.css?v=70397998" rel="stylesheet">
+  <link href="assets/css/nav-themes.css?v=3b8d7bed" rel="stylesheet">
+  <style>
+    body { margin: 0; background: radial-gradient(circle at top, #334155, #0f172a 70%); min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif; }
+    .portal-wrap { max-width: 1080px; margin: 0 auto; padding: 64px 24px 80px; }
+    .portal-title { color: #f8fafc; font-size: 30px; font-weight: 800; letter-spacing: .5px; margin: 0 0 8px; }
+    .portal-sub { color: #94a3b8; font-size: 14px; margin: 0 0 36px; line-height: 1.8; }
+    .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .portal-card { display: block; text-decoration: none; background: rgba(248, 250, 252, .06); border: 1px solid rgba(148, 163, 184, .22); border-radius: 14px; padding: 20px 20px 18px; transition: transform .18s ease, border-color .18s ease, background .18s ease; }
+    .portal-card:hover { transform: translateY(-3px); border-color: rgba(56, 189, 248, .5); background: rgba(56, 189, 248, .10); }
+    .portal-card .card-tag { display: inline-block; font-size: 11px; color: #7dd3fc; border: 1px solid rgba(125, 211, 252, .4); border-radius: 999px; padding: 2px 10px; margin-bottom: 12px; }
+    .portal-card h3 { color: #f1f5f9; font-size: 17px; margin: 0 0 8px; }
+    .portal-card p { color: #94a3b8; font-size: 13px; line-height: 1.7; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="portal-wrap">
+    <h1 class="portal-title">proto-harness 示例项目</h1>
+    <p class="portal-sub">
+      这是一个虚构的三端设计稿仓库示例：管理后台（admin-portal）、移动端 App（field-app）、小程序（mini-program）。<br>
+      全部页面为本仓自带的演示内容，仅用于演示目录结构、抽屉组件与机检流程。
+    </p>
+    <div class="portal-grid">
+      <a class="portal-card" href="迭代索引/202606下.html">
+        <span class="card-tag">迭代索引</span>
+        <h3>202606下 迭代总览</h3>
+        <p>按需求分组聚合本期页面入口，迭代页只做索引，不承载业务开发。</p>
+      </a>
+      <a class="portal-card" href="admin-portal/asset-admin/index.html?page=asset-list">
+        <span class="card-tag">管理后台</span>
+        <h3>资产管理模块</h3>
+        <p>模块承载页（左侧菜单 + iframe 承载 + pageNames 路由）与资产列表业务页。</p>
+      </a>
+      <a class="portal-card" href="field-app/main/pages/订单列表.html">
+        <span class="card-tag">移动端 App</span>
+        <h3>订单列表</h3>
+        <p>手机模型 + 右侧设计稿控制区，需求文档抽屉默认自动展开。</p>
+      </a>
+      <a class="portal-card" href="mini-program/main/pages/下单.html">
+        <span class="card-tag">小程序</span>
+        <h3>下单页</h3>
+        <p>轻量表单页示例，展示字段级需求说明与底部操作栏的静态原型写法。</p>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

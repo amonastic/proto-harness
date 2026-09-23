@@ -1,0 +1,13 @@
+{
+  "schema_version": "h01-checkpoint-v1",
+  "checkpoint_id": "CHECKPOINT-H01F-STATE-MISMATCH",
+  "trace_id": "TRACE-H01-COMPLETE",
+  "last_event_sequence": 2,
+  "state": "FAKE-STATE",
+  "snapshot_ref": "X-SNAPSHOT-H01F-STATE",
+  "input_digest": "h01f-state",
+  "resumable": true,
+  "status": "active",
+  "scope": "harness-engineering",
+  "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES"]
+}

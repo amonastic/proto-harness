@@ -1,0 +1,10 @@
+{
+  "schema_version": "h01-task-v1",
+  "task_id": "TASK-H01-01",
+  "title": "H01 核心 Schema、Owner Registry 与目录契约",
+  "task_type": "engineering-contract",
+  "scope": "harness-engineering",
+  "status": "completed",
+  "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES"],
+  "ruleset_id": "RULESET-H01-BASE"
+}

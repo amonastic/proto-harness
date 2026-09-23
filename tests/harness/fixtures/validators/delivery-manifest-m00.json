@@ -1,0 +1,96 @@
+{
+  "suite_ref": "FS-SYNTHETIC-H03D-V1",
+  "validator": "delivery-manifest",
+  "cases": [
+    {
+      "id": "M00-01",
+      "manifest": {
+        "htmlFiles": [{ "path": "pages/save.html", "status": "pushed" }],
+        "docsDataFiles": [{ "path": "js/docs/save.js", "status": "pushed" }],
+        "entryFiles": [{ "path": "index.html", "status": "pushed" }],
+        "sharedDeps": [{ "path": "js/docs.js", "status": "pushed" }],
+        "cacheBustVerified": true,
+        "onlineUploadStatus": "done"
+      },
+      "requiredFiles": ["pages/save.html", "js/docs/save.js", "index.html", "js/docs.js"],
+      "expected": { "verdict": "pass", "checks": { "allRequiredPresent": true, "statusesValid": true, "cacheBustValid": true, "onlineStatusDeclared": true } }
+    },
+    {
+      "id": "M00-02",
+      "manifest": {
+        "htmlFiles": [{ "path": "pages/save.html", "status": "pushed" }],
+        "docsDataFiles": [],
+        "entryFiles": [],
+        "sharedDeps": [],
+        "cacheBustVerified": true,
+        "onlineUploadStatus": "pending"
+      },
+      "requiredFiles": ["pages/save.html", "js/docs/save.js"],
+      "expected": { "verdict": "fail", "checks": { "allRequiredPresent": false }, "violationsIncludes": ["清单遗漏文件：js/docs/save.js"] }
+    },
+    {
+      "id": "M00-03",
+      "manifest": {
+        "htmlFiles": [{ "path": "pages/save.html", "status": "uploaded" }],
+        "docsDataFiles": [],
+        "entryFiles": [],
+        "sharedDeps": [],
+        "cacheBustVerified": true,
+        "onlineUploadStatus": "pending"
+      },
+      "requiredFiles": ["pages/save.html"],
+      "expected": { "verdict": "fail", "checks": { "statusesValid": false }, "violationsIncludes": ["无效状态值：uploaded"] }
+    },
+    {
+      "id": "M00-04",
+      "manifest": {
+        "htmlFiles": [{ "path": "pages/save.html", "status": "local" }],
+        "docsDataFiles": [],
+        "entryFiles": [],
+        "sharedDeps": [],
+        "cacheBustVerified": false,
+        "onlineUploadStatus": "pending"
+      },
+      "requiredFiles": ["pages/save.html"],
+      "expected": { "verdict": "fail", "checks": { "cacheBustValid": false }, "violationsIncludes": ["cache bust 未经 hash 收敛验证"] }
+    },
+    {
+      "id": "M00-05",
+      "manifest": {
+        "htmlFiles": [],
+        "docsDataFiles": [],
+        "entryFiles": [],
+        "sharedDeps": [],
+        "cacheBustVerified": true
+      },
+      "requiredFiles": [],
+      "expected": { "verdict": "fail", "checks": { "onlineStatusDeclared": false }, "violationsIncludes": ["线上上传状态未声明"] }
+    },
+    {
+      "id": "M00-06",
+      "manifest": {
+        "htmlFiles": [],
+        "docsDataFiles": [],
+        "entryFiles": [],
+        "sharedDeps": [],
+        "cacheBustVerified": true,
+        "onlineUploadStatus": "not-required"
+      },
+      "requiredFiles": [],
+      "expected": { "verdict": "pass", "checks": { "onlineStatusDeclared": true } }
+    },
+    {
+      "id": "M00-07",
+      "manifest": {
+        "htmlFiles": [{ "path": "pages/save.html", "status": "pushed" }],
+        "docsDataFiles": [{ "path": "js/docs/save.js", "status": "local" }],
+        "entryFiles": [{ "path": "index.html", "status": "pushed" }],
+        "sharedDeps": [],
+        "cacheBustVerified": true,
+        "onlineUploadStatus": "pending"
+      },
+      "requiredFiles": ["pages/save.html", "js/docs/save.js", "index.html"],
+      "expected": { "verdict": "pass", "checks": { "statusesValid": true } }
+    }
+  ]
+}

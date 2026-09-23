@@ -1,0 +1,26 @@
+{
+  "suite_ref": "FS-SYNTHETIC-H03B-V1",
+  "graph": {
+    "sourceDir": {
+      "path": "admin-portal/maintain-admin/index.html",
+      "menuItems": [
+        { "pageId": "page-a", "label": "页面甲", "monthTag": "202608上" },
+        { "pageId": "page-b", "label": "页面乙", "monthTag": "202608下" }
+      ],
+      "iframeCarriers": [
+        { "pageId": "page-a", "src": "pages/page-a.html", "monthComment": "202608上" },
+        { "pageId": "page-b", "src": "pages/page-b.html", "monthComment": "202608下" }
+      ],
+      "pageNames": { "page-a": "页面甲", "page-b": "页面乙" },
+      "iterationRefs": ["page-c"]
+    },
+    "docsData": {
+      "entries": [
+        { "docId": "doc-a", "pageId": "page-a", "scriptOrder": 0 },
+        { "docId": "doc-b", "pageId": "page-b", "scriptOrder": 1 }
+      ],
+      "scriptLoadOrder": ["assets/js/doc-panel.js", "admin-portal/maintain-admin/js/docs.js", "admin-portal/maintain-admin/js/docs/doc-a.js"]
+    },
+    "pageBodyText": "这是页面甲的合成正文，不含边界词。"
+  }
+}

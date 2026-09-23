@@ -1,0 +1,212 @@
+{
+  "version": "0.2.1",
+  "updatedAt": "2026-05-11",
+  "scope": {
+    "targets": [
+      "admin-portal/**/*.html",
+      "field-app/**/*.html",
+      "mini-program/**/*.html"
+    ]
+  },
+  "docDrawer": {
+    "entry": {
+      "requiredClass": "dg-doc-btn",
+      "preferredLabel": "需求文档",
+      "allowedImplementations": [
+        "assets/js/components/doc-button.js",
+        "assets/js/components/doc-panel.js",
+        "js/doc-panel.js"
+      ]
+    },
+    "cssSpec": {
+      "mustSupportPageLevelSpec": true,
+      "pageLevelHook": "getDocCssContent(docId)",
+      "requiredSections": [
+        "颜色规范",
+        "字体规范",
+        "圆角规范",
+        "间距规范"
+      ],
+      "requiredVisualPatterns": [
+        "w-8 h-8 rounded",
+        "flex items-center gap-3",
+        "font-mono",
+        "justify-between",
+        "px-2 py-1 rounded"
+      ],
+      "componentRequirements": [
+        "CSS规范 Tab 必须优先读取页面级 CSS 规范，读不到时才允许回退通用默认内容",
+        "需求文档 Tab 与 CSS规范 Tab 必须共享正文排版基线",
+        "抽屉组件必须具备最小布局能力，确保颜色色块、左右信息行和规范标签可正常显示"
+      ],
+      "forbiddenPatterns": [
+        "只有通用默认 CSS 规范，无页面级扩展能力",
+        "页面已声明专属 CSS 规范，但抽屉组件缺少对应渲染能力",
+        "CSS规范页只剩纯文本或颜色值，无法显示色块和结构行"
+      ]
+    },
+    "contentStyle": {
+      "mustFollow": [
+        "先页面定位，再角色入口，再核心流程",
+        "状态说明要显式列出",
+        "异常边界与待确认项不能缺失",
+        "新版本逻辑默认融入原文档，不另开 tab"
+      ],
+      "forbiddenPatterns": [
+        "只有碎片化条目，没有章节标题",
+        "只写视觉描述，不写业务规则",
+        "只写流程，不写状态与异常",
+        "不同端对同一迭代标记使用不同高亮样式"
+      ]
+    },
+    "versionTag": {
+      "requiredPrefix": "",
+      "preferredFormat": "[202604上]",
+      "unifiedStyle": {
+        "background": "#EBF5FF",
+        "borderColor": "#1677FF",
+        "textColor": "#1677FF",
+        "radius": "999px"
+      },
+      "allowedFormats": [
+        "[202604上]",
+        "[202604下]",
+        "[20260401]"
+      ]
+    },
+    "layout": {
+      "baselineSource": "app",
+      "width": {
+        "web": "780px",
+        "app": "780px",
+        "miniapp": "780px"
+      },
+      "typography": {
+        "bodyFontSize": "15px",
+        "tableFontSize": "13px",
+        "sectionTitleSize": "17px",
+        "lineHeight": "1.85"
+      }
+    }
+  },
+  "styleReferencePolicy": {
+    "weighting": {
+      "latestIterationIndex": 7,
+      "historicalExcellentUi": 3,
+      "rule": "做 UI 风格统一时，最新迭代索引决定结构、入口顺序、页面层级和状态组织；历史优秀 UI 只用于视觉质感、密度和局部样式收口。"
+    },
+    "platformReferences": {
+      "web": [
+        "admin-portal/asset-admin/index.html",
+        "admin-portal/asset-admin/js/docs.js#card-list"
+      ],
+      "app": [
+        "field-app/station-ops/pages/投递统计.html",
+        "迭代索引/202605下.html#demo-group"
+      ],
+      "miniapp": [
+        "mini-program/main/小程序首页.html",
+        "mini-program/main/alipay/小程序首页.html",
+        "mini-program/shipping/pages/下单.html"
+      ]
+    },
+    "forbiddenPatterns": [
+      "只看旧入口跳转页就认定当前基准",
+      "把单一小程序样本扩展成全部小程序统一模板",
+      "机械平均不同页面的 CSS 数值",
+      "用历史优秀 UI 推翻最新迭代的信息结构"
+    ]
+  },
+  "icons": {
+    "allowedSources": [
+      "font-awesome.min.css",
+      "font-awesome-local.css",
+      "local-svg"
+    ],
+    "groupingRules": [
+      "同一导航组内图标风格一致",
+      "同一按钮组内不混用描边和面性图标",
+      "状态标签不使用 emoji 作为正式图标",
+      "操作按钮默认纯文字或纯图标二选一，不叠加 icon+文字"
+    ]
+  },
+  "typography": {
+    "weightRules": [
+      "页面正文、标签、按钮、信息值默认不加粗（400），层级靠颜色区分",
+      "次级强调允许 500（如取件码数字、关键数值），与 harness/30 字重口径一致",
+      "加粗仅保留标题类元素（导航标题、卡片标题、广告标题）"
+    ]
+  },
+  "css": {
+    "mustReferenceAny": [
+      "assets/css/variables.css",
+      "../assets/css/variables.css",
+      "../../assets/css/variables.css",
+      "../../../assets/css/variables.css"
+    ],
+    "preferSharedFiles": [
+      "assets/css/common.css",
+      "assets/css/components.css"
+    ],
+    "forbidden": [
+      "重复定义与公共 token 语义相同的颜色变量",
+      "业务页私有样式覆盖公共按钮主色而无说明",
+      "同类状态标签在不同端使用不同语义色",
+      "主操作按钮添加投影阴影"
+    ]
+  },
+  "statusLabels": {
+    "preferredSet": [
+      "待处理",
+      "处理中",
+      "已完成",
+      "已关闭",
+      "异常"
+    ],
+    "rules": [
+      "同一模块的状态名称保持前后一致",
+      "同一状态在不同端的颜色语义保持一致",
+      "列表页和详情页状态标签文案必须一致"
+    ]
+  },
+  "businessModalOverlay": {
+    "rule": "业务对话框不得使用浏览器视口级半透明阻断遮罩，避免弹窗打开后阻断需求文档入口和抽屉操作。",
+    "forbiddenCombination": {
+      "selectorHints": [
+        "modal-mask",
+        "dialog-mask",
+        "overlay"
+      ],
+      "mustNotCombine": [
+        "position: fixed",
+        "inset: 0",
+        "nonTransparentBackground",
+        "missingPointerEventsNone"
+      ]
+    },
+    "requiredPattern": [
+      ".modal-mask { background: transparent; pointer-events: none; }",
+      ".modal { pointer-events: auto; }"
+    ],
+    "allowedException": "仅当用户明确要求遮罩时允许半透明遮罩；最终回复必须说明会影响需求文档入口或抽屉操作。"
+  },
+  "devArtifacts": {
+    "forbiddenTexts": [
+      "模拟操作",
+      "仅设计稿可见",
+      "开发备注",
+      "测试按钮",
+      "场景切换器"
+    ],
+    "allowedPlacement": [
+      "手机模型右侧独立控制区",
+      "Web 页面右侧独立控制轨"
+    ],
+    "forbiddenIn": [
+      "真实页面正文",
+      "业务弹窗",
+      "业务抽屉",
+      "需求文档内容"
+    ]
+  }
+}

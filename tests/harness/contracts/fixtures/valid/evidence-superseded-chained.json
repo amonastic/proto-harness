@@ -1,0 +1,11 @@
+{
+  "schema_version": "h01-evidence-v1",
+  "evidence_id": "D-SUPERSEDED-CHAINED",
+  "kind": "decision",
+  "statement": "合法 supersedes 链：本证据被 D-CHAIN-NEXT 取代",
+  "source_refs": ["R-PROJECT-AGENTS"],
+  "scope": "harness-engineering",
+  "status": "superseded",
+  "authority": "user-confirmed",
+  "supersedes": ["D-CHAIN-NEXT"]
+}

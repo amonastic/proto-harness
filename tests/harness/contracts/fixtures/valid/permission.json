@@ -1,0 +1,23 @@
+{
+  "schema_version": "h01-permission-v1",
+  "permission_id": "PERM-H01-VALIDATE",
+  "task_id": "TASK-H01-01",
+  "status": "AUTHORIZED",
+  "authorization_quote": "按 H01 任务包实施核心 Schema、Owner Registry 与目录契约",
+  "object": "harness/engineering/**",
+  "actions": [
+    "create",
+    "modify"
+  ],
+  "valid_from": "2026-08-04T00:00:00Z",
+  "valid_until": "2026-08-31T00:00:00Z",
+  "forbidden_scopes": [
+    "business-pages",
+    "historical-snapshots"
+  ],
+  "source_refs": [
+    "A-HARNESS-ENGINEERING-PRINCIPLES"
+  ],
+  "issuer": "user",
+  "scope": "harness-engineering"
+}

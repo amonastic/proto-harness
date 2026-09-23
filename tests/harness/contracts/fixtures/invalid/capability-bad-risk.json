@@ -1,0 +1,10 @@
+{
+  "schema_version": "h01-capability-v1",
+  "capability_id": "CAP-H01-BAD-RISK",
+  "owner_id": "OWNER-H01-CONTRACTS",
+  "action": "validate",
+  "target": { "kind": "contract", "scope": "harness-engineering" },
+  "risk": "medium",
+  "status": "available",
+  "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES"]
+}

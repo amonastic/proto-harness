@@ -1,0 +1,10 @@
+{
+  "schema_version": "h01-evidence-v1",
+  "evidence_id": "A-HARNESS-ENGINEERING-PRINCIPLES",
+  "kind": "authoritative-fact",
+  "statement": "H01 建立核心结构化工程契约，供 H02/H03/M0 消费同一套字段、ID、owner 与外部引用。",
+  "source_refs": ["R-PROJECT-AGENTS"],
+  "scope": "harness-engineering",
+  "status": "active",
+  "authority": "authoritative-fact"
+}

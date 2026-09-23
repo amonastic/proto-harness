@@ -1,0 +1,20 @@
+/* 语义化需求抽屉正文；仅在显式引用的业务页面生效 */
+.doc-panel-body .doc-section { margin: 0 0 20px; }
+.doc-panel-body .doc-section-title { margin: 0 0 10px; padding-bottom: 8px; border-bottom: 1px solid #e5e7eb; color: #1f2937; font-size: 15px; font-weight: 700; }
+.doc-panel-body .doc-rule-card { margin: 0 0 10px; padding: 12px; border: 1px solid #e5e7eb; border-radius: 10px; background: #f9fafb; }
+.doc-panel-body .doc-rule-card:last-child { margin-bottom: 0; }
+.doc-panel-body .doc-rule-title { margin-bottom: 7px; color: #1f2937; font-size: 13px; font-weight: 700; }
+.doc-panel-body .doc-rule-line { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 8px; padding: 4px 0; font-size: 13px; line-height: 1.65; }
+.doc-panel-body .doc-rule-line span { color: #6b7280; white-space: nowrap; }
+.doc-panel-body .doc-rule-line p { margin: 0; color: #374151; }
+.doc-panel-body .doc-plain-table { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: 13px; }
+.doc-panel-body .doc-plain-table th,
+.doc-panel-body .doc-plain-table td { padding: 9px 11px; border: 1px solid #e5e7eb; text-align: left; vertical-align: top; }
+.doc-panel-body .doc-plain-table th { background: #f9fafb; color: #303133; font-weight: 600; }
+.doc-panel-body .doc-plain-table th:first-child,
+.doc-panel-body .doc-plain-table td:first-child { width: 18%; white-space: nowrap; }
+.doc-panel-body .doc-plain-table th:nth-child(2),
+.doc-panel-body .doc-plain-table td:nth-child(2) { width: 30%; }
+.doc-panel-body .doc-plain-table th:last-child,
+.doc-panel-body .doc-plain-table td:last-child { width: 52%; }
+.doc-panel-body .doc-danger { padding: 12px; border: 1px solid #fecaca; border-radius: 10px; background: #fef2f2; color: #991b1b; font-size: 13px; line-height: 1.65; }

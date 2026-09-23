@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:h01:checkpoint.schema.json",
+  "title": "H01 Checkpoint",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "checkpoint_id", "trace_id", "last_event_sequence", "state", "snapshot_ref", "input_digest", "resumable", "status", "scope", "source_refs"],
+  "properties": {
+    "schema_version": { "const": "h01-checkpoint-v1" },
+    "scope": { "type": "string", "minLength": 1 },
+    "source_refs": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "checkpoint_id": { "type": "string", "minLength": 1, "pattern": "^CHECKPOINT-[A-Z0-9][A-Z0-9-]*$" },
+    "trace_id": { "type": "string", "minLength": 1, "pattern": "^TRACE-[A-Z0-9][A-Z0-9-]*$" },
+    "last_event_sequence": { "type": "integer" },
+    "state": { "type": "string", "minLength": 1 },
+    "snapshot_ref": { "type": "string", "minLength": 1 },
+    "input_digest": { "type": "string", "minLength": 1 },
+    "resumable": { "type": "boolean" },
+    "status": { "type": "string", "enum": ["active", "superseded"] }
+  }
+}

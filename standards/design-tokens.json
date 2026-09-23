@@ -1,0 +1,189 @@
+{
+  "version": "0.2.0",
+  "updatedAt": "2026-05-14",
+  "foundations": {
+    "colors": {
+      "brand": {
+        "primary": "#1677FF",
+        "success": "#00B578",
+        "warning": "#FF6B00",
+        "danger": "#FF4D4F"
+      },
+      "background": {
+        "page": "#F5F7FA",
+        "card": "#FFFFFF",
+        "mask": "rgba(15, 23, 42, 0.45)"
+      },
+      "text": {
+        "primary": "#1A1A1A",
+        "secondary": "#666666",
+        "tertiary": "#999999"
+      },
+      "border": {
+        "default": "#E8E8E8",
+        "strong": "#D9D9D9"
+      }
+    },
+    "radius": {
+      "card": "8px",
+      "control": "6px",
+      "pill": "999px"
+    },
+    "spacing": {
+      "page": "16px",
+      "section": "16px",
+      "block": "12px",
+      "inline": "8px"
+    },
+    "typography": {
+      "title": {
+        "size": "18px",
+        "weight": 700
+      },
+      "subtitle": {
+        "size": "16px",
+        "weight": 600
+      },
+      "body": {
+        "size": "14px",
+        "weight": 400
+      },
+      "caption": {
+        "size": "12px",
+        "weight": 400
+      }
+    }
+  },
+  "statusSemantics": {
+    "pending": {
+      "label": "待处理",
+      "color": "#FF6B00"
+    },
+    "processing": {
+      "label": "处理中",
+      "color": "#1677FF"
+    },
+    "success": {
+      "label": "已完成",
+      "color": "#00B578"
+    },
+    "closed": {
+      "label": "已关闭",
+      "color": "#999999"
+    },
+    "error": {
+      "label": "异常",
+      "color": "#FF4D4F"
+    }
+  },
+  "iconRules": {
+    "allowedSets": [
+      "font-awesome",
+      "local-svg"
+    ],
+    "defaultSizes": {
+      "nav": "16px",
+      "button": "14px",
+      "status": "12px",
+      "card": "20px"
+    },
+    "forbiddenPatterns": [
+      "emoji-as-icon",
+      "mixed-outline-and-filled-in-same-group"
+    ]
+  },
+  "componentBaselines": {
+    "button": {
+      "height": {
+        "web": "32px",
+        "mobile": "36px"
+      },
+      "radius": "6px"
+    },
+    "docDrawer": {
+      "width": {
+        "web": "780px",
+        "mobile": "780px"
+      }
+    },
+    "card": {
+      "padding": "16px",
+      "gap": "12px"
+    }
+  },
+  "maturePageTokens": {
+    "appScanInventory": {
+      "source": "field-app/main/pages/扫码盘点.html",
+      "docSource": "field-app/main/js/docs.js#inventory-warning",
+      "scope": "app mobile prototype shell, right-side control panel, scan work page density",
+      "usage": "作为 App 移动端业务作业页的视觉抽象基线；只复用页面与控制区分层、密度、圆角、面板层级和抽屉入口组织，不复用扫码盘点业务字段。",
+      "shell": {
+        "desktopBackground": "radial-gradient(circle at top, #334155, #111827 65%)",
+        "pageWrapperGap": "18px",
+        "phone": {
+          "width": "393px",
+          "height": "852px",
+          "radius": "48px",
+          "background": "#EFF3FB",
+          "shadow": "0 0 0 12px #242424, 0 32px 80px rgba(0, 0, 0, 0.42)"
+        }
+      },
+      "mobilePage": {
+        "headerHeight": "144px",
+        "headerPadding": "74px 18px 20px",
+        "headerGradient": "linear-gradient(155deg, #2F63FF 0%, #2350E8 52%, #1233AA 100%)",
+        "contentTop": "116px",
+        "contentRadius": "28px 28px 0 0",
+        "contentPadding": "10px 12px 92px",
+        "contentGap": "8px",
+        "card": {
+          "background": "#FFFFFF",
+          "radius": "18px",
+          "padding": "12px",
+          "shadow": "0 10px 20px rgba(35, 50, 74, 0.05)"
+        },
+        "bottomAction": {
+          "height": "44px",
+          "radius": "22px",
+          "gap": "10px"
+        }
+      },
+      "rightControlPanel": {
+        "width": "300px",
+        "gap": "12px",
+        "card": {
+          "background": "rgba(15, 23, 42, 0.88)",
+          "border": "1px solid rgba(148, 163, 184, 0.14)",
+          "radius": "22px",
+          "padding": "16px",
+          "textColor": "#D7E0F2",
+          "shadow": "0 24px 48px rgba(0, 0, 0, 0.26)"
+        },
+        "docButton": {
+          "height": "auto",
+          "padding": "10px 12px",
+          "radius": "14px",
+          "background": "linear-gradient(135deg, #4D8CFF, #2A62FF)",
+          "fontSize": "13px",
+          "fontWeight": 600
+        },
+        "controlButton": {
+          "height": "48px",
+          "radius": "16px",
+          "fontSize": "13px",
+          "fontWeight": 600
+        },
+        "metricCard": {
+          "padding": "10px 12px",
+          "radius": "14px",
+          "background": "rgba(255, 255, 255, 0.05)"
+        }
+      },
+      "forbiddenExtraction": [
+        "不得把扫码盘点业务字段、货架上限、统计数字、扫描流程固化成全局 token",
+        "不得要求所有 App 页面都使用扫码盘点蓝色头图或扫描区结构",
+        "不得用该基线覆盖 Web 或小程序平台基准"
+      ]
+    }
+  }
+}

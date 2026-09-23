@@ -1,0 +1,11 @@
+{
+  "schema_version": "h01-evidence-v1",
+  "evidence_id": "A-UNKNOWN-KEY",
+  "kind": "authoritative-fact",
+  "statement": "含未知字段",
+  "source_refs": ["R-PROJECT-AGENTS"],
+  "scope": "harness-engineering",
+  "status": "active",
+  "authority": "authoritative-fact",
+  "unexpected_key": true
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": "h01-task-v1",
+  "task_id": "TASK-H01-MISSING",
+  "title": "缺 status 与 ruleset_id 字段",
+  "task_type": "engineering-contract",
+  "scope": "harness-engineering",
+  "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES"]
+}

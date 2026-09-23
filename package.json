@@ -1,0 +1,77 @@
+{
+  "name": "proto-harness",
+  "version": "0.1.0",
+  "description": "Prototype governance harness: delivery gates, audits and rule harness for static design-prototype teams working with AI agents",
+  "license": "MIT",
+  "author": "amonastic",
+  "homepage": "https://github.com/amonastic/proto-harness#readme",
+  "bugs": {
+    "url": "https://github.com/amonastic/proto-harness/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amonastic/proto-harness.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "design-governance",
+    "prototype",
+    "harness",
+    "ai-collaboration"
+  ],
+  "scripts": {
+        "lint:ui": "node scripts/lint-ui.js",
+        "audit:ui": "node scripts/audit-ui.js",
+        "audit:docs": "node scripts/audit-docs.js",
+        "audit:snapshots": "node scripts/audit-iteration-snapshots.js",
+        "audit:snapshots:all": "node scripts/audit-iteration-snapshots.js --all",
+        "audit:iteration-snapshots": "npm run audit:snapshots",
+        "audit:version-tags": "node scripts/audit-version-tags.js",
+        "audit:rules": "node scripts/audit-rules.js",
+        "harness:h00a:validate": "node scripts/harness/validate-h00a.js",
+        "harness:h00a:drift": "node scripts/harness/validate-h00a.js",
+        "harness:h00a:capture-debt": "node scripts/harness/capture-validation-debt.js",
+        "harness:h00a:compare": "node scripts/harness/compare-validation-debt.js",
+        "harness:h00a:test": "node --test tests/harness/h00a/validate-h00a.test.js",
+        "harness:baseline": "node scripts/harness/capture-baseline.js",
+        "harness:h00b:test": "node --test tests/harness/h00b/*.test.js",
+        "harness:contracts:validate": "node scripts/harness/validate-contract.js",
+        "check:governance": "npm run audit:snapshots && npm run audit:version-tags",
+        "scaffold:page": "node scripts/scaffold-page.js",
+        "register:missing": "node scripts/register-missing-pages.js",
+        "register:missing:write": "node scripts/register-missing-pages.js --write",
+        "annotate:type": "node scripts/annotate-template-type.js",
+        "annotate:type:write": "node scripts/annotate-template-type.js --write",
+        "cache:bust": "node scripts/cache-bust-html.js",
+        "cache:bust:write": "node scripts/cache-bust-html.js --write",
+        "serve:local": "node scripts/serve-local.js",
+        "extract:css": "node scripts/extract-page-css.js",
+        "export:requirement": "node scripts/export-requirement-group.js",
+        "convert:docx": "node scripts/convert-md-to-docx.js",
+        "audit:export-stale": "node scripts/audit-export-stale.js",
+        "check:ui:readonly": "npm run register:missing && npm run lint:ui && npm run audit:ui",
+        "check:ui": "npm run register:missing:write && npm run lint:ui && npm run audit:ui",
+        "check:all": "npm run audit:rules && npm run check:ui:readonly && npm run audit:docs && npm run audit:export-stale && npm run check:governance",
+        "harness:run": "node scripts/harness/run-task.js",
+        "harness:run:h02": "node scripts/harness/run.js",
+        "harness:trace:validate": "node --test tests/harness/runner/*.test.js",
+        "harness:validators:test": "node --test tests/harness/validators/*.test.js",
+        "harness:provider:doctor": "node --test tests/harness/providers/smoke.test.js --test-name-pattern=doctor",
+        "harness:provider:smoke": "node --test tests/harness/providers/smoke.test.js --test-name-pattern=smoke",
+        "harness:corpus:build": "node scripts/harness/corpus/build-corpus.js",
+        "harness:oracle:validate": "node scripts/harness/corpus/oracle.js",
+        "harness:pack": "node scripts/harness/corpus/pack-compiler.js",
+        "harness:pack:run": "node scripts/harness/corpus/pack-runner.js",
+        "harness:capability:doctor": "node scripts/harness/capability-doctor.js",
+        "harness:recover": "node scripts/harness/recover.js",
+        "harness:qualify": "node scripts/harness/qualify.js",
+        "harness:cutover": "node scripts/harness/cutover.js",
+        "harness:shadow": "node scripts/harness/shadow.js",
+        "audit:rules-usage": "node scripts/rule-frequency-audit.js"
+    },
+    "optionalDependencies": {
+        "docx": "^9.6.0"
+    }
+}

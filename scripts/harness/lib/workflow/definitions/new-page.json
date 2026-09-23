@@ -1,0 +1,11 @@
+{
+  "schema_version": "workflow-v1",
+  "workflow_id": "new-page",
+  "description": "真实任务链路：需求访谈（requirement-interview）→ UI 规格（ui-spec-generation）→ 页面生成（page-generation）→ 索引更新（index-registration）",
+  "steps": [
+    { "step_id": "requirement-interview", "task": "requirement-interview", "output": "req" },
+    { "step_id": "ui-spec", "task": "ui-spec-generation", "input_from": "req", "output": "ui" },
+    { "step_id": "page-generation", "task": "page-generation", "input_from": "ui", "output": "page" },
+    { "step_id": "index-update", "task": "index-registration", "input_from": "page", "output": "index" }
+  ]
+}

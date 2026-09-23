@@ -1,0 +1,8 @@
+{
+  "schema_version": "h01-external-reference-v1",
+  "reference_id": "NOT-PREFIXED",
+  "reference_kind": "incident",
+  "locator": "",
+  "status": "active",
+  "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES"]
+}

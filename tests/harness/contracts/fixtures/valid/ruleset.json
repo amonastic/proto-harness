@@ -1,0 +1,13 @@
+{
+  "schema_version": "h01-ruleset-v1",
+  "ruleset_id": "RULESET-H01-BASE",
+  "source_refs": [
+    "A-HARNESS-ENGINEERING-PRINCIPLES"
+  ],
+  "owner_registry_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "compiler_version": "h01-compiler-v1",
+  "route_version": "h01-route-v1",
+  "status": "active",
+  "supersedes": [],
+  "scope": "harness-engineering"
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:h01:evidence.schema.json",
+  "title": "H01 Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "evidence_id", "kind", "statement", "source_refs", "scope", "status", "authority"],
+  "properties": {
+    "schema_version": { "const": "h01-evidence-v1" },
+    "evidence_id": { "type": "string", "minLength": 1, "pattern": "^(A|D|O|C|R|Q|V|X)-[A-Z0-9][A-Z0-9-]*$" },
+    "kind": {
+      "type": "string",
+      "enum": ["authoritative-fact", "decision", "observation", "claimant-statement", "active-rule", "question", "verification-result", "external-reference"]
+    },
+    "statement": { "type": "string", "minLength": 1 },
+    "source_refs": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "scope": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "enum": ["active", "superseded"] },
+    "authority": {
+      "type": "string",
+      "enum": ["observation", "claimant", "user-confirmed", "authoritative-fact", "active-rule"]
+    },
+    "supersedes": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
+  }
+}

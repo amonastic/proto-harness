@@ -1,0 +1,9 @@
+{
+  "schema_version": "h01-result-v1",
+  "result_id": "RESULT-H01-FAILED-NO-CODE",
+  "trace_id": "TRACE-H01-COMPLETE",
+  "status": "FAILED",
+  "summary": "FAILED 但缺 failure_code 与 blocking_reason",
+  "completion_evidence_refs": [],
+  "created_by": "executor"
+}

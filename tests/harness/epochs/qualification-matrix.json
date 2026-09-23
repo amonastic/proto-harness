@@ -1,0 +1,15 @@
+{
+  "schema_version": "h09-qualification-matrix-v1",
+  "matrix_id": "QMATRIX-H09-BASE-V1",
+  "provider": "deepseek",
+  "baseline": "initial",
+  "notes": "2026-08-19 用户裁决方案 A：初始全部预期档位 L2（受限写入需人工审阅）；实际档位由 harness:qualify 按 P0/P1/P2 运行结果判定。任务族 = corpus.json scenario_type（P5 §3）。2026-08-21 P8.5 追加 permission-control / feature-addition / cross-platform 三族（终端使用权限类真实任务族，corpus 各 5 条，P0=2/P1=2/P2=1）。",
+  "task_families": [
+    { "family": "entry-defect", "expected_tier": "L2" },
+    { "family": "malformed-index", "expected_tier": "L2" },
+    { "family": "snapshot-pollution", "expected_tier": "L2" },
+    { "family": "permission-control", "expected_tier": "L2" },
+    { "family": "feature-addition", "expected_tier": "L2" },
+    { "family": "cross-platform", "expected_tier": "L2" }
+  ]
+}

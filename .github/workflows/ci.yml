@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # 核心链路零第三方依赖，仓库也没有 lockfile，因此不执行 install 步骤。
+
+      - name: UI governance checks
+        run: npm run check:ui:readonly
+
+      - name: Harness regression tests
+        # --test-concurrency=1：存量竞态护栏，不是长期设计。
+        # tests/harness/shadow/{runner,parallel}.test.js 共享
+        # .harness-runtime/shadow/<provider>/<family> 可变状态并在 finally 中互删，
+        # 并发跑会随机挂掉 H10A-03 / H10A-07 / H10C-01。
+        # 根治方案是给每个测试文件独立的 runtime 命名空间，见 OPEN_SOURCE_PLAN.md。
+        run: node --test --test-concurrency=1
+
+      # 治理脚本与用例只允许写 .harness-runtime/ 等已忽略路径；
+      # 出现未跟踪新文件或既有文件被改动，说明有用例依赖了外部工作区状态。
+      - name: Assert the run left the workspace unchanged
+        run: |
+          git diff --quiet
+          test -z "$(git ls-files --others --exclude-standard)"

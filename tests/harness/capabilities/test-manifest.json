@@ -1,0 +1,59 @@
+{
+  "schema_version": "h06-capability-manifest-v1",
+  "scope": "harness-engineering",
+  "entries": [
+    {
+      "schema_version": "h01-capability-v1",
+      "scope": "harness-engineering",
+      "capability_id": "CAP-RUNNER-EXECUTE-01",
+      "owner_id": "H02",
+      "action": "execute-fixture",
+      "target": { "kind": "runner", "scope": "harness-engineering" },
+      "risk": "read-only",
+      "status": "ready",
+      "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES"]
+    },
+    {
+      "schema_version": "h01-capability-v1",
+      "scope": "harness-engineering",
+      "capability_id": "CAP-CORPUS-BUILD-01",
+      "owner_id": "H04",
+      "action": "build-corpus",
+      "target": { "kind": "corpus", "scope": "harness-engineering" },
+      "risk": "reversible-write",
+      "status": "ready",
+      "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES"]
+    },
+    {
+      "schema_version": "h01-capability-v1",
+      "scope": "harness-engineering",
+      "capability_id": "CAP-PROVIDER-CALL-01",
+      "owner_id": "P1",
+      "action": "call-provider",
+      "target": { "kind": "provider", "scope": "harness-engineering" },
+      "risk": "external-call",
+      "status": "ready",
+      "source_refs": ["D-USER-SWITCH-PROVIDER"]
+    },
+    {
+      "schema_version": "h01-capability-v1",
+      "scope": "harness-engineering",
+      "capability_id": "CAP-SNAPSHOT-WRITE-01",
+      "owner_id": "H03C",
+      "action": "write-snapshot",
+      "target": { "kind": "snapshot", "scope": "harness-engineering" },
+      "risk": "destructive-write",
+      "status": "planned",
+      "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES"]
+    },
+    {
+      "schema_version": "h01-capability-v1",
+      "scope": "harness-engineering",
+      "capability_id": "CAP-INCOMPLETE-01",
+      "owner_id": "H06",
+      "action": "incomplete",
+      "target": { "kind": "missing", "scope": "harness-engineering" },
+      "status": "ready"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": "h00a-source-manifest-v1",
+  "description": "开源示例：合成中性来源清册。私有仓库的真实来源清单（含内部 remote 与业务路径）不随仓库发布；本桩仅保留契约测试所需的来源引用结构。",
+  "sources": [
+    {
+      "id": "A-HARNESS-ENGINEERING-PRINCIPLES",
+      "path": "harness/engineering/PRINCIPLES.md",
+      "note": "synthetic stub for OSS example; replace with a real source inventory in private deployments"
+    }
+  ]
+}

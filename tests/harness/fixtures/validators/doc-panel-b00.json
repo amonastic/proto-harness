@@ -1,0 +1,66 @@
+{
+  "suite_ref": "FS-SYNTHETIC-H03B-V1",
+  "validator": "doc-panel",
+  "cases": [
+    {
+      "id": "P00-01",
+      "docId": "doc-a",
+      "docsData": {
+        "entries": [
+          { "docId": "doc-a", "pageId": "page-a", "scriptOrder": 0 },
+          { "docId": "doc-b", "pageId": "page-b", "scriptOrder": 1 }
+        ],
+        "scriptLoadOrder": ["assets/js/doc-panel.js", "js/docs.js", "js/docs/doc-a.js"]
+      },
+      "expected": { "verdict": "pass", "checks": { "docIdExists": true, "noDuplicate": true, "scriptOrder": true } }
+    },
+    {
+      "id": "P00-02",
+      "docId": "doc-missing",
+      "docsData": {
+        "entries": [{ "docId": "doc-a", "pageId": "page-a", "scriptOrder": 0 }],
+        "scriptLoadOrder": ["js/docs.js", "assets/js/doc-panel.js"]
+      },
+      "expected": { "verdict": "fail", "checks": { "docIdExists": false }, "violationsIncludes": ["docId 不存在于 docsData"] }
+    },
+    {
+      "id": "P00-03",
+      "docId": "doc-a",
+      "docsData": {
+        "entries": [
+          { "docId": "doc-a", "pageId": "page-a", "scriptOrder": 0 },
+          { "docId": "doc-a", "pageId": "page-a", "scriptOrder": 1 }
+        ],
+        "scriptLoadOrder": ["js/docs.js", "assets/js/doc-panel.js"]
+      },
+      "expected": { "verdict": "fail", "checks": { "noDuplicate": false }, "violationsIncludes": ["重复 docId"] }
+    },
+    {
+      "id": "P00-04",
+      "docId": "doc-a",
+      "docsData": {
+        "entries": [{ "docId": "doc-a", "pageId": "page-a", "scriptOrder": 0 }],
+        "scriptLoadOrder": ["js/docs.js", "assets/js/doc-panel.js"]
+      },
+      "expected": { "verdict": "fail", "checks": { "scriptOrder": false }, "violationsIncludes": ["脚本加载顺序错误"] }
+    },
+    {
+      "id": "P00-05",
+      "docId": "doc-a",
+      "docsData": {
+        "entries": [],
+        "scriptLoadOrder": ["js/docs.js", "assets/js/doc-panel.js"]
+      },
+      "expected": { "verdict": "fail", "checks": { "docIdExists": false }, "violationsIncludes": ["docId 不存在于 docsData"] }
+    },
+    {
+      "id": "P00-06",
+      "docId": "doc-a",
+      "docsData": {
+        "entries": [{ "docId": "doc-a", "pageId": "page-a", "scriptOrder": 0 }],
+        "scriptLoadOrder": ["assets/js/doc-panel.js", "js/docs/merchant-list-edit.js"]
+      },
+      "expected": { "verdict": "pass", "checks": { "docIdExists": true, "noDuplicate": true, "scriptOrder": true } }
+    }
+  ]
+}

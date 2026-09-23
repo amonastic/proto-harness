@@ -1,0 +1,11 @@
+{
+  "schema_version": "h01-permission-v1",
+  "permission_id": "PERM-H01-NO-SCOPE-TIME",
+  "task_id": "TASK-H01-01",
+  "status": "AUTHORIZED",
+  "authorization_quote": "缺 forbidden_scopes 与 valid_from/valid_until",
+  "object": "harness/engineering/**",
+  "actions": ["create"],
+  "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES"],
+  "issuer": "user"
+}

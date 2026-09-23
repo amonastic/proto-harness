@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>平台入口页模板（有导航）</title>
+  <script src="../../assets/js/tailwind.min.js?v=20260622164834"></script>
+  <link href="../../assets/css/font-awesome.min.css?v=20260622164834" rel="stylesheet">
+  <link href="../../assets/css/font-awesome-local.css?v=20260622164834" rel="stylesheet">
+  <link href="../../assets/css/variables.css?v=20260622164834" rel="stylesheet">
+  <link href="../../assets/css/common.css?v=20260622164834" rel="stylesheet">
+  <link href="../../assets/css/components.css?v=20260622164834" rel="stylesheet">
+</head>
+<body>
+  <!-- 适用：后台/客户端/小程序平台入口页 -->
+  <!-- 禁止：模块业务详情页 -->
+  <!-- 底部返回区固定两行：第一行返回所属平台/上级导航，第二行返回总导航；零散设计与迭代索引不套此规则。 -->
+  <nav class="system-nav dg-sidebar" data-role="system-sidebar">
+    <!-- 示例：
+    <div class="nav-return-wrap">
+      <a href="../index.html" class="nav-return"><i class="fas fa-arrow-left"></i><span>返回平台导航</span></a>
+      <a href="../../index.html" class="nav-return secondary"><i class="fas fa-home"></i><span>返回总导航</span></a>
+    </div>
+    -->
+  </nav>
+  <main class="dg-main-content"></main>
+  <script src="../../assets/js/components/sidebar-standard.js?v=20260622164834"></script>
+</body>
+</html>

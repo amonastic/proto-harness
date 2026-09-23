@@ -1,0 +1,97 @@
+{
+  "schema_version": "requirement-template-v1",
+  "description": "需求模板：从老 harness 提取的需求字段定义与需求抽屉节模板（任务包 P10.2）。字段口径来源：harness/roles/需求聚焦者.md#收口；抽屉节模板来源：standards/doc-spec.json requiredSections。",
+  "source_refs": [
+    "harness/roles/需求聚焦者.md",
+    "harness/roles/指导审阅者.md",
+    "standards/doc-spec.json",
+    "standards/ui-spec.json"
+  ],
+  "fields": {
+    "title": {
+      "type": "string",
+      "description": "需求标题，15 字内",
+      "maxLength": 15
+    },
+    "target": {
+      "type": "string",
+      "description": "根问题：真正解决什么，影响谁（需求聚焦者第一性原理第 1 问）"
+    },
+    "roles_and_platforms": {
+      "type": "object",
+      "description": "角色与端：角色、涉及端、前端影响、后端影响（需求聚焦者收口字段）",
+      "required": ["roles", "platforms", "frontend_impact", "backend_impact"],
+      "properties": {
+        "roles": { "type": "array", "items": { "type": "string" } },
+        "platforms": { "type": "array", "items": { "type": "string" } },
+        "frontend_impact": { "type": "string" },
+        "backend_impact": { "type": "string" }
+      }
+    },
+    "core_flows": {
+      "type": "array",
+      "description": "核心流程与状态（doc-spec requiredSections.core-flow：核心流程/操作流程/页面功能规划）",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "data_and_permission": {
+      "type": "object",
+      "description": "数据权限与依赖：数据来源、权限控制",
+      "properties": {
+        "data_source": { "type": "string" },
+        "permission_control": { "type": "string" }
+      }
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "description": "验收标准（可测试、可验证）",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "scope": {
+      "type": "object",
+      "description": "本次范围与明确不做（需求聚焦者收口字段）",
+      "required": ["in_scope", "out_of_scope"],
+      "properties": {
+        "in_scope": { "type": "array", "items": { "type": "string" } },
+        "out_of_scope": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "risks_and_boundaries": {
+      "type": "array",
+      "description": "异常边界、风险点（doc-spec requiredSections.exceptions-boundaries）",
+      "items": { "type": "string" }
+    },
+    "confirmed_facts": {
+      "type": "array",
+      "description": "用户已确认项（需求聚焦者收口：已确认/推断/待确认三分）",
+      "items": { "type": "string" }
+    },
+    "inferred_assumptions": {
+      "type": "array",
+      "description": "推断项（待用户确认，不得写成事实）",
+      "items": { "type": "string" }
+    },
+    "key_decisions": {
+      "type": "array",
+      "description": "关键决策依据（用户裁决、业务外脑、页面或文档依据）",
+      "items": { "type": "string" }
+    }
+  },
+  "drawer_sections": {
+    "description": "需求抽屉节模板（doc-spec.json requiredSections 映射），新 harness 需求抽屉生成器对齐口径",
+    "sections": [
+      { "key": "core-flow", "title": "核心流程" },
+      { "key": "states-branches", "title": "状态与分支" },
+      { "key": "field-spec", "title": "字段说明" },
+      { "key": "interaction-rules", "title": "交互规则" },
+      { "key": "exceptions-boundaries", "title": "异常与边界" },
+      { "key": "todo-open-questions", "title": "待确认项" }
+    ]
+  },
+  "writing_style": {
+    "description": "老 harness 抽屉写法（doc-spec.json writingStyle）",
+    "tone": ["陈述句优先", "先结论后说明", "状态和条件表达明确", "抽屉默认直入业务规则"],
+    "organization": "按功能分区闭环，不按抽象维度拆分；字段定义 + 交互规则 + 边界说明自包含"
+  }
+}

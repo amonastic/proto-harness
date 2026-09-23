@@ -1,0 +1,13 @@
+{
+  "schema_version": "h01-checkpoint-v1",
+  "checkpoint_id": "CHECKPOINT-H01F-NO-TRACE",
+  "trace_id": "TRACE-H01-NOT-EXIST",
+  "last_event_sequence": 1,
+  "state": "RUNNING",
+  "snapshot_ref": "X-SNAPSHOT-H01F-NO-TRACE",
+  "input_digest": "h01f-no-trace",
+  "resumable": true,
+  "status": "active",
+  "scope": "harness-engineering",
+  "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES"]
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": "h01-external-reference-v1",
+  "reference_id": "X-BAD-KIND",
+  "reference_kind": "document",
+  "locator": "doc/平台治理/README.md",
+  "status": "active",
+  "source_refs": ["A-HARNESS-ENGINEERING-PRINCIPLES"]
+}

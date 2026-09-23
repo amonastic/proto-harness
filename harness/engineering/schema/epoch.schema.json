@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:h01:epoch.schema.json",
+  "title": "H01 Epoch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "epoch_id", "ruleset_id", "provider_ref", "judge_ref", "host", "tools", "permissions", "status", "source_refs", "scope"],
+  "properties": {
+    "schema_version": { "const": "h01-epoch-v2" },
+    "scope": { "type": "string", "minLength": 1 },
+    "epoch_id": { "type": "string", "minLength": 1, "pattern": "^EPOCH-[A-Z0-9][A-Z0-9-]*$" },
+    "ruleset_id": { "type": "string", "minLength": 1, "pattern": "^RULESET-[A-Z0-9][A-Z0-9-]*$" },
+    "provider_ref": { "type": "string", "minLength": 1 },
+    "judge_ref": { "type": "string", "minLength": 1 },
+    "host": { "type": "string", "minLength": 1 },
+    "tools": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "permissions": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "status": { "type": "string", "enum": ["selected-pending-smoke", "callable-confirmed"] },
+    "source_refs": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "fixtures": {
+      "description": "P5/H09（2026-08-19 用户裁决同意扩展）：本 epoch 绑定的准入 fixture 引用（corpus.json corpus_id + 优先级 + 每 fixture 必跑次数）",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["corpus_id", "priority", "required_runs"],
+        "properties": {
+          "corpus_id": { "type": "string", "minLength": 1 },
+          "priority": { "type": "string", "enum": ["P0", "P1", "P2"] },
+          "required_runs": { "type": "integer" }
+        }
+      }
+    }
+  }
+}

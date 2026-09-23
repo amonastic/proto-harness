@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:h01:result.schema.json",
+  "title": "H01 Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "result_id", "trace_id", "status", "summary", "completion_evidence_refs", "created_by", "scope", "source_refs"],
+  "properties": {
+    "schema_version": { "const": "h01-result-v1" },
+    "scope": { "type": "string", "minLength": 1 },
+    "source_refs": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "result_id": { "type": "string", "minLength": 1, "pattern": "^RESULT-[A-Z0-9][A-Z0-9-]*$" },
+    "trace_id": { "type": "string", "minLength": 1, "pattern": "^TRACE-[A-Z0-9][A-Z0-9-]*$" },
+    "status": { "type": "string", "enum": ["SUCCEEDED", "FAILED", "BLOCKED", "INCOMPLETE"] },
+    "summary": { "type": "string", "minLength": 1 },
+    "completion_evidence_refs": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "created_by": { "type": "string", "minLength": 1 },
+    "failure_code": { "type": "string", "minLength": 1 },
+    "blocking_reason": { "type": "string", "minLength": 1 }
+  }
+}

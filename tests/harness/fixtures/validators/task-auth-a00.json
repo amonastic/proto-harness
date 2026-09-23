@@ -1,0 +1,54 @@
+{
+  "suite_ref": "FS-SYNTHETIC-H03A-V1",
+  "validator": "task-auth",
+  "cases": [
+    {
+      "id": "A00-01",
+      "message": "开始改 `tests/harness/validators/task-auth.js`，只实现 checkTaskAuth。",
+      "plannedFiles": ["tests/harness/validators/task-auth.js"],
+      "expected": { "level": "L3", "verdict": "pass", "reasonIncludes": "L3 授权命中" }
+    },
+    {
+      "id": "A00-02",
+      "message": "方案 OK，先保留待确认状态。",
+      "plannedFiles": ["scripts/harness/validators/task-auth.js"],
+      "expected": { "level": "L2", "verdict": "fail", "reasonIncludes": "缺少 L3 明确授权" }
+    },
+    {
+      "id": "A00-03",
+      "message": "分析一下 L2 与 L3 的边界。",
+      "plannedFiles": ["standards/授权词表.md"],
+      "expected": { "level": "none", "verdict": "fail", "reasonIncludes": "非授权词条" }
+    },
+    {
+      "id": "A00-04",
+      "message": "把 scripts/a.js 和 scripts/b.js 都改一下。",
+      "plannedFiles": ["scripts/a.js", "scripts/b.js"],
+      "expected": { "level": "L3", "verdict": "fail", "reasonIncludes": "多对象歧义" }
+    },
+    {
+      "id": "A00-05",
+      "message": "开始改 scripts/a.js。",
+      "plannedFiles": ["scripts/b.js"],
+      "expected": { "level": "L3", "verdict": "fail", "reasonIncludes": "授权对象不一致" }
+    },
+    {
+      "id": "A00-06",
+      "message": "上次说过直接做 scripts/a.js，现在继续。",
+      "plannedFiles": ["scripts/a.js"],
+      "expected": { "level": "none", "verdict": "fail", "reasonIncludes": "旧授权继承不合法" }
+    },
+    {
+      "id": "A00-07",
+      "message": "",
+      "plannedFiles": ["scripts/a.js"],
+      "expected": { "level": "none", "verdict": "fail", "reasonIncludes": "无授权消息" }
+    },
+    {
+      "id": "A00-08",
+      "message": "继续分析一下这个方案。",
+      "plannedFiles": ["scripts/a.js"],
+      "expected": { "level": "none", "verdict": "fail", "reasonIncludes": "非授权词条" }
+    }
+  ]
+}
