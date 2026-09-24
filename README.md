@@ -1,5 +1,7 @@
 # proto-harness
 
+[![CI](https://github.com/amonastic/proto-harness/actions/workflows/ci.yml/badge.svg)](https://github.com/amonastic/proto-harness/actions/workflows/ci.yml)
+
 **面向「目录型设计稿仓库」的治理工作流内核：一套 AI 协作规则 + 可机检的结构化标准 + 零依赖脚本 + 自带虚构示例。**
 
 ---
