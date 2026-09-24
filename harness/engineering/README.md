@@ -36,7 +36,7 @@
 
 `owner-registry.json` 只登记 H01 控制面主题（evidence-contract、task-contract、capability-contract、permission-contract、trace-contract、result-contract、checkpoint-contract、ruleset-contract、epoch-contract、external-reference-contract、provider-contract）的唯一 active owner。不登记业务页面、业务事实或 Memory owner。同一 active topic 存在多个 owner 时，validator 输出 `OWNER_CONFLICT` 并列出全部候选 owner 与来源引用。
 
-## Incident / Fixture / Rule Admission 最小引用
+## 事故 / 夹具 / 规则准入的最小引用
 
 Incident、Fixture、Rule Admission、Run、Oracle、Adapter 在 H01 只通过 `external-reference.schema.json` 保存最小引用（ID、kind、locator、来源），不承载对象正文。H01 只校验引用格式；对象是否已存在由 H04/M2 处理。
 

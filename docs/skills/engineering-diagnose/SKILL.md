@@ -1,6 +1,6 @@
 ---
 name: engineering-diagnose
-description: Use when investigating bugs, broken pages, failing validation scripts, UI audit failures, build errors, performance regressions, or any user report that something is wrong. Establish a reproducible feedback loop before changing files.
+description: 排查缺陷、页面异常、校验脚本失败、UI 审计失败、构建报错、性能回退，或用户报告任何不对劲的情况时使用。改文件之前先建立可复现的反馈回路。
 ---
 
 # Engineering Diagnose
@@ -9,7 +9,7 @@ Disciplined debugging for this design稿系统仓库. Adapted from `mattpocock/s
 
 ## Trigger
 
-Use this skill when the user says or implies:
+用户说出或暗示以下内容时使用本 skill：
 
 - 页面异常、打不开、样式错位、交互不生效
 - `npm run lint:ui`、`audit:ui`、`check:ui`、`audit:docs`、`check:all` 失败
@@ -26,7 +26,7 @@ Before editing, state:
 - Execution basis
 - Whether this turn may add interactions, prompts, tests, or acceptance items
 
-If the user is still discussing or reviewing, do not edit. Output understanding, impact, plan, and questions.
+用户仍处于讨论或评审阶段时，不得改文件。只输出理解、影响范围、计划与待确认项。
 
 ## Loop
 

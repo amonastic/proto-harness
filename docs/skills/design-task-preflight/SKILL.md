@@ -1,6 +1,6 @@
 ---
 name: design-task-preflight
-description: Use before executing any design稿, page, drawer, requirement document, rule, or prototype change. Identify missing information, rule conflicts, scope creep, and execution risks before editing files.
+description: 在执行任何设计稿、页面、抽屉、需求文档、规则或原型改动之前使用。在改文件之前先识别信息缺口、规则冲突、范围蔓延与执行风险。
 ---
 
 # Design Task Preflight
@@ -9,14 +9,14 @@ Execution gate for this design稿系统仓库. Use this skill after `AGENTS.md` 
 
 ## Trigger
 
-Use this skill when the user asks or implies:
+用户提出或暗示以下情形时使用本 skill：
 
 - 新增页面、修改页面、微调、既有功能新增、0-1 新功能
 - 修改需求抽屉、CSS 规范抽屉、需求文档、页面登记、规则文件
 - 复刻改造、`design over` 打标、落文档、执行方案
 - "按这个改 / 直接做 / 开始改 / 执行 / 继续"
 
-If the user is still discussing, reviewing, comparing, or brainstorming, do not edit. Output the review result and wait for explicit execution intent.
+用户仍处于讨论、评审、方案对比或头脑风暴阶段时，不得改文件。只输出审查结论，等待明确的执行意图。
 
 ## Required Checks
 
@@ -107,7 +107,7 @@ When the task involves `design over`,打标, 可打标, 收口, or design-over r
 
 ## Historical Snapshot Gate
 
-Use this gate before editing any historical iteration or snapshot surface:
+改动任何历史迭代或快照相关内容之前，先过本闸门：
 
 - Trigger when modifying `迭代索引/*.html`, `迭代索引/snapshots/**`, running `npm run cache:bust:write`, or touching a source page that is referenced by historical iteration pages.
 - Treat historical snapshots as higher priority than the current business request. If pollution is found, stop the current business work and report the snapshot issue first.
@@ -125,7 +125,7 @@ Use this gate before editing any historical iteration or snapshot surface:
 
 ## Screenshot Replication Gate
 
-Use this gate when the user provides a screenshot or asks to replicate/restore a screenshot:
+用户提供截图、或要求按截图复刻/还原时，先过本闸门：
 
 - Declare the screenshot as `visual clone-source`, then decide whether it is a repository page, online page, external/competitor page, rough annotation, or unknown source.
 - Before editing, produce a matrix with:
@@ -177,4 +177,4 @@ change-type：
 下一步执行方案：
 ```
 
-Keep questions focused. If the answer can be found in existing files, inspect files instead of asking the user.
+提问要聚焦。答案能在现有文件里查到的，先查文件，不要反问用户。

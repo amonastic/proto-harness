@@ -1,6 +1,6 @@
 ---
 name: engineering-zoom-out
-description: Use when the user asks to understand a module, directory, page set, rule system, script, or unfamiliar code area before making changes. Produce a concise map of relevant files, responsibilities, dependencies, and risks.
+description: 改动之前，用户要求先理解某个模块、目录、页面族、规则体系、脚本或不熟悉的代码区域时使用。产出相关文件、职责、依赖与风险的简明地图。
 ---
 
 # Engineering Zoom Out
@@ -9,13 +9,13 @@ High-level orientation for unfamiliar parts of this repository. Adapted from `ma
 
 ## Trigger
 
-Use this skill when the user asks:
+用户提出以下问题时使用本 skill：
 
 - "先看看 / 先理解 / zoom out / 整体分析 / 这个模块怎么回事"
 - To locate files, page ownership, module boundaries, scripts, standards, or AI rules
 - Before changing a page family, workflow, standards file, or automation script
 
-Also use before major implementation if the affected area is unfamiliar.
+若将有大范围实现且涉及的区域不熟悉，也在动手前使用本 skill。
 
 ## Output Shape
 

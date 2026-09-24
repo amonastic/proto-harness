@@ -1,6 +1,6 @@
 ---
 name: neat-freak
-description: Perform project knowledge closeout after implementation by reconciling code, visible runtime, requirement drawers and docs, project rules, authorized memory, delivery state, and workspace residue. Use when the user explicitly invokes "/neat", "洁癖", "执行洁癖收尾", asks to synchronize project docs/rules/memory after development, reports stale or conflicting project knowledge, requests a clean handoff, or asks whether project rules were actually followed. Bare phrases such as "整理一下", "梳理一下", "看看", or ordinary coding/debugging do not authorize writes; in those cases only perform a read-only audit when the surrounding request clearly concerns project knowledge closeout.
+description: 实现完成后做项目知识收尾：核对代码、实际运行态、需求抽屉与文档、项目规则、已授权记忆、交付状态与工作区残留。仅在用户明确调用 "/neat"、"洁癖"、"执行洁癖收尾"，或要求开发后同步项目文档/规则/记忆、报告知识过期或互相冲突、要求干净交接、追问规则是否真的被遵守时使用。单独出现"整理一下""梳理一下""看看"或普通的编码/排障不构成写入授权；这些情况下，只有当上下文确实指向项目知识收尾时，才做只读审计。
 ---
 
 # 洁癖：项目知识收尾

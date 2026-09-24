@@ -1,6 +1,6 @@
 ---
 name: engineering-plan-grill
-description: Use when stress-testing a requirement, implementation plan, page change, rule change, or AI workflow before execution. Ask targeted questions, compare against repo rules and existing pages, and produce confirmed decisions without editing during discussion.
+description: 在执行前对需求、实现方案、页面改动、规则变更或 AI 工作流做压力测试时使用。提出针对性问题，对照仓库规则与现有页面，产出已确认的决策；讨论期间不改文件。
 ---
 
 # Engineering Plan Grill
@@ -9,7 +9,7 @@ Plan stress-testing adapted from `mattpocock/skills` `grill-with-docs`. In this 
 
 ## Trigger
 
-Use this skill when the user asks to:
+用户要求以下事项时使用本 skill：
 
 - 评审方案、对比方案、讨论需求、先问清楚
 - Validate a page/drawer/rule/script change before implementation

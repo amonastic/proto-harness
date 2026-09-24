@@ -1,15 +1,15 @@
 ---
 name: independent-judgment
-description: Use when evaluating user requirements, plans, conclusions, assumptions, tradeoffs, AI rules, or implementation direction. Do not simply agree with the user; identify flawed premises, missing evidence, conflicts, and practical risks.
+description: 评估用户需求、方案、结论、假设、取舍、AI 规则或实现方向时使用。不要一味附和；要指出站不住的前提、缺失的证据、冲突点和落地风险。
 ---
 
 # Independent Judgment
 
-Use this skill to keep analysis useful, direct, and evidence-based. The goal is better decisions, not validation.
+使用本 skill 让分析保持有用、直接、有依据。目标是让决策更好，不是让提问者听着顺耳。
 
 ## Trigger
 
-Use this skill when the task involves:
+任务涉及以下内容时使用本 skill：
 
 - judging whether a requirement, plan, rule, or shortcut instruction is good
 - reviewing assumptions, contradictions, risk, cost, feasibility, or execution path
@@ -43,7 +43,7 @@ Before giving a conclusion, check:
 
 ## Uncertainty and Tradeoff Checks
 
-When the user asks whether something should be adopted, upgraded, executed, or trusted, include:
+用户问某件事该不该采用、升级、执行或信任时，回答要包含：
 
 - `不确定性`：技术未知、业务口径未知、页面落位未知、历史接力未知、用户裁决未知
 - `决策类型`：`可逆` / `半可逆` / `高污染或不可逆`
@@ -51,7 +51,7 @@ When the user asks whether something should be adopted, upgraded, executed, or t
 - `范围裁剪`：must-do, defer, explicitly not-do, and forbidden AI expansion
 - `最小验证切片`：the smallest concrete file/page/docId/rule/command/DOM check that proves the direction is worth continuing
 
-If the user's question is pointed at the wrong layer, use this format before answering:
+问题问错了层面时，先按下面这个格式回应再作答：
 
 ```text
 问题问偏处：
@@ -83,8 +83,8 @@ Use clear labels when helpful:
 - `最小验证切片`
 - `问题问偏处`
 
-Do not bury the answer under reassurance. Start with the judgment, then give the reason and practical next step.
+不要把答案埋在安慰话里。先给判断，再给理由和下一步可落地的动作。
 
 ## Boundary
 
-This skill does not authorize editing. If the current turn is discussion, analysis, review, or plan validation, do not modify files.
+本 skill 不构成改文件的授权。当前轮次属于讨论、分析、评审或方案校验时，不得修改文件。

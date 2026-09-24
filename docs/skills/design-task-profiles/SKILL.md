@@ -1,6 +1,6 @@
 ---
 name: design-task-profiles
-description: Use when a task is described as 0-1 new feature, pure requirement drawer change, design over check, existing-feature addition, micro-adjustment, regular iteration, or replication change. Applies the matching task profile and constraints.
+description: 当任务被描述为 0-1 新功能、纯需求抽屉改动、design over 验收、既有功能新增、微调、常规迭代或复刻改造时使用，套用对应的任务画像与约束。
 ---
 
 # Design Task Profiles
@@ -9,7 +9,7 @@ Task-profile rules for this design稿系统仓库. Use after `AGENTS.md` and bef
 
 ## Trigger
 
-Use this skill when the user mentions or implies:
+用户提到或暗示以下内容时使用本 skill：
 
 - `0-1`、新功能、独立模块
 - 纯需求抽屉、只改抽屉、不改页面结构
@@ -19,7 +19,7 @@ Use this skill when the user mentions or implies:
 - 微调、持续修补、未评审页面修补
 - 普通迭代、复刻改造、沿用既有页面
 
-Also use it when the task type is unclear and choosing the wrong profile could change version markers, docs scope, or implementation scope.
+任务类型不明确、且选错画像会改变版本标记、文档范围或实现范围时，也使用本 skill。
 
 ## Shared Rules
 
@@ -92,7 +92,7 @@ Also use it when the task type is unclear and choosing the wrong profile could c
 
 ## Output
 
-When this skill changes the execution path, state:
+当本 skill 改变了执行路径时，说明：
 
 ```text
 任务画像：

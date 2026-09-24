@@ -1,6 +1,6 @@
 ---
 name: implementation-self-audit
-description: Use after modifying pages, drawers, requirement docs, rules, scripts, or prototype files. Verify scope, static-prototype boundaries, version markers, drawer rules, commands, and new-vs-existing issues before final response.
+description: 改动页面、抽屉、需求文档、规则、脚本或原型文件之后使用。在给出最终回复前核对范围、静态原型边界、版本标记、抽屉规则、命令，以及新增问题与存量问题的区分。
 ---
 
 # Implementation Self Audit
@@ -9,7 +9,7 @@ Completion gate for this design稿系统仓库. Use this skill after edits and b
 
 ## Trigger
 
-Use this skill after any change to:
+对以下内容做过任何改动之后，使用本 skill：
 
 - HTML/CSS/JS prototype pages
 - requirement drawers or CSS specification drawers
@@ -148,4 +148,4 @@ Use this structure when relevant:
 待确认项：
 ```
 
-If a violation is found, fix it before final whenever feasible. If it cannot be fixed safely, report the blocker clearly.
+发现违规时，只要可行就先修完再给最终回复。无法安全修复的，把阻塞点明确报告出来。

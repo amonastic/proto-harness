@@ -1,6 +1,6 @@
 ---
 name: engineering-slice-plan
-description: Use when breaking a large requirement, PRD, page redesign, rule update, or governance task into executable slices. Produce thin, independently verifiable tasks aligned with this repo's static prototype and documentation rules.
+description: 把大需求、PRD、页面改版、规则更新或治理任务拆成可执行切片时使用。产出符合本仓库静态原型与文档规则、可独立验证的薄切片任务。
 ---
 
 # Engineering Slice Plan
@@ -9,7 +9,7 @@ Task decomposition adapted from `mattpocock/skills` `to-issues`. This repo does 
 
 ## Trigger
 
-Use this skill when the user asks to:
+用户要求以下事项时使用本 skill：
 
 - 拆任务、拆 issue、拆迭代、落执行计划
 - Convert a requirement, plan, or review result into implementation steps
@@ -34,7 +34,7 @@ For each slice, provide:
 - **Done when**
 - **Blocked by**
 
-Then ask for approval if the user has not already asked to execute.
+若用户此前没有要求执行，接着请求确认。
 
 ## Publishing
 
