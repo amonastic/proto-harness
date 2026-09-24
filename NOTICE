@@ -38,16 +38,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-## 2. 字体（`assets/fonts/`、`assets/webfonts/`）
+## 2. 字体与图标（Font Awesome Free 6.0.0）
 
-| 资源 | 文件 | 许可 |
+许可：字体文件 SIL OFL 1.1；图标 CC BY 4.0；代码 MIT。详见 <https://fontawesome.com/license/free>。
+
+随仓库打包的文件（版本标记取自 `assets/css/font-awesome*.css` 头部，实测为 `6.0.0`）：
+
+| 目录 | 文件 |
+| --- | --- |
+| `assets/fonts/` | `fa-brands-400.woff2`、`fa-regular-400.woff2`、`fa-solid-900.woff2` |
+| `assets/webfonts/` | `fa-regular-400.woff2` |
+
+两份样式表的实际状态不同，接入时请按 `font-awesome-local.css` 使用：
+
+| 样式表 | `@font-face` 指向 | 状态 |
 | --- | --- | --- |
-| Font Awesome Free | `fa-regular-400.woff2`、`fa-solid-900.woff2`、`fa-brands-400.woff2` | 字体文件 SIL OFL 1.1；图标 CC BY 4.0；代码 MIT。详见 <https://fontawesome.com/license/free> |
+| `assets/css/font-awesome-local.css` | `../fonts/*.woff2` | 引用的 3 个文件均已打包，示例页面实际依赖这一份 |
+| `assets/css/font-awesome.min.css` | `../webfonts/*.woff2` 与 `*.ttf`，另含 `fa-v4compatibility.*` | 该目录只有 1 个 woff2；其余 **7 个 URL 指向未打包文件**，加载时会产生 404。它是从完整分发行裁剪而来的残留 |
 
-## 3. 前端依赖
+保留 `font-awesome.min.css` 是因为 `standards/ui-consistency-rules.json` 的 `icons.allowedSources` 同时允许两份，且模板与 `scaffold:page` 的骨架两份都写。它不影响图标渲染（`-local.css` 在后加载并定义了同一批字体族），代价是一段未被使用的图标 CSS 加若干控制台 404。清理它需要同时改标准白名单、4 个模板与脚手架骨架，属独立治理任务。
 
-| 资源 | 文件 | 许可 |
-| --- | --- | --- |
-| Tailwind CSS | `assets/js/tailwind.min.js`（构建产物） | MIT License，<https://github.com/tailwindlabs/tailwindcss> |
+若你的分发场景需要完整 Font Awesome（含 `.ttf` 兜底与 v4 兼容字形），请自行从官方发行版补齐 `assets/webfonts/`，许可条件同上。
+
+## 3. 前端与 Node 依赖
+
+| 资源 | 位置 | 许可 | 说明 |
+| --- | --- | --- | --- |
+| Tailwind CSS | `assets/js/tailwind.min.js` | MIT，<https://github.com/tailwindlabs/tailwindcss> | 官方浏览器版（Play CDN）脚本，非本仓库自行构建；文件内版本号为运行时拼接，未静态固化。仅示例页面与页面骨架引用 |
+| docx | `optionalDependencies` | MIT，<https://github.com/dolanmiu/docx> | 只被 `scripts/convert-md-to-docx.js`（`npm run convert:docx`）使用。核心机检与登记链路不依赖任何第三方包，无需 `npm install` 即可运行 |
 
 除上述内容外，仓库内脚本、规则文档、示例页面均为本仓库自研内容。
+

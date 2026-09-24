@@ -14,9 +14,10 @@ const fs = require('fs');
 const path = require('path');
 
 const HOST_ROOT = path.resolve(__dirname, '../../../../');
-const COMPARE_DIR = '.harness-runtime/shadow/compare';
+const { shadowRoot } = require('./runtime-root');
+const COMPARE_SUBDIR = 'compare';
 const DEFAULT_CORPUS = 'tests/harness/fixtures/corpus/corpus.json';
-const QUALIFICATION_TEMPLATE = '.harness-runtime/qualification/<provider>.json';
+const { qualificationPath } = require('./runtime-root');
 const COMPARE_SCHEMA_VERSION = 'h10c-shadow-compare-v1';
 
 const { runShadowObservation, createShadowDryRunProvider, loadQualificationResult } = require('./runner');
@@ -25,10 +26,6 @@ const { detectCrossModelConsensus } = require('./intervention');
 
 const SUPPORTED_PROVIDERS = Object.freeze(['deepseek', 'longcat', 'glm', 'codex']);
 const API_KEY_ENV = Object.freeze({ deepseek: 'DEEPSEEK_API_KEY', longcat: 'LONGCAT_API_KEY', glm: 'GLM_API_KEY', codex: 'CODEX_API_KEY' });
-
-function qualificationPath(provider) {
-  return QUALIFICATION_TEMPLATE.replace('<provider>', provider);
-}
 
 // 读取 corpus（项目内路径防逃逸；与 runner.js loadCorpus 同语义，不依赖其导出）
 function loadCorpus(corpusPath = DEFAULT_CORPUS) {
@@ -203,7 +200,7 @@ async function runParallelShadow({
   report.timestamp = now.toISOString();
   if (failedProviders.length > 0) report.failed_providers = failedProviders;
 
-  const compareDir = path.join(HOST_ROOT, COMPARE_DIR);
+  const compareDir = path.join(HOST_ROOT, shadowRoot(), COMPARE_SUBDIR);
   fs.mkdirSync(compareDir, { recursive: true });
   const compareFile = path.join(compareDir, `${family}-${now.getTime()}.json`);
   const tmp = `${compareFile}.tmp`;
@@ -224,7 +221,7 @@ async function runParallelShadow({
 }
 
 module.exports = {
-  COMPARE_DIR,
+  COMPARE_DIR: '.harness-runtime/shadow/compare',
   COMPARE_SCHEMA_VERSION,
   SUPPORTED_PROVIDERS,
   API_KEY_ENV,

@@ -9,7 +9,13 @@ const fs = require('fs');
 const path = require('path');
 
 const HOST_ROOT = path.resolve(__dirname, '..', '..', '..');
-const QUALIFICATION_DIR = path.join(HOST_ROOT, '.harness-runtime/qualification');
+
+// 独立运行时命名空间，避免与 runner.test.js 争抢准入矩阵与 shadow 产物。
+// 隔离机制见 scripts/harness/lib/shadow/runtime-root.js。
+process.env.HARNESS_RUNTIME_ROOT = '.harness-runtime/it-shadow-parallel';
+const RUNTIME_NS = process.env.HARNESS_RUNTIME_ROOT;
+const QUALIFICATION_DIR = path.join(HOST_ROOT, RUNTIME_NS, 'qualification');
+const SHADOW_DIR = path.join(HOST_ROOT, RUNTIME_NS, 'shadow');
 
 const {
   runParallelShadow,
@@ -52,9 +58,9 @@ function restoreMatrices() {
 
 function cleanupShadowDirs(providers, family) {
   for (const provider of providers) {
-    fs.rmSync(path.join(HOST_ROOT, '.harness-runtime/shadow', provider, family), { recursive: true, force: true });
+    fs.rmSync(path.join(SHADOW_DIR, provider, family), { recursive: true, force: true });
   }
-  fs.rmSync(path.join(HOST_ROOT, '.harness-runtime/shadow/compare'), { recursive: true, force: true });
+  fs.rmSync(path.join(SHADOW_DIR, 'compare'), { recursive: true, force: true });
 }
 
 // 行为可编程 provider：输出固定 verdict

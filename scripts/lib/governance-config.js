@@ -3,8 +3,8 @@
  * governance.config.json 读取层
  *
  * 消费方在项目根放置 governance.config.json 声明自身的平台目录、
- * 迭代目录与扫描清单；未提供时回退到内置默认（与 examples/demo-project 一致）。
- * 字段说明参考仓根 governance.config.example.json。
+ * 迭代目录与扫描清单；未提供时回退到内置默认（即仓根本仓库自带的虚构三端示例）。
+ * 字段说明参考仓根 governance.config.example.json 与 docs/README.md 的接入指南。
  */
 'use strict';
 

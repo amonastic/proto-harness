@@ -8,7 +8,7 @@ const fs = require('fs');
 const path = require('path');
 
 const HOST_ROOT = path.resolve(__dirname, '../../../../');
-const SHADOW_ROOT = '.harness-runtime/shadow';
+const { shadowRoot, DEFAULT_SHADOW_ROOT: SHADOW_ROOT } = require('./runtime-root');
 
 // 从模型输出文本提取 unified diff（优先 ```diff 围栏；其次裸 ---/+++ 块）
 function extractDiff(text) {
@@ -30,14 +30,14 @@ function looksLikeUnifiedDiff(text) {
 }
 
 function diffPath(provider, family, runId) {
-  return path.join(HOST_ROOT, SHADOW_ROOT, provider, family, `${runId}.diff`);
+  return path.join(HOST_ROOT, shadowRoot(), provider, family, `${runId}.diff`);
 }
 
 // 写入 .diff 文件（相对路径返回）；diffText 为空/未提取 → 不写文件，返回 null
 function writeDiffFile({ provider, family, runId, diffText }) {
   const extracted = extractDiff(diffText);
   if (extracted === null) return null;
-  const dir = path.join(HOST_ROOT, SHADOW_ROOT, provider, family);
+  const dir = path.join(HOST_ROOT, shadowRoot(), provider, family);
   fs.mkdirSync(dir, { recursive: true });
   const target = diffPath(provider, family, runId);
   const tmp = `${target}.tmp`;

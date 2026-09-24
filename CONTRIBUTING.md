@@ -7,7 +7,7 @@
 npm run check:ui
 
 # 治理机制与脚本改动
-node --test --test-concurrency=1
+node --test
 node --check <改动过的脚本>
 
 # 缓存刷新（会改动 HTML 中 CSS/JS 引用 hash）
@@ -15,10 +15,9 @@ npm run cache:bust:write
 node scripts/cache-bust-html.js   # 复跑，应输出 Would update 0 HTML file(s)
 ```
 
-`--test-concurrency=1` 是必需项，不是加速选项：`tests/harness/shadow/` 下多个用例文件共享
-`.harness-runtime/shadow/<provider>/<family>` 产物并互相清理，并发跑会随机失败。
-同理不要改写成 `node --test 'tests/**/*.test.js'` 这类 glob 形式 —— `node --test` 的 glob 支持自 Node 21 起才有，
-而无参自动发现自 Node 18 起可用，且与本仓库 CI 的调用方式保持一致。
+用无参的 `node --test`（自动发现），不要改写成 `node --test 'tests/**/*.test.js'` 这类 glob 形式 —— `node --test` 的 glob 支持自 Node 21 起才有，而 CI 覆盖 Node 18 / 20 / 22。
+
+测试按文件并发执行，而 shadow 链路会写运行时产物（日志、diff、准入矩阵）。这些路径统一经 `scripts/harness/lib/shadow/runtime-root.js` 解析，测试文件各自设置 `HARNESS_RUNTIME_ROOT` 独占自己的命名空间。**新增会写运行时产物的测试文件时必须同样设置**，否则会与既有文件互删产物导致随机失败。
 
 ## 改动边界
 

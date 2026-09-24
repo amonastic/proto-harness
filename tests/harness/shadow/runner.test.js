@@ -9,7 +9,17 @@ const fs = require('fs');
 const path = require('path');
 
 const HOST_ROOT = path.resolve(__dirname, '..', '..', '..');
-const MATRIX_PATH = '.harness-runtime/qualification/deepseek.json';
+
+// 本文件独占一个运行时命名空间：shadow 产物与准入矩阵都是可写状态，
+// 与其它测试文件共用会在并发执行时互相覆盖或删掉对方产物。
+// 隔离机制见 scripts/harness/lib/shadow/runtime-root.js。
+process.env.HARNESS_RUNTIME_ROOT = '.harness-runtime/it-shadow-runner';
+const RUNTIME_NS = process.env.HARNESS_RUNTIME_ROOT;
+const MATRIX_PATH = RUNTIME_NS + '/qualification/deepseek.json';
+
+function removeShadowArtifact(provider, family) {
+  fs.rmSync(path.join(HOST_ROOT, RUNTIME_NS, 'shadow', provider, family), { recursive: true, force: true });
+}
 
 const {
   loadQualificationResult,
@@ -135,7 +145,7 @@ test('H10A-04 L1 observation writes log only (no diff / no branch / no commit)',
     assert.equal(log.output.commit, null);
   } finally {
     restoreMatrix(original);
-    fs.rmSync(path.join(HOST_ROOT, '.harness-runtime/shadow/deepseek/malformed-index'), { recursive: true, force: true });
+    removeShadowArtifact('deepseek', 'malformed-index');
   }
 });
 
@@ -158,7 +168,7 @@ test('H10A-05 L2 observation writes log + diff file (git unified format)', async
     assert.ok(entry.branch === null && entry.commit === null, 'L2 must not branch/commit');
   } finally {
     restoreMatrix(original);
-    fs.rmSync(path.join(HOST_ROOT, '.harness-runtime/shadow/deepseek/entry-defect'), { recursive: true, force: true });
+    removeShadowArtifact('deepseek', 'entry-defect');
   }
 });
 
@@ -202,8 +212,8 @@ test('H10A-07 dirty repo skips L3/L4 write with warning (log + diff only)', asyn
   } finally {
     removeDirtyProbe();
     restoreMatrix(original);
-    fs.rmSync(path.join(HOST_ROOT, '.harness-runtime/shadow/deepseek/entry-defect'), { recursive: true, force: true });
-    fs.rmSync(path.join(HOST_ROOT, '.harness-runtime/shadow/deepseek/snapshot-pollution'), { recursive: true, force: true });
+    removeShadowArtifact('deepseek', 'entry-defect');
+    removeShadowArtifact('deepseek', 'snapshot-pollution');
   }
 });
 
@@ -224,7 +234,7 @@ test('H10A-08 stop-on-critical stops after critical signal', async () => {
     assert.ok(result.signals.some((s) => s.type === 'tier_downgrade' && s.severity === 'critical'), 'critical downgrade signal expected');
   } finally {
     restoreMatrix(original);
-    fs.rmSync(path.join(HOST_ROOT, '.harness-runtime/shadow/deepseek/entry-defect'), { recursive: true, force: true });
+    removeShadowArtifact('deepseek', 'entry-defect');
   }
 });
 
@@ -235,7 +245,7 @@ test('H10A-09 CLI dry-run L1 exits 0 and writes log (end-to-end)', async () => {
     assert.equal(code, 0);
   } finally {
     restoreMatrix(original);
-    fs.rmSync(path.join(HOST_ROOT, '.harness-runtime/shadow/deepseek/malformed-index'), { recursive: true, force: true });
+    removeShadowArtifact('deepseek', 'malformed-index');
   }
 });
 

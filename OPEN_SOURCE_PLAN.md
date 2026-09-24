@@ -148,25 +148,51 @@
 
 ---
 
-## 时间估算（2026-09-24 按实证修订）
+## 执行记录（2026-09-24 · Phase 1-3 已落地）
 
-| Phase | 工作量 | 状态 |
-| --- | --- | --- |
-| 0.1 package.json | 0.2 天 | ✅ |
-| 0.2 测试环境耦合（H10A-07） | 0.3 天 | ✅ |
-| 0.3 GitHub Actions CI | 0.3 天 | ✅（含竞态护栏） |
-| 0.4 gitignore 误吞必需测试 | 0.2 天 | ✅ |
-| 0.5 步骤 1-3：全量虚构化 | 已完成 | ✅ 跟踪文件零命中 |
-| **0.5 步骤 4：历史重写** | 0.3 天 | ⛔ 等 §0.7(a) 决策 |
-| 0.7(b) shadow 测试竞态根治 | 0.5-1 天 | 待办（已加护栏，不阻塞发布） |
-| Phase 1 文档完善 | 1.5 天 | 未开始 |
-| Phase 2 发布体验 | 1.5 天 | 未开始 |
-| Phase 3 长期健康度 | 持续 | — |
+### Phase 1 文档完善 ✅
 
-**发布只剩两步**：处置 `OPEN_SOURCE_PLAN.md` → 重写本地历史；然后进 Phase 1。
+| 项 | 结果 |
+| --- | --- |
+| 命令参考补全 | 48 个 npm scripts 全部点名，含 17 个此前缺失项；别名（`audit:snapshots:all` / `harness:h00a:drift` / `audit:iteration-snapshots`）单独标注 |
+| governance 配置指南 | 字段表 + 浅合并/解析失败整份回退两个坑 + `businessBrain` 可选性说明。**没有改成 JSONC**：该文件被 `JSON.parse` 消费，加 `//` 会直接失败，故字段说明留在 `docs/README.md`，示例文件保持合法 JSON |
+| 模板说明 | 新增 `templates/README.md`，并记录一个真实陷阱：`scaffold:page` **不读** `templates/*.html`，它自带骨架字符串，两侧会漂移 |
+| DEVELOPMENT.md 审查 | 引用的组件与 API 逐项核对存在；`临时设计目录` 统一为 `scratchDir`（`零散设计`）；补上 `governance.config.json` 缺省回退说明 |
+| 失效引用 | `scripts/lib/governance-config.js` 注释里的 `examples/demo-project` 在本仓库不存在，已改为指向真实位置 |
+
+### Phase 2 发布体验 ✅
+
+- README：新增英文总览段、「零依赖」精确化（核心链路零依赖，仅 `convert:docx` 需装 `docx`）、`node --test` 必须用无参形式的原因、版本状态与已知限制指引。
+- 截图：`docs/images/` 三张真实渲染图（总导航 / Web 列表页 / 移动端手机模型 + 自动展开抽屉），headless Chrome 采集。**逐张看过内容**确认非空白、均为虚构数据。
+- `CHANGELOG.md`：v0.1.0 收录内容、设计取舍、已知限制。
+- 社区文件：`SECURITY.md`、`.github/PULL_REQUEST_TEMPLATE.md`、`.github/ISSUE_TEMPLATE/`（bug / question / feature proposal），front matter 已用 YAML 解析器验证。
+
+### Phase 3 长期健康度 ✅（可自动验证的部分）
+
+- `npm pack --dry-run`：325 项、约 951 kB；按真实清单核对无 `.harness-runtime`、无 `.DS_Store`、无 `node_modules`、无 `governance.config.json`、无导出报告。
+- **刻意不加 `files` 白名单**并记录理由：测试、示例、标准都是这个内核的交付物，白名单只会造成遗漏。
+- 许可核对（`NOTICE` 重写）：Font Awesome 实测版本 `6.0.0`；两份样式表状态不同 —— `-local.css` 引用的 3 个 woff2 均已打包，`.min.css` 有 **7 个字体 URL 指向未打包文件**（会产生控制台 404，但图标渲染不受影响，因为 `-local.css` 在后并定义了同一批字体族）。清理它需同时改标准白名单、4 个模板与脚手架骨架，属独立治理任务，**本轮未动**。
+
+### 根治了那个竞态 ✅
+
+新增 `scripts/harness/lib/shadow/runtime-root.js`，把 shadow 日志 / diff / 对比报告 / 准入矩阵的路径统一收口，并支持 `HARNESS_RUNTIME_ROOT` 按测试文件分命名空间。`runner.test.js` 与 `parallel.test.js` 各用独立命名空间。
+
+验证：两个原本必冲突的文件并跑 3 次 → 19/19 全过；**去掉 `--test-concurrency=1` 护栏后全量默认并发跑 3 次 → 均 `321 / 282 pass / 0 fail`**。生产默认路径经实测仍为 `.harness-runtime/shadow` 与 `.harness-runtime/qualification/<provider>.json`，未变。CI 与 `CONTRIBUTING.md` 已移除护栏并改为说明真实机制。
+
+过程中自己引入并当场修掉的两个错误，记下来避免重犯：`runtime-root.js` 的 `HOST_ROOT` 少上一级目录（产物落进 `scripts/.harness-runtime`）；以及一次 `python` 批量替换因缩进不匹配静默未命中，留下把函数当字符串用的默认值。两次都是靠跑测试才发现，不是靠读代码。
+
+### 仍未完成
+
+- 建 GitHub 远端与首次推送 —— 需你确认后才做。
+- `corpus.json` 与仓库结构不符（引用 8 个不存在的页面路径、无法由 `harness:corpus:build` 复现）：要修需先扩充虚构示例模块，属独立任务。
+- `font-awesome.min.css` 的 7 个悬空字体 URL（见上）。
+- `harness/rules/Web后台风格基线.md` 等文档描述的模块目录超出示例实际收录范围。
+- Node 18 / 20 的 CI 实际结果 —— 本机只有 v24，只能等首次 CI 运行验证。
+- 外部接入反馈收集（v0.2.0 输入）。
 
 ---
 
+## 时间估算（2026-09-24 按实证修订）
 ## 风险与注意事项
 
 1. **历史仍未清（唯一发布阻塞）**：工作区跟踪文件识别词已归零，但提交 `1a0e234` 里仍有 **521 处**旧名 —— `git log --all -S` 可查。删文件、改文件都不影响已提交的对象；推送时历史对象会一并上传，别人能翻出第一次提交的原始内容。经核实本仓库**没有 remote、没有 upstream**（`git remote -v` 为空），`package.json` / README 里的 GitHub 地址只是预填 —— **这是历史重写成本最低的一次机会，必须在首次 push 之前做**。

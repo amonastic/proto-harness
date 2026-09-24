@@ -13,7 +13,7 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 
 const HOST_ROOT = path.resolve(__dirname, '../../../../');
-const DEFAULT_QUALIFICATION = '.harness-runtime/qualification/deepseek.json';
+const { qualificationPath } = require('./runtime-root');
 const DEFAULT_CORPUS = 'tests/harness/fixtures/corpus/corpus.json';
 
 const { buildPrompt, parseVerdictOutput, classifyFailure, loadCorpus } = require('../qualification/runner');
@@ -23,7 +23,7 @@ const { detectInterventionSignals, hasCritical } = require('./intervention');
 
 // ---- 准入矩阵读取（P5 harness:qualify 产物）----
 
-function loadQualificationResult(matrixPath = DEFAULT_QUALIFICATION) {
+function loadQualificationResult(matrixPath = qualificationPath('deepseek')) {
   const resolved = path.resolve(HOST_ROOT, matrixPath);
   const relative = path.relative(HOST_ROOT, resolved);
   if (relative.startsWith('..') || path.isAbsolute(relative)) {
@@ -125,7 +125,7 @@ async function runShadowObservation({
   providerName = 'deepseek',
   family,
   tier,
-  matrixPath = DEFAULT_QUALIFICATION,
+  matrixPath = qualificationPath('deepseek'),
   corpusPath = DEFAULT_CORPUS,
   fixtureRef = null,
   count = 1,
@@ -331,7 +331,6 @@ function createShadowDryRunProvider() {
 }
 
 module.exports = {
-  DEFAULT_QUALIFICATION,
   loadQualificationResult,
   decidedTierOf,
   selectFixturesForShadow,

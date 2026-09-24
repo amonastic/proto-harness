@@ -12,12 +12,12 @@ const fs = require('fs');
 const path = require('path');
 
 const HOST_ROOT = path.resolve(__dirname, '../../../../');
-const SHADOW_ROOT = '.harness-runtime/shadow';
+const { shadowRoot, DEFAULT_SHADOW_ROOT: SHADOW_ROOT } = require('./runtime-root');
 const LOG_SCHEMA_VERSION = 'h10a-shadow-log-v1';
 const WEEKLY_SCHEMA_VERSION = 'h10a-shadow-weekly-v1';
 
 function shadowDir(provider, family) {
-  return path.join(HOST_ROOT, SHADOW_ROOT, provider, family);
+  return path.join(HOST_ROOT, shadowRoot(), provider, family);
 }
 
 function logPath(provider, family, runId) {
