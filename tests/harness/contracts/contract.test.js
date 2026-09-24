@@ -816,17 +816,20 @@ function collectEvidence(variant, sourceBefore, sourceAfter, run, startedAt, fai
   };
 }
 
-// source-mutation leaf 证据校验：目标 subtest 恰为 entry、tests=1/pass=0/fail=1/skipped=0/todo=0、
+// source-mutation leaf 证据校验：目标 subtest 恰为 entry、实际执行数=1 且 pass=0/fail=1/todo=0、
 // 失败为 ERR_ASSERTION、诊断命中；超时/信号/spawn error 均不合格。
+// 执行数取 tests - skipped：Node 18/20 会把 --test-name-pattern 未命中的用例以
+// `# SKIP test name does not match pattern` 计入 tests 汇总，Node 22 则不计。
+// 断言直接写 tests=1 等于把 TAP 汇总口径绑死在某一版 Node 上。
 function validateF3Evidence(variant, evidence) {
   assert.ok(typeof variant.semantic_assertion === 'string' && variant.semantic_assertion.trim().length > 0, `${variant.id} must declare non-empty semantic_assertion`);
   assert.equal(evidence.status, 1, `${variant.id} must exit 1`);
   assert.equal(evidence.signal, null, `${variant.id} must not be signal-killed`);
   assert.equal(evidence.spawn_error, null, `${variant.id} must not have spawn error`);
-  assert.equal(evidence.tap_tests, 1, `${variant.id} must run exactly 1 subtest (got ${evidence.tap_tests})`);
+  const executed = evidence.tap_tests - evidence.tap_skipped;
+  assert.equal(executed, 1, `${variant.id} must run exactly 1 subtest (got ${executed}; tests=${evidence.tap_tests} skipped=${evidence.tap_skipped})`);
   assert.equal(evidence.tap_pass, 0, `${variant.id} must have 0 pass`);
   assert.equal(evidence.tap_fail, 1, `${variant.id} must have exactly 1 fail`);
-  assert.equal(evidence.tap_skipped, 0, `${variant.id} must have 0 skipped`);
   assert.equal(evidence.tap_todo, 0, `${variant.id} must have 0 todo`);
   assert.equal(evidence.failure_code, 'ERR_ASSERTION', `${variant.id} failure must be AssertionError (got ${evidence.failure_code})`);
   assert.ok(variant.diagnostic.test(evidence.diagnostic), `${variant.id} diagnostic must match ${variant.diagnostic} (got ${evidence.diagnostic})`);
