@@ -1,7 +1,7 @@
 {
   "name": "proto-harness",
   "version": "0.1.0",
-  "description": "Prototype governance harness: delivery gates, audits and rule harness for static design-prototype teams working with AI agents",
+  "description": "面向目录型设计稿仓库的治理工作流内核：交付闸门、机检审计与 AI 协作规则",
   "license": "MIT",
   "author": "amonastic",
   "homepage": "https://github.com/amonastic/proto-harness#readme",
