@@ -1,56 +1,289 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>proto-harness 示例项目 · 总导航</title>
-  <link href="assets/css/font-awesome-local.css?v=8171babf" rel="stylesheet">
-  <link href="assets/css/variables.css?v=12f21725" rel="stylesheet">
-  <link href="assets/css/common.css?v=a6a1e0b1" rel="stylesheet">
-  <link href="assets/css/components.css?v=70397998" rel="stylesheet">
-  <link href="assets/css/nav-themes.css?v=3b8d7bed" rel="stylesheet">
-  <style>
-    body { margin: 0; background: radial-gradient(circle at top, #334155, #0f172a 70%); min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif; }
-    .portal-wrap { max-width: 1080px; margin: 0 auto; padding: 64px 24px 80px; }
-    .portal-title { color: #f8fafc; font-size: 30px; font-weight: 800; letter-spacing: .5px; margin: 0 0 8px; }
-    .portal-sub { color: #94a3b8; font-size: 14px; margin: 0 0 36px; line-height: 1.8; }
-    .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
-    .portal-card { display: block; text-decoration: none; background: rgba(248, 250, 252, .06); border: 1px solid rgba(148, 163, 184, .22); border-radius: 14px; padding: 20px 20px 18px; transition: transform .18s ease, border-color .18s ease, background .18s ease; }
-    .portal-card:hover { transform: translateY(-3px); border-color: rgba(56, 189, 248, .5); background: rgba(56, 189, 248, .10); }
-    .portal-card .card-tag { display: inline-block; font-size: 11px; color: #7dd3fc; border: 1px solid rgba(125, 211, 252, .4); border-radius: 999px; padding: 2px 10px; margin-bottom: 12px; }
-    .portal-card h3 { color: #f1f5f9; font-size: 17px; margin: 0 0 8px; }
-    .portal-card p { color: #94a3b8; font-size: 13px; line-height: 1.7; margin: 0; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>a monastic · 产品经理工作台</title>
+    <script src="assets/js/tailwind.min.js?v=7a614b9a"></script>
+    <link href="assets/css/font-awesome.min.css?v=dfb8fc36" rel="stylesheet">
+    <link href="assets/css/font-awesome-local.css?v=8171babf" rel="stylesheet">
+    <link href="assets/css/variables.css?v=12f21725" rel="stylesheet">
+    <script src="assets/js/nav-theme-preload.js?v=a5b6544d"></script>
+    <link href="assets/css/nav-themes.css?v=3b8d7bed" rel="stylesheet">
+    <style>
+        body {
+            background: #0F172A;
+            min-height: 100vh;
+        }
+        .card-hover {
+            transition: all 0.2s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .sub-link {
+            cursor: pointer;
+            transition: background-color 0.15s ease, color 0.15s ease;
+            text-decoration: none;
+        }
+        .sub-link:hover {
+            filter: brightness(1.25);
+        }
+        .module-entry {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 0;
+            font-size: 14px;
+            color: var(--nav-text);
+            cursor: pointer;
+            text-decoration: none;
+            border-bottom: 1px solid var(--nav-border);
+            transition: color 0.15s ease;
+        }
+        .module-entry:last-child {
+            border-bottom: none;
+        }
+        .module-entry:hover {
+            color: var(--nav-accent);
+        }
+        .module-entry .me-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: var(--nav-accent);
+            background: transparent !important;
+        }
+        .module-entry .me-name {
+            flex: 1;
+            min-width: 0;
+        }
+        .module-entry .me-arrow {
+            font-size: 10px;
+            color: var(--nav-muted);
+        }
+        .iter-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .iter-stat-label {
+            font-size: 11px;
+            color: var(--nav-muted);
+        }
+        .iter-stat-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--nav-text);
+        }
+        #global-search-input {
+            color: var(--nav-text) !important;
+            -webkit-text-fill-color: var(--nav-text);
+            background: var(--nav-surface-soft) !important;
+            border-color: var(--nav-border) !important;
+        }
+        #global-search-input::placeholder { color: var(--nav-subtle) !important; opacity: 1; }
+        #global-search-input::-webkit-input-placeholder { color: var(--nav-subtle) !important; opacity: 1; }
+        #global-search-results {
+            background: var(--nav-surface) !important;
+            border-color: var(--nav-border) !important;
+        }
+    </style>
 </head>
-<body>
-  <div class="portal-wrap">
-    <h1 class="portal-title">proto-harness 示例项目</h1>
-    <p class="portal-sub">
-      这是一个虚构的三端设计稿仓库示例：管理后台（admin-portal）、移动端 App（field-app）、小程序（mini-program）。<br>
-      全部页面为本仓自带的演示内容，仅用于演示目录结构、抽屉组件与机检流程。
-    </p>
-    <div class="portal-grid">
-      <a class="portal-card" href="迭代索引/202606下.html">
-        <span class="card-tag">迭代索引</span>
-        <h3>202606下 迭代总览</h3>
-        <p>按需求分组聚合本期页面入口，迭代页只做索引，不承载业务开发。</p>
-      </a>
-      <a class="portal-card" href="admin-portal/asset-admin/index.html?page=asset-list">
-        <span class="card-tag">管理后台</span>
-        <h3>资产管理模块</h3>
-        <p>模块承载页（左侧菜单 + iframe 承载 + pageNames 路由）与资产列表业务页。</p>
-      </a>
-      <a class="portal-card" href="field-app/main/pages/订单列表.html">
-        <span class="card-tag">移动端 App</span>
-        <h3>订单列表</h3>
-        <p>手机模型 + 右侧设计稿控制区，需求文档抽屉默认自动展开。</p>
-      </a>
-      <a class="portal-card" href="mini-program/main/pages/下单.html">
-        <span class="card-tag">小程序</span>
-        <h3>下单页</h3>
-        <p>轻量表单页示例，展示字段级需求说明与底部操作栏的静态原型写法。</p>
-      </a>
-    </div>
-  </div>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 顶部导航 -->
+    <header class="py-6 px-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center gap-3 mb-5">
+                <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-cubes text-indigo-400 text-xl"></i>
+                </div>
+                <h1 class="text-white text-xl font-bold">a monastic · 产品经理工作台</h1>
+            </div>
+            <!-- 全局搜索 -->
+            <div class="relative">
+                <div class="relative">
+                    <i class="fas fa-search absolute" style="left:18px;top:50%;transform:translateY(-50%);color:var(--nav-muted);font-size:15px;"></i>
+                    <input
+                        id="global-search-input"
+                        type="text"
+                        placeholder="搜索菜单名称或需求文档内容…（如：资产列表、订单列表、下单）"
+                        style="width:100%;height:48px;padding:0 18px 0 46px;border-radius:10px;font-size:14px;outline:none;transition:all 0.2s;"
+                        onfocus="this.style.boxShadow='0 0 0 3px rgba(129,140,248,0.2)'"
+                        onblur="this.style.boxShadow='none'"
+                    />
+                </div>
+                <div id="global-search-results" style="display:none;position:absolute;top:54px;left:0;right:0;max-height:480px;overflow-y:auto;border-width:1px;border-style:solid;border-radius:10px;box-shadow:var(--nav-shadow);z-index:100;"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="flex-1 px-8 py-10">
+        <div class="max-w-6xl w-full mx-auto">
+
+            <!-- 平台卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+                <!-- 管理后台 -->
+                <div class="card-hover bg-white/10 backdrop-blur rounded-xl p-5 relative">
+                    <a href="admin-portal/asset-admin/index.html" class="absolute inset-0 z-0 rounded-xl" aria-label="进入管理后台"></a>
+                    <div class="relative z-10 pointer-events-none">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-desktop text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white text-base font-bold">管理后台</h3>
+                                <p class="text-white/50 text-xs">Web 管理端</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mb-3">
+                            <a href="admin-portal/asset-admin/index.html?page=asset-list" class="module-entry relative z-10 pointer-events-auto">
+                                <span class="me-icon bg-blue-500/30 text-blue-300"><i class="fas fa-store"></i></span>
+                                <span class="me-name">服务商后台</span>
+                                <i class="fas fa-chevron-right me-arrow"></i>
+                            </a>
+                        </div>
+                        <div class="pt-3 border-t border-white/10 flex items-center justify-end">
+                            <span class="text-blue-400 text-xs font-medium">进入总览 <i class="fas fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 小程序端 -->
+                <div class="card-hover bg-white/10 backdrop-blur rounded-xl p-5 relative">
+                    <a href="mini-program/main/index.html?page=order-create" class="absolute inset-0 z-0 rounded-xl" aria-label="进入小程序端"></a>
+                    <div class="relative z-10 pointer-events-none">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fab fa-weixin text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white text-base font-bold">小程序端</h3>
+                                <p class="text-white/50 text-xs">微信/支付宝小程序</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mb-3">
+                            <a href="mini-program/main/index.html?page=order-create" class="module-entry relative z-10 pointer-events-auto">
+                                <span class="me-icon bg-green-500/30 text-green-300"><i class="fas fa-box"></i></span>
+                                <span class="me-name">在线下单</span>
+                                <i class="fas fa-chevron-right me-arrow"></i>
+                            </a>
+                        </div>
+                        <div class="pt-3 border-t border-white/10 flex items-center justify-end">
+                            <span class="text-green-400 text-xs font-medium">进入总览 <i class="fas fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 移动作业端 -->
+                <div class="card-hover bg-white/10 backdrop-blur rounded-xl p-5 relative">
+                    <a href="field-app/main/index.html?page=order-list" class="absolute inset-0 z-0 rounded-xl" aria-label="进入移动作业端"></a>
+                    <div class="relative z-10 pointer-events-none">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-mobile-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white text-base font-bold">移动作业端</h3>
+                                <p class="text-white/50 text-xs">App 客户端</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mb-3">
+                            <a href="field-app/main/index.html?page=order-list" class="module-entry relative z-10 pointer-events-auto">
+                                <span class="me-icon bg-orange-500/30 text-orange-300"><i class="fas fa-list"></i></span>
+                                <span class="me-name">订单列表</span>
+                                <i class="fas fa-chevron-right me-arrow"></i>
+                            </a>
+                        </div>
+                        <div class="pt-3 border-t border-white/10 flex items-center justify-end">
+                            <span class="text-orange-400 text-xs font-medium">进入总览 <i class="fas fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 迭代速览 -->
+            <div class="mt-6">
+                <a href="迭代索引/index.html" class="card-hover bg-white/10 backdrop-blur border border-indigo-400/30 rounded-xl p-6 block">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-indigo-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-calendar-alt text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white text-base font-bold flex items-center gap-2">
+                                    迭代速览
+                                    <span class="px-2 py-0.5 bg-green-500 text-white text-xs rounded-full">进行中</span>
+                                </h3>
+                                <p class="text-white/50 text-xs">按迭代周期查看设计稿</p>
+                            </div>
+                        </div>
+                        <span class="text-indigo-400 text-xs font-medium">
+                            查看全部 <i class="fas fa-arrow-right ml-1"></i>
+                        </span>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-white/10">
+                        <div class="iter-stat">
+                            <span class="iter-stat-label">当前进行中</span>
+                            <span class="iter-stat-value">202606 下</span>
+                        </div>
+                        <div class="iter-stat">
+                            <span class="iter-stat-label">下个计划</span>
+                            <span class="iter-stat-value">202607 上</span>
+                        </div>
+                        <div class="iter-stat">
+                            <span class="iter-stat-label">专项</span>
+                            <span class="iter-stat-value">1 个</span>
+                        </div>
+                        <div class="iter-stat">
+                            <span class="iter-stat-label">待排期</span>
+                            <span class="iter-stat-value">2 个</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 专项入口 -->
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <a href="admin-portal/asset-admin/index.html?page=asset-list" class="card-hover bg-white/5 border border-white/10 rounded-xl p-4 flex items-center justify-between block">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-building text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-white/80 text-sm font-medium flex items-center gap-2">
+                                设备接入专项
+                                <span class="px-2 py-0.5 bg-emerald-600/80 text-white text-xs rounded-full">专项</span>
+                            </h3>
+                            <p class="text-white/40 text-xs">设备台账、接入状态与批量操作的统一承载</p>
+                        </div>
+                    </div>
+                    <span class="text-white/40 text-xs">
+                        进入 <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                    </span>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- 底部信息 -->
+    <footer class="mt-auto py-6 px-8 flex-shrink-0">
+        <div class="max-w-6xl mx-auto flex items-center justify-between text-white/50 text-sm">
+            <span>a monastic 设计稿系统 v0.2</span>
+            <span>© 2026 a monastic</span>
+        </div>
+    </footer>
+    <script src="assets/js/nav-theme-switcher.js?v=fd508952"></script>
+    <script src="assets/js/search-index.js?v=49bd6d12"></script>
+    <script src="assets/js/global-search.js?v=173001e3"></script>
 </body>
 </html>

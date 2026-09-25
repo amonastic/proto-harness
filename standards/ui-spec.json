@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "updatedAt": "2026-09-22",
+  "updatedAt": "2026-09-25",
   "principles": [
     "迭代页是索引页，不承载业务开发",
     "平台入口页有导航，模块业务页无平台导航",
@@ -94,12 +94,66 @@
     ],
     "pages": [
       {
+        "path": "迭代索引/202605下.html",
+        "type": "iteration-index",
+        "platform": "web",
+        "docPanelMode": "none",
+        "requiresDocButton": false,
+        "requiresTokens": false,
+        "docDeliveryStrategy": "none"
+      },
+      {
         "path": "迭代索引/202606下.html",
         "type": "iteration-index",
         "platform": "web",
-        "docPanelMode": "web-manual-open",
+        "docPanelMode": "none",
         "requiresDocButton": false,
         "requiresTokens": false,
+        "docDeliveryStrategy": "none"
+      },
+      {
+        "path": "迭代索引/待排期.html",
+        "type": "iteration-index",
+        "platform": "web",
+        "docPanelMode": "none",
+        "requiresDocButton": false,
+        "requiresTokens": false,
+        "docDeliveryStrategy": "none"
+      },
+      {
+        "path": "迭代索引/已废弃.html",
+        "type": "iteration-index",
+        "platform": "web",
+        "docPanelMode": "none",
+        "requiresDocButton": false,
+        "requiresTokens": false,
+        "docDeliveryStrategy": "none"
+      },
+      {
+        "path": "迭代索引/index.html",
+        "type": "portal-index",
+        "platform": "web",
+        "docPanelMode": "none",
+        "requiresDocButton": false,
+        "requiresTokens": false,
+        "docDeliveryStrategy": "none"
+      },
+      {
+        "path": "迭代索引/snapshots/202605下/订单列表.html",
+        "type": "module-page",
+        "platform": "app",
+        "docPanelMode": "app-auto-open",
+        "requiresDocButton": true,
+        "requiresTokens": true,
+        "docDeliveryStrategy": "none"
+      },
+      {
+        "path": "迭代索引/snapshots/202605下/下单.html",
+        "type": "module-page",
+        "platform": "miniapp",
+        "docPanelMode": "miniapp-auto-open",
+        "requiresDocButton": true,
+        "requiresTokens": true,
         "docDeliveryStrategy": "none"
       },
       {
@@ -121,12 +175,30 @@
         "docDeliveryStrategy": "drawer-first"
       },
       {
+        "path": "field-app/main/index.html",
+        "type": "module-page",
+        "platform": "app",
+        "docPanelMode": "web-manual-open",
+        "requiresDocButton": true,
+        "requiresTokens": true,
+        "docDeliveryStrategy": "drawer-first"
+      },
+      {
         "path": "field-app/main/pages/订单列表.html",
         "type": "module-page",
         "platform": "app",
         "docPanelMode": "app-auto-open",
         "requiresDocButton": true,
         "requiresTokens": false,
+        "docDeliveryStrategy": "drawer-first"
+      },
+      {
+        "path": "mini-program/main/index.html",
+        "type": "module-page",
+        "platform": "miniapp",
+        "docPanelMode": "web-manual-open",
+        "requiresDocButton": true,
+        "requiresTokens": true,
         "docDeliveryStrategy": "drawer-first"
       },
       {

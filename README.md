@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/amonastic/proto-harness/actions/workflows/ci.yml/badge.svg)](https://github.com/amonastic/proto-harness/actions/workflows/ci.yml)
 
-**面向「目录型设计稿仓库」的治理工作流内核：一套 AI 协作规则 + 可机检的结构化标准 + 零依赖脚本 + 自带虚构示例。**
+**面向「目录型设计稿仓库」的产品经理工作台：总导航 + 迭代（版本）管理 + 需求文档检索，加一套 AI 协作规则、可机检的结构化标准与零依赖脚本，自带虚构示例。**
 
 ---
 
@@ -54,9 +54,9 @@ npm run serve:local
 
 ```text
 [register-missing] no missing html pages
-[register-missing] total registered: 5
-[lint-ui] OK (5 pages checked)
-[audit-ui] scanned 5 html files
+[register-missing] total registered: 13
+[lint-ui] OK (13 pages checked)
+[audit-ui] scanned 13 html files
 [audit-ui] found 0 issues
 ```
 
@@ -79,28 +79,39 @@ npm run serve:local
 
 | 入口 | 说明 |
 | --- | --- |
-| `index.html` | 总导航：迭代索引 + 三端示例页入口 |
-| `迭代索引/202606下.html` | 迭代索引：只做入口聚合，不写业务 |
+| `index.html` | 总导航：全局搜索 + 三端平台卡 + 迭代速览 + 专项入口 |
+| `迭代索引/index.html` | 迭代门户：待排期 / 进行中 / 规划中 / 历史 / 已废弃分区，卡片摘要实时读取迭代页分组 |
+| `迭代索引/202606下.html` | 当前迭代页：iframe 引用源页面，左侧导航 + `pageNames` 路由 + 页脚计数 |
+| `迭代索引/202605下.html` | 历史迭代页：iframe **只引用冻结快照**，不引用仍在演进的源页面 |
+| `迭代索引/snapshots/202605下/` | 迭代快照：带 `snapshot-of` / `snapshot-iteration` / `snapshot-date` 元信息的冻结副本 |
+| `迭代索引/待排期.html`、`迭代索引/已废弃.html` | 两个固定分区入口 |
 | `admin-portal/asset-admin/index.html` | 模块承载页：左侧菜单 + iframe 承载 + `pageNames` 路由 |
 | `admin-portal/asset-admin/pages/资产列表.html` | Web 列表页：筛选 + 表格 + 手动需求抽屉 |
+| `field-app/main/index.html`、`mini-program/main/index.html` | 另两端的模块承载页（同上结构） |
 | `field-app/main/pages/订单列表.html` | 移动端页：手机模型 + 右侧控制区 + 自动展开抽屉 |
 | `mini-program/main/pages/下单.html` | 小程序页：轻量表单 + 底部操作栏 |
 
+需求文档数据按模块分层放在各端 `js/docs.js` 中（`requirement` 供抽屉渲染、`content` 供全局搜索抽取全文、`DOCS_CSS_DATA` 提供页面级 CSS 规范），加载顺序为 `doc-builder.js` → 模块级 `docs.js` → `doc-panel.js`。
+
 ### 长什么样
 
-总导航 —— 迭代索引与三端入口聚合在一页：
+总导航 —— 全局搜索、三端平台卡与迭代速览聚合在一页：
 
 ![示例项目总导航](docs/images/01-overview.png)
 
-Web 列表页 —— 标准筛选区 + 主表 + 状态标签，右上角是需求文档入口（默认手动打开）：
+迭代门户 —— 待排期 / 进行中 / 规划中 / 历史 / 已废弃分区，卡片摘要实时读取迭代页的分组标题：
 
-![Web 列表页与需求文档入口](docs/images/02-web-list.png)
+![迭代索引门户](docs/images/04-iteration-portal.png)
+
+Web 列表页 —— 标准筛选区 + 主表 + 状态标签，右侧是需求文档抽屉（Web 端默认手动打开）：
+
+![Web 列表页与需求文档抽屉](docs/images/02-web-list.png)
 
 移动端页 —— 左侧手机模型，右侧自动展开的需求文档抽屉（「需求文档 / CSS 规范」双标签页）：
 
 ![移动端手机模型与自动展开的需求抽屉](docs/images/03-mobile-drawer.png)
 
-三张图均为仓库自带虚构示例的真实渲染结果（用无头 Chrome 采集，页面由 `npm run serve:local` 起服务提供）。
+四张图均为仓库自带虚构示例的真实渲染结果（用无头 Chrome 采集，页面由 `npm run serve:local` 起服务提供）。
 
 「需求文档抽屉」由公共组件 `assets/js/components/doc-panel.js` 提供：页面声明 `window.DocsData` 后，一个按钮即可获得「需求文档 / CSS 规范」双标签页抽屉。
 
@@ -127,6 +138,8 @@ proto-harness/
 ├── governance.config.example.json
 ├── LICENSE / NOTICE       # MIT 主体许可 + 第三方资源与许可声明
 └── (示例项目) index.html / 迭代索引/ / admin-portal/ / field-app/ / mini-program/
+            （迭代索引/ 内含 index.html 门户、〇202605下.html 与 202606下.html 迭代页、
+              待排期.html、已废弃.html、sprint-config.js、snapshots/ 与 js/）
 ```
 
 ## 常用命令
@@ -158,7 +171,7 @@ proto-harness/
 
 ## 版本状态
 
-当前 `v0.1.0`。设计目标是小范围稳定，而非快速扩张接口面：规则与机检口径已经过一轮内部项目验证，但**尚未有多个外部项目的接入反馈**，`standards/*` 的具体阈值与目录约定可能仍带原项目的形状。
+当前 `v0.2.0`。设计目标是小范围稳定，而非快速扩张接口面：规则与机检口径已经过一轮内部项目验证，但**尚未有多个外部项目的接入反馈**，`standards/*` 的具体阈值与目录约定可能仍带原项目的形状。
 
 已知限制完整列在 [`CHANGELOG.md`](CHANGELOG.md#已知限制)，其中两条影响接入判断：
 

@@ -25,7 +25,7 @@
         "platforms": {
           "type": "array",
           "items": { "type": "string" },
-          "description": "涉及端（门店后台、门店小程序、作业端 App、用户端 App 等）"
+          "description": "涉及端（服务商后台、门店小程序、作业端 App、用户端 App 等）"
         },
         "frontend_impact": {
           "type": "string",

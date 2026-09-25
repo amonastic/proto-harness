@@ -156,7 +156,7 @@ test('H10A-05 L2 observation writes log + diff file (git unified format)', async
     const result = await runShadowObservation({
       provider: createShadowDryRunProvider(),
       family: 'entry-defect',
-      fixtureRef: 'C-店-门店后台-index.html-02',
+      fixtureRef: 'C-店-服务商后台-index.html-02',
       now
     });
     assert.equal(result.tier, 'L2');
@@ -197,7 +197,7 @@ test('H10A-07 dirty repo skips L3/L4 write with warning (log + diff only)', asyn
     const l3 = await runShadowObservation({
       provider: createShadowDryRunProvider(),
       family: 'entry-defect',
-      fixtureRef: 'C-店-门店后台-index.html-02',
+      fixtureRef: 'C-店-服务商后台-index.html-02',
       now
     });
     assert.equal(l3.dirty_write_skipped, true, 'L3 write must be skipped when dirty');

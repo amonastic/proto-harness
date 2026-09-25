@@ -25,7 +25,7 @@
       "required_runs": 3
     },
     {
-      "corpus_id": "C-店-门店后台-index.html-02",
+      "corpus_id": "C-店-服务商后台-index.html-02",
       "priority": "P0",
       "required_runs": 5
     },
@@ -35,17 +35,17 @@
       "required_runs": 3
     },
     {
-      "corpus_id": "C-站-服务站后台-index.html-04",
+      "corpus_id": "C-站-门店后台-index.html-04",
       "priority": "P0",
       "required_runs": 5
     },
     {
-      "corpus_id": "C-站-服务站后台-服务站数据大屏-05",
+      "corpus_id": "C-站-门店后台-服务站数据大屏-05",
       "priority": "P1",
       "required_runs": 3
     },
     {
-      "corpus_id": "C-运-运维后台-index.html-06",
+      "corpus_id": "C-运-管理后台-index.html-06",
       "priority": "P0",
       "required_runs": 5
     },

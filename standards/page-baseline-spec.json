@@ -36,7 +36,7 @@
     },
     "platforms": {
       "web": {
-        "purpose": "0-1 运维后台列表/台账页基准",
+        "purpose": "0-1 管理后台列表/台账页基准",
         "primaryReferences": [
           "admin-portal/asset-admin/index.html",
           "admin-portal/asset-admin/js/docs.js#card-list"

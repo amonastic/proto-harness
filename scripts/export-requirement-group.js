@@ -63,7 +63,7 @@ function warnMissing(kind, ref, baseDir) {
 
 /**
  * 解析相对引用：优先按页面目录解析；存量页面存在 ../ 层级写错的情况
- * （如 运维后台/pages 下误写 ../../assets），逐级加一层 ../ 回退重试。
+ * （如 管理后台/pages 下误写 ../../assets），逐级加一层 ../ 回退重试。
  */
 function resolveRef(ref, baseDir) {
   const clean = stripVersion(ref);

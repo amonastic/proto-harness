@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!-- template-type: portal-index -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迭代索引 - 设计稿导航</title>
+    <script src="../assets/js/tailwind.min.js?v=7a614b9a"></script>
+    <link href="../assets/css/font-awesome.min.css?v=dfb8fc36" rel="stylesheet">
+    <link href="../assets/css/font-awesome-local.css?v=8171babf" rel="stylesheet">
+    <link href="../assets/css/variables.css?v=12f21725" rel="stylesheet">
+    <script src="../assets/js/nav-theme-preload.js?v=a5b6544d"></script>
+    <link href="../assets/css/nav-themes.css?v=3b8d7bed" rel="stylesheet">
+    <style>
+        body {
+            background: #0F172A;
+            min-height: 100vh;
+        }
+        .sprint-card {
+            transition: all 0.2s ease;
+            border-left: 4px solid transparent;
+        }
+        .sprint-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .sprint-card.current {
+            border-left-color: #22C55E;
+        }
+        .sprint-card.upcoming {
+            border-left-color: #3B82F6;
+        }
+        .sprint-card.completed {
+            border-left-color: #6B7280;
+            opacity: 0.8;
+        }
+        .platform-tag {
+            display: inline-flex;
+            align-items: center;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+        .tag-backend { background: rgba(59,130,246,0.2); color: #60A5FA; }
+        .tag-client { background: rgba(249,115,22,0.2); color: #FB923C; }
+        .tag-miniprogram { background: rgba(34,197,94,0.2); color: #4ADE80; }
+
+        .status-badge {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 999px;
+        }
+        .status-current { background: #22C55E; color: white; }
+        .status-overdue { background: #EF4444; color: white; animation: overduePulse 2s infinite; }
+        .status-upcoming { background: #3B82F6; color: white; }
+        .status-completed { background: #6B7280; color: white; }
+        @keyframes overduePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .sprint-summary {
+            display: block;
+            max-width: min(64vw, 640px);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .sprint-card > .flex,
+        .sprint-card > .flex > .flex {
+            gap: 16px;
+        }
+        .sprint-card .text-right {
+            flex: 0 0 auto;
+        }
+        .sprint-card .text-right .flex {
+            flex-wrap: nowrap !important;
+        }
+        .index-shell {
+            width: min(100% - 64px, 1480px);
+            margin: 0 auto;
+        }
+        .pinned-entry {
+            margin-bottom: 24px;
+        }
+        .pinned-entry .mb-8 {
+            margin-bottom: 0;
+        }
+        .pinned-entry .sprint-card {
+            max-width: none;
+        }
+        .iteration-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+            gap: 24px;
+            align-items: start;
+        }
+        .history-extra.is-collapsed {
+            display: none;
+        }
+        .history-toggle {
+            width: 100%;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            background: rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.72);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-top: 12px;
+            font-size: 13px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .history-toggle:hover {
+            background: rgba(255,255,255,0.09);
+            color: white;
+        }
+        .planned-extra.is-collapsed {
+            display: none;
+        }
+        .planned-extra .sprint-card + .sprint-card {
+            margin-top: 16px;
+        }
+        .planned-toggle {
+            width: 100%;
+            border: 1px solid var(--nav-active-border);
+            background: var(--nav-active-bg);
+            color: var(--nav-accent);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-top: 12px;
+            font-size: 13px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .planned-toggle:hover {
+            background: var(--nav-surface-hover);
+            color: var(--nav-text);
+        }
+        html[data-nav-theme] a.home-fab[title="返回总导航"] {
+            min-width: 86px;
+            height: 38px;
+            padding: 0 13px;
+            gap: 7px;
+            background: var(--nav-surface) !important;
+            color: var(--nav-accent) !important;
+            border-color: var(--nav-active-border) !important;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: 0;
+            box-shadow: var(--nav-shadow);
+        }
+        html[data-nav-theme] a.home-fab[title="返回总导航"] i,
+        html[data-nav-theme] a.home-fab[title="返回总导航"] span {
+            color: inherit !important;
+        }
+        html[data-nav-theme] a.home-fab[title="返回总导航"] i {
+            font-size: 13px;
+        }
+        html[data-nav-theme] a.home-fab[title="返回总导航"]:hover {
+            background: var(--nav-surface-hover) !important;
+            color: var(--nav-text) !important;
+            transform: translateY(-1px);
+            box-shadow: var(--nav-shadow);
+        }
+        .regular-column,
+        .special-column {
+            min-width: 0;
+        }
+        .special-column {
+            position: sticky;
+            top: 16px;
+        }
+        @media (max-width: 960px) {
+            .index-shell {
+                width: calc(100% - 32px);
+            }
+            .iteration-layout {
+                grid-template-columns: 1fr;
+            }
+            .special-column {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 顶部导航 -->
+    <header class="py-6 px-8">
+        <div class="index-shell flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="../index.html" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-white/70 hover:bg-white/20 hover:text-white transition-colors" title="返回总导航">
+                    <i class="fas fa-th-large"></i>
+                </a>
+                <div>
+                    <h1 class="text-white text-xl font-bold">迭代索引</h1>
+                    <p class="text-white/60 text-xs">按迭代周期查看设计稿</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 text-white/50 text-sm">
+                <span><i class="fas fa-calendar-alt mr-2"></i>按时间周期组织</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容 -->
+    <main class="flex-1 px-8 py-6">
+        <div class="index-shell">
+
+            <!-- 专项/定制池 -->
+            <div class="mb-8" data-index-section="special">
+                <h2 class="text-white/60 text-xs font-medium mb-4 tracking-wider uppercase flex items-center gap-2">
+                    <span class="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                    专项 / 定制池
+                </h2>
+                <div class="space-y-4">
+                    <a href="../admin-portal/asset-admin/index.html?page=asset-list" class="sprint-card bg-white/5 backdrop-blur rounded-xl p-5 block" style="border-left:4px solid #EAB308;">
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <h3 class="text-white/80 text-base font-bold">设备接入专项</h3>
+                                    <span class="status-badge" style="background:#EAB308;color:#0F172A;">多端专项</span>
+                                </div>
+                                <p class="text-white/40 text-sm">设备台账、接入状态与批量操作的统一承载</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="flex gap-2 flex-wrap justify-end">
+                                    <span class="platform-tag tag-backend">后台</span>
+                                    <span class="platform-tag tag-client">客户端</span>
+                                    <span class="platform-tag tag-miniprogram">小程序</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-t border-white/10 pt-3 mt-3">
+                            <div class="flex items-center justify-end">
+                                <span class="text-yellow-400 text-sm font-medium">
+                                    查看详情 <i class="fas fa-arrow-right ml-1"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 待排期 -->
+            <div class="mb-8" data-index-section="pinned">
+                <h2 class="text-white/60 text-xs font-medium mb-4 tracking-wider uppercase flex items-center gap-2">
+                    <span class="w-2 h-2 bg-gray-500 rounded-full"></span>
+                    待排期
+                </h2>
+                <div class="space-y-4">
+                    <a href="待排期.html" class="sprint-card bg-white/5 backdrop-blur rounded-xl p-5 block" style="border-left:4px solid #6B7280;">
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <h3 class="text-white/80 text-base font-bold">待排期</h3>
+                                    <span class="status-badge" style="background:#6B7280;color:white;">待排期</span>
+                                </div>
+                                <p class="text-white/40 text-sm">已立项但未排入迭代的需求页面集合</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-white/40 text-xs">固定入口</div>
+                            </div>
+                        </div>
+                        <div class="border-t border-white/10 pt-3 mt-3">
+                            <div class="flex items-center justify-end">
+                                <span class="text-gray-400 text-sm font-medium">
+                                    查看详情 <i class="fas fa-arrow-right ml-1"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 当前进行中 -->
+            <div class="mb-8" data-index-section="active">
+                <h2 class="text-white/60 text-xs font-medium mb-4 tracking-wider uppercase flex items-center gap-2">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    当前进行中
+                </h2>
+                <div class="space-y-4">
+                    <a href="202606下.html" class="sprint-card current bg-white/10 backdrop-blur rounded-xl p-6 block" data-sprint-card="202606 下">
+                        <div class="flex items-start justify-between mb-4">
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <h3 class="text-white text-lg font-bold">202606 下</h3>
+                                    <span class="status-badge status-current">进行中</span>
+                                </div>
+                                <p class="text-white/50 text-sm sprint-summary" data-iteration-summary>—</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-white/60 text-xs mb-1">涉及平台</div>
+                                <div class="flex gap-2 flex-wrap justify-end">
+                                    <span class="platform-tag tag-backend">后台</span>
+                                    <span class="platform-tag tag-client">客户端</span>
+                                    <span class="platform-tag tag-miniprogram">小程序</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-t border-white/10 pt-4 mt-4">
+                            <div class="flex items-center justify-end">
+                                <span class="text-green-400 text-sm font-medium">
+                                    查看详情 <i class="fas fa-arrow-right ml-1"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 规划中 -->
+            <div class="mb-8" data-index-section="planned">
+                <h2 class="text-white/60 text-xs font-medium mb-4 tracking-wider uppercase flex items-center gap-2">
+                    <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    规划中
+                </h2>
+                <div class="space-y-4">
+                    <div class="sprint-card upcoming bg-white/10 backdrop-blur rounded-xl p-6 block" data-sprint-card="202607 上">
+                        <div class="flex items-start justify-between mb-4"><div><div class="flex items-center gap-3 mb-2"><h3 class="text-white text-lg font-bold">202607 上</h3><span class="status-badge status-upcoming">计划中</span></div><p class="text-white/50 text-sm sprint-summary" data-iteration-summary>尚未登记迭代页面</p></div></div>
+                        <div class="border-t border-white/10 pt-4 mt-4"><div class="flex items-center justify-end"><span class="text-blue-400 text-sm font-medium">查看详情 <i class="fas fa-arrow-right ml-1"></i></span></div></div>
+                    </div>
+                    <div class="sprint-card upcoming bg-white/10 backdrop-blur rounded-xl p-6 block" data-sprint-card="202607 下">
+                        <div class="flex items-start justify-between mb-4"><div><div class="flex items-center gap-3 mb-2"><h3 class="text-white text-lg font-bold">202607 下</h3><span class="status-badge status-upcoming">计划中</span></div><p class="text-white/50 text-sm sprint-summary" data-iteration-summary>尚未登记迭代页面</p></div></div>
+                        <div class="border-t border-white/10 pt-4 mt-4"><div class="flex items-center justify-end"><span class="text-blue-400 text-sm font-medium">查看详情 <i class="fas fa-arrow-right ml-1"></i></span></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 历史迭代 -->
+            <div class="mb-8" data-index-section="history">
+                <h2 class="text-white/60 text-xs font-medium mb-4 tracking-wider uppercase flex items-center gap-2">
+                    <span class="w-2 h-2 bg-gray-500 rounded-full"></span>
+                    历史迭代
+                </h2>
+                <div class="space-y-4">
+                    <a href="202605下.html" class="sprint-card completed bg-white/5 backdrop-blur rounded-xl p-5 block" data-sprint-card="202605 下">
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <h3 class="text-white/80 text-base font-bold">202605 下</h3>
+                                    <span class="status-badge status-completed">已结束</span>
+                                </div>
+                                <p class="text-white/40 text-sm sprint-summary" data-iteration-summary>订单履约初版：移动作业端订单列表 / 小程序端下单页</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="flex gap-2 flex-wrap justify-end">
+                                    <span class="platform-tag tag-client">客户端</span>
+                                    <span class="platform-tag tag-miniprogram">小程序</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-t border-white/10 pt-3 mt-3">
+                            <div class="flex items-center justify-end">
+                                <span class="text-gray-400 text-sm font-medium">
+                                    查看详情 <i class="fas fa-arrow-right ml-1"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="sprint-card completed bg-white/5 backdrop-blur rounded-xl p-5 block" data-sprint-card="202604 下">
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <h3 class="text-white/80 text-base font-bold">202604 下</h3>
+                                    <span class="status-badge status-completed">已结束</span>
+                                </div>
+                                <p class="text-white/40 text-sm sprint-summary" data-iteration-summary>尚未登记迭代页面</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="flex gap-2 flex-wrap justify-end">
+                                    <span class="platform-tag tag-backend">后台</span>
+                                    <span class="platform-tag tag-client">客户端</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-t border-white/10 pt-3 mt-3">
+                            <div class="flex items-center justify-end">
+                                <span class="text-white/40 text-sm font-medium">
+                                    查看详情 <i class="fas fa-arrow-right ml-1"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 已废弃 -->
+            <div class="mb-8" data-index-section="deprecated">
+                <h2 class="text-white/60 text-xs font-medium mb-4 tracking-wider uppercase flex items-center gap-2">
+                    <span class="w-2 h-2 bg-gray-500 rounded-full"></span>
+                    已废弃
+                </h2>
+                <div class="space-y-4">
+                    <a href="已废弃.html" class="sprint-card bg-white/5 backdrop-blur rounded-xl p-5 block" style="border-left:4px solid #6B7280;">
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <h3 class="text-white/80 text-base font-bold">已废弃</h3>
+                                    <span class="status-badge" style="background:#6B7280;color:white;">已废弃</span>
+                                </div>
+                                <p class="text-white/40 text-sm">本年度不再做的需求页面</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-white/40 text-xs">固定入口</div>
+                            </div>
+                        </div>
+                        <div class="border-t border-white/10 pt-3 mt-3">
+                            <div class="flex items-center justify-end">
+                                <span class="text-gray-400 text-sm font-medium">
+                                    查看详情 <i class="fas fa-arrow-right ml-1"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+    <!-- 底部 -->
+    <footer class="py-4 px-8">
+        <div class="index-shell text-center text-white/40 text-xs">
+            迭代索引 · 按时间周期组织设计稿 | 点击左上角返回总导航
+        </div>
+    </footer>
+
+    <script src="sprint-config.js?v=6cd1692f"></script>
+    <script>
+        (function() {
+            var root = document.querySelector('main .index-shell');
+            if (!root) return;
+
+            var sections = {
+                special: root.querySelector('[data-index-section="special"]'),
+                pinned: root.querySelector('[data-index-section="pinned"]'),
+                planned: root.querySelector('[data-index-section="planned"]'),
+                active: root.querySelector('[data-index-section="active"]'),
+                history: root.querySelector('[data-index-section="history"]'),
+                deprecated: root.querySelector('[data-index-section="deprecated"]')
+            };
+
+            if (sections.pinned) root.prepend(sections.pinned);
+
+            var layout = document.createElement('div');
+            layout.className = 'iteration-layout';
+            var regularColumn = document.createElement('div');
+            regularColumn.className = 'regular-column';
+            var specialColumn = document.createElement('aside');
+            specialColumn.className = 'special-column';
+            layout.appendChild(regularColumn);
+            layout.appendChild(specialColumn);
+
+            if (sections.pinned && sections.pinned.nextSibling) {
+                root.insertBefore(layout, sections.pinned.nextSibling);
+            } else {
+                root.appendChild(layout);
+            }
+
+            ['active', 'planned', 'history', 'deprecated'].forEach(function(key) {
+                if (sections[key]) regularColumn.appendChild(sections[key]);
+            });
+            if (sections.special) specialColumn.appendChild(sections.special);
+
+            var sectionOrder = {
+                active: sections.active && sections.active.querySelector('.space-y-4'),
+                planned: sections.planned && sections.planned.querySelector('.space-y-4'),
+                history: sections.history && sections.history.querySelector('.space-y-4')
+            };
+
+            function sprintRange(name) {
+                var match = String(name || '').match(/^(\d{4})(\d{2})\s*(上|下)$/);
+                if (!match) return null;
+                var year = Number(match[1]);
+                var month = Number(match[2]);
+                var half = match[3];
+                var startDay = half === '上' ? 1 : 16;
+                var endDay = half === '上' ? 15 : new Date(year, month, 0).getDate();
+                return {
+                    start: new Date(year, month - 1, startDay, 0, 0, 0, 0),
+                    end: new Date(year, month - 1, endDay, 23, 59, 59, 999),
+                    sortKey: year * 1000 + month * 10 + (half === '上' ? 1 : 2)
+                };
+            }
+
+            function phaseFromSection(card) {
+                var section = card.closest('[data-index-section]');
+                var key = section && section.getAttribute('data-index-section');
+                if (key === 'planned' || key === 'active' || key === 'history') return key;
+                return 'history';
+            }
+
+            function setCardPhase(card, phase) {
+                var badge = card.querySelector('.status-badge');
+                var linkText = card.querySelector('.fa-arrow-right') && card.querySelector('.fa-arrow-right').parentElement;
+                card.classList.remove('current', 'upcoming', 'completed');
+                card.classList.remove('bg-white/5', 'bg-white/10', 'p-5', 'p-6');
+                if (badge) {
+                    badge.classList.remove('status-current', 'status-upcoming', 'status-completed', 'status-online', 'status-overdue');
+                }
+                if (phase === 'active') {
+                    card.classList.add('current', 'bg-white/10', 'p-6');
+                    if (badge) {
+                        badge.textContent = '进行中';
+                        badge.classList.add('status-current');
+                    }
+                    if (linkText) {
+                        linkText.className = 'text-green-400 text-sm font-medium';
+                    }
+                } else if (phase === 'planned') {
+                    card.classList.add('upcoming', 'bg-white/10', 'p-6');
+                    if (badge) {
+                        badge.textContent = '计划中';
+                        badge.classList.add('status-upcoming');
+                    }
+                    if (linkText) {
+                        linkText.className = 'text-blue-400 text-sm font-medium';
+                    }
+                } else {
+                    card.classList.add('completed', 'bg-white/5', 'p-5');
+                    if (badge) {
+                        badge.textContent = '已结束';
+                        badge.classList.add('status-completed');
+                    }
+                    if (linkText) {
+                        linkText.className = 'text-white/40 text-sm font-medium';
+                    }
+                }
+            }
+
+            var cards = Array.from(root.querySelectorAll('[data-sprint-card]')).map(function(card) {
+                var range = sprintRange(card.dataset.sprintCard);
+                return range ? { card: card, range: range, phase: phaseFromSection(card) } : null;
+            }).filter(Boolean);
+
+            cards.sort(function(a, b) {
+                if (a.phase === 'planned' && b.phase === 'planned') {
+                    return a.range.sortKey - b.range.sortKey;
+                }
+                return b.range.sortKey - a.range.sortKey;
+            });
+
+            cards.forEach(function(item) {
+                setCardPhase(item.card, item.phase);
+                var target = sectionOrder[item.phase];
+                if (target) target.appendChild(item.card);
+            });
+
+            if (sections.planned && sectionOrder.planned) {
+                var plannedCards = Array.from(sectionOrder.planned.querySelectorAll('[data-sprint-card]'));
+                if (plannedCards.length > 2) {
+                    var plannedExtraWrap = document.createElement('div');
+                    plannedExtraWrap.className = 'planned-extra is-collapsed';
+                    plannedCards.slice(2).forEach(function(card) {
+                        plannedExtraWrap.appendChild(card);
+                    });
+                    sectionOrder.planned.appendChild(plannedExtraWrap);
+
+                    var plannedToggle = document.createElement('button');
+                    plannedToggle.type = 'button';
+                    plannedToggle.className = 'planned-toggle';
+                    var plannedExpanded = localStorage.getItem('iterationPlannedExpanded') === '1';
+                    function renderPlannedToggle() {
+                        plannedExtraWrap.classList.toggle('is-collapsed', !plannedExpanded);
+                        plannedToggle.textContent = plannedExpanded ? '收起其余规划' : '展开其余规划';
+                    }
+                    plannedToggle.addEventListener('click', function() {
+                        plannedExpanded = !plannedExpanded;
+                        localStorage.setItem('iterationPlannedExpanded', plannedExpanded ? '1' : '0');
+                        renderPlannedToggle();
+                    });
+                    sectionOrder.planned.appendChild(plannedToggle);
+                    renderPlannedToggle();
+                }
+            }
+
+            if (sections.history && sectionOrder.history) {
+                var historyCards = Array.from(sectionOrder.history.querySelectorAll('[data-sprint-card]'));
+                if (historyCards.length > 5) {
+                    var extraWrap = document.createElement('div');
+                    extraWrap.className = 'history-extra is-collapsed';
+                    historyCards.slice(5).forEach(function(card) {
+                        extraWrap.appendChild(card);
+                    });
+                    sectionOrder.history.appendChild(extraWrap);
+
+                    var toggle = document.createElement('button');
+                    toggle.type = 'button';
+                    toggle.className = 'history-toggle';
+                    var expanded = localStorage.getItem('iterationHistoryExpanded') === '1';
+                    function renderHistoryToggle() {
+                        extraWrap.classList.toggle('is-collapsed', !expanded);
+                        toggle.textContent = expanded ? '收起更早历史' : '展开更早历史';
+                    }
+                    toggle.addEventListener('click', function() {
+                        expanded = !expanded;
+                        localStorage.setItem('iterationHistoryExpanded', expanded ? '1' : '0');
+                        renderHistoryToggle();
+                    });
+                    sectionOrder.history.appendChild(toggle);
+                    renderHistoryToggle();
+                }
+            }
+
+            Object.keys(sectionOrder).forEach(function(key) {
+                var section = sections[key];
+                var list = sectionOrder[key];
+                if (section && list && !list.children.length) {
+                    section.style.display = 'none';
+                }
+            });
+        })();
+
+        (function() {
+            var EXCLUDED_GROUPS = {
+                '迭代入口': true,
+                '总览': true,
+                '入口': true,
+                '返回总导航': true
+            };
+
+            function cleanText(value) {
+                return (value || '').replace(/\s+/g, ' ').trim();
+            }
+
+            function stripVersion(urlText) {
+                return (urlText || '').replace(/[?&]v=\d+/g, '').replace(/[?&]$/, '');
+            }
+
+            function detailUrlFromCard(card) {
+                var href = card.getAttribute('href') || '';
+                if (!href || href.indexOf('.html') < 0) return '';
+                return href;
+            }
+
+            function parseGroups(htmlText) {
+                var doc = new DOMParser().parseFromString(htmlText, 'text/html');
+                return Array.from(doc.querySelectorAll('.nav-group-title')).map(function(title) {
+                    var spanText = cleanText(title.querySelector('span') && title.querySelector('span').textContent);
+                    return spanText || cleanText(title.textContent);
+                }).filter(function(title, index, list) {
+                    return title && !EXCLUDED_GROUPS[title] && list.indexOf(title) === index;
+                });
+            }
+
+            function updateSummary(card) {
+                var summary = card.querySelector('[data-iteration-summary]');
+                var url = detailUrlFromCard(card);
+                if (!summary || !url || !window.fetch) return;
+
+                fetch(url, { cache: 'no-store' }).then(function(response) {
+                    if (!response.ok) throw new Error('load failed');
+                    return response.text();
+                }).then(function(htmlText) {
+                    var groups = parseGroups(htmlText);
+                    if (!groups.length) return;
+                    summary.textContent = groups.join(' / ');
+                    summary.setAttribute('title', groups.join(' / '));
+                    summary.dataset.summarySource = stripVersion(url);
+                }).catch(function() {
+                    summary.setAttribute('title', cleanText(summary.textContent));
+                });
+            }
+
+            document.querySelectorAll('[data-sprint-card]').forEach(updateSummary);
+        })();
+
+    </script>
+    <script src="../assets/js/home-fab.js?v=cc7ea647"></script>
+    <script src="../assets/js/nav-theme-switcher.js?v=fd508952"></script>
+</body>
+</html>

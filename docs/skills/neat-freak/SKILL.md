@@ -25,7 +25,7 @@ description: 实现完成后做项目知识收尾：核对代码、实际运行�
 - 涉及记忆时读 `memory/梳理规则.md`；不得自创记忆路径、格式或压缩阈值。
 - 涉及规则或 skill 时读 `harness/04-规则准入与治理.md` 和 `standards/rule-map.json`。
 - 涉及页面、抽屉、迭代或上传时读取对应 Harness、`DEVELOPMENT.md` 和专项 `standards/*`。
-- 用户表达“记下来、同步到 Obsidian、更新记忆、以后复用”等意图时，必须改走项目的 Obsidian 蒸馏硬闸门；本 skill 不自动写 Shane's Cortex。
+- 用户表达“记下来、沉淀到业务知识库、更新记忆、以后复用”等意图时，必须改走 `business-knowledge-capture` skill 的沉淀流程；本 skill 不自动写入任何外部知识库。
 
 机械枚举全部文件不等于全文读取全部文件。优先使用 `rg --files`、文档索引、`standards/rule-map.json` 和本轮改动范围定位；只有索引缺失、发现冲突或用户明确要求全量审计时才扩大读取。
 
@@ -126,7 +126,7 @@ verification: <命令、入口、DOM、文档或规则章节>
 
 - 不因“整理一下、梳理一下、收尾”自动写文件；以用户最新消息和授权词表为准。
 - 不修改历史快照、迭代索引、公共资源或范围外 dirty 文件，除非用户明确授权对应专项任务。
-- 不自动写 Obsidian，不复制完整对话，不写敏感本地数据、token、cookie 或认证信息。
+- 不自动写外部业务知识库，不复制完整对话，不写敏感本地数据、token、cookie 或认证信息。
 - 不使用 `git add -A`，不顺手提交其他需求或未跟踪文件。
 - 不自动删除、重命名、迁移、清理 worktree/分支/临时文件。
 - 不把 `AGENTS.md`、Harness、skill 或 memory 当成变更日志。

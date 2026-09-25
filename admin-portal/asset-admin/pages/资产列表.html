@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>资产列表</title>
+  <link href="../../../assets/css/font-awesome.min.css?v=dfb8fc36" rel="stylesheet">
   <link href="../../../assets/css/font-awesome-local.css?v=8171babf" rel="stylesheet">
   <link href="../../../assets/css/variables.css?v=12f21725" rel="stylesheet">
   <link href="../../../assets/css/common.css?v=a6a1e0b1" rel="stylesheet">
@@ -95,52 +96,9 @@
   </div>
 
   <script src="../../../assets/js/doc-builder.js?v=02fad5e9"></script>
+  <script src="../js/docs.js?v=947407f1"></script>
   <script src="../../../assets/js/components/doc-panel.js?v=bf6d429e"></script>
   <script>
-    window.DocsData = {
-      'asset-list': {
-        title: '资产列表',
-        requirement: {
-          coreFlow: [
-            '按关键字 / 类型 / 状态组合筛选资产台账',
-            '列表展示资产编号、名称、类型、归属站点、状态与到期日期',
-            '临近到期资产以橙色标签提示，点击行进入资产详情（本期不含）'
-          ],
-          filterRows: [
-            ['关键字', '文本输入，支持资产编号与名称模糊匹配', '资产台账接口'],
-            ['资产类型', '下拉单选：全部 / 标签类 / 设备类', '类型字典'],
-            ['状态', '下拉单选：全部 / 使用中 / 闲置 / 临近到期', '状态字段']
-          ],
-          fieldRows: [
-            ['列表列', '资产编号', '唯一编号，等宽字体展示'],
-            ['列表列', '状态', '枚举标签：使用中（绿）/ 闲置（灰）/ 临近到期（橙）'],
-            ['列表列', '到期日期', 'YYYY-MM-DD；空值展示为 -'],
-            ['列表列', '归属站点', '站点名称，超长省略并悬浮展示全称']
-          ],
-          interactionRules: [
-            '查询按钮提交当前筛选条件并回到第一页',
-            '重置按钮清空筛选条件但不自动查询',
-            '分页仅展示页码占位，本期不实现真实翻页'
-          ],
-          exceptionsBoundaries: [
-            '筛选无结果时列表区展示空状态占位',
-            '资产编号重复属数据异常，列表按原值展示并在详情页提示'
-          ],
-          todoOpenQuestions: [
-            '资产导出能力是否需要在本期一并提供'
-          ]
-        },
-        css: {
-          headers: ['选择器 / 元素', '规范说明'],
-          rows: [
-            ['.filter-bar', '白底卡片，圆角 12px，控件间距 10px，输入框高 32px'],
-            ['table thead th', '浅灰底 #f8fafc，12.5px 字号，左对齐，行高由 11px 内边距撑开'],
-            ['.tag-inuse / .tag-idle / .tag-expiring', '状态标签统一 999px 圆角 + 11px 字号，绿 / 灰 / 橙三色语义'],
-            ['.table-foot', '列表底部信息条，左侧计数、右侧页码，12px 弱化字色']
-          ]
-        }
-      }
-    };
   </script>
 </body>
 </html>

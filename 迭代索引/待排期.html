@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!-- template-type: iteration-index -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>待排期 - 迭代索引</title>
+    <script src="../assets/js/tailwind.min.js?v=7a614b9a"></script>
+    <link href="../assets/css/font-awesome.min.css?v=dfb8fc36" rel="stylesheet">
+    <link href="../assets/css/font-awesome-local.css?v=8171babf" rel="stylesheet">
+    <link href="../assets/css/variables.css?v=12f21725" rel="stylesheet">
+    <script src="../assets/js/nav-theme-preload.js?v=a5b6544d"></script>
+    <link href="../assets/css/nav-themes.css?v=3b8d7bed" rel="stylesheet">
+    <style>
+        body { margin: 0; padding: 0; overflow: hidden; }
+        :root { --nav-width: 280px; --nav-z-index: 9999; --primary-color: #6B7280; }
+        .system-nav { position: fixed; top: 0; left: 0; width: var(--nav-width); height: 100vh; background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%); z-index: var(--nav-z-index); overflow-y: auto; box-shadow: 4px 0 20px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
+        .system-nav::-webkit-scrollbar { width: 6px; }
+        .system-nav::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+        .nav-header { padding: 20px; border-bottom: 1px solid #334155; }
+        .sprint-title { font-size: 18px; font-weight: 700; color: white; display: flex; align-items: center; gap: 8px; }
+        .sprint-meta { font-size: 12px; color: #94A3B8; margin-top: 4px; }
+        .nav-group { margin: 12px 0; }
+        .nav-group-title { padding: 12px 20px 8px; font-size: 11px; color: #64748B; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; }
+        .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 20px; color: #CBD5E1; text-decoration: none; font-size: 14px; transition: all 0.2s; border-left: 3px solid transparent; cursor: pointer; }
+        .nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
+        .nav-item.active { background: rgba(107,114,128,0.18); color: white; border-left-color: var(--primary-color); }
+        .nav-item i { width: 16px; text-align: center; font-size: 12px; }
+        .nav-bottom-fixed { margin-top: auto; padding: 12px 20px; border-top: 1px solid var(--nav-border); }
+        .nav-footer { padding: 12px 20px; border-top: 1px solid #334155; color: #64748B; font-size: 11px; }
+        .main-content { margin-left: var(--nav-width); height: 100vh; overflow-y: auto; background: #F8FAFC; }
+        .page-head { padding: 20px 28px 0; }
+        .page-head h1 { margin: 0 0 6px; color: #0F172A; font-size: 22px; font-weight: 700; }
+        .page-head p { margin: 0 0 20px; color: #64748B; font-size: 13px; line-height: 1.8; }
+        .pending-list { padding: 0 28px 40px; display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+        .pending-card { background: white; border: 1px solid #E2E8F0; border-radius: 10px; padding: 16px; }
+        .pending-card h3 { margin: 0 0 6px; color: #1E293B; font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .pending-card p { margin: 0 0 10px; color: #64748B; font-size: 13px; line-height: 1.7; }
+        .pending-card .pending-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+        .pending-tag { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: rgba(107,114,128,0.14); color: #4B5563; }
+        .pending-empty { padding: 0 28px 40px; color: #94A3B8; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <!-- 迭代索引分区页：待排期需求的固定承载入口，不归属任何迭代 -->
+    <nav class="system-nav">
+        <div class="nav-header">
+            <a href="index.html" style="color: #64748B; text-decoration: none; font-size: 12px; display: flex; align-items: center; gap: 4px; margin-bottom: 8px;">
+                <i class="fas fa-arrow-left"></i><span>返回迭代索引</span>
+            </a>
+            <div class="sprint-title">
+                <span class="w-2 h-2 bg-gray-500 rounded-full"></span>
+                待排期
+            </div>
+            <div class="sprint-meta">
+                <i class="fas fa-hourglass-half mr-1"></i>排期时间待定
+            </div>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">
+                <i class="fas fa-compass"></i>
+                <span>分区入口</span>
+            </div>
+            <div class="nav-item active" data-page="pending-overview">
+                <i class="fas fa-hourglass-half"></i>
+                <span>待排期总览</span>
+            </div>
+        </div>
+        <div class="nav-bottom-fixed">
+            <a href="../index.html" class="nav-item" style="padding: 8px 0;">
+                <i class="fas fa-home"></i><span>返回总导航</span>
+            </a>
+        </div>
+        <div class="nav-footer">
+            <div>固定分区入口</div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="page-head">
+            <h1>待排期</h1>
+            <p>已立项、尚未排入迭代的需求页面集合。</p>
+        </div>
+        <div class="pending-list">
+            <div class="pending-card">
+                <h3>设备报废与调拨流程</h3>
+                <p>资产在门店间调拨、报废申请与审批的页面族。涉及服务商后台与移动作业端，需求粒度待拆。</p>
+                <div class="pending-meta">
+                    <span class="pending-tag">后台</span>
+                    <span class="pending-tag">客户端</span>
+                    <span class="pending-tag">需求已立项</span>
+                </div>
+            </div>
+            <div class="pending-card">
+                <h3>订单导出中心</h3>
+                <p>订单列表的批量导出与导出记录页。等待 202607 排期确认后迁出本分区。</p>
+                <div class="pending-meta">
+                    <span class="pending-tag">移动作业端</span>
+                    <span class="pending-tag">排期待定</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/nav-theme-switcher.js?v=fd508952"></script>
+    <script src="../assets/js/components/sidebar-standard.js?v=031fb429"></script>
+</body>
+</html>

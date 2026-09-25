@@ -15,6 +15,7 @@
 | [`engineering-plan-grill`](engineering-plan-grill/SKILL.md) | 方案评审、需求质询、执行前确认 | 讨论态不改文件，结论必须标依据 |
 | [`engineering-slice-plan`](engineering-slice-plan/SKILL.md) | 拆任务、拆 issue、拆迭代、拆执行包 | 默认只输出任务拆分，不创建 issue |
 | [`neat-freak`](neat-freak/SKILL.md) | 实现后的知识收尾：代码 / 文档 / 规则 / 记忆对齐 | 只在用户明确要求收尾时写入，普通「整理一下」只做只读审计 |
+| [`business-knowledge-capture`](business-knowledge-capture/SKILL.md) | 与 AI 沟通需求、规则或方案收口后，判断业务逻辑是否值得沉淀 | 只做判断与提示；不自动写入外部知识库，沉淀位置由使用方配置 |
 
 ## 未随仓库提供的 skills
 

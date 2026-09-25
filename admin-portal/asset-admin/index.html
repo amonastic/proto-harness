@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>资产管理 · 模块承载页</title>
+  <link href="../../assets/css/font-awesome.min.css?v=dfb8fc36" rel="stylesheet">
   <link href="../../assets/css/font-awesome-local.css?v=8171babf" rel="stylesheet">
   <link href="../../assets/css/variables.css?v=12f21725" rel="stylesheet">
   <link href="../../assets/css/common.css?v=a6a1e0b1" rel="stylesheet">
@@ -43,51 +44,19 @@
         </button>
       </header>
 
-      <section class="page-section active" id="page-asset-list">
+      <div id="page-asset-list" class="page-section active">
         <iframe src="pages/资产列表.html" title="资产列表"></iframe>
-      </section>
+      </div>
+      <!-- 页面承载区结束 -->
     </div>
   </div>
 
   <script src="../../assets/js/doc-builder.js?v=02fad5e9"></script>
+  <script src="js/docs.js?v=947407f1"></script>
   <script src="../../assets/js/components/doc-panel.js?v=bf6d429e"></script>
   <script>
     var pageNames = { 'asset-list': '资产列表' };
 
-    window.DocsData = {
-      'asset-admin-module': {
-        title: '资产管理模块（承载页）',
-        requirement: {
-          coreFlow: [
-            '在左侧菜单选择功能页面，右侧 iframe 加载对应源页面',
-            '支持通过 URL 参数 ?page=页面ID 直达指定功能页',
-            '需求文档按钮固定在顶栏右侧，手动打开抽屉'
-          ],
-          fieldRows: [
-            ['承载页', 'pageNames', '页面 ID 到中文名的映射，用于顶栏标题与菜单高亮'],
-            ['承载页', 'iframe src', '指向 pages/ 下的源页面，模块承载页不直接写业务内容'],
-            ['承载页', 'data-page', '菜单项与 page-section 一一对应，切换时同步顶栏标题']
-          ],
-          interactionRules: [
-            '点击菜单项切换 active 状态与对应 page-section 显示',
-            'URL 显式参数 ?page=xxx 的优先级高于默认第一项',
-            '承载页需求抽屉展示的是模块级说明，具体页面规则在各自源页面抽屉中'
-          ],
-          exceptionsBoundaries: [
-            'pageNames 未覆盖的页面 ID 进入时，标题回退为「资产管理」'
-          ]
-        },
-        css: {
-          headers: ['选择器 / 元素', '规范说明'],
-          rows: [
-            ['.module-sidebar', '深色侧栏固定 232px，菜单项圆角 9px，激活态用浅蓝底'],
-            ['.module-topbar', '白底顶栏 12px/22px 内边距，右侧固定需求文档按钮'],
-            ['.page-section', '默认 display:none，active 时 display:flex 并铺满剩余高度'],
-            ['iframe', '去除边框，背景 #f8fafc，与源页面背景保持一致']
-          ]
-        }
-      }
-    };
 
     function switchPage(pageId) {
       var target = pageNames[pageId] ? pageId : Object.keys(pageNames)[0];

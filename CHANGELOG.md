@@ -2,6 +2,44 @@
 
 本项目遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/) 格式，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## 0.2.0
+
+把 0.1.0 里被简化掉的**产品经理工作台**外壳还回示例：总导航首页、迭代（版本）管理、需求文档检索，以及模块承载页与冻结快照。治理内核与机检口径不变，新增内容全部由仓库自带的虚构示例承载。
+
+### 新增
+
+**工作台外壳（示例项目）**
+
+- 根 `index.html` 总导航：深色门户、三端平台卡（含子模块直达）、迭代速览统计、专项入口，以及**全局搜索**——可检索菜单名称与需求文档正文（索引由 `build-search-index.js` 生成，10 条菜单 / 4 条文档）。
+- `迭代索引/index.html` 迭代门户：专项池、待排期、当前进行中、规划中、历史迭代、已废弃六个分区，卡片摘要由 `fetch` 读取迭代页分组标题生成；`sprint-config.js` 提供 20 个迭代周期的状态机（planning / active / overdue / completed）与模块清单。
+- 迭代页 `迭代索引/202606下.html`（当前迭代，iframe 引用源页面）与 `迭代索引/202605下.html`（历史迭代，iframe **只引用冻结快照**），均带 `pageNames` 路由、左侧导航与页脚页面计数。
+- `迭代索引/待排期.html`、`迭代索引/已废弃.html` 两个固定分区入口。
+- `迭代索引/js/iteration-doc-autopen.js`：迭代页切换时自动展开 iframe 内的需求文档抽屉。
+
+**快照与入口闭环**
+
+- `迭代索引/snapshots/202605下/` 一组冻结快照（2 页），带 `snapshot-of` / `snapshot-iteration` / `snapshot-date` 元信息，内联文档数据，不引用仍在演进的源页面或模块级 `docs.js`。
+- 补齐 `field-app/main/index.html` 与 `mini-program/main/index.html` 两个模块承载页（左侧菜单 + iframe 承载 + `pageNames` 路由 + 需求文档入口），使三端业务页在源目录内完成菜单注册，而不只是"可达"。
+
+**抽屉数据分层**
+
+- 三端示例页的需求文档数据从页面内联抽出为模块级 `js/docs.js`：`requirement` 供抽屉渲染、`content` 为同源全文投影（供搜索索引抽取）、`DOCS_CSS_DATA` + `getDocCssContent` 提供页面级 CSS 规范（颜色 / 字体 / 圆角 / 间距四章节）。加载顺序为 `doc-builder.js` → 模块级 `docs.js` → `doc-panel.js`。
+
+**规则与 skill**
+
+- 新增 skill `docs/skills/business-knowledge-capture`：在需求沟通收口后判断业务逻辑是否值得沉淀为业务知识条目，并提示用户——只做判断，不自动写入；沉淀位置由使用方的 `governance.config.json` 声明。
+- `AGENTS.md` 技能触发表新增对应行。
+
+### 变更
+
+- 示例与文档中的后台命名统一为：**管理后台 / 服务商后台 / 门店后台**（此前发布版使用的旧称呼已全仓替换，涉及 16 个文件）。
+- 示例仓库不再出现原内部环境的个人或组织标识：页脚与页面标题改为 `a monastic`，外部知识库相关表述统一改为通用称谓。
+
+### 已知限制（0.2.0 新增项）
+
+- 迭代链按最小集收敛：只有 1 个当前迭代页、1 个历史迭代页与 1 组快照；`sprint-config.js` 里 202603–202605 的历史模块清单为演示数据，指向的三端示例页只有 3 个。
+- `asset-admin-module` 这条文档没有页面级 `pageUrl`：索引脚本只为页面级 `docs.js` 条目建立 docId → 页面映射，模块承载页自身的文档入口不在搜索结果里直接跳转。
+
 ## 0.1.0
 
 首个公开版本。从内部设计稿仓库抽出的治理工作流内核，示例项目为完全虚构内容。

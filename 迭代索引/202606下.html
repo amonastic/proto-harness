@@ -1,85 +1,223 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+<!-- template-type: iteration-index -->
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>迭代索引 · 202606下</title>
-  <link href="../assets/css/font-awesome-local.css?v=8171babf" rel="stylesheet">
-  <link href="../assets/css/variables.css?v=12f21725" rel="stylesheet">
-  <link href="../assets/css/common.css?v=a6a1e0b1" rel="stylesheet">
-  <link href="../assets/css/components.css?v=70397998" rel="stylesheet">
-  <link href="../assets/css/nav-themes.css?v=3b8d7bed" rel="stylesheet">
-  <style>
-    .iteration-main { margin-left: 260px; padding: 28px 32px 80px; }
-    .iteration-head h1 { font-size: 22px; margin: 0 0 6px; color: #0f172a; }
-    .iteration-head p { font-size: 13px; color: #64748b; margin: 0 0 26px; line-height: 1.8; }
-    .iteration-group { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 18px 20px; margin-bottom: 18px; }
-    .iteration-group h2 { font-size: 15px; margin: 0 0 4px; color: #0f172a; }
-    .iteration-group .group-sub { font-size: 12px; color: #94a3b8; margin: 0 0 14px; }
-    .iteration-entry { display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid #eef2f7; background: #f8fafc; border-radius: 10px; padding: 12px 14px; }
-    .iteration-entry + .iteration-entry { margin-top: 10px; }
-    .iteration-entry .entry-name { font-size: 13px; color: #334155; font-weight: 600; }
-    .iteration-entry .entry-note { font-size: 12px; color: #94a3b8; margin-top: 2px; }
-    .iteration-entry a.entry-link { flex: none; font-size: 12px; color: #0284c7; text-decoration: none; border: 1px solid rgba(2, 132, 199, .35); border-radius: 8px; padding: 6px 12px; }
-    .iteration-entry a.entry-link:hover { background: rgba(2, 132, 199, .08); }
-    .iteration-return { margin-top: 26px; display: flex; flex-direction: column; gap: 8px; }
-    .iteration-return a { font-size: 12px; color: #64748b; text-decoration: none; }
-    .iteration-return a:hover { color: #0284c7; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>202606 下 - 迭代详情</title>
+    <script src="../assets/js/tailwind.min.js?v=7a614b9a"></script>
+    <link href="../assets/css/font-awesome.min.css?v=dfb8fc36" rel="stylesheet">
+    <link href="../assets/css/font-awesome-local.css?v=8171babf" rel="stylesheet">
+    <link href="../assets/css/variables.css?v=12f21725" rel="stylesheet">
+    <link href="../assets/css/common.css?v=a6a1e0b1" rel="stylesheet">
+    <link href="../assets/css/components.css?v=70397998" rel="stylesheet">
+    <script src="../assets/js/nav-theme-preload.js?v=a5b6544d"></script>
+    <link href="../assets/css/nav-themes.css?v=3b8d7bed" rel="stylesheet">
+    <style>
+        body { margin: 0; padding: 0; overflow: hidden; }
+        :root { --nav-width: 280px; --nav-z-index: 9999; --primary-color: #3b82f6; }
+        .system-nav { position: fixed; top: 0; left: 0; width: var(--nav-width); height: 100vh; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); z-index: var(--nav-z-index); overflow-y: auto; box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3); }
+        .system-nav::-webkit-scrollbar { width: 6px; }
+        .system-nav::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+        .nav-header { position: sticky; top: 0; z-index: 20; background: linear-gradient(180deg, #1e293b 0%, #111827 100%); box-shadow: 0 1px 0 rgba(148, 163, 184, 0.18), 0 10px 18px rgba(15, 23, 42, 0.22); padding: 20px; border-bottom: 1px solid #334155; }
+        .sprint-title { font-size: 18px; font-weight: 700; color: white; display: flex; align-items: center; gap: 8px; }
+        .sprint-meta { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+        .nav-group { margin: 12px 0; }
+        .nav-group-title { padding: 12px 20px 8px; font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; }
+        .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 20px; color: #cbd5e1; text-decoration: none; font-size: 14px; transition: all 0.2s; border-left: 3px solid transparent; cursor: pointer; }
+        .nav-item:hover { background: rgba(255, 255, 255, 0.05); color: white; }
+        .nav-item.active { background: rgba(59, 130, 246, 0.12); color: white; border-left-color: var(--primary-color); }
+        .nav-item i { width: 16px; text-align: center; font-size: 12px; }
+        .nav-divider { margin: 8px 20px; border-top: 1px solid rgba(148, 163, 184, 0.18); height: 0; }
+        .nav-subgroup { margin-top: 6px; }
+        .nav-subgroup-title { padding: 6px 20px 4px 36px; font-size: 10px; color: #64748b; letter-spacing: 0.6px; display: flex; align-items: center; gap: 6px; }
+        .nav-subgroup-title::before { content: ""; width: 4px; height: 4px; border-radius: 999px; background: rgba(148, 163, 184, 0.55); flex-shrink: 0; }
+        .nav-subitem { padding-left: 36px; font-size: 14px; }
+        .main-content { margin-left: var(--nav-width); height: 100vh; overflow: hidden; background: #f8fafc; }
+        .breadcrumb { padding: 12px 24px; background: white; border-bottom: 1px solid #e2e8f0; font-size: 13px; color: #64748b; }
+        .breadcrumb a { color: #64748b; text-decoration: none; }
+        .breadcrumb a:hover { color: #3b82f6; }
+        .page-container { width: 100%; height: calc(100vh - 45px); }
+        .page-section { width: 100%; height: 100%; display: none; overflow: auto; }
+        .page-section.active { display: block; }
+        .iframe-page { width: 100%; height: 100%; border: none; background: white; }
+        .overview-page { padding: 24px; background: #f8fafc; min-height: 100%; box-sizing: border-box; }
+        .overview-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+        .overview-title { margin: 0; color: #0f172a; font-size: 22px; font-weight: 700; }
+        .overview-meta { margin-top: 6px; color: #64748b; font-size: 13px; }
+        .overview-count { flex-shrink: 0; padding: 6px 10px; border-radius: 6px; background: #dbeafe; color: #1d4ed8; font-size: 13px; font-weight: 600; }
+        .overview-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .overview-group { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; }
+        .overview-group h3 { margin: 0 0 12px; color: #1e293b; font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .overview-subtitle { margin: 12px 0 8px; color: #64748b; font-size: 12px; font-weight: 600; }
+        .overview-link { width: 100%; border: 1px solid #e2e8f0; background: #f8fafc; border-radius: 6px; padding: 10px 12px; margin-top: 8px; display: flex; align-items: center; gap: 10px; color: #334155; font-size: 13px; text-align: left; cursor: pointer; }
+        .overview-link:hover { border-color: #93c5fd; background: #eff6ff; color: #1d4ed8; }
+        .overview-link i { width: 16px; text-align: center; color: #3b82f6; }
+        .nav-footer { padding: 12px 20px; border-top: 1px solid #334155; color: #64748b; font-size: 11px; }
+    </style>
 </head>
 <body>
-  <!-- 迭代索引页：只做入口聚合，不承载业务开发；真实页面在 admin-portal / field-app / mini-program -->
-  <nav class="system-nav" data-role="system-sidebar" data-title="迭代索引 202606下">
-    <div class="nav-group">
-      <div class="nav-group-title">202606下</div>
-      <div class="nav-item" data-page="asset-list"><i class="fas fa-box-archive" aria-hidden="true"></i><span>管理后台 · 资产列表</span></div>
-      <div class="nav-item" data-page="order-list"><i class="fas fa-list" aria-hidden="true"></i><span>移动端 App · 订单列表</span></div>
-      <div class="nav-item" data-page="order-create"><i class="fas fa-pen-to-square" aria-hidden="true"></i><span>小程序 · 下单页</span></div>
-    </div>
-  </nav>
-
-  <main class="main-content iteration-main">
-    <div class="iteration-head">
-      <h1>202606下 迭代总览</h1>
-      <p>本页聚合本期需求入口。迭代索引用 iframe 承载源页面，不在本页直接开发业务功能。</p>
-    </div>
-
-    <section class="iteration-group">
-      <h2>主题 A · 资产台账</h2>
-      <p class="group-sub">分组：管理后台</p>
-      <div class="iteration-entry">
-        <div>
-          <div class="entry-name">运维后台 · 资产列表</div>
-          <div class="entry-note">筛选 / 列表 / 需求抽屉；源页面 admin-portal/asset-admin/pages/资产列表.html</div>
+    <!-- 迭代索引页：只做入口聚合，不承载业务开发；当前迭代经 iframe 引用三端源页面 -->
+    <nav class="system-nav">
+        <div class="nav-header">
+            <a href="index.html" style="color: #64748b; text-decoration: none; font-size: 12px; display: flex; align-items: center; gap: 4px; margin-bottom: 8px;">
+                <i class="fas fa-arrow-left"></i><span>返回迭代索引</span>
+            </a>
+            <div class="sprint-title">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                202606 下
+            </div>
+            <div class="sprint-meta">
+                <i class="fas fa-calendar mr-1"></i>6月下旬 · 进行中
+            </div>
         </div>
-        <a class="entry-link" href="../admin-portal/asset-admin/index.html?page=asset-list" target="_blank" rel="noopener">打开设计稿</a>
-      </div>
-    </section>
 
-    <section class="iteration-group">
-      <h2>主题 B · 订单履约</h2>
-      <p class="group-sub">分组：移动端 App / 小程序</p>
-      <div class="iteration-entry">
-        <div>
-          <div class="entry-name">移动端 App · 订单列表</div>
-          <div class="entry-note">卡片列表 + 自动展开需求抽屉；源页面 field-app/main/pages/订单列表.html</div>
+        <div class="nav-group">
+            <div class="nav-group-title">
+                <i class="fas fa-compass"></i>
+                <span>迭代入口</span>
+            </div>
+            <div class="nav-item active" data-page="overview" onclick="switchPage('overview')">
+                <i class="fas fa-map"></i>
+                <span>迭代导航</span>
+            </div>
         </div>
-        <a class="entry-link" href="../field-app/main/pages/订单列表.html" target="_blank" rel="noopener">打开设计稿</a>
-      </div>
-      <div class="iteration-entry">
-        <div>
-          <div class="entry-name">小程序 · 下单页</div>
-          <div class="entry-note">轻量表单 + 底部操作栏；源页面 mini-program/main/pages/下单.html</div>
+
+        <div class="nav-divider"></div>
+        <div class="nav-group">
+            <div class="nav-group-title">
+                <i class="fas fa-box-archive"></i>
+                <span>资产台账</span>
+            </div>
+            <div class="nav-subgroup">
+                <div class="nav-subgroup-title"><span>管理后台</span></div>
+                <div class="nav-item nav-subitem" data-page="asset-list" data-review-state="dev" onclick="switchPage('asset-list')">
+                    <i class="fas fa-list-ul"></i>
+                    <span>资产列表</span>
+                </div>
+            </div>
         </div>
-        <a class="entry-link" href="../mini-program/main/pages/下单.html" target="_blank" rel="noopener">打开设计稿</a>
-      </div>
-    </section>
 
-    <div class="iteration-return">
-      <a href="../index.html"><i class="fas fa-home" aria-hidden="true"></i> 返回总导航</a>
-    </div>
-  </main>
+        <div class="nav-divider"></div>
+        <div class="nav-group">
+            <div class="nav-group-title">
+                <i class="fas fa-truck-fast"></i>
+                <span>订单履约</span>
+            </div>
+            <div class="nav-subgroup">
+                <div class="nav-subgroup-title"><span>移动作业端</span></div>
+                <div class="nav-item nav-subitem" data-page="order-list" data-review-state="dev" onclick="switchPage('order-list')">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>订单列表</span>
+                </div>
+            </div>
+            <div class="nav-subgroup">
+                <div class="nav-subgroup-title"><span>小程序端</span></div>
+                <div class="nav-item nav-subitem" data-page="order-create" data-review-state="dev" onclick="switchPage('order-create')">
+                    <i class="fab fa-weixin"></i>
+                    <span>下单页</span>
+                </div>
+            </div>
+        </div>
 
-  <script src="../assets/js/components/sidebar-standard.js?v=031fb429"></script>
+        <div class="nav-bottom-fixed" style="padding: 12px 20px; border-top: 1px solid var(--nav-border);">
+            <a href="../index.html" class="nav-item" style="padding: 8px 0;">
+                <i class="fas fa-home"></i><span>返回总导航</span>
+            </a>
+        </div>
+
+        <div class="nav-footer">
+            <div>共 4 个页面</div>
+            <div style="color: #64748b; margin-top: 4px;">
+                <i class="fas fa-circle text-xs mr-1"></i>进行中
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="breadcrumb">
+            <a href="../index.html"><i class="fas fa-home"></i> 总导航</a>
+            <i class="fas fa-chevron-right" style="margin: 0 8px; font-size: 10px;"></i>
+            <a href="index.html">迭代索引</a>
+            <i class="fas fa-chevron-right" style="margin: 0 8px; font-size: 10px;"></i>
+            <span style="color: #1e293b">202606 下</span>
+            <i class="fas fa-chevron-right" style="margin: 0 8px; font-size: 10px;"></i>
+            <span id="currentPageName" style="color: #3b82f6">迭代导航</span>
+        </div>
+
+        <div class="page-container">
+            <div id="page-overview" class="page-section active">
+                <div class="overview-page">
+                    <div class="overview-head">
+                        <div>
+                            <h1 class="overview-title">202606 下 · 迭代导航</h1>
+                            <div class="overview-meta">
+                                默认入口只展示本迭代页面目录，选择入口后进入对应原型页。
+                            </div>
+                        </div>
+                        <div class="overview-count">4 个页面</div>
+                    </div>
+                    <div class="overview-grid">
+                        <section class="overview-group">
+                            <h3><i class="fas fa-box-archive"></i>资产台账</h3>
+                            <div class="overview-subtitle">管理后台</div>
+                            <button class="overview-link" type="button" onclick="switchPage('asset-list')">
+                                <i class="fas fa-list-ul"></i><span>服务商后台 · 资产列表</span>
+                            </button>
+                        </section>
+                        <section class="overview-group">
+                            <h3><i class="fas fa-truck-fast"></i>订单履约</h3>
+                            <div class="overview-subtitle">移动作业端 / 小程序端</div>
+                            <button class="overview-link" type="button" onclick="switchPage('order-list')">
+                                <i class="fas fa-mobile-alt"></i><span>移动作业端 · 订单列表</span>
+                            </button>
+                            <button class="overview-link" type="button" onclick="switchPage('order-create')">
+                                <i class="fab fa-weixin"></i><span>小程序端 · 下单页</span>
+                            </button>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <div id="page-asset-list" class="page-section">
+                <iframe src="../admin-portal/asset-admin/pages/资产列表.html" class="iframe-page"></iframe>
+            </div>
+            <div id="page-order-list" class="page-section">
+                <iframe src="../field-app/main/pages/订单列表.html" class="iframe-page"></iframe>
+            </div>
+            <div id="page-order-create" class="page-section">
+                <iframe src="../mini-program/main/pages/下单.html" class="iframe-page"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const pageNames = {
+            "overview": "迭代导航",
+            "asset-list": "管理后台 · 资产列表",
+            "order-list": "移动作业端 · 订单列表",
+            "order-create": "小程序端 · 下单页"
+        };
+        function switchPage(pageId) {
+            document.querySelectorAll(".nav-item").forEach((item) => item.classList.remove("active"));
+            document.querySelector(`.nav-item[data-page="${pageId}"]`).classList.add("active");
+            document.getElementById("currentPageName").textContent = pageNames[pageId];
+            document.querySelectorAll(".page-section").forEach((section) => section.classList.remove("active"));
+            document.getElementById(`page-${pageId}`).classList.add("active");
+            const activeFrame = document.querySelector(`#page-${pageId} iframe.iframe-page`);
+            if (window.IterationDocAutoOpen && activeFrame) {
+                window.IterationDocAutoOpen.openFrame(activeFrame);
+            }
+        }
+        window.addEventListener("DOMContentLoaded", function () {
+            const page = new URLSearchParams(window.location.search).get("page");
+            if (page && pageNames[page]) {
+                switchPage(page);
+            }
+        });
+    </script>
+    <script src="js/iteration-doc-autopen.js?v=cc468a78"></script>
+    <script src="../assets/js/nav-theme-switcher.js?v=fd508952"></script>
+    <script src="../assets/js/components/sidebar-standard.js?v=031fb429"></script>
 </body>
 </html>

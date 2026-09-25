@@ -1,4 +1,4 @@
-# Web 后台风格基线（门店后台 / 服务站后台 / 运维后台）
+# Web 后台风格基线（服务商后台 / 门店后台 / 管理后台）
 
 > 触发词：目标路径属于 `admin-portal/store-admin`、`admin-portal/station-admin` 或 `admin-portal/maintain-admin`  
 > 适用场景：三个 Web 后台的列表页、详情页、弹窗、导入、设置等页面设计稿开发  
@@ -6,7 +6,7 @@
 
 ## 1. 定位
 
-本文件为示例项目三个 Web 管理端（门店后台、服务站后台、运维后台）沉淀统一视觉基线。三端共享相同的布局体系、组件规范和交互模式，仅通过主题色区分归属。
+本文件为示例项目三个 Web 管理端（服务商后台、门店后台、管理后台）沉淀统一视觉基线。三端共享相同的布局体系、组件规范和交互模式，仅通过主题色区分归属。
 
 - 不适用于移动作业端 App、用户端 App、用户小程序、门店小程序。
 - 资产管理模块（`admin-portal/asset-admin`）是 Web 后台成熟基准之一（harness/10 成熟基准表登记），本基线与之一致。
@@ -15,15 +15,15 @@
 
 | 后台 | 主色 | 悬停色 | 适用路径 |
 | --- | --- | --- | --- |
-| 门店后台 | `#2563EB`（蓝） | `#1D4ED8` | `admin-portal/store-admin` |
-| 服务站后台 | `#10B981`（绿） | `#059669` | `admin-portal/station-admin` |
-| 运维后台 | `#7C3AED`（紫） | `#6D28D9` | `admin-portal/maintain-admin` |
+| 服务商后台 | `#2563EB`（蓝） | `#1D4ED8` | `admin-portal/store-admin` |
+| 门店后台 | `#10B981`（绿） | `#059669` | `admin-portal/station-admin` |
+| 管理后台 | `#7C3AED`（紫） | `#6D28D9` | `admin-portal/maintain-admin` |
 
 除主色外，三端的布局、组件、字号、间距、弹窗、筛选区完全一致。新增页面时根据所属端自动应用主题色。
 
 ## 3. Style Clone-source 清单
 
-### 门店后台
+### 服务商后台
 
 | 页面 | 路径 | 作为基准时主要吸收 |
 | --- | --- | --- |
@@ -33,14 +33,14 @@
 | 资产标签管理 | `admin-portal/store-admin/pages/资产标签管理.html` | 列表页标准结构、弹窗 header 需求文档入口 |
 | 客户管理 | `admin-portal/store-admin/pages/客户管理.html` | 客户列表、操作列按钮、批量操作 |
 
-### 服务站后台
+### 门店后台
 
 | 页面 | 路径 | 作为基准时主要吸收 |
 | --- | --- | --- |
 | 订单详情 | `admin-portal/station-admin/pages/订单详情.html` | 详情页分区卡片、顶部导航、信息网格 |
 | 门店资料导入 | `admin-portal/station-admin/pages/门店资料导入.html` | 批量导入弹窗、步骤指示器、上传区 |
 
-### 运维后台
+### 管理后台
 
 | 页面 | 路径 | 作为基准时主要吸收 |
 | --- | --- | --- |

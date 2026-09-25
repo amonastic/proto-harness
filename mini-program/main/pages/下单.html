@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>下单页 · 小程序</title>
+  <link href="../../../assets/css/font-awesome.min.css?v=dfb8fc36" rel="stylesheet">
   <link href="../../../assets/css/font-awesome-local.css?v=8171babf" rel="stylesheet">
   <link href="../../../assets/css/variables.css?v=12f21725" rel="stylesheet">
   <link href="../../../assets/css/common.css?v=a6a1e0b1" rel="stylesheet">
@@ -69,44 +70,9 @@
   </aside>
 
   <script src="../../../assets/js/doc-builder.js?v=02fad5e9"></script>
+  <script src="../js/docs.js?v=26c87324"></script>
   <script src="../../../assets/js/components/doc-panel.js?v=bf6d429e"></script>
   <script>
-    window.DocsData = {
-      'miniapp-order-create': {
-        title: '下单页（小程序）',
-        requirement: {
-          coreFlow: [
-            '选择寄件地址与收件地址',
-            '填写物品名称与数量',
-            '选择期望送达时间段并提交订单'
-          ],
-          fieldRows: [
-            ['地址区', '寄件地址', '默认带出上次使用地址，可重新选择'],
-            ['地址区', '收件地址', '必填；未选择时提交按钮置灰'],
-            ['物品区', '物品名称', '必填，20 字以内'],
-            ['物品区', '物品数量', '默认 1，整数，1–99'],
-            ['时间区', '期望送达', '时间段选项由站点配送时段决定'],
-            ['时间区', '备注', '选填，50 字以内']
-          ],
-          interactionRules: [
-            '提交前校验必填项，未通过时定位到首个缺失项',
-            '提交成功后进入订单详情并提示结果'
-          ],
-          exceptionsBoundaries: [
-            '站点未配置配送时段时，期望送达项展示为「暂不可选」'
-          ]
-        },
-        css: {
-          headers: ['选择器 / 元素', '规范说明'],
-          rows: [
-            ['.phone', '小程序模型 375×812，圆角 40px，深色描边 10px'],
-            ['.form-card', '白底圆角 14px，行内 13px 字号，分节间距 12px'],
-            ['.form-row', '左右分栏布局，右侧值弱化字色，占位态 #94a3b8'],
-            ['.btn-submit', '底部主按钮高 44px，999px 圆角，全宽']
-          ]
-        }
-      }
-    };
 
     DocPanel.autoShow('miniapp-order-create');
   </script>

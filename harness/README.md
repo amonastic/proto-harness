@@ -63,7 +63,7 @@
 - 新增 AI 执行规则时，先判断应进入 `AGENTS.md`、本目录、`DEVELOPMENT.md`、`standards/*` 还是工具适配层。
 - 能放入既有主入口或专项规则的，不新增平行规则文件。
 - 规则审阅、缺陷清单、迁移方案等过程材料进入 `archive/`，避免误认为执行必读规则。
-- 业务知识、端范围、权限和配置判断继续进入 Obsidian 业务外脑，不写入项目 Harness。
+- 业务知识、端范围、权限和配置判断继续进入外部业务知识库（业务外脑），不写入项目 Harness；外脑位置由 `governance.config.json` 的 `businessBrain.root` 声明，判断流程见 `harness/04-规则准入与治理.md` 与 `docs/skills/business-knowledge-capture/`。
 
 ## 已沉淀的跨模型专项审阅模板
 

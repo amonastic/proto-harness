@@ -127,6 +127,7 @@
 | 方案评审、需求质询、执行前确认（讨论态不改文件） | `engineering-plan-grill` |
 | 拆任务、拆 issue、拆迭代、拆执行包 | `engineering-slice-plan` |
 | 实现后的知识收尾（代码/文档/规则/记忆对齐） | `neat-freak` |
+| 需求或业务沟通收口后，判断业务逻辑是否值得沉淀到外部业务知识库 | `business-knowledge-capture` |
 
 - skills 索引与来源声明见 `docs/skills/README.md`。
 - 若某个 skill 在当前工具环境不可用，必须在开工声明中说明，并使用最接近的可用 skill 替代；不得静默跳过。
