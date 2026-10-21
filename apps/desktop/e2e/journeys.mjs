@@ -421,8 +421,9 @@ async function journeyTwo() {
 }
 
 async function main() {
-  rmrf(EVIDENCE_DIR);
   fs.mkdirSync(EVIDENCE_DIR, { recursive: true });
+  for (const journey of ['journey-1', 'journey-2']) rmrf(path.join(EVIDENCE_DIR, journey));
+  rmrf(path.join(EVIDENCE_DIR, 'summary.json'));
   console.log(`Proto Harness Agent E2E · ${RUN_LABEL} · electron ${PACKAGED_BINARY || 'dev'}`);
   const started = Date.now();
   const journey1 = await journeyOne();

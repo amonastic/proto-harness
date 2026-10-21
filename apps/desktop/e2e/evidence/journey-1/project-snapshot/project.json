@@ -1,6 +1,6 @@
 {
   "schema_version": "pha-project-v1",
-  "id": "PRODUCT-社区驿站取件-9E6697",
+  "id": "PRODUCT-社区驿站取件-9D60DF",
   "name": "社区驿站取件",
   "goal": "让门店店员在 2 分钟内可重复开柜，同时不改变订单签收状态",
   "audience": "门店店员、取件人",
@@ -10,25 +10,25 @@
   ],
   "endpoints": [
     {
-      "id": "EP-作业端-APP-4C536",
+      "id": "EP-作业端-APP-C7E67",
       "name": "作业端 App",
       "role": "门店店员",
       "platform": "App",
       "ui_standard": ""
     },
     {
-      "id": "EP-管理后台-82BF9",
+      "id": "EP-管理后台-1079F",
       "name": "管理后台",
       "role": "产品运营",
       "platform": "Web",
       "ui_standard": ""
     }
   ],
-  "current_baseline_id": "BASELINE-初始基线-12DDE",
+  "current_baseline_id": "BASELINE-初始基线-1810F",
   "open_questions": [],
   "source_roots": [],
   "app_version": "0.1.0",
-  "created_at": "2026-10-21T11:34:41.611Z",
-  "updated_at": "2026-10-21T11:34:41.614Z",
+  "created_at": "2026-10-21T11:35:34.443Z",
+  "updated_at": "2026-10-21T11:35:34.446Z",
   "revision": 2
 }
