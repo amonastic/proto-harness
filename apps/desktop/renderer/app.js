@@ -139,7 +139,6 @@ async function boot() {
   try {
     state.settings = await api('settings:get');
     state.projects = await api('projects:list');
-    state.appInfo = await api('app:info');
   } catch (error) {
     const app = document.getElementById('app');
     app.innerHTML = `<div class="boot-screen"><span class="boot-mark">PHA</span><p>${fmt.escapeHtml(errorText(error)).replaceAll('\n', '<br>')}</p></div>`;

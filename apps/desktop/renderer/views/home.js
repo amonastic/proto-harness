@@ -47,14 +47,12 @@ function projectCard(project) {
 
 export async function renderHome(container) {
   const ctx = window.phaContext;
-  const [projects, settings, appInfo] = await Promise.all([
+  const [projects, settings] = await Promise.all([
     api('projects:list'),
-    api('settings:get'),
-    api('app:info')
+    api('settings:get')
   ]);
   ctx.state.projects = projects;
   ctx.state.settings = settings;
-  ctx.state.appInfo = appInfo;
   const pending = projects.reduce((sum, item) => sum + (item.pending || 0), 0);
   const deliveries = projects.reduce((sum, item) => sum + (item.counts?.deliveries || 0), 0);
   const model = settings.model;
