@@ -35,7 +35,7 @@ npm start
 ```bash
 cd apps/desktop
 npm test            # 46 项内核 + 适配器单元测试
-npm run e2e         # Playwright Electron 两条旅程；证据写入 e2e/evidence/
+npm run e2e         # Playwright Electron 三条旅程；证据写入 e2e/evidence/
 npm run e2e:packaged # 使用 release/ 下的安装产物运行同样旅程
 ```
 

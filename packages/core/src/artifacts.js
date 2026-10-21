@@ -1032,7 +1032,7 @@ export function renderPrototypeHtml({ product, requirement, spec, tokens = defau
   const pageTabs = pages.length > 1
     ? `<div class="page-tabs" role="tablist">${pages.map((page, index) => `<button class="tab page-tab" role="tab" aria-selected="${index === 0}" data-page-tab="${escapeHtml(page.id)}">${escapeHtml(page.name)}</button>`).join('')}</div>`
     : '';
-  return `<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -1098,6 +1098,7 @@ export function renderPrototypeHtml({ product, requirement, spec, tokens = defau
 </script>
 </body>
 </html>`;
+  return html.replace(/[ \t]+$/gm, '');
 }
 
 export function buildCssSpec({ tokens = defaultTokens(), prototypeHtml = '', scanned = [], requirement }) {

@@ -162,7 +162,9 @@ function archiveJourney(projectDir, journey, requirementId, deliveryId) {
     `requirements/${requirementId}/requirement.json`,
     `requirements/${requirementId}/proposal.json`,
     `requirements/${requirementId}/analysis.json`,
+    `requirements/${requirementId}/analysis-resolved.json`,
     `requirements/${requirementId}/interaction-spec.json`,
+    `requirements/${requirementId}/artifacts/spec-generation.json`,
     `requirements/${requirementId}/requirement.md`,
     `requirements/${requirementId}/artifacts/prototype.html`,
     `requirements/${requirementId}/artifacts/css-spec.json`,
@@ -177,6 +179,12 @@ function archiveJourney(projectDir, journey, requirementId, deliveryId) {
     if (!fs.existsSync(source)) continue;
     for (const file of fs.readdirSync(source)) {
       copyFileInto(projectDir, `${dir}/${file}`, dest);
+    }
+  }
+  const delivery = readJson(path.join(projectDir, 'deliveries', deliveryId, 'delivery.json'));
+  for (const item of delivery.manifest || []) {
+    if (item.frozen_path) {
+      copyFileInto(projectDir, `deliveries/${deliveryId}/${item.frozen_path}`, dest);
     }
   }
 }
