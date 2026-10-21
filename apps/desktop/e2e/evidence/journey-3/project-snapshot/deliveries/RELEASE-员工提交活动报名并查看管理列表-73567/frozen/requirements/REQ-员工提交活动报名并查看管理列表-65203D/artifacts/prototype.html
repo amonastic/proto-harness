@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>员工提交活动报名并查看管理列表 · 交互原型</title>
+<style>
+    :root {
+      --ink: #1D1D1B;
+      --muted: #6F6D66;
+      --paper: #F6F5F1;
+      --surface: #FFFFFF;
+      --accent: #1F6F5C;
+      --accent-soft: #E3EFEA;
+      --border: #E3E0D8;
+      --warning: #B5622A;
+      --danger: #A33A32;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--paper); color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .topbar {
+      height: 48px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; background: #1C1D1A; color: #F4F2EC; font-size: 12px;
+      letter-spacing: .08em;
+    }
+    .topbar .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+    .topbar .dot { width: 8px; height: 8px; border-radius: 50%; background: #7BC6A8; }
+    .badge { border: 1px solid rgba(255,255,255,.25); border-radius: 999px; padding: 3px 9px; color: #D8D5CC; }
+    main { max-width: 1180px; margin: 0 auto; padding: 34px 28px 48px; }
+    .eyebrow { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
+    h1 { font-size: 30px; line-height: 1.2; margin: 0 0 10px; letter-spacing: -.02em; }
+    .lede { margin: 0; color: var(--muted); max-width: 720px; line-height: 1.7; font-size: 14px; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 22px; margin-top: 28px; }
+    .panel, .aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+    .panel { overflow: hidden; }
+    .page-tabs, .state-tabs { display: flex; gap: 6px; padding: 14px 18px 0; flex-wrap: wrap; }
+    .tab {
+      border: 1px solid transparent; background: transparent; color: var(--muted);
+      border-radius: 8px; padding: 7px 12px; font-size: 12px; cursor: pointer;
+    }
+    .tab[aria-selected="true"] { background: var(--accent-soft); color: var(--accent); border-color: #C9E0D7; font-weight: 600; }
+    .page-body { padding: 22px; }
+    .state-block { display: none; }
+    .state-block.active { display: block; }
+    .toolbar { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 16px; }
+    .toolbar h2 { margin: 0; font-size: 16px; }
+    .toolbar .hint { color: var(--muted); font-size: 12px; }
+    .btn {
+      border: 1px solid var(--border); background: var(--surface); color: var(--ink);
+      padding: 9px 14px; border-radius: 9px; font-size: 13px; cursor: pointer;
+    }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn.danger { background: #FBEEEC; border-color: #E6C4BF; color: var(--danger); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; color: var(--muted); font-weight: 600; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding: 10px 8px; border-bottom: 1px solid var(--border); }
+    td { padding: 12px 8px; border-bottom: 1px solid #EFEDE6; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 11px; font-weight: 600; }
+    .pill.warn { background: #F7E9DE; color: var(--warning); }
+    .empty, .error { padding: 44px 24px; text-align: center; }
+    .empty h3, .error h3 { margin: 0 0 8px; font-size: 16px; }
+    .empty p, .error p { margin: 0 auto 18px; color: var(--muted); max-width: 420px; line-height: 1.7; font-size: 13px; }
+    .error { background: #FDF6F4; border-top: 1px solid #F0DAD5; }
+    .error h3 { color: var(--danger); }
+    .aside { padding: 20px; height: fit-content; }
+    .aside h2 { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+    .aside h2:not(:first-child) { margin-top: 22px; }
+    .rule { border-left: 2px solid var(--accent); padding: 2px 0 2px 10px; margin-bottom: 12px; }
+    .rule code { font-size: 10px; color: var(--muted); display: block; margin-bottom: 4px; }
+    .rule p { margin: 0; font-size: 12px; line-height: 1.6; }
+    .aside ul { margin: 0; padding-left: 16px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .footer-note { margin-top: 18px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+    .page-panel { display: none; }
+    .page-panel.active { display: block; }
+    .page-panel-head { padding: 20px 22px 4px; display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+    .page-panel-head h2 { margin: 4px 0 6px; font-size: 20px; letter-spacing: -.02em; }
+    .page-panel-head p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.65; max-width: 620px; }
+    .page-type { color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .page-tabs { border-bottom: 1px solid var(--border); padding: 12px 18px 0; }
+    .state-hint { color: var(--muted); font-size: 11px; margin-bottom: 12px; }
+    .proto-toolbar { display: flex; gap: 8px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
+    .proto-filter { border: 1px solid var(--border); background: #FBFAF7; border-radius: 8px; padding: 7px 10px; color: var(--muted); font-size: 12px; }
+    .proto-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .proto-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .proto-label { font-size: 12px; font-weight: 600; color: var(--ink); }
+    .proto-label .required { color: var(--danger); margin-left: 3px; }
+    .proto-input { width: 100%; border: 1px solid var(--border); background: #fff; border-radius: 8px; padding: 9px 10px; font-size: 12px; color: var(--ink); font-family: inherit; }
+    .proto-field.has-error .proto-input { border-color: #D9A49C; background: #FFF9F7; }
+    .field-error { color: var(--danger); font-size: 10px; }
+    .proto-switch { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); padding: 8px 0; }
+    .proto-switch input { accent-color: var(--accent); }
+    .form-actions { display: flex; gap: 8px; margin-top: 18px; padding-top: 14px; border-top: 1px solid #EFEDE6; }
+    .board { display: grid; grid-template-columns: repeat(3, minmax(190px, 1fr)); gap: 10px; overflow-x: auto; }
+    .board-column { background: #F4F2EC; border: 1px solid var(--border); border-radius: 10px; padding: 10px; min-height: 220px; }
+    .board-head { display: flex; justify-content: space-between; color: var(--ink); font-size: 12px; font-weight: 600; margin-bottom: 9px; }
+    .board-count { color: var(--muted); font-family: ui-monospace, Menlo, monospace; font-size: 10px; background: #fff; border-radius: 999px; padding: 1px 6px; }
+    .board-card { background: #fff; border: 1px solid var(--border); border-radius: 9px; padding: 10px; margin-bottom: 8px; display: flex; flex-direction: column; gap: 5px; }
+    .board-card strong { font-size: 12px; }
+    .board-card > span { color: var(--muted); font-size: 11px; }
+    .board-meta { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 10px; }
+    .tag { border-radius: 999px; background: #F7E9DE; color: var(--warning); padding: 2px 6px; }
+    .board-add { width: 100%; border: 1px dashed #D5D0C4; background: transparent; color: var(--muted); border-radius: 8px; padding: 7px; font-size: 11px; cursor: pointer; }
+    .settings-groups { display: grid; gap: 14px; }
+    .settings-group { border: 1px solid var(--border); border-radius: 11px; overflow: hidden; }
+    .settings-group-head { background: #FBFAF7; padding: 12px 14px; border-bottom: 1px solid #EFEDE6; }
+    .settings-group-head h3 { margin: 0 0 3px; font-size: 13px; }
+    .settings-group-head p { margin: 0; color: var(--muted); font-size: 11px; }
+    .setting-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 14px; border-bottom: 1px solid #F2F0EA; }
+    .setting-row:last-child { border-bottom: 0; }
+    .setting-row strong { display: block; font-size: 12px; }
+    .setting-row span { color: var(--muted); font-size: 10px; }
+    .setting-row .proto-input { width: 220px; }
+    .metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .metric-card { background: #F4F7F4; border: 1px solid #DCE7E0; border-radius: 11px; padding: 14px; }
+    .metric-card span { display: block; color: var(--muted); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; }
+    .metric-card strong { display: block; margin-top: 7px; font-size: 26px; letter-spacing: -.04em; color: var(--ink); }
+    .metric-card em { display: block; margin-top: 3px; color: var(--accent); font-size: 10px; font-style: normal; }
+    .trend-card { margin-top: 12px; border: 1px solid var(--border); border-radius: 11px; padding: 14px; }
+    .bars { display: grid; gap: 9px; }
+    .bar-row { display: grid; grid-template-columns: 52px 1fr 32px; gap: 9px; align-items: center; color: var(--muted); font-size: 10px; }
+    .bar-track { height: 8px; background: #EEF2EE; border-radius: 999px; overflow: hidden; }
+    .bar { height: 100%; background: var(--accent); border-radius: 999px; }
+    .bar-row em { font-style: normal; text-align: right; color: var(--muted); }
+    .detail-sections { display: grid; gap: 10px; }
+    .detail-section { border: 1px solid var(--border); border-radius: 10px; padding: 13px 14px; }
+    .detail-section h3 { margin: 0 0 7px; font-size: 13px; }
+    .detail-section ul { margin: 0; padding-left: 17px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .success-box { text-align: center; padding: 46px 24px; }
+    .success-mark { width: 44px; height: 44px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; margin: 0 auto 12px; font-size: 20px; font-weight: 700; }
+    .success-box h3 { margin: 0 0 7px; font-size: 17px; }
+    .success-box p { margin: 0 auto 16px; color: var(--muted); font-size: 12px; max-width: 420px; line-height: 1.7; }
+    .error-inline { border: 1px solid #F0DAD5; background: #FDF6F4; color: var(--danger); border-radius: 8px; padding: 9px 11px; font-size: 11px; margin-bottom: 12px; }
+    .decision-banner { margin-top: 16px; border: 1px solid #E5D7C3; background: #FBF6EE; border-radius: 10px; padding: 11px 13px; display: flex; flex-direction: column; gap: 3px; }
+    .decision-banner strong { font-size: 11px; color: #7A4A15; }
+    .decision-banner span { font-size: 11px; color: var(--muted); line-height: 1.6; }
+    .decision-banner ul { margin: 4px 0 0; padding-left: 17px; color: var(--muted); font-size: 10.5px; line-height: 1.6; }
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      .proto-form-grid, .metric-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="dot"></span> PROTO HARNESS AGENT</div>
+  <span class="badge">交互原型 · 演示数据</span>
+</header>
+<main>
+  <div class="eyebrow">运营活动台 / 2 个页面</div>
+  <h1>员工提交活动报名并查看管理列表</h1>
+  <p class="lede">在「员工端」中完成“员工提交活动报名并查看管理列表”相关操作，并按当前基线规则给出可解释的结果。</p>
+
+  <div class="layout">
+    <section class="panel">
+      <div class="page-tabs" role="tablist"><button class="tab page-tab" role="tab" aria-selected="true" data-page-tab="PAGE-FORM-1">员工提交活动报名并查看管理列表 · 提交</button><button class="tab page-tab" role="tab" aria-selected="false" data-page-tab="PAGE-LIST-2">员工提交活动报名并查看管理列表 · 管理</button></div>
+      <section class="page-panel active" data-page-panel="PAGE-FORM-1" data-page-type="form">
+    <div class="page-panel-head"><div><span class="page-type">表单</span><h2>员工提交活动报名并查看管理列表 · 提交</h2><p>在「员工端」中完成“员工提交活动报名并查看管理列表”相关操作，并按当前基线规则给出可解释的结果。</p></div>
+      <span class="pill">员工 · 管理员</span></div>
+    <div class="state-tabs" role="tablist"><button class="tab" role="tab" aria-selected="true" data-state-tab="PAGE-FORM-1" data-state-name="填写">填写</button><button class="tab" role="tab" aria-selected="false" data-state-tab="PAGE-FORM-1" data-state-name="校验失败">校验失败</button><button class="tab" role="tab" aria-selected="false" data-state-tab="PAGE-FORM-1" data-state-name="提交成功">提交成功</button></div>
+    <div class="page-body"><section class="state-block active" data-state-panel="PAGE-FORM-1" data-state-name="填写">
+      <div class="state-hint">规则校验：报名提交后仅可查看，不得修改；报名记录必须记录提交时间</div>
+      <form class="proto-form" onsubmit="return false">
+    <div class="proto-form-grid"><label class="proto-field "><span class="proto-label">姓名<span class="required">*</span></span>
+    <input class="proto-input" type="text" placeholder="请输入姓名"></label><label class="proto-field "><span class="proto-label">部门<span class="required">*</span></span>
+      <select class="proto-input"><option>运营部</option><option>客服部</option><option>财务部</option></select></label><label class="proto-field "><span class="proto-label">联系方式</span>
+    <input class="proto-input" type="tel" placeholder="请输入联系方式"></label></div>
+    <div class="form-actions">
+      <button class="btn primary" type="button">提交报名</button>
+      <button class="btn" type="button">保存草稿</button>
+    </div>
+  </form>
+    </section><section class="state-block " data-state-panel="PAGE-FORM-1" data-state-name="校验失败">
+      <div class="state-hint">必填项为空或格式不正确时，逐字段提示并保留已填内容</div>
+      <div class="error-inline">必填项为空或格式不正确时，逐字段提示并保留已填内容</div><form class="proto-form" onsubmit="return false">
+    <div class="proto-form-grid"><label class="proto-field has-error"><span class="proto-label">姓名<span class="required">*</span></span>
+    <input class="proto-input" type="text" placeholder="请输入姓名"><span class="field-error">此项为必填，请补充</span></label><label class="proto-field has-error"><span class="proto-label">部门<span class="required">*</span></span>
+      <select class="proto-input"><option>运营部</option><option>客服部</option><option>财务部</option></select><span class="field-error">此项为必填，请补充</span></label><label class="proto-field "><span class="proto-label">联系方式</span>
+    <input class="proto-input" type="tel" placeholder="请输入联系方式"></label></div>
+    <div class="form-actions">
+      <button class="btn primary" type="button">提交报名</button>
+      <button class="btn" type="button">保存草稿</button>
+    </div>
+  </form>
+    </section><section class="state-block " data-state-panel="PAGE-FORM-1" data-state-name="提交成功">
+      <div class="state-hint">提交成功后展示结果编号与下一步</div>
+      <div class="success-box"><div class="success-mark">✓</div><h3>提交成功</h3><p>提交成功后展示结果编号与下一步</p><button class="btn primary" type="button">查看结果</button></div>
+    </section></div>
+  </section><section class="page-panel " data-page-panel="PAGE-LIST-2" data-page-type="list">
+    <div class="page-panel-head"><div><span class="page-type">列表</span><h2>员工提交活动报名并查看管理列表 · 管理</h2><p>在「管理后台」中完成“员工提交活动报名并查看管理列表”相关操作，并按当前基线规则给出可解释的结果。</p></div>
+      <span class="pill">管理员 · 员工</span></div>
+    <div class="state-tabs" role="tablist"><button class="tab" role="tab" aria-selected="true" data-state-tab="PAGE-LIST-2" data-state-name="默认">默认</button><button class="tab" role="tab" aria-selected="false" data-state-tab="PAGE-LIST-2" data-state-name="空数据">空数据</button><button class="tab" role="tab" aria-selected="false" data-state-tab="PAGE-LIST-2" data-state-name="异常">异常</button></div>
+    <div class="page-body"><section class="state-block active" data-state-panel="PAGE-LIST-2" data-state-name="默认">
+      <div class="state-hint">规则校验：报名提交后仅可查看，不得修改；报名记录必须记录提交时间</div>
+      <div class="proto-toolbar">
+      <span class="proto-filter">全部记录</span>
+      <span class="grow"></span>
+      <button class="btn" type="button">筛选</button>
+      <button class="btn primary" type="button">新建记录</button>
+    </div>
+    <table><thead><tr><th>姓名</th><th>部门</th><th>联系方式</th><th>操作</th></tr></thead>
+    <tbody><tr><td>林晓</td><td>示例状态</td><td>138****0001</td><td><span class="link">查看</span></td></tr><tr><td>周然</td><td>示例状态</td><td>138****0002</td><td><span class="link">查看</span></td></tr><tr><td>陈一</td><td>示例状态</td><td>138****0003</td><td><span class="link">查看</span></td></tr></tbody></table>
+    </section><section class="state-block " data-state-panel="PAGE-LIST-2" data-state-name="空数据">
+      <div class="state-hint">没有符合条件的记录时说明空数据原因并提供主操作</div>
+      <div class="empty"><h3>还没有可展示的记录</h3><p>没有符合条件的记录时说明空数据原因并提供主操作</p><button class="btn primary" type="button">新建记录</button></div>
+    </section><section class="state-block " data-state-panel="PAGE-LIST-2" data-state-name="异常">
+      <div class="state-hint">核对配置端规则与消费端展示是否使用同一版本</div>
+      <div class="error"><h3>操作未完成</h3><p>核对配置端规则与消费端展示是否使用同一版本</p><button class="btn danger" type="button">查看业务依据</button></div>
+    </section></div>
+  </section>
+    </section>
+    <aside class="aside">
+      <h2>业务依据</h2>
+      <div class="rule"><code>RULE-报名提交后可查看-不得修改-5929E · r1</code><p>报名提交后仅可查看，不得修改</p></div><div class="rule"><code>RULE-记录-6BA2F · r1</code><p>报名记录必须记录提交时间</p></div>
+      <h2>页面结构</h2>
+      <ul><li>员工提交活动报名并查看管理列表 · 提交 · 表单</li><li>员工提交活动报名并查看管理列表 · 管理 · 列表</li></ul>
+      <h2>验收关注</h2>
+      <ul><li>空数据、异常与无权限场景有明确反馈，不出现无说明的中断</li><li>需求文档、交互规格与原型引用同一规则版本</li></ul>
+      <p class="footer-note">原型用于表达预期行为与状态，不代表生产系统已完成。演示数据不可作为真实业务记录。</p>
+    </aside>
+  </div>
+</main>
+<script>
+(function () {
+  var pageTabs = document.querySelectorAll('[data-page-tab]');
+  var pagePanels = document.querySelectorAll('[data-page-panel]');
+  pageTabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      pageTabs.forEach(function (item) { item.setAttribute('aria-selected', String(item === tab)); });
+      pagePanels.forEach(function (panel) {
+        panel.classList.toggle('active', panel.getAttribute('data-page-panel') === tab.getAttribute('data-page-tab'));
+      });
+    });
+  });
+  document.querySelectorAll('[data-state-tab]').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var pageId = tab.getAttribute('data-state-tab');
+      var stateName = tab.getAttribute('data-state-name');
+      document.querySelectorAll('[data-state-tab]').forEach(function (item) {
+        if (item.getAttribute('data-state-tab') === pageId) {
+          item.setAttribute('aria-selected', String(item === tab));
+        }
+      });
+      document.querySelectorAll('[data-state-panel]').forEach(function (panel) {
+        if (panel.getAttribute('data-state-panel') === pageId) {
+          panel.classList.toggle('active', panel.getAttribute('data-state-name') === stateName);
+        }
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

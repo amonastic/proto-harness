@@ -1,0 +1,33 @@
+{
+  "schema_version": "pha-baseline-v1",
+  "id": "BASELINE-初始基线-D4EA1",
+  "product_id": "PRODUCT-社区驿站取件-976138",
+  "name": "初始基线",
+  "status": "current",
+  "rule_refs": [
+    {
+      "id": "RULE-取件码-08CF6",
+      "revision": 1
+    },
+    {
+      "id": "RULE-订单-D6E62",
+      "revision": 1
+    }
+  ],
+  "capability_refs": [
+    {
+      "id": "CAP-管理取件码-53ECF",
+      "revision": 1
+    },
+    {
+      "id": "CAP-管理订单-9AC1F",
+      "revision": 1
+    }
+  ],
+  "formed_by": "onboarding",
+  "activated_at": "2026-10-21T12:16:52.051Z",
+  "evidence_refs": [],
+  "notes": "",
+  "created_at": "2026-10-21T12:16:52.051Z",
+  "updated_at": "2026-10-21T12:16:52.051Z"
+}

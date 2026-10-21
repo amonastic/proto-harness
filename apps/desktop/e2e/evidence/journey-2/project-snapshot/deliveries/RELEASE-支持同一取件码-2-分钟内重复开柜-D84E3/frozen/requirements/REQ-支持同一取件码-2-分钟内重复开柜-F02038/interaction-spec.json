@@ -1,0 +1,166 @@
+{
+  "schema_version": "interaction-spec-v1",
+  "requirement_id": "REQ-支持同一取件码-2-分钟内重复开柜-F02038",
+  "baseline_id": "BASELINE-支持同一取件码-2-分钟内重复开柜-NEXT-29966",
+  "source": "local-heuristic",
+  "summary": "业务裁决采纳新口径：业务确认允许 2 分钟内重复开柜，订单状态与物流推送保持不变",
+  "effective_title": "支持同一取件码 2 分钟内重复开柜",
+  "decision": {
+    "action": "adopt",
+    "reason": "业务确认允许 2 分钟内重复开柜，订单状态与物流推送保持不变",
+    "condition": "",
+    "rejected_changes": []
+  },
+  "rules": [
+    {
+      "id": "RULE-PICKUP-REOPEN-B7C9",
+      "revision": 2,
+      "statement": "同一取件码在 2 分钟内可重复开柜，不改变订单状态",
+      "constraints": [],
+      "knowledge_status": "confirmed",
+      "effective_state": "planned"
+    },
+    {
+      "id": "RULE-BILLING-PERIOD-30F9",
+      "revision": 1,
+      "statement": "月结账单必须按订单完成时间归入对应月份；历史账单必须使用生成时的快照，不得随当前订单状态重算",
+      "constraints": [],
+      "knowledge_status": "confirmed",
+      "effective_state": "current"
+    },
+    {
+      "id": "RULE-PICKUP-LOG-3377",
+      "revision": 1,
+      "statement": "每次开柜操作必须记录操作人、取件码、柜格与结果。",
+      "constraints": [],
+      "knowledge_status": "confirmed",
+      "effective_state": "current"
+    },
+    {
+      "id": "RULE-BILLING-EXPORT-A5AB",
+      "revision": 1,
+      "statement": "仅财务角色可以导出月结账单明细；运营角色可以查看汇总，不得导出客户级明细",
+      "constraints": [],
+      "knowledge_status": "confirmed",
+      "effective_state": "current"
+    }
+  ],
+  "evidence_refs": [],
+  "pages": [
+    {
+      "responsibility": "在「管理后台」中完成“支持同一取件码 2 分钟内重复开柜”相关操作，并按当前基线规则给出可解释的结果。",
+      "entry_conditions": [
+        "角色进入「管理后台」",
+        "当前需求使用基线：BASELINE-支持同一取件码-2-分钟内重复开柜-NEXT-29966"
+      ],
+      "roles": [
+        "产品运营",
+        "一线作业人员"
+      ],
+      "behaviors": [
+        "在「管理后台」发起与取件码相关的操作",
+        "系统读取当前基线中的适用规则并判断是否允许继续",
+        "按判断结果完成操作或给出明确阻断原因",
+        "保存本次操作结果与业务状态，供后续查询与核对"
+      ],
+      "feedback": [
+        "操作成功：显示结果与关联业务对象",
+        "操作阻断：显示命中的规则与下一步",
+        "待裁决：暂停依赖该判断的生成"
+      ],
+      "exceptions": [
+        "核对配置端规则与消费端展示是否使用同一版本"
+      ],
+      "design_constraints": [
+        "主操作使用 accent 色，错误与阻断使用 danger 色",
+        "规则 ID、版本和基线必须可见",
+        "演示数据不得被理解为真实业务数据"
+      ],
+      "acceptance_refs": [
+        "规则“同一取件码在 2 分钟内可重复开柜，不改变订单状态”在主要路径生效，并在界面或反馈中可被验证",
+        "规则“重复开柜不得触发新的物流推送”在主要路径生效，并在界面或反馈中可被验证",
+        "空数据、异常与无权限场景有明确反馈，不出现无说明的中断",
+        "需求文档、交互规格与原型引用同一规则版本",
+        "规则 RULE-PICKUP-REOPEN-B7C9 r2：同一取件码在 2 分钟内可重复开柜，不改变订单状态"
+      ],
+      "decision_note": "业务裁决：已裁决。业务确认允许 2 分钟内重复开柜，订单状态与物流推送保持不变",
+      "id": "PAGE-LIST-1",
+      "type": "list",
+      "layout": "single",
+      "name": "支持同一取件码 2 分钟内重复开柜",
+      "components": [
+        "页面标题",
+        "筛选区",
+        "列表主表",
+        "行操作",
+        "空状态"
+      ],
+      "primary_action": "新建记录",
+      "actions": [
+        "新建记录",
+        "筛选"
+      ],
+      "fields": [
+        {
+          "name": "取件码",
+          "type": "text",
+          "required": true,
+          "options": [],
+          "placeholder": "输入取件码"
+        },
+        {
+          "name": "订单",
+          "type": "text",
+          "required": false,
+          "options": [],
+          "placeholder": "输入订单"
+        }
+      ],
+      "columns": [
+        {
+          "name": "取件码",
+          "type": "text"
+        },
+        {
+          "name": "订单",
+          "type": "text"
+        }
+      ],
+      "demo_rows": [
+        {
+          "取件码": "示例值 A",
+          "订单": "示例值 A"
+        },
+        {
+          "取件码": "示例值 B",
+          "订单": "示例值 B"
+        },
+        {
+          "取件码": "示例值 C",
+          "订单": "示例值 C"
+        }
+      ],
+      "states": [
+        {
+          "name": "默认",
+          "behavior": "规则校验：同一取件码在 2 分钟内可重复开柜，不改变订单状态；月结账单必须按订单完成时间归入对应月份；历史账单必须使用生成时的快照，不得随当前订单状态重算；每次开柜操作必须记录操作人、取件码、柜格与结果。；仅财务角色可以导出月结账单明细；运营角色可以查看汇总，不得导出客户级明细"
+        },
+        {
+          "name": "空数据",
+          "behavior": "没有符合条件的记录时说明空数据原因并提供主操作"
+        },
+        {
+          "name": "异常",
+          "behavior": "核对配置端规则与消费端展示是否使用同一版本"
+        }
+      ]
+    }
+  ],
+  "note": "页面行为必须与所列规则版本一致。",
+  "generation": {
+    "source": "local-heuristic",
+    "model": null,
+    "warning": null,
+    "page_count": 1
+  }
+}

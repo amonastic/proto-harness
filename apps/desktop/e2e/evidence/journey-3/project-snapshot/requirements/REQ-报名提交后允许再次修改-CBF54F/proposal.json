@@ -1,0 +1,95 @@
+{
+  "schema_version": "pha-proposal-v1",
+  "id": "PROPOSAL-REQ-报名提交后允许再次修改-CBF54F-4707E",
+  "product_id": "PRODUCT-运营活动台-A3DFDF",
+  "requirement_id": "REQ-报名提交后允许再次修改-CBF54F",
+  "base_revision": 4,
+  "base_baseline_id": "BASELINE-初始基线-C9180",
+  "changes": [
+    {
+      "kind": "rule.revise",
+      "rule_id": "RULE-报名提交后可查看-不得修改-5929E",
+      "from_revision": 1,
+      "statement": "报名提交后可以再次修改报名信息",
+      "scope": "员工端、管理后台",
+      "topic": "报名提交后可查看，不得修改",
+      "constraints": [
+        "已确认：重复操作的允许时间窗口是多少？超过窗口后系统应如何反馈？ -> 2 分钟，超时后拒绝"
+      ],
+      "evidence_refs": [
+        "EVID-产品初始说明-CA69C"
+      ],
+      "reason": "需求与现行规则存在业务口径差异，需要裁决"
+    }
+  ],
+  "reason": "需求与现行规则存在冲突，需先完成业务裁决",
+  "evidence_refs": [],
+  "impact": {
+    "actual": [
+      "更新「员工端」中与“报名提交后允许再次修改 员工可以在报名提交后再次…”相关的操作入口、状态反馈与说明",
+      "更新「管理后台」中与“报名提交后允许再次修改 员工可以在报名提交后再次…”相关的操作入口、状态反馈与说明"
+    ],
+    "verify": [
+      "核对配置端规则与消费端展示是否使用同一版本",
+      "核对历史数据、快照与已有交付是否受本次规则变化影响"
+    ],
+    "keep": [
+      "报名提交后仅可查看，不得修改",
+      "报名记录必须记录提交时间"
+    ]
+  },
+  "conflicts": [
+    {
+      "id": "CONFLICT-xsxp7g5",
+      "topic": "报名提交后可查看，不得修改",
+      "heuristic": true,
+      "existing_rules": [
+        {
+          "id": "RULE-报名提交后可查看-不得修改-5929E",
+          "revision": 1,
+          "statement": "报名提交后仅可查看，不得修改",
+          "scope": "员工端、管理后台",
+          "evidence_refs": [
+            "EVID-产品初始说明-CA69C"
+          ]
+        }
+      ],
+      "proposed_statement": "报名提交后可以再次修改报名信息",
+      "why": "新需求允许重复操作，而现行规则限制为一次或禁止重复",
+      "options": [
+        {
+          "id": "adopt",
+          "label": "采用新口径",
+          "description": "新规则进入计划基线，现行基线暂不切换"
+        },
+        {
+          "id": "keep",
+          "label": "保留现行规则",
+          "description": "按现行基线继续，需求范围需要调整"
+        },
+        {
+          "id": "conditional",
+          "label": "附加条件后采用",
+          "description": "在生效条件中限定适用范围"
+        }
+      ]
+    }
+  ],
+  "analysis_source": "local-heuristic",
+  "status": "applied",
+  "created_at": "2026-10-21T12:17:52.395Z",
+  "proposal_hash": "323b3c62696b017ca54c7476655b1719e8d1ccc2d7009bffdde09d6a80da531f",
+  "base_baseline_status": "current",
+  "confirmed_answers": [
+    {
+      "id": "U-f0x0oi",
+      "question": "重复操作的允许时间窗口是多少？超过窗口后系统应如何反馈？",
+      "answer": "2 分钟，超时后拒绝",
+      "blocking": true
+    }
+  ],
+  "rebased_at": "2026-10-21T12:17:53.014Z",
+  "decided_at": "2026-10-21T12:17:54.250Z",
+  "decision_id": "DECISION-REQ-报名提交后允许再次修改-CBF54F-31EE8",
+  "applied_at": "2026-10-21T12:17:54.252Z"
+}

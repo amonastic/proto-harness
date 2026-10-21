@@ -1,20 +1,32 @@
 {
   "label": "packaged",
-  "packaged_binary": "/tmp/pha-installed-final2/Proto Harness Agent.app/Contents/MacOS/Proto Harness Agent",
-  "started_at": "2026-10-21T11:35:33.016Z",
-  "finished_at": "2026-10-21T11:36:01.670Z",
-  "duration_ms": 28654,
+  "packaged_binary": "/tmp/pha-installed-final3/Proto Harness Agent.app/Contents/MacOS/Proto Harness Agent",
+  "started_at": "2026-10-21T12:16:47.990Z",
+  "finished_at": "2026-10-21T12:18:02.154Z",
+  "duration_ms": 74164,
   "journeys": {
     "new_product": {
-      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j1-CsP4Bb/projects/社区驿站取件",
-      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-5EE420",
-      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-F64F8",
+      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j1-7QSGYf/projects/社区驿站取件",
+      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-311A5A",
+      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-D216D",
       "errors": []
     },
     "existing_project": {
-      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j2-9RojIL/projects/社区驿站取件",
-      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-078721",
-      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-E04C8",
+      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j2-ohoID5/projects/社区驿站取件",
+      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-F02038",
+      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-D84E3",
+      "errors": []
+    },
+    "distinct_requirement": {
+      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j3-TJav6s/projects/运营活动台",
+      "requirementIds": [
+        "REQ-员工提交活动报名并查看管理列表-65203D",
+        "REQ-报名提交后允许再次修改-CBF54F"
+      ],
+      "deliveryIds": [
+        "RELEASE-员工提交活动报名并查看管理列表-73567",
+        "RELEASE-报名提交后允许再次修改-8E2CD"
+      ],
       "errors": []
     }
   },
@@ -27,6 +39,11 @@
     "git_commit_and_push": true,
     "second_copy_resumed": true,
     "import_source_untouched": true,
-    "no_secrets_in_export": true
+    "no_secrets_in_export": true,
+    "distinct_requirement_multipage": true,
+    "unknown_answer_rebased": true,
+    "keep_decision_respected": true,
+    "delivery_frozen_on_reexport": true,
+    "git_second_commit": true
   }
 }

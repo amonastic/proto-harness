@@ -1,0 +1,68 @@
+{
+  "delivery_id": "RELEASE-支持同一取件码-2-分钟内重复开柜-D216D",
+  "requirement_id": "REQ-支持同一取件码-2-分钟内重复开柜-311A5A",
+  "baseline_id": "BASELINE-支持同一取件码-2-分钟内重复开柜-NEXT-E353D",
+  "rule_refs": [
+    {
+      "id": "RULE-取件码-08CF6",
+      "revision": 2
+    },
+    {
+      "id": "RULE-订单-D6E62",
+      "revision": 2
+    }
+  ],
+  "created_at": "2026-10-21T12:16:59.469Z",
+  "files": [
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-311A5A-296B9",
+      "type": "requirement-doc",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-311A5A/requirement.md",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-311A5A/requirement.md",
+      "sha256": "4b76ce0927d3254a0b3018a4fbff5b99d11ab2095fbc5bbaca7e916bee9fd2e0",
+      "size": 3634,
+      "size_label": "3.5 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-311A5A-72C44",
+      "type": "interaction-spec",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-311A5A/interaction-spec.json",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-311A5A/interaction-spec.json",
+      "sha256": "dd4e82c094b95d920aa5b95be3f00e49628240e45fcb3b5ab45557c6ff95efef",
+      "size": 5118,
+      "size_label": "5.0 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-311A5A-1A974",
+      "type": "prototype",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-311A5A/artifacts/prototype.html",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-311A5A/artifacts/prototype.html",
+      "sha256": "df2303a34aff8eb23c2114449c7223c32dbfb9557791db6213f713b67664f5e9",
+      "size": 17135,
+      "size_label": "16.7 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-311A5A-F1986",
+      "type": "css-spec",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-311A5A/artifacts/css-spec.json",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-311A5A/artifacts/css-spec.json",
+      "sha256": "035fe3f42e3f37ffd861616752f81c1038607722e37cec7d30d0d692b69b0601",
+      "size": 5243,
+      "size_label": "5.1 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-311A5A-206E7",
+      "type": "mapping",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-311A5A/artifacts/mapping.json",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-311A5A/artifacts/mapping.json",
+      "sha256": "3249c90fd2662efb784f84481eb734890a2022b95b8a0d501babfdb48d3756e7",
+      "size": 1691,
+      "size_label": "1.7 KB",
+      "state": "draft"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "schema_version": "pha-proposal-v1",
+  "id": "PROPOSAL-REQ-支持同一取件码-2-分钟内重复开柜-311A5A-BE0A5",
+  "product_id": "PRODUCT-社区驿站取件-976138",
+  "requirement_id": "REQ-支持同一取件码-2-分钟内重复开柜-311A5A",
+  "base_revision": 3,
+  "base_baseline_id": "BASELINE-初始基线-D4EA1",
+  "changes": [
+    {
+      "kind": "rule.revise",
+      "rule_id": "RULE-取件码-08CF6",
+      "from_revision": 1,
+      "statement": "同一取件码在 2 分钟内可重复开柜，不改变订单状态",
+      "scope": "作业端 App、管理后台",
+      "topic": "取件码",
+      "constraints": [],
+      "evidence_refs": [
+        "EVID-产品初始说明-60845"
+      ],
+      "reason": "需求与现行规则存在业务口径差异，需要裁决"
+    },
+    {
+      "kind": "rule.revise",
+      "rule_id": "RULE-订单-D6E62",
+      "from_revision": 1,
+      "statement": "重复开柜不得触发新的物流推送",
+      "scope": "作业端 App、管理后台",
+      "topic": "订单",
+      "constraints": [],
+      "evidence_refs": [
+        "EVID-产品初始说明-60845"
+      ],
+      "reason": "需求对现行规则做出补充或细化"
+    }
+  ],
+  "reason": "需求与现行规则存在冲突，需先完成业务裁决",
+  "evidence_refs": [],
+  "impact": {
+    "actual": [
+      "更新「作业端 App」中与“支持同一取件码 2 分钟内重复开柜 同一取件码在…”相关的操作入口、状态反馈与说明",
+      "更新「管理后台」中与“支持同一取件码 2 分钟内重复开柜 同一取件码在…”相关的操作入口、状态反馈与说明"
+    ],
+    "verify": [
+      "核对配置端规则与消费端展示是否使用同一版本",
+      "核对历史数据、快照与已有交付是否受本次规则变化影响"
+    ],
+    "keep": [
+      "每个取件码仅可开柜一次",
+      "重复开柜不得改变订单签收状态，不得触发新的物流推送"
+    ]
+  },
+  "conflicts": [
+    {
+      "id": "CONFLICT-rfbjgx",
+      "topic": "取件码",
+      "heuristic": true,
+      "existing_rules": [
+        {
+          "id": "RULE-取件码-08CF6",
+          "revision": 1,
+          "statement": "每个取件码仅可开柜一次",
+          "scope": "作业端 App、管理后台",
+          "evidence_refs": [
+            "EVID-产品初始说明-60845"
+          ]
+        }
+      ],
+      "proposed_statement": "同一取件码在 2 分钟内可重复开柜，不改变订单状态",
+      "why": "新需求允许重复操作，而现行规则限制为一次或禁止重复",
+      "options": [
+        {
+          "id": "adopt",
+          "label": "采用新口径",
+          "description": "新规则进入计划基线，现行基线暂不切换"
+        },
+        {
+          "id": "keep",
+          "label": "保留现行规则",
+          "description": "按现行基线继续，需求范围需要调整"
+        },
+        {
+          "id": "conditional",
+          "label": "附加条件后采用",
+          "description": "在生效条件中限定适用范围"
+        }
+      ]
+    }
+  ],
+  "analysis_source": "local-heuristic",
+  "status": "applied",
+  "created_at": "2026-10-21T12:16:56.057Z",
+  "proposal_hash": "8c96006be45e509d3fa54d9c2da6c830b343106f4d0175d01d06a5dc6063fa5e",
+  "base_baseline_status": "current",
+  "decided_at": "2026-10-21T12:16:56.680Z",
+  "decision_id": "DECISION-REQ-支持同一取件码-2-分钟内重复开柜-311A5A-C51D1",
+  "applied_at": "2026-10-21T12:16:56.685Z"
+}

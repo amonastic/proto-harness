@@ -1,11 +1,12 @@
 # 安装产物端到端验证证据
 
-执行日期：2026-10-21（安装产物由提交 `8cefc82` 构建）
-源码提交：`8cefc826dce3f28ce654e8726fad72095f477598`
-安装产物：`apps/desktop/release/Proto-Harness-Agent-0.1.0-arm64.dmg`
+执行日期：2026-10-21（返修版安装产物）
+客户端版本：0.1.1
+源码提交：`34bf49001456da5d91a32ed612ef98937e8ed145`
+安装产物：`apps/desktop/release/Proto-Harness-Agent-0.1.1-arm64.dmg`
 验证方式：挂载 DMG → 将 `Proto Harness Agent.app` 复制到临时安装目录 → 直接启动安装副本 → 运行 `e2e/journeys.mjs`。
 签名状态：ad-hoc 签名，未使用 Developer ID，未公证。
-分析来源：本地规则分析（未调用真实模型；模型适配器另有 mock HTTP 单测）。
+分析来源：本地规则分析（未调用真实模型；模型规格接入用 fake adapter 单测验证）。
 
 ## 结果
 
@@ -21,9 +22,16 @@
   "git_commit_and_push": true,
   "second_copy_resumed": true,
   "import_source_untouched": true,
-  "no_secrets_in_export": true
+  "no_secrets_in_export": true,
+  "distinct_requirement_multipage": true,
+  "unknown_answer_rebased": true,
+  "keep_decision_respected": true,
+  "delivery_frozen_on_reexport": true,
+  "git_second_commit": true
 }
 ```
+
+单元测试：46 项全部通过，覆盖页面类型推断、模型两页规格进入产物、补答重绑、保留现行规则、交付冻结、并行计划基线与 Git 二次提交。
 
 ## 旅程一：新建产品
 
@@ -41,13 +49,11 @@
 | `journey-1/06-settings.png` | 安装版运行环境、安全存储、Git/pen/OpenCode 状态 |
 | `journey-1/07-resumed.png` | 关闭客户端后重启，恢复交付与裁决上下文 |
 
-项目快照位于 `journey-1/project-snapshot/`，包含基线、裁决、需求、交互规格、原型、CSS 规范、交付清单与导出首页。
-
 ## 旅程二：接入已有项目
 
 | 截图 | 覆盖点 |
 | --- | --- |
-| `journey-2/01-import-scan.png` | 扫描示例项目，识别 1 组历史/当前口径冲突 |
+| `journey-2/01-import-scan.png` | 扫描示例项目，识别历史/当前口径冲突 |
 | `journey-2/02-workbench.png` | 导入后形成当前基线与历史替代记录 |
 | `journey-2/03-brain-rules.png` | 规则、状态、修订与结构化来源 |
 | `journey-2/04-decision.png` | 基于已有规则的迭代产生冲突 |
@@ -56,16 +62,34 @@
 | `journey-2/review.png` | 评审确认 |
 | `journey-2/delivered.png` | 交付导出 |
 
-项目快照位于 `journey-2/project-snapshot/`。验证同时比对了来源示例目录的 SHA-256 树，确认导入前后完全一致。
+来源示例目录在导入前后做了 SHA-256 树对比，保持完全一致。
+
+## 旅程三：不同真实需求、补答与保留现行规则
+
+| 截图 | 覆盖点 |
+| --- | --- |
+| `journey-3/01-a-form-list.png` | 「活动报名」需求生成表单页，字段包含姓名/部门/联系方式 |
+| `journey-3/02-a-management.png` | 同一需求生成第二页管理列表，页面页签切换后可见 |
+| `journey-3/03-a-review.png` / `03-a-delivered.png` | 报名需求评审与交付 |
+| `journey-3/04-a-frozen-reexport.png` | 修改活原型后重新导出，历史交付内容哈希不变 |
+| `journey-3/05-b-blocked.png` | 冲突需求因缺少时间窗口进入阻塞未知项 |
+| `journey-3/06-b-keep-decision.png` | 补答后提案重绑成功，进入裁决而非“版本已变化” |
+| `journey-3/07-b-keep-artifacts.png` | 选择保留现行规则后，产物标题为「按现行规则处理」，并显示未采纳口径 |
+| `journey-3/08-b-review.png` / `08-b-delivered.png` | 保留现行规则的产物评审与交付 |
+| `journey-3/09-git-recommit.png` | 首次提交后修改首个文件并再次提交成功 |
+
+旅程三与取件码示例无关；它验证了表单 + 管理列表双页、补答重绑、保留现行规则、交付冻结和 Git 二次提交。
 
 ## 重要断言
 
 - 采纳裁决后 `planned` 基线建立，但 `current_baseline_id` 不变。
-- 需求固定使用计划基线，交付清单包含 5 项产物与规则版本。
+- 保留现行规则时，生成规格与原型不实现被否决口径；需求文档保留原始输入和裁决记录。
+- 补答阻塞问题后，提案以新需求修订重绑，问答进入规则约束与后续规格。
+- 页面规格按语义生成；报名需求是第一页表单、第二页列表，第二页不会丢失。
+- 交付创建时冻结产物与哈希；修改活产物后重新导出，历史导出字节不变。
 - 交付导出包含 `index.html`、`manifest.json`、需求文档、交互规格、原型与 CSS 规范；没有密钥、日志或 `.runtime`。
-- 未提交时交付会记录“未绑定 Git 提交”警告；本次旅程在交付后完成提交与推送，并验证远端 `refs/heads/main`。
-- 第二工作副本从远端克隆后可直接恢复需求与交付。
-- 导入规则修订后仍能解析到来源证据，需求上下文显示“来源证据”而非空列表。
+- 计划基线不阻塞另一项仍基于现行规则的需求（单测覆盖）。
+- Git 状态使用 NUL 分隔路径解析，提交后再次修改首个文件仍可正常提交。
 
 ## 复现
 
@@ -78,4 +102,4 @@ npm run e2e:packaged
 # 方式二：挂载 DMG，复制 .app 到临时目录，再以 PHA_E2E_BINARY 指向安装副本运行
 ```
 
-注意：`summary.json` 中的临时项目路径在执行结束后可能已不存在；`project-snapshot/` 保留了关键业务文件。真实模型调用未在本证据中验证，因为本机没有可用模型凭据。
+注意：`summary.json` 中的临时项目路径在执行结束后可能已不存在；`project-snapshot/` 保留了关键业务文件与交付冻结副本。真实模型调用未在本证据中验证，因为本机没有可用模型凭据；两页模型规格由本地 mock adapter 单测验证并进入生成主链。

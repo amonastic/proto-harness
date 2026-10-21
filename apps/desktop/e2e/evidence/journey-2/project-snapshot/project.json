@@ -1,6 +1,6 @@
 {
   "schema_version": "pha-project-v1",
-  "id": "PRODUCT-社区驿站取件-34F947",
+  "id": "PRODUCT-社区驿站取件-649E1D",
   "name": "社区驿站取件",
   "goal": "面向社区驿站的取件核销示例项目，用于演示已有规则、历史方案、页面与后续需求之间的关系。示例不含真实客户资料，业务阈值仅用于流程演示。",
   "audience": "",
@@ -9,21 +9,21 @@
   ],
   "endpoints": [
     {
-      "id": "EP-管理后台-702F3",
+      "id": "EP-管理后台-01D9F",
       "name": "管理后台",
       "role": "产品运营",
       "platform": "Web",
       "ui_standard": ""
     },
     {
-      "id": "EP-作业端-APP-3465B",
+      "id": "EP-作业端-APP-15F4A",
       "name": "作业端 App",
       "role": "一线作业人员",
       "platform": "App",
       "ui_standard": ""
     }
   ],
-  "current_baseline_id": "BASELINE-导入基线-3150F",
+  "current_baseline_id": "BASELINE-导入基线-5FCBB",
   "open_questions": [
     {
       "question": "同一主题同时存在 1 条当前口径与 1 条历史口径，材料日期不能代替业务裁决",
@@ -36,11 +36,11 @@
       "path": "/Users/shanyuan/Project/proto-harness/examples/existing-project",
       "label": "导入来源",
       "portable": false,
-      "imported_at": "2026-10-21T11:35:52.667Z"
+      "imported_at": "2026-10-21T12:17:29.911Z"
     }
   ],
-  "app_version": "0.1.0",
-  "created_at": "2026-10-21T11:35:52.668Z",
-  "updated_at": "2026-10-21T11:35:52.673Z",
+  "app_version": "0.1.1",
+  "created_at": "2026-10-21T12:17:29.912Z",
+  "updated_at": "2026-10-21T12:17:29.917Z",
   "revision": 2
 }
