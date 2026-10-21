@@ -181,7 +181,9 @@ function applyChanges(store, { requirement, decision, proposal, plannedBaseline 
           ...(change.constraints || []),
           ...(decision.chosen.action === 'conditional' ? [`生效条件：${decision.condition}`] : [])
         ],
-        evidenceRefs: change.evidence_refs || base.evidence_refs || [],
+        evidenceRefs: (change.evidence_refs && change.evidence_refs.length > 0)
+          ? change.evidence_refs
+          : (base.evidence_refs || []),
         decisionRef: decision.id,
         supersedes: { id: base.id, revision: base.revision },
         topic: change.topic || base.topic,
@@ -208,7 +210,9 @@ function applyChanges(store, { requirement, decision, proposal, plannedBaseline 
           ...(change.constraints || []),
           ...(decision.chosen.action === 'conditional' ? [`生效条件：${decision.condition}`] : [])
         ],
-        evidenceRefs: change.evidence_refs || [],
+        evidenceRefs: (change.evidence_refs && change.evidence_refs.length > 0)
+          ? change.evidence_refs
+          : (proposal.evidence_refs || []),
         decisionRef: decision.id,
         topic: change.topic || '',
         source: 'decision'

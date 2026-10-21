@@ -389,6 +389,7 @@ export function scanProjectDirectory(sourceRoot) {
       title: parsed.title, evidence_id: evidenceId
     });
     evidence.push(createEvidence({
+      id: evidenceId,
       productId: null,
       title: parsed.title,
       sourceType,

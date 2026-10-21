@@ -62,13 +62,13 @@ export function createProject({
 }
 
 export function createEvidence({
-  productId, title, sourceType = 'note', sourceRef = '', portable = true,
+  id = null, productId, title, sourceType = 'note', sourceRef = '', portable = true,
   locator = '', contentHash = '', rawExcerpt = '', usage = 'fact', capturedAt = nowIso(),
   sourceAbs = ''
 }) {
   return {
     schema_version: SCHEMA.evidence,
-    id: makeId('EVID', title || sourceRef || 'source'),
+    id: id || makeId('EVID', title || sourceRef || 'source'),
     product_id: productId,
     title: String(title || sourceRef || '来源').slice(0, 160),
     source_type: sourceType,

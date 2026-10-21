@@ -73,6 +73,11 @@ test('导入生成当前规则、历史规则与裁决记录，且不修改来�
   assert.ok(historical);
   assert.equal(historical.knowledge_status, 'superseded');
   assert.equal(current.supersedes?.id, historical.id);
+  for (const rule of imported) {
+    for (const evidenceId of rule.evidence_refs || []) {
+      assert.ok(applied.store.getEvidence(evidenceId), `规则 ${rule.id} 引用了缺失证据 ${evidenceId}`);
+    }
+  }
 });
 
 test('导入项目生成产物时继承来源 CSS 声明值', async () => {
@@ -101,6 +106,7 @@ test('导入项目生成产物时继承来源 CSS 声明值', async () => {
     requirementId: requirement.id,
     adapter: createLocalAdapter()
   });
+  assert.ok(analysis.context.evidence.length > 0, '需求上下文应包含可解析的来源证据');
   const decision = recordDecision(applied.store, {
     requirementId: requirement.id,
     proposalHash: analysis.proposal.proposal_hash,
@@ -109,6 +115,8 @@ test('导入项目生成产物时继承来源 CSS 声明值', async () => {
     reason: '确认变更'
   });
   applyDecision(applied.store, decision.id);
+  const revisedRule = applied.store.getRule(analysis.proposal.changes[0].rule_id);
+  assert.ok(revisedRule.evidence_refs.length > 0, '修订规则应保留来源证据');
   const generated = buildArtifactsForRequirement(applied.store, requirement.id);
   const cssArtifact = generated.artifacts.find((item) => item.type === 'css-spec');
   const css = JSON.parse(fs.readFileSync(applied.store.resolve(cssArtifact.path), 'utf8'));
