@@ -214,6 +214,8 @@ export function normalizeInteractionSpec(raw, requirementId, modelId) {
     source: `model:${modelId || 'unknown'}`,
     pages: raw.pages.map((page, index) => ({
       id: page.id || `PAGE-${index + 1}`,
+      type: page.type || null,
+      layout: page.layout || null,
       name: String(page.name || `页面${index + 1}`),
       responsibility: String(page.responsibility || ''),
       entry_conditions: stringList(page.entry_conditions),
@@ -229,7 +231,15 @@ export function normalizeInteractionSpec(raw, requirementId, modelId) {
       feedback: stringList(page.feedback),
       exceptions: stringList(page.exceptions),
       design_constraints: stringList(page.design_constraints),
-      acceptance_refs: stringList(page.acceptance_refs)
+      acceptance_refs: stringList(page.acceptance_refs),
+      primary_action: page.primary_action ? String(page.primary_action) : '',
+      actions: stringList(page.actions),
+      columns: arrayOf(page.columns),
+      demo_rows: arrayOf(page.demo_rows),
+      board_columns: arrayOf(page.board_columns),
+      groups: arrayOf(page.groups),
+      metrics: arrayOf(page.metrics),
+      sections: arrayOf(page.sections)
     }))
   };
 }

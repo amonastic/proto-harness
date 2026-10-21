@@ -54,7 +54,7 @@ export function createProject({
     current_baseline_id: null,
     open_questions: openQuestions,
     source_roots: sourceRoots,
-    app_version: '0.1.0',
+    app_version: '0.1.1',
     created_at: createdAt,
     updated_at: createdAt,
     revision: 1

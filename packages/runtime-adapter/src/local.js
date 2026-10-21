@@ -100,7 +100,7 @@ function buildCapabilities(ruleSentences, objects, endpoints, goal) {
   return capabilities.slice(0, 6);
 }
 
-function buildUnknowns(text, { ruleSentences, objects, references = [] } = {}) {
+function buildUnknowns(text, { ruleSentences, objects, references = [], hasContextRules = false } = {}) {
   const unknowns = [];
   const explicit = sentences(text).filter((item) => /(待确认|未确认|未知|TBD|\?|？)/.test(item));
   for (const item of explicit.slice(0, 2)) {
@@ -132,7 +132,7 @@ function buildUnknowns(text, { ruleSentences, objects, references = [] } = {}) {
       false
     ));
   }
-  if (unknowns.length === 0 && ruleSentences.length === 0) {
+  if (unknowns.length === 0 && ruleSentences.length === 0 && !hasContextRules) {
     unknowns.push(makeUnknown(
       '本次变更必须遵守哪些业务约束？',
       '缺少可判断的业务规则，无法形成可用于生成的需求基线',
@@ -323,7 +323,7 @@ function localRequirementAnalysis(input) {
     proposalKeys.add(key);
     proposals.push(item);
   }
-  const unknowns = buildUnknowns(text, { ruleSentences, objects });
+  const unknowns = buildUnknowns(text, { ruleSentences, objects, hasContextRules: existingRules.length > 0 });
   const impact = buildImpact(endpoints, text, product);
   const acceptance = buildAcceptance(ruleSentences, unknowns);
   const scope = {

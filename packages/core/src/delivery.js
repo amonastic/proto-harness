@@ -23,15 +23,25 @@ function assertArtifactsReady(store, requirement) {
   return artifacts;
 }
 
-export function buildManifest(store, requirement, artifacts) {
+export function buildManifest(store, requirement, artifacts, { deliveryId = null } = {}) {
+  const deliveryDir = deliveryId ? store.deliveryDir(deliveryId) : null;
   return artifacts.map((artifact) => {
-    const abs = store.resolve(artifact.path);
-    const stat = fs.statSync(abs);
+    const source = store.resolve(artifact.path);
+    let target = source;
+    let frozenPath = null;
+    if (deliveryDir) {
+      target = path.join(deliveryDir, 'frozen', artifact.path);
+      ensureDir(path.dirname(target));
+      fs.copyFileSync(source, target);
+      frozenPath = path.posix.join('frozen', artifact.path.split(path.sep).join('/'));
+    }
+    const stat = fs.statSync(target);
     return {
       artifact_id: artifact.id,
       type: artifact.type,
       path: artifact.path,
-      sha256: sha256File(abs),
+      frozen_path: frozenPath,
+      sha256: sha256File(target),
       size: stat.size,
       size_label: formatBytes(stat.size),
       state: artifact.state
@@ -52,7 +62,6 @@ export function createDeliveryRecord(store, { requirementId, sourceCommit = null
       throw fail('DELIVERY_INCOMPLETE', `交付引用的规则缺失：${ref.id} r${ref.revision}`);
     }
   }
-  const manifest = buildManifest(store, requirement, artifacts);
   const delivery = createDelivery({
     productId: store.project.id,
     requirementId,
@@ -60,27 +69,34 @@ export function createDeliveryRecord(store, { requirementId, sourceCommit = null
     baselineId: requirement.baseline_id,
     ruleRefs,
     artifactRefs: artifacts.map((artifact) => artifact.id),
-    manifest,
+    manifest: [],
     sourceCommit,
     title: requirement.title
   });
-  store.saveDelivery(delivery);
   const dir = store.deliveryDir(delivery.id);
   ensureDir(dir);
+  let manifest;
+  try {
+    manifest = buildManifest(store, requirement, artifacts, { deliveryId: delivery.id });
+  } catch (error) {
+    fs.rmSync(dir, { recursive: true, force: true });
+    throw error;
+  }
+  const saved = store.saveDelivery({ ...delivery, manifest });
   atomicWriteJson(path.join(dir, 'manifest.json'), {
-    delivery_id: delivery.id,
+    delivery_id: saved.id,
     requirement_id: requirement.id,
     baseline_id: requirement.baseline_id,
     rule_refs: ruleRefs,
-    created_at: delivery.created_at,
+    created_at: saved.created_at,
     files: manifest
   });
   store.activity({
     type: 'delivery.created',
-    summary: `创建交付版本：${requirement.title}`,
-    ref: delivery.id
+    summary: `创建交付版本并冻结 ${manifest.length} 个文件：${requirement.title}`,
+    ref: saved.id
   });
-  return delivery;
+  return saved;
 }
 
 function cssSpecHtml(cssSpec) {
@@ -100,12 +116,12 @@ function cssSpecHtml(cssSpec) {
   <table><thead><tr><th>类型</th><th>值</th><th>用途</th><th>来源</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-function deliveryIndexHtml({ store, delivery, requirement, baseline, rules, artifacts, cssSpec, warnings }) {
+function deliveryIndexHtml({ store, delivery, requirement, baseline, rules, artifacts, cssSpec, warnings, requirementDocMarkdown = '' }) {
   const artifactRows = delivery.manifest.map((item) => `
     <tr><td>${escapeHtml(item.type)}</td><td><code>${escapeHtml(item.path)}</code></td><td>${escapeHtml(item.size_label)}</td><td><code>${escapeHtml(item.sha256.slice(0, 12))}</code></td></tr>`).join('');
   const ruleRows = rules.map((rule) => `
     <tr><td><code>${escapeHtml(rule.id)}</code></td><td>r${rule.revision}</td><td>${escapeHtml(rule.knowledge_status)}/${escapeHtml(rule.effective_state)}</td><td>${escapeHtml(rule.statement)}</td></tr>`).join('');
-  const requirementHtml = markdownToHtml(store.readRequirementFile(requirement.id, 'requirement.md'));
+  const requirementHtml = markdownToHtml(requirementDocMarkdown);
   const body = `
     <div class="eyebrow">固定交付版本</div>
     <h1>${escapeHtml(requirement.title)}</h1>
@@ -156,21 +172,39 @@ export function exportDelivery(store, deliveryId, { warnings = [] } = {}) {
   ensureDir(exportDir);
 
   const missing = [];
+  const tampered = [];
   for (const item of delivery.manifest) {
-    const source = store.resolve(item.path);
+    if (!item.frozen_path) {
+      throw fail('DELIVERY_INCOMPLETE', '该交付版本没有冻结内容，历史版本不可漂移，请重新创建交付', {
+        delivery_id: deliveryId
+      });
+    }
+    const source = path.join(dir, item.frozen_path);
     if (!fs.existsSync(source)) {
-      missing.push(item.path);
+      missing.push(item.frozen_path);
+      continue;
+    }
+    if (sha256File(source) !== item.sha256) {
+      tampered.push(item.frozen_path);
       continue;
     }
     const target = path.join(exportDir, item.path);
     ensureDir(path.dirname(target));
     fs.copyFileSync(source, target);
   }
-  if (missing.length > 0) {
-    store.saveDelivery({ ...delivery, status: 'failed', error: { code: 'MISSING_RESOURCE', missing } });
-    throw fail('DELIVERY_INCOMPLETE', '导出时发现缺失资源', { missing });
+  if (missing.length > 0 || tampered.length > 0) {
+    store.saveDelivery({
+      ...delivery,
+      status: 'failed',
+      error: { code: 'DELIVERY_INCOMPLETE', missing, tampered }
+    });
+    throw fail('DELIVERY_INCOMPLETE', '交付冻结内容缺失或被修改', { missing, tampered });
   }
 
+  const requirementDocEntry = delivery.manifest.find((item) => item.type === 'requirement-doc');
+  const requirementDocMarkdown = requirementDocEntry?.frozen_path
+    ? fs.readFileSync(path.join(dir, requirementDocEntry.frozen_path), 'utf8')
+    : '';
   const cssSpec = JSON.parse(fs.readFileSync(path.join(exportDir, 'requirements', requirement.id, 'artifacts', 'css-spec.json'), 'utf8'));
   const baseline = store.getBaseline(delivery.baseline_id);
   const rules = (delivery.rule_refs || []).map((ref) => store.getRule(ref.id, ref.revision)).filter(Boolean);
@@ -182,7 +216,8 @@ export function exportDelivery(store, deliveryId, { warnings = [] } = {}) {
   }
   if (!delivery.source_commit) exportWarnings.push('交付未绑定 Git 提交；如需追溯请先提交项目文件。');
   const indexHtml = deliveryIndexHtml({
-    store, delivery, requirement, baseline, rules, artifacts: delivery.manifest, cssSpec, warnings: exportWarnings
+    store, delivery, requirement, baseline, rules, artifacts: delivery.manifest, cssSpec,
+    warnings: exportWarnings, requirementDocMarkdown
   });
   if (scanForSecrets(indexHtml)) {
     store.saveDelivery({ ...delivery, status: 'failed', error: { code: 'DELIVERY_INCOMPLETE', message: '导出内容疑似包含密钥' } });
@@ -248,6 +283,20 @@ export function exportDelivery(store, deliveryId, { warnings = [] } = {}) {
 export function deliveryCheck(store, deliveryId) {
   const delivery = store.getDelivery(deliveryId);
   if (!delivery) throw fail('NOT_FOUND', '交付版本不存在');
-  const missing = delivery.manifest.filter((item) => !fs.existsSync(store.resolve(item.path))).map((item) => item.path);
-  return { ok: missing.length === 0, missing };
+  const dir = store.deliveryDir(deliveryId);
+  const missing = [];
+  const tampered = [];
+  for (const item of delivery.manifest || []) {
+    if (!item.frozen_path) {
+      missing.push(`${item.path}（无冻结内容）`);
+      continue;
+    }
+    const target = path.join(dir, item.frozen_path);
+    if (!fs.existsSync(target)) {
+      missing.push(item.frozen_path);
+      continue;
+    }
+    if (sha256File(target) !== item.sha256) tampered.push(item.frozen_path);
+  }
+  return { ok: missing.length === 0 && tampered.length === 0, missing, tampered };
 }

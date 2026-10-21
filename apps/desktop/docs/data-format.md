@@ -22,6 +22,7 @@
     requirement.json
     proposal.json
     analysis.json
+    analysis-resolved.json       # 裁决后的生成口径
     analysis-source.json
     history/r-<revision>.json
     requirement.md
@@ -29,12 +30,14 @@
     artifacts/prototype.html
     artifacts/css-spec.json
     artifacts/mapping.json
+    artifacts/spec-generation.json
   design/
     source-css-spec.json        # 导入来源的静态扫描声明值
   deliveries/<DELIVERY-ID>/
     delivery.json
     manifest.json
-    export/                     # 静态交付站
+    frozen/                     # 创建交付时冻结的产物副本
+    export/                     # 从 frozen 生成的静态交付站
   .runtime/                     # 不进入 Git，可删除重建
 ```
 
@@ -135,7 +138,9 @@
 
 提案包含 `base_revision`、`base_baseline_id`、`changes`、`reason`、`evidence_refs`、`conflicts` 与 `proposal_hash`。哈希只覆盖不可变内容；状态字段变化不影响绑定。
 
-裁决保存 `proposal_hash`、`base_revision`、`chosen`、`reason`、`confirmed_by`、`confirmed_at`、`applied_at` 与 `result`。应用前重新校验哈希、需求修订、基线与规则修订；不一致返回 `STALE_PROPOSAL`。
+裁决保存 `proposal_hash`、`base_revision`、`chosen`、`reason`、`confirmed_by`、`confirmed_at`、`applied_at` 与 `result`。应用前重新校验哈希、需求修订、提案基准基线与该基线中的规则修订；不一致返回 `STALE_PROPOSAL`。
+
+补答阻塞未知项时，提案会把已确认问答写入 `confirmed_answers` 与规则约束，并以新的需求修订重绑 `base_revision`/`proposal_hash`，避免正常补答被误判为版本漂移。规则修订校验以提案基准基线为准，其他计划基线中的新版本不会阻塞基于现行基线的需求。
 
 ### Artifact
 
@@ -152,9 +157,11 @@
 
 `state`：`draft` / `needs_review` / `reviewed` / `stale`。规则变化时，受影响产物标记为 `stale`，阻止直接交付。
 
+交互规格页面新增 `type`：`form` / `list` / `board` / `settings` / `dashboard` / `detail`，并可用 `fields`、`columns`、`board_columns`、`groups`、`metrics`、`sections` 表达对应页面结构。`spec-generation.json` 记录本次规格来自模型还是本地回退，以及页数。
+
 ### Delivery
 
-`delivery.json` 保存需求修订、基线、规则引用、产物引用、manifest、来源提交、状态与警告。`manifest.json` 保存每个文件的大小与 SHA-256。导出前校验资源存在、静态站链接完整、疑似密钥不进入导出。
+`delivery.json` 保存需求修订、基线、规则引用、产物引用、manifest、来源提交、状态与警告。创建交付时，产物会复制到 `deliveries/<id>/frozen/`；`manifest.json` 保存每个文件的原始路径、`frozen_path`、大小与 SHA-256。导出只读取冻结副本并校验哈希，活产物后续变化不会影响历史交付；缺失或篡改冻结内容会阻止导出。
 
 ## 3 来源与可迁移性
 

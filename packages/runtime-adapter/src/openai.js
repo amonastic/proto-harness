@@ -132,36 +132,56 @@ function promptRequirement(input) {
 
 function promptInteractionSpec(input) {
   const { requirement, analysis, contextText = '' } = input;
+  const decision = analysis.decision || null;
   return [
     '你是交互规格生成器。请只输出一个 JSON 对象，不要输出 Markdown 或解释。',
     '任务：根据需求分析与业务依据，生成与具体设计工具无关的交互规格。',
     '要求：页面职责、进入条件、角色、组件、状态、字段、行为、反馈、异常、设计约束和验收引用必须来自需求与业务规则；不得补充未定义的业务规则。',
+    '必须为每个需要的页面输出独立 page；不得把一个多页需求压缩成单页，也不得丢弃任何已明确要求的页面。',
+    '页面 type 必须是 form / list / board / settings / dashboard / detail 之一；表单页必须有 fields 与输入类型，看板页必须有 board_columns，设置页必须有 groups。',
+    decision?.action === 'keep'
+      ? '本次业务裁决是保留现行规则：不得在页面行为、字段、验收或示例中实现被否决的新口径，必须按现行规则生成。'
+      : '页面行为必须与裁决后的规则版本一致。',
     '',
     '需求：',
-    JSON.stringify({ title: requirement.title, goal: requirement.goal, scope: requirement.scope }, null, 2),
+    JSON.stringify({
+      title: analysis.effective_title || requirement.title,
+      goal: analysis.effective_goal || requirement.goal,
+      scope: analysis.scope || requirement.scope
+    }, null, 2),
     '',
     '需求分析：',
-    JSON.stringify(analysis, null, 2).slice(0, 12000),
+    JSON.stringify(analysis, null, 2).slice(0, 16000),
     '',
     '业务依据：',
     String(contextText).slice(0, 8000),
     '',
     '输出结构：',
     JSON.stringify({
+      summary: '规格摘要',
       pages: [{
         id: 'PAGE-1',
+        type: 'form|list|board|settings|dashboard|detail',
+        layout: 'single|board',
         name: '页面名',
         responsibility: '页面职责',
         entry_conditions: ['进入条件'],
         roles: ['角色'],
         components: ['组件'],
         states: [{ name: '默认', behavior: '行为' }],
-        fields: [{ name: '字段', type: '类型', required: true }],
+        fields: [{ name: '字段', type: 'text|number|select|switch|textarea|date|tel|email', required: true, options: [] }],
+        columns: [{ name: '列名', type: 'text' }],
+        actions: ['主操作'],
+        primary_action: '主操作',
         behaviors: ['行为'],
         feedback: ['反馈'],
         exceptions: ['异常'],
         design_constraints: ['约束'],
-        acceptance_refs: ['验收引用']
+        acceptance_refs: ['验收引用'],
+        board_columns: [{ name: '待处理', cards: [{ title: '示例卡片', meta: '说明' }] }],
+        groups: [{ title: '设置分组', items: [{ name: '设置项', type: 'switch', value: true }] }],
+        metrics: [{ label: '指标', value: '128', hint: '示例' }],
+        sections: [{ title: '分区', items: ['内容'] }]
       }]
     }, null, 2)
   ].join('\n');

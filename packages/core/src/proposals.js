@@ -83,12 +83,16 @@ export function verifyProposalIntegrity(store, requirementId, proposal) {
   if (proposal.base_baseline_id && baseline && proposal.base_baseline_id !== baseline.id) {
     throw fail('STALE_PROPOSAL', '需求基线已变化，请重新展示提案');
   }
+  const baseBaseline = store.getBaseline(proposal.base_baseline_id || requirement.baseline_id);
+  if (!baseBaseline) throw fail('STALE_PROPOSAL', '提案基准基线不存在');
   for (const change of proposal.changes || []) {
     if (change.kind === 'rule.revise' && change.rule_id) {
-      const latest = store.getRule(change.rule_id);
-      if (!latest) throw fail('NOT_FOUND', `规则不存在：${change.rule_id}`);
-      if (change.from_revision != null && Number(latest.revision) !== Number(change.from_revision)) {
-        throw fail('STALE_PROPOSAL', `规则 ${change.rule_id} 已从修订 ${change.from_revision} 变化到 ${latest.revision}`);
+      const ref = (baseBaseline.rule_refs || []).find((item) => item.id === change.rule_id);
+      if (!ref) {
+        throw fail('STALE_PROPOSAL', `规则 ${change.rule_id} 不在提案基准基线中`);
+      }
+      if (change.from_revision != null && Number(ref.revision) !== Number(change.from_revision)) {
+        throw fail('STALE_PROPOSAL', `提案基准中的规则 ${change.rule_id} 已从修订 ${change.from_revision} 变化到 ${ref.revision}`);
       }
     }
   }
@@ -160,18 +164,20 @@ function applyChanges(store, { requirement, decision, proposal, plannedBaseline 
   const changedRules = [];
   for (const change of proposal.changes || []) {
     if (change.kind === 'rule.revise') {
-      const base = store.getRule(change.rule_id);
-      if (!base) throw fail('NOT_FOUND', `规则不存在：${change.rule_id}`);
-      if (change.from_revision != null && Number(base.revision) !== Number(change.from_revision)) {
-        throw fail('STALE_PROPOSAL', `规则 ${change.rule_id} 已被其他修订更新`);
-      }
+      const baseBaseline = store.getBaseline(requirement.baseline_id);
+      const baseRef = (baseBaseline?.rule_refs || []).find((ref) => ref.id === change.rule_id);
+      const fromRevision = change.from_revision ?? baseRef?.revision;
+      const base = store.getRule(change.rule_id, fromRevision);
+      if (!base) throw fail('NOT_FOUND', `规则 ${change.rule_id} 在提案基准中不存在`);
+      const index = store.getRuleIndex(change.rule_id);
+      const nextRevision = Math.max(...(index?.revisions || [base.revision])) + 1;
       const scope = decision.chosen.action === 'conditional' && decision.condition
         ? [change.scope, `条件：${decision.condition}`].filter(Boolean).join('；')
         : change.scope;
       const revision = createRuleRevision({
         productId: store.project.id,
         ruleId: base.id,
-        revision: Number(base.revision) + 1,
+        revision: nextRevision,
         statement: change.statement,
         scope,
         knowledgeStatus: 'confirmed',
@@ -225,6 +231,124 @@ function applyChanges(store, { requirement, decision, proposal, plannedBaseline 
   return changedRules;
 }
 
+function loadOriginalAnalysis(store, requirement) {
+  try {
+    return JSON.parse(store.readRequirementFile(requirement.id, 'analysis.json')).analysis || {};
+  } catch {
+    return {};
+  }
+}
+
+function finalRulesForBaseline(store, baseline) {
+  return (baseline?.rule_refs || [])
+    .map((ref) => store.getRule(ref.id, ref.revision))
+    .filter(Boolean);
+}
+
+function endpointNameFor(store, requirement) {
+  const refs = requirement.endpoint_refs || [];
+  return store.project.endpoints.find((item) => refs.includes(item.id))?.name
+    || store.project.endpoints[0]?.name
+    || '业务端';
+}
+
+function uniqueStrings(items) {
+  return [...new Set(items.filter(Boolean))];
+}
+
+function buildResolvedAnalysis({ store, requirement, decision, proposal, baseline }) {
+  const original = loadOriginalAnalysis(store, requirement);
+  const action = decision.chosen?.action || 'adopt';
+  const finalRules = finalRulesForBaseline(store, baseline);
+  const answers = (requirement.unknowns || [])
+    .filter((item) => item.answer)
+    .map((item) => ({ id: item.id, question: item.question, answer: item.answer, blocking: Boolean(item.blocking) }));
+  const rejectedChanges = action === 'keep'
+    ? (proposal.changes || []).map((change) => ({
+        kind: change.kind,
+        rule_id: change.rule_id || null,
+        statement: change.statement,
+        reason: change.reason || ''
+      }))
+    : [];
+  const resolved = {
+    ...original,
+    source: original.source || requirement.analysis_source || 'local-heuristic',
+    decision: {
+      id: decision.id,
+      action,
+      reason: decision.reason,
+      condition: decision.condition || '',
+      at: nowIso()
+    },
+    final_rules: finalRules.map((rule) => ({
+      id: rule.id,
+      revision: rule.revision,
+      statement: rule.statement,
+      constraints: rule.constraints || [],
+      effective_state: rule.effective_state,
+      knowledge_status: rule.knowledge_status
+    })),
+    confirmed_answers: answers,
+    rule_proposals: [],
+    conflicts: [],
+    rejected_changes: rejectedChanges
+  };
+
+  if (action === 'keep') {
+    const endpointName = endpointNameFor(store, requirement);
+    resolved.effective_title = '按现行规则处理';
+    resolved.effective_goal = '保留现行规则，不实施被否决的新口径。';
+    resolved.summary = `业务裁决保留现行规则：${decision.reason}`;
+    resolved.core_flows = [
+      `在「${endpointName}」按现行规则发起操作`,
+      '系统校验现行规则与业务状态',
+      '按现行规则结果继续或阻断，并保留操作记录'
+    ];
+    resolved.scope = {
+      in_scope: [`在「${endpointName}」按现行规则继续现有流程`],
+      out_of_scope: uniqueStrings([
+        ...(original.scope?.out_of_scope || []),
+        ...rejectedChanges.map((change) => `不采纳：${change.statement}`)
+      ])
+    };
+    resolved.impact = {
+      actual: [],
+      verify: original.impact?.verify || [],
+      keep: uniqueStrings([
+        ...finalRules.map((rule) => `继续执行现行规则：${rule.statement}`),
+        ...(original.impact?.keep || [])
+      ])
+    };
+    resolved.acceptance = uniqueStrings([
+      ...finalRules.map((rule) => `现行规则继续生效：${rule.statement}`),
+      '被否决口径不进入页面行为或交付产物',
+      ...answers.map((item) => `已确认：${item.question} -> ${item.answer}`)
+    ]);
+  } else {
+    resolved.effective_title = requirement.title;
+    resolved.effective_goal = requirement.goal;
+    resolved.summary = action === 'conditional'
+      ? `业务裁决附加条件采用：${decision.condition}`
+      : `业务裁决采纳新口径：${decision.reason}`;
+    resolved.scope = {
+      in_scope: uniqueStrings([
+        ...(original.scope?.in_scope || requirement.scope?.in_scope || []),
+        ...(decision.condition ? [`生效条件：${decision.condition}`] : [])
+      ]),
+      out_of_scope: original.scope?.out_of_scope || requirement.scope?.out_of_scope || []
+    };
+    resolved.impact = original.impact || requirement.impact;
+    resolved.core_flows = original.core_flows || [];
+    resolved.acceptance = uniqueStrings([
+      ...(original.acceptance || requirement.acceptance || []),
+      ...finalRules.map((rule) => `规则 ${rule.id} r${rule.revision}：${rule.statement}`),
+      ...answers.map((item) => `已确认：${item.question} -> ${item.answer}`)
+    ]);
+  }
+  return resolved;
+}
+
 export function applyDecision(store, decisionId) {
   const decision = store.getDecision(decisionId);
   if (!decision) throw fail('NOT_FOUND', '裁决不存在');
@@ -238,29 +362,51 @@ export function applyDecision(store, decisionId) {
   verifyProposalIntegrity(store, requirement.id, proposal);
 
   if (decision.chosen.action === 'keep') {
+    const baseBaseline = store.getBaseline(requirement.baseline_id);
+    if (!baseBaseline) throw fail('NOT_FOUND', '需求基线不存在');
+    const resolved = buildResolvedAnalysis({
+      store, requirement, decision, proposal, baseline: baseBaseline
+    });
+    store.saveRequirementFile(requirement.id, 'analysis-resolved.json', resolved);
+    const updatedRequirement = store.saveRequirement({
+      ...requirement,
+      status: 'analyzed',
+      next_step: '生成需求与设计',
+      scope: resolved.scope,
+      acceptance: resolved.acceptance,
+      impact: resolved.impact,
+      rule_refs: (baseBaseline.rule_refs || []).map((ref) => ({ id: ref.id, revision: ref.revision })),
+      effective_title: resolved.effective_title,
+      effective_goal: resolved.effective_goal,
+      decision_ref: decision.id,
+      resolved_analysis_ref: 'analysis-resolved.json',
+      revision: requirement.revision + 1,
+      updated_at: nowIso(),
+      checkpoints: [...(requirement.checkpoints || []), {
+        at: nowIso(), from: requirement.status, to: 'analyzed', summary: '裁决保留当前规则，产物按现行规则生成'
+      }]
+    });
     const result = {
       action: 'keep',
       baseline_id: requirement.baseline_id,
-      rule_refs: requirement.rule_refs || [],
+      rule_refs: updatedRequirement.rule_refs,
       artifact_ids: [],
-      note: '保留当前规则；需求继续基于现行基线'
+      resolved_analysis_ref: 'analysis-resolved.json',
+      note: '保留当前规则；需求继续基于现行基线，被否决口径不进入产物'
     };
     const updatedDecision = store.saveDecision({
       ...decision,
       applied_at: nowIso(),
       result
     });
-    store.saveRequirement({
-      ...requirement,
-      status: 'analyzed',
-      next_step: '生成需求与设计',
-      revision: requirement.revision + 1,
-      updated_at: nowIso(),
-      checkpoints: [...(requirement.checkpoints || []), {
-        at: nowIso(), from: requirement.status, to: 'analyzed', summary: '裁决保留当前规则'
-      }]
+    store.saveRequirementProposal(requirement.id, {
+      ...proposal,
+      status: 'applied',
+      applied_at: nowIso(),
+      decision_id: decision.id
     });
-    store.activity({ type: 'decision.applied', summary: '裁决应用：保留当前规则', ref: decision.id });
+    store.rebuildIndex();
+    store.activity({ type: 'decision.applied', summary: '裁决应用：保留当前规则，生成口径锁定为现行规则', ref: decision.id });
     return updatedDecision.result;
   }
 
@@ -301,12 +447,23 @@ export function applyDecision(store, decisionId) {
     }
   }
 
+  const resolved = buildResolvedAnalysis({
+    store, requirement, decision, proposal, baseline: updatedBaseline
+  });
+  store.saveRequirementFile(requirement.id, 'analysis-resolved.json', resolved);
   const updatedRequirement = store.saveRequirement({
     ...requirement,
     baseline_id: updatedBaseline.id,
     rule_refs: (updatedBaseline.rule_refs || []).map((ref) => ({ id: ref.id, revision: ref.revision })),
     status: 'analyzed',
     next_step: '生成需求与设计',
+    scope: resolved.scope,
+    acceptance: resolved.acceptance,
+    impact: resolved.impact,
+    effective_title: resolved.effective_title,
+    effective_goal: resolved.effective_goal,
+    decision_ref: decision.id,
+    resolved_analysis_ref: 'analysis-resolved.json',
     revision: requirement.revision + 1,
     updated_at: nowIso(),
     checkpoints: [...(requirement.checkpoints || []), {
@@ -320,6 +477,7 @@ export function applyDecision(store, decisionId) {
     baseline_id: updatedBaseline.id,
     rule_refs: changedRules.map((rule) => ({ id: rule.id, revision: rule.revision })),
     artifact_ids: staleArtifacts,
+    resolved_analysis_ref: 'analysis-resolved.json',
     note: '新规则进入 planned 基线；现行基线未自动切换'
   };
   const updatedDecision = store.saveDecision({

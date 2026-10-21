@@ -6,7 +6,7 @@ import { fail, isInside, toPosix } from './util.js';
 const execFileAsync = promisify(execFile);
 const MAX_BUFFER = 8 * 1024 * 1024;
 
-async function runGit(root, args, { allowFailure = false } = {}) {
+async function runGit(root, args, { allowFailure = false, trim = true } = {}) {
   try {
     const { stdout } = await execFileAsync('git', args, {
       cwd: root,
@@ -14,7 +14,7 @@ async function runGit(root, args, { allowFailure = false } = {}) {
       timeout: 30000,
       windowsHide: true
     });
-    return stdout.trim();
+    return trim ? stdout.trim() : stdout;
   } catch (error) {
     if (allowFailure) return null;
     const detail = (error.stderr || error.message || '').trim().slice(0, 1000);
@@ -27,13 +27,17 @@ async function runGit(root, args, { allowFailure = false } = {}) {
 
 function parsePorcelain(text) {
   const files = [];
-  for (const line of String(text || '').split('\n')) {
-    if (!line.trim()) continue;
-    const status = line.slice(0, 2);
-    let filePath = line.slice(3).trim();
-    if (filePath.includes(' -> ')) filePath = filePath.split(' -> ').pop().trim();
-    filePath = filePath.replace(/^"|"$/g, '');
+  const records = String(text || '').split('\0').filter((record) => record.length > 0);
+  for (let index = 0; index < records.length; index += 1) {
+    const record = records[index];
+    if (record.length < 3) continue;
+    const status = record.slice(0, 2);
+    const filePath = record.slice(3);
     const untracked = status === '??';
+    if (status[0] === 'R' || status[0] === 'C') {
+      // -z 格式：重命名/复制记录后紧跟旧路径记录
+      index += 1;
+    }
     files.push({
       path: filePath,
       status,
@@ -66,7 +70,9 @@ export async function gitStatus(root) {
   const upstream = await runGit(root, ['rev-parse', '--abbrev-ref', '--symbolic-full-name', '@{u}'], { allowFailure: true });
   const remoteRaw = await runGit(root, ['remote', 'get-url', 'origin'], { allowFailure: true });
   const remote = remoteRaw ? remoteRaw.replace(/\/\/[^/@\s]+@/, '//***@') : null;
-  const porcelain = await runGit(root, ['status', '--porcelain=v1'], { allowFailure: true }) || '';
+  const porcelain = await runGit(root, ['status', '--porcelain=v1', '-z', '--untracked-files=all'], {
+    allowFailure: true, trim: false
+  }) || '';
   const lastCommitRaw = await runGit(root, ['log', '-1', '--format=%h%x09%s%x09%cI'], { allowFailure: true });
   let ahead = 0;
   let behind = 0;

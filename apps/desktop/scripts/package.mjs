@@ -107,7 +107,7 @@ async function main() {
     quiet: false,
     extendInfo: {
       NSHumanReadableCopyright: 'MIT · 本地优先的产品 Agent 客户端',
-      LSMinimumSystemVersion: '12.0'
+      LSMinimumSystemVersion: '13.0'
     },
     extraResource: [
       path.join(APP_DIR, 'docs', 'user-guide.md'),

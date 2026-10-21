@@ -108,7 +108,8 @@
 }
 ```
 
-- `recordDecision(proposal, chosen, reason)` 再次读取提案并校验 hash 与 base revision；不一致返回 `STALE_PROPOSAL`。
+- `recordDecision(proposal, chosen, reason)` 再次读取提案并校验 hash、需求修订、提案基准基线与该基线中的规则修订；不一致返回 `STALE_PROPOSAL`。其他计划基线中的新修订不影响基于现行基线的提案。
+- 补答阻塞未知项时，内核将问答写入提案 `confirmed_answers` 与规则约束，并以新的需求修订重绑提案哈希与基准，随后重新进入待裁决。
 - `applyDecision(decisionId)` 幂等：已应用返回既有结果，不产生第二份修订。
 - 应用顺序：校验 → 写新规则修订 → 写决策 → 更新基线引用 → 标记受影响产物 `stale`。
 - 同一规则出现不同业务裁决时不自动合并；界面必须重新展示冲突。
@@ -120,6 +121,7 @@ draft -> analyzing -> (awaiting_decision -> analyzed) -> generating -> reviewed 
 ```
 
 - 每次状态变更追加 `checkpoints[]`：`{at, from, to, summary}`，并写 `history/r-<revision>.json`。
+- 裁决应用后写 `analysis-resolved.json`：保留有效来源、确认问答、最终规则与裁决；保留现行规则时，`effective_title` 为「按现行规则处理」，被否决口径进入 `rejected_changes`，生成产物不得实现被否决口径。
 - `next_step` 由内核计算，界面只展示，不在渲染层推断。
 - 未知项：`{id, question, why_blocking, owner, answer, blocking}`；阻塞未知项存在时不得进入 `generating`。
 - 纠偏：新提案经裁决后，旧结论标记 `superseded`，受影响 Artifact 标 `stale`，要求重新生成/核对。
@@ -143,6 +145,7 @@ interface RuntimeAdapter {
 - API Key 只存 Electron `safeStorage`（Keychain），不写项目文件、日志、导出包。
 - 本地启发式分析器输出必须带 `source: "local-heuristic"`，界面显示「本地规则分析」。
 - 首版生产适配器：OpenAI 兼容 `/chat/completions`；OpenCode 未验证，不接入。
+- 模型交互规格必须进入生成主链；模型失败时显式记录 `spec_generation.warning` 并回退本地规格，不得静默丢弃模型返回的页面。
 
 ## 7 产物契约
 
@@ -156,13 +159,22 @@ interface RuntimeAdapter {
   "source": "local-heuristic | model:<id>",
   "pages": [{
     "id": "PAGE-...",
+    "type": "form|list|board|settings|dashboard|detail",
+    "layout": "single|board",
     "name": "...",
     "responsibility": "...",
+    "primary_action": "...",
+    "actions": [],
     "entry_conditions": [],
     "roles": [],
     "components": [],
     "states": [{"name": "空态", "behavior": "..."}],
     "fields": [],
+    "columns": [],
+    "board_columns": [],
+    "groups": [],
+    "metrics": [],
+    "sections": [],
     "behaviors": [],
     "feedback": [],
     "exceptions": [],
@@ -189,7 +201,7 @@ interface RuntimeAdapter {
 
 ### 7.4 交付
 
-`delivery.json` + `manifest.json` + `export/index.html` + 需求文档与原型。导出前校验：所有 manifest 路径存在、无密钥/日志/`.runtime`、需求与规则版本一致。缺资源时 Delivery 为 `failed` 并列出缺失项。
+`delivery.json` + `manifest.json` + `frozen/` + `export/index.html` + 需求文档与原型。创建交付时把产物复制到 `frozen/`，manifest 记录原始路径与 `frozen_path` 并计算 SHA-256。导出只读取并校验冻结副本；修改活产物后重新导出不得改变历史交付。缺资源或冻结内容被篡改时 Delivery 为 `failed` 并列出缺失项。
 
 ## 8 导入契约
 

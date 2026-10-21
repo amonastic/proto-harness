@@ -64,3 +64,23 @@ test('提交后可以推送到已配置的 bare 远端', async () => {
   const refs = execFileSync('git', ['--git-dir', bare, 'show-ref']).toString();
   assert.match(refs, /refs\/heads\/main/);
 });
+
+test('提交后再次修改时，首个文件路径解析正确并可再次提交', async () => {
+  const root = tempRoot();
+  const { store } = onboard(root);
+  await gitInit(store.root);
+  await gitCommit(store.root, {
+    paths: ['.gitignore', 'README.md', 'project.json', 'brain', 'requirements'],
+    message: 'feat: 初始提交'
+  });
+  fs.appendFileSync(path.join(store.root, '.gitignore'), '\n# 二次修改\n');
+  fs.appendFileSync(path.join(store.root, 'README.md'), '\n二次修改\n');
+  const status = await gitStatus(store.root);
+  const paths = status.files.map((file) => file.path);
+  assert.ok(paths.includes('.gitignore'), `实际路径：${paths.join(', ')}`);
+  assert.ok(paths.includes('README.md'));
+  assert.ok(!paths.includes('gitignore'));
+  const commit = await gitCommit(store.root, { paths, message: 'fix: 二次提交' });
+  assert.ok(commit.hash);
+  assert.equal((await gitStatus(store.root)).clean, true);
+});

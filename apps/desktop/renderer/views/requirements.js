@@ -333,6 +333,7 @@ function contextColumn(detail) {
           <div class="row"><span>需求修订</span><strong>r${req.revision}</strong></div>
           <div class="row"><span>基线</span><strong class="mono">${fmt.escapeHtml(req.baseline_id || '')}</strong></div>
           <div class="row"><span>分析来源</span><strong>${fmt.escapeHtml(req.analysis_source || '未记录')}</strong></div>
+          <div class="row"><span>规格生成</span><strong>${fmt.escapeHtml(req.spec_generation ? `${req.spec_generation.source}${req.spec_generation.page_count ? ` · ${req.spec_generation.page_count} 页` : ''}` : '尚未生成')}</strong></div>
         </div>
         <button class="btn small" id="open-project-folder" style="margin-top:12px">${icons.folder(13)} 打开项目目录</button>
       </div>
@@ -381,6 +382,7 @@ function detailPage(ctx, detail) {
     ${req.next_step ? `<div class="next-card" style="margin-bottom:18px"><div class="orb">${icons.arrow(19)}</div><div class="grow"><div class="title">下一步</div><div class="sub">${fmt.escapeHtml(req.next_step)}</div></div></div>` : ''}
     <div id="req-error"></div>
     ${req.last_error ? `<div class="error-box" style="margin-bottom:16px"><strong>上次分析失败：${fmt.escapeHtml(req.last_error.code || 'RUNTIME_FAILED')}</strong>${fmt.escapeHtml(req.last_error.message || '')}${req.last_error.log ? `<br>日志：<span class="mono">${fmt.escapeHtml(req.last_error.log)}</span>` : ''}</div>` : ''}
+    ${req.spec_generation?.warning ? `<div class="warn-box" style="margin-bottom:16px"><strong>模型规格生成失败，已回退本地规则规格</strong>${fmt.escapeHtml(req.spec_generation.warning.message || req.spec_generation.warning.code || '')}</div>` : ''}
     <div class="grid-2">
       <div class="stack">${mainBlocks}</div>
       ${contextColumn(detail)}
@@ -544,7 +546,10 @@ function bindDetail(ctx, container, detail) {
       } catch (error) {
         ui.setBusy(submit, false);
         const errorBox = decision.querySelector('#decision-error');
-        if (errorBox) errorBox.innerHTML = ui.errorBox(error);
+        if (errorBox) {
+          errorBox.innerHTML = `${ui.errorBox(error)}${error.code === 'STALE_PROPOSAL' ? '<button class="btn small" id="reload-proposal" style="margin-top:8px">重新读取当前提案</button>' : ''}`;
+          errorBox.querySelector('#reload-proposal')?.addEventListener('click', () => ctx.refreshProject());
+        }
         ui.toast(errorText(error), 'error');
       }
     });

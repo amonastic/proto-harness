@@ -5,14 +5,14 @@ import {
 } from './util.js';
 import {
   createArtifact, createCapability, createEvidence, createObject,
-  createRequirement as createRequirementEntity, createRuleRevision
+  createRequirement as createRequirementEntity, createRuleRevision, hashProposal
 } from './models.js';
 import { ProjectStore } from './store.js';
 import { resolveContext, contextToPrompt } from './context.js';
 import { createRequirementProposal } from './proposals.js';
 import {
   buildCssSpec, buildInteractionSpec, buildMapping, buildRequirementMarkdown,
-  defaultTokens, renderPrototypeHtml, suggestedArtifactPaths, artifactRevision
+  completeInteractionSpec, defaultTokens, renderPrototypeHtml, suggestedArtifactPaths, artifactRevision
 } from './artifacts.js';
 
 function checkpoint(requirement, to, summary) {
@@ -320,18 +320,24 @@ export function answerUnknown(store, { requirementId, unknownId, answer }) {
       : item
   ));
   const blockingLeft = unknowns.filter((item) => item.blocking && !item.answer);
+  const existingProposal = store.getRequirementProposal(requirementId);
   let status = requirement.status;
   let nextStep = requirement.next_step;
-  if (requirement.status === 'blocked' && blockingLeft.length === 0) {
-    const proposal = store.getRequirementProposal(requirementId);
-    status = proposal ? 'awaiting_decision' : 'analyzed';
-    nextStep = proposal ? '处理业务裁决' : '生成需求与设计';
+  if (blockingLeft.length > 0) {
+    status = 'blocked';
+    nextStep = `还有 ${blockingLeft.length} 个阻塞未知项待回答`;
+  } else if (existingProposal) {
+    status = 'awaiting_decision';
+    nextStep = '处理业务裁决';
+  } else if (['blocked', 'awaiting_decision'].includes(requirement.status)) {
+    status = 'analyzed';
+    nextStep = '生成需求与设计';
   }
   const updated = {
     ...requirement,
     unknowns,
     status,
-    next_step: blockingLeft.length > 0 ? `还有 ${blockingLeft.length} 个阻塞未知项待回答` : nextStep,
+    next_step: nextStep,
     revision: requirement.revision + 1,
     updated_at: nowIso(),
     checkpoints: [...(requirement.checkpoints || []), {
@@ -340,10 +346,43 @@ export function answerUnknown(store, { requirementId, unknownId, answer }) {
     }]
   };
   store.saveRequirement(updated);
-  return updated;
+
+  if (existingProposal) {
+    const confirmedAnswers = unknowns
+      .filter((item) => item.answer)
+      .map((item) => ({
+        id: item.id,
+        question: item.question,
+        answer: item.answer,
+        blocking: Boolean(item.blocking)
+      }));
+    const changes = (existingProposal.changes || []).map((change) => {
+      const constraints = [...(change.constraints || [])];
+      for (const item of confirmedAnswers) {
+        const line = `已确认：${item.question} -> ${item.answer}`;
+        if (!constraints.includes(line)) constraints.push(line);
+      }
+      return { ...change, constraints };
+    });
+    const rebased = {
+      ...existingProposal,
+      changes,
+      confirmed_answers: confirmedAnswers,
+      base_revision: updated.revision,
+      status: 'pending',
+      proposal_hash: '',
+      rebased_at: nowIso()
+    };
+    delete rebased.decision_id;
+    delete rebased.decided_at;
+    delete rebased.applied_at;
+    rebased.proposal_hash = hashProposal(rebased);
+    store.saveRequirementProposal(requirementId, rebased);
+  }
+  return store.getRequirement(requirementId);
 }
 
-export function buildArtifactsForRequirement(store, requirementId, { tokens = null } = {}) {
+export async function buildArtifactsForRequirement(store, requirementId, { tokens = null, adapter = null } = {}) {
   const requirement = store.getRequirement(requirementId);
   if (!requirement) throw fail('NOT_FOUND', '需求不存在');
   const blocking = (requirement.unknowns || []).filter((item) => item.blocking && !String(item.answer || '').trim());
@@ -352,7 +391,13 @@ export function buildArtifactsForRequirement(store, requirementId, { tokens = nu
   if (!['analyzed', 'generated', 'reviewed'].includes(requirement.status)) {
     throw fail('INVALID_INPUT', `当前状态 ${requirement.status} 不能生成产物`);
   }
-  const analysisRecord = JSON.parse(store.readRequirementFile(requirementId, 'analysis.json')).analysis || {};
+  let analysisRecord;
+  try {
+    analysisRecord = JSON.parse(store.readRequirementFile(requirementId, 'analysis-resolved.json'));
+  } catch {
+    analysisRecord = JSON.parse(store.readRequirementFile(requirementId, 'analysis.json')).analysis || {};
+  }
+  const decision = analysisRecord.decision || null;
   const context = resolveContext(store, {
     requirementId,
     baselineId: requirement.baseline_id,
@@ -367,12 +412,65 @@ export function buildArtifactsForRequirement(store, requirementId, { tokens = nu
   } catch {
     sourceTokens = [];
   }
-  const spec = buildInteractionSpec({
-    product: store.project,
-    requirement,
-    analysis: analysisRecord,
-    rules,
-    tokens: designTokens
+  let spec = null;
+  const specGeneration = {
+    source: analysisRecord.source || 'local-heuristic',
+    model: null,
+    warning: null,
+    page_count: 0
+  };
+  if (adapter
+    && typeof adapter.generateInteractionSpec === 'function'
+    && typeof adapter.describe === 'function'
+    && adapter.describe().kind === 'openai-compatible') {
+    try {
+      const modelSpec = await adapter.generateInteractionSpec({
+        product: store.project,
+        requirement,
+        analysis: analysisRecord,
+        contextText: contextToPrompt(context)
+      });
+      if (modelSpec && Array.isArray(modelSpec.pages) && modelSpec.pages.length > 0) {
+        spec = completeInteractionSpec(modelSpec, {
+          product: store.project, requirement, analysis: analysisRecord, rules, decision
+        });
+        specGeneration.source = spec.source || 'model';
+        specGeneration.model = adapter.describe().model || null;
+      }
+    } catch (error) {
+      specGeneration.warning = {
+        code: error.code || 'RUNTIME_FAILED',
+        message: error.message || String(error)
+      };
+      store.saveRequirementFile(requirementId, 'artifacts/spec-generation-error.json', {
+        at: nowIso(),
+        ...specGeneration.warning,
+        details: error.details || null
+      });
+    }
+  }
+  if (!spec) {
+    const localSpec = buildInteractionSpec({
+      product: store.project,
+      requirement,
+      analysis: analysisRecord,
+      rules,
+      tokens: designTokens,
+      decision
+    });
+    spec = completeInteractionSpec(localSpec, {
+      product: store.project, requirement, analysis: analysisRecord, rules, decision
+    });
+    specGeneration.source = localSpec.source;
+    if (specGeneration.warning) specGeneration.fallback_from = analysisRecord.source || null;
+  }
+  specGeneration.page_count = spec.pages.length;
+  spec = { ...spec, generation: specGeneration };
+  analysisRecord.spec_generation = specGeneration;
+  store.saveRequirementFile(requirementId, 'artifacts/spec-generation.json', {
+    at: nowIso(),
+    ...specGeneration,
+    pages: spec.pages.map((page) => ({ id: page.id, name: page.name, type: page.type }))
   });
   const paths = suggestedArtifactPaths(requirementId);
   const prototypeHtml = renderPrototypeHtml({
@@ -432,6 +530,8 @@ export function buildArtifactsForRequirement(store, requirementId, { tokens = nu
     rule_refs: ruleRefs,
     artifact_refs: ordered.map((artifact) => artifact.id),
     interaction_spec_ref: paths.interactionSpec,
+    spec_generation: specGeneration,
+    analysis_source: analysisRecord.source || requirement.analysis_source,
     revision: requirement.revision + 1,
     updated_at: nowIso(),
     checkpoints: [...(requirement.checkpoints || []), {

@@ -451,7 +451,9 @@ function registerIpc() {
 
   handle('requirements:generate', async (payload) => {
     const store = ensureStore(payload.root);
-    const result = core.buildArtifactsForRequirement(store, payload.requirementId);
+    const result = await core.buildArtifactsForRequirement(store, payload.requirementId, {
+      adapter: adapterFromSettings()
+    });
     return {
       requirement: result.requirement,
       artifacts: result.artifacts,

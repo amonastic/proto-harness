@@ -117,7 +117,7 @@ test('导入项目生成产物时继承来源 CSS 声明值', async () => {
   applyDecision(applied.store, decision.id);
   const revisedRule = applied.store.getRule(analysis.proposal.changes[0].rule_id);
   assert.ok(revisedRule.evidence_refs.length > 0, '修订规则应保留来源证据');
-  const generated = buildArtifactsForRequirement(applied.store, requirement.id);
+  const generated = await buildArtifactsForRequirement(applied.store, requirement.id);
   const cssArtifact = generated.artifacts.find((item) => item.type === 'css-spec');
   const css = JSON.parse(fs.readFileSync(applied.store.resolve(cssArtifact.path), 'utf8'));
   const scanned = css.entries.filter((item) => item.extraction === 'static-scan');

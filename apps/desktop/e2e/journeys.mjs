@@ -112,16 +112,16 @@ async function decideAdopt(page, reason) {
   await page.waitForSelector('[data-testid="req-generate"]', { timeout: 25000 });
 }
 
-async function generateAndInspect(page, journey) {
+async function generateAndInspect(page, journey, { prefix = '', headingPattern = /重复开柜/ } = {}) {
   await page.click('[data-testid="req-generate"]');
   await page.waitForSelector('[data-testid="artifact-preview"]', { timeout: 30000 });
   await page.locator('[data-testid="artifact-preview"]').scrollIntoViewIfNeeded();
-  await shot(page, journey, 'artifacts');
+  await shot(page, journey, `${prefix}artifacts`);
   const frame = page.frames().find((item) => item.url().startsWith('pha-preview://'));
   assert.ok(frame, '原型预览 frame 未加载');
   await frame.waitForSelector('h1', { timeout: 10000 });
   const heading = await frame.locator('h1').first().innerText();
-  assert.match(heading, /重复开柜/);
+  assert.match(heading, headingPattern);
   const bodyText = await frame.locator('body').innerText();
   assert.match(bodyText, /业务依据/);
   assert.match(bodyText, /交互原型 · 演示数据/);
@@ -130,19 +130,19 @@ async function generateAndInspect(page, journey) {
   const swatches = await page.locator('.swatch-card').count();
   assert.ok(swatches >= 5, `CSS 色块数量不足：${swatches}`);
   assert.match(await page.locator('#artifact-content').innerText(), /声明值|模板默认/);
-  await shot(page, journey, 'css-spec');
+  await shot(page, journey, `${prefix}css-spec`);
   return heading;
 }
 
-async function reviewAndDeliver(page, journey) {
+async function reviewAndDeliver(page, journey, { prefix = '' } = {}) {
   await page.click('[data-testid="req-review"]');
   await page.waitForSelector('.modal [data-confirm]');
-  await shot(page, journey, 'review');
+  await shot(page, journey, `${prefix}review`);
   await page.click('.modal [data-confirm]');
   await page.waitForSelector('[data-testid="req-deliver"]', { timeout: 25000 });
   await page.click('[data-testid="req-deliver"]');
   await page.waitForSelector('[data-testid="req-open-delivery"]', { timeout: 40000 });
-  await shot(page, journey, 'delivered');
+  await shot(page, journey, `${prefix}delivered`);
 }
 
 function copyFileInto(projectDir, rel, destDir) {
@@ -177,6 +177,43 @@ function archiveJourney(projectDir, journey, requirementId, deliveryId) {
     if (!fs.existsSync(source)) continue;
     for (const file of fs.readdirSync(source)) {
       copyFileInto(projectDir, `${dir}/${file}`, dest);
+    }
+  }
+}
+
+function findRequirementId(projectDir, title) {
+  const base = path.join(projectDir, 'requirements');
+  for (const id of fs.readdirSync(base)) {
+    const file = path.join(base, id, 'requirement.json');
+    if (!fs.existsSync(file)) continue;
+    if (readJson(file).title === title) return id;
+  }
+  throw new Error(`未找到需求：${title}`);
+}
+
+function archiveVariant(projectDir, requirementIds, deliveryIds) {
+  const dest = path.join(EVIDENCE_DIR, 'journey-3', 'project-snapshot');
+  rmrf(dest);
+  copyFileInto(projectDir, 'project.json', dest);
+  copyFileInto(projectDir, 'README.md', dest);
+  for (const requirementId of requirementIds) {
+    for (const file of [
+      'requirement.json', 'proposal.json', 'analysis.json', 'analysis-resolved.json',
+      'interaction-spec.json', 'requirement.md', 'artifacts/spec-generation.json',
+      'artifacts/prototype.html', 'artifacts/css-spec.json', 'artifacts/mapping.json'
+    ]) {
+      copyFileInto(projectDir, `requirements/${requirementId}/${file}`, dest);
+    }
+  }
+  for (const deliveryId of deliveryIds) {
+    for (const file of ['delivery.json', 'manifest.json', 'export/index.html']) {
+      copyFileInto(projectDir, `deliveries/${deliveryId}/${file}`, dest);
+    }
+    const delivery = readJson(path.join(projectDir, 'deliveries', deliveryId, 'delivery.json'));
+    for (const item of delivery.manifest || []) {
+      if (item.frozen_path) {
+        copyFileInto(projectDir, `deliveries/${deliveryId}/${item.frozen_path}`, dest);
+      }
     }
   }
 }
@@ -420,14 +457,157 @@ async function journeyTwo() {
   }
 }
 
+
+async function journeyThree() {
+  const root = freshRoot('j3');
+  const projects = path.join(root, 'projects');
+  const userData = path.join(root, 'user');
+  const { app, page, errors } = await launch({ userData, projects });
+  let projectDir;
+  let reqAId;
+  let reqBId;
+  let deliveryA;
+  let deliveryB;
+  try {
+    await page.waitForSelector('[data-testid="home-new-product"]', { timeout: 30000 });
+    await page.click('[data-testid="home-new-product"]');
+    await page.fill('[data-testid="np-name"]', '运营活动台');
+    await page.fill('[data-testid="np-goal"]', '让员工提交活动报名，管理员查看和管理报名记录');
+    await page.fill('[data-testid="np-audience"]', '员工、管理员');
+    await page.fill('[data-testid="np-constraints"]', '报名提交后仅可查看，不得修改\n报名记录必须记录提交时间');
+    await page.fill('[data-testid="np-endpoints"]', '员工端 | 员工 | Web\n管理后台 | 管理员 | Web');
+    await page.click('[data-testid="np-analyze"]');
+    await page.waitForSelector('[data-testid="np-rule-checkbox"]', { timeout: 20000 });
+    await page.click('[data-testid="np-create"]');
+    await page.waitForSelector('[data-testid="top-new-requirement"]', { timeout: 30000 });
+    projectDir = path.join(projects, '运营活动台');
+
+    // A：与取件码无关的真实需求，要求表单 + 管理列表
+    await page.click('[data-testid="top-new-requirement"]');
+    await page.waitForSelector('[data-testid="nr-title"]');
+    await page.fill('[data-testid="nr-title"]', '员工提交活动报名并查看管理列表');
+    await page.fill('[data-testid="nr-goal"]', '员工填写报名信息，管理员查看报名列表');
+    await page.fill('[data-testid="nr-raw"]', '员工填写姓名、部门、联系方式并提交报名；管理员查看报名列表。');
+    await page.click('[data-testid="nr-create"]');
+    await page.waitForSelector('[data-testid="req-generate"]', { timeout: 35000 });
+    reqAId = findRequirementId(projectDir, '员工提交活动报名并查看管理列表');
+    await page.click('[data-testid="req-generate"]');
+    await page.waitForSelector('[data-testid="artifact-preview"]', { timeout: 30000 });
+    await page.locator('[data-testid="artifact-preview"]').scrollIntoViewIfNeeded();
+    await shot(page, 'journey-3', '01-a-form-list');
+    const frameA = page.frames().find((item) => item.url().startsWith('pha-preview://'));
+    assert.ok(frameA, '活动报名原型未加载');
+    await frameA.waitForSelector('[data-page-tab]');
+    assert.equal(await frameA.locator('[data-page-tab]').count(), 2);
+    assert.ok(await frameA.locator('input.proto-input').count() >= 3);
+    await frameA.locator('[data-page-tab]').nth(1).click();
+    await page.waitForTimeout(250);
+    assert.equal(await frameA.locator('[data-page-panel="PAGE-LIST-2"]').isVisible(), true);
+    assert.match(await frameA.locator('[data-page-panel="PAGE-LIST-2"]').innerText(), /报名/);
+    await shot(page, 'journey-3', '02-a-management');
+    const specA = readJson(path.join(projectDir, 'requirements', reqAId, 'interaction-spec.json'));
+    assert.equal(specA.pages.length, 2);
+    assert.deepEqual(specA.pages.map((item) => item.type), ['form', 'list']);
+    assert.ok(specA.pages[0].fields.some((field) => field.name === '姓名'));
+    await reviewAndDeliver(page, 'journey-3', { prefix: '03-a-' });
+    deliveryA = fs.readdirSync(path.join(projectDir, 'deliveries'))[0];
+
+    // 冻结验证：修改活产物后重新导出，历史交付不变
+    const exportedProto = path.join(
+      projectDir, 'deliveries', deliveryA, 'export', 'requirements', reqAId, 'artifacts', 'prototype.html'
+    );
+    const frozenHash = sha256File(exportedProto);
+    fs.appendFileSync(
+      path.join(projectDir, 'requirements', reqAId, 'artifacts', 'prototype.html'),
+      '\n<!-- live modification after delivery -->\n'
+    );
+    await page.click('[data-testid="nav-deliveries"]');
+    await page.waitForSelector(`[data-export-delivery="${deliveryA}"]`, { timeout: 20000 });
+    await page.click(`[data-export-delivery="${deliveryA}"]`);
+    await page.waitForTimeout(1500);
+    assert.equal(sha256File(exportedProto), frozenHash, '重新导出改写了历史交付内容');
+    await shot(page, 'journey-3', '04-a-frozen-reexport');
+
+    // B：冲突 + 阻塞补答 + 保留现行规则
+    await page.click('[data-testid="top-new-requirement"]');
+    await page.waitForSelector('[data-testid="nr-title"]');
+    await page.fill('[data-testid="nr-title"]', '报名提交后允许再次修改');
+    await page.fill('[data-testid="nr-goal"]', '员工可以在报名提交后再次修改报名信息');
+    await page.fill('[data-testid="nr-raw"]', '报名提交后可以再次修改报名信息。');
+    await page.click('[data-testid="nr-create"]');
+    await page.waitForSelector('[data-testid="unknown-answer-0"]', { timeout: 35000 });
+    await shot(page, 'journey-3', '05-b-blocked');
+    for (let index = 0; index < 3; index += 1) {
+      const input = page.locator('[data-testid="unknown-answer-0"]');
+      if ((await input.count()) === 0) break;
+      await input.fill('2 分钟，超时后拒绝');
+      await page.click('[data-testid="unknown-save-0"]');
+      await page.waitForTimeout(600);
+    }
+    await page.waitForSelector('[data-testid="decision-submit"]', { timeout: 30000 });
+    await shot(page, 'journey-3', '06-b-keep-decision');
+    await page.click('[data-testid="decision-keep"]');
+    await page.fill('[data-testid="decision-reason"]', '保持报名提交后不可修改的现行规则');
+    await page.click('[data-testid="decision-submit"]');
+    await page.waitForSelector('[data-testid="req-generate"]', { timeout: 30000 });
+    await page.click('[data-testid="req-generate"]');
+    await page.waitForSelector('[data-testid="artifact-preview"]', { timeout: 30000 });
+    reqBId = findRequirementId(projectDir, '报名提交后允许再次修改');
+    const specB = readJson(path.join(projectDir, 'requirements', reqBId, 'interaction-spec.json'));
+    assert.equal(specB.decision.action, 'keep');
+    assert.equal(specB.effective_title, '按现行规则处理');
+    assert.doesNotMatch(JSON.stringify(specB.pages), /再次修改/);
+    assert.ok(specB.rules.every((rule) => rule.effective_state === 'current'));
+    const docB = fs.readFileSync(path.join(projectDir, 'requirements', reqBId, 'requirement.md'), 'utf8');
+    assert.match(docB, /保留现行规则/);
+    assert.match(docB, /被否决口径/);
+    await shot(page, 'journey-3', '07-b-keep-artifacts');
+    await reviewAndDeliver(page, 'journey-3', { prefix: '08-b-' });
+    const deliveries = fs.readdirSync(path.join(projectDir, 'deliveries'));
+    deliveryB = deliveries.find((id) => id !== deliveryA);
+    assert.ok(deliveryB);
+
+    // Git 二次提交：提交后再次修改首个文件
+    await page.click('[data-testid="nav-deliveries"]');
+    await page.waitForSelector('[data-testid="git-init"]', { timeout: 20000 });
+    await page.click('[data-testid="git-init"]');
+    await page.waitForSelector('[data-testid="git-commit"]', { timeout: 20000 });
+    await page.fill('[data-testid="git-commit-message"]', 'feat: 活动报名首版与保留现行规则');
+    await page.click('[data-testid="git-commit"]');
+    await page.waitForTimeout(1500);
+    fs.appendFileSync(path.join(projectDir, 'README.md'), '\n\n## 二次提交测试\n');
+    await page.click('#delivery-refresh');
+    await page.waitForSelector('[data-testid="git-commit"]', { timeout: 20000 });
+    await page.fill('[data-testid="git-commit-message"]', 'fix: 二次提交');
+    await page.click('[data-testid="git-commit"]');
+    await page.waitForTimeout(1500);
+    const log = execFileSync('git', ['-C', projectDir, 'log', '--oneline']).toString().trim().split('\n');
+    assert.ok(log.length >= 2, `提交数量不足：${log.join(' | ')}`);
+    assert.match(log[0], /二次提交/);
+    await shot(page, 'journey-3', '09-git-recommit');
+
+    archiveVariant(projectDir, [reqAId, reqBId], [deliveryA, deliveryB]);
+    assert.deepEqual(errors, [], `控制台错误：${errors.join('\n')}`);
+    return { projectDir, requirementIds: [reqAId, reqBId], deliveryIds: [deliveryA, deliveryB], errors };
+  } catch (error) {
+    await page.screenshot({ path: path.join(EVIDENCE_DIR, 'journey-3', 'failure.png') }).catch(() => {});
+    error.message = `[journey-3] ${error.message}`;
+    throw error;
+  } finally {
+    await app.close().catch(() => {});
+  }
+}
+
 async function main() {
+
   fs.mkdirSync(EVIDENCE_DIR, { recursive: true });
-  for (const journey of ['journey-1', 'journey-2']) rmrf(path.join(EVIDENCE_DIR, journey));
+  for (const journey of ['journey-1', 'journey-2', 'journey-3']) rmrf(path.join(EVIDENCE_DIR, journey));
   rmrf(path.join(EVIDENCE_DIR, 'summary.json'));
   console.log(`Proto Harness Agent E2E · ${RUN_LABEL} · electron ${PACKAGED_BINARY || 'dev'}`);
   const started = Date.now();
   const journey1 = await journeyOne();
   const journey2 = await journeyTwo();
+  const journey3 = await journeyThree();
   const summary = {
     label: RUN_LABEL,
     packaged_binary: PACKAGED_BINARY || null,
@@ -436,7 +616,8 @@ async function main() {
     duration_ms: Date.now() - started,
     journeys: {
       new_product: journey1,
-      existing_project: journey2
+      existing_project: journey2,
+      distinct_requirement: journey3
     },
     checks: {
       conflict_bound_decision: true,
@@ -447,7 +628,12 @@ async function main() {
       git_commit_and_push: true,
       second_copy_resumed: true,
       import_source_untouched: true,
-      no_secrets_in_export: true
+      no_secrets_in_export: true,
+      distinct_requirement_multipage: true,
+      unknown_answer_rebased: true,
+      keep_decision_respected: true,
+      delivery_frozen_on_reexport: true,
+      git_second_commit: true
     }
   };
   fs.writeFileSync(path.join(EVIDENCE_DIR, 'summary.json'), `${JSON.stringify(summary, null, 2)}\n`);

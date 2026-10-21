@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import { sha256File } from '../src/util.js';
 import {
   analyzeRequirement, recordDecision, applyDecision, buildArtifactsForRequirement,
   reviewRequirement, createDeliveryRecord, exportDelivery, deliveryCheck
@@ -25,7 +26,7 @@ async function readyForDelivery() {
     reason: '确认规则变更'
   });
   applyDecision(store, decision.id);
-  const generated = buildArtifactsForRequirement(store, requirement.id);
+  const generated = await buildArtifactsForRequirement(store, requirement.id);
   reviewRequirement(store, { requirementId: requirement.id, note: '产物核对完成' });
   return { store, requirement, generated };
 }
@@ -74,12 +75,33 @@ test('失效产物阻止交付', async () => {
   assert.throws(() => createDeliveryRecord(store, { requirementId: requirement.id }), (error) => error.code === 'DELIVERY_INCOMPLETE');
 });
 
-test('缺失资源可被交付检查发现', async () => {
+test('缺失冻结资源可被交付检查发现', async () => {
   const { store, requirement } = await readyForDelivery();
   const delivery = createDeliveryRecord(store, { requirementId: requirement.id });
   const prototype = delivery.manifest.find((item) => item.type === 'prototype');
-  fs.rmSync(store.resolve(prototype.path));
+  fs.rmSync(path.join(store.deliveryDir(delivery.id), prototype.frozen_path));
   const check = deliveryCheck(store, delivery.id);
   assert.equal(check.ok, false);
-  assert.ok(check.missing.includes(prototype.path));
+  assert.ok(check.missing.includes(prototype.frozen_path));
+});
+
+test('交付创建后修改源产物，历史导出保持不变', async () => {
+  const { store, requirement } = await readyForDelivery();
+  const delivery = createDeliveryRecord(store, { requirementId: requirement.id });
+  const first = exportDelivery(store, delivery.id);
+  const prototypeArtifact = delivery.manifest.find((item) => item.type === 'prototype');
+  const exportedPrototype = path.join(first.export_path, prototypeArtifact.path);
+  const firstHash = sha256File(exportedPrototype);
+  const firstIndex = fs.readFileSync(path.join(first.export_path, 'index.html'), 'utf8');
+  const firstDoc = fs.readFileSync(path.join(first.export_path, 'requirements', requirement.id, 'requirement.md'), 'utf8');
+
+  fs.appendFileSync(store.resolve(prototypeArtifact.path), '\n<!-- live modification after delivery -->\n');
+  fs.appendFileSync(store.resolve(`requirements/${requirement.id}/requirement.md`), '\n- 交付后修改的活文档\n');
+
+  const second = exportDelivery(store, delivery.id);
+  assert.equal(sha256File(exportedPrototype), firstHash);
+  assert.equal(fs.readFileSync(path.join(second.export_path, 'index.html'), 'utf8'), firstIndex);
+  assert.equal(fs.readFileSync(path.join(second.export_path, 'requirements', requirement.id, 'requirement.md'), 'utf8'), firstDoc);
+  const check = deliveryCheck(store, delivery.id);
+  assert.equal(check.ok, true);
 });
