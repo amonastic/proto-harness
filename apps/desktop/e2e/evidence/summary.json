@@ -1,31 +1,31 @@
 {
   "label": "packaged",
-  "packaged_binary": "/tmp/pha-installed-final3/Proto Harness Agent.app/Contents/MacOS/Proto Harness Agent",
-  "started_at": "2026-10-21T12:16:47.990Z",
-  "finished_at": "2026-10-21T12:18:02.154Z",
-  "duration_ms": 74164,
+  "packaged_binary": "/tmp/pha-installed-012/Proto Harness Agent.app/Contents/MacOS/Proto Harness Agent",
+  "started_at": "2026-10-21T12:40:37.968Z",
+  "finished_at": "2026-10-21T12:41:39.342Z",
+  "duration_ms": 61374,
   "journeys": {
     "new_product": {
-      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j1-7QSGYf/projects/社区驿站取件",
-      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-311A5A",
-      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-D216D",
+      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j1-9GF3L2/projects/社区驿站取件",
+      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-006489",
+      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-FF33C",
       "errors": []
     },
     "existing_project": {
-      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j2-ohoID5/projects/社区驿站取件",
-      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-F02038",
-      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-D84E3",
+      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j2-H4GYQO/projects/社区驿站取件",
+      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-1635CE",
+      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-E985F",
       "errors": []
     },
     "distinct_requirement": {
-      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j3-TJav6s/projects/运营活动台",
+      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j3-vv3QDM/projects/运营活动台",
       "requirementIds": [
-        "REQ-员工提交活动报名并查看管理列表-65203D",
-        "REQ-报名提交后允许再次修改-CBF54F"
+        "REQ-员工提交活动报名并查看管理列表-7D70B1",
+        "REQ-报名提交后允许再次修改-45704B"
       ],
       "deliveryIds": [
-        "RELEASE-员工提交活动报名并查看管理列表-73567",
-        "RELEASE-报名提交后允许再次修改-8E2CD"
+        "RELEASE-员工提交活动报名并查看管理列表-D64F3",
+        "RELEASE-报名提交后允许再次修改-A71D5"
       ],
       "errors": []
     }

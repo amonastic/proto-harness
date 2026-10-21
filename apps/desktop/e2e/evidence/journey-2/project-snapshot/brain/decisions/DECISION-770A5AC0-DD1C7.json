@@ -1,0 +1,44 @@
+{
+  "schema_version": "pha-decision-v1",
+  "id": "DECISION-770A5AC0-DD1C7",
+  "product_id": "PRODUCT-社区驿站取件-140A67",
+  "requirement_id": null,
+  "proposal_hash": "770a5ac002768b2a77374e337861a243",
+  "base_revision": 0,
+  "chosen": {
+    "action": "adopt",
+    "condition": ""
+  },
+  "condition": "",
+  "reason": "以当前已评审口径为准，历史方案保留为已替代，不进入当前基线",
+  "confirmed_by": "user",
+  "confirmed_at": "2026-10-21T12:41:06.730Z",
+  "applied_at": "2026-10-21T12:41:06.730Z",
+  "result": {
+    "action": "import-conflict-resolved",
+    "baseline_id": "BASELINE-导入基线-917D2",
+    "rule_refs": [
+      {
+        "id": "RULE-PICKUP-REOPEN-B7C9",
+        "revision": 1
+      }
+    ],
+    "superseded_rule_refs": [
+      {
+        "id": "RULE-PICKUP-REOPEN-D79A-HIST-D79",
+        "revision": 1
+      }
+    ]
+  },
+  "conflict_context": {
+    "kind": "import-conflict",
+    "topic": "取件码开柜规则",
+    "chosen_candidate": "CAND-8dcee093",
+    "rejected_candidates": [
+      {
+        "id": "CAND-34cf37a6",
+        "statement": "重复开柜必须先撤销出库状态，再重新出库；每次重复开柜都需要生成一条新的出库记录"
+      }
+    ]
+  }
+}

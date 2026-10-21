@@ -1,0 +1,46 @@
+{
+  "schema_version": "pha-artifact-mapping-v1",
+  "requirement_id": "REQ-支持同一取件码-2-分钟内重复开柜-006489",
+  "baseline_id": "BASELINE-支持同一取件码-2-分钟内重复开柜-NEXT-2C6D5",
+  "rule_refs": [
+    {
+      "id": "RULE-取件码-8D6FC",
+      "revision": 2
+    },
+    {
+      "id": "RULE-订单-D5A86",
+      "revision": 2
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-006489-EA826",
+      "type": "requirement-doc",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-006489/requirement.md",
+      "provider": "local-heuristic",
+      "state": "draft"
+    },
+    {
+      "id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-006489-F774E",
+      "type": "interaction-spec",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-006489/interaction-spec.json",
+      "provider": "local-heuristic",
+      "state": "draft"
+    },
+    {
+      "id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-006489-F2E37",
+      "type": "prototype",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-006489/artifacts/prototype.html",
+      "provider": "local-heuristic",
+      "state": "draft"
+    },
+    {
+      "id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-006489-C124A",
+      "type": "css-spec",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-006489/artifacts/css-spec.json",
+      "provider": "local-heuristic",
+      "state": "draft"
+    }
+  ],
+  "note": "页面级映射；节点级映射需在具备稳定节点标识的设计工具中建立。"
+}

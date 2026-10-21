@@ -1,0 +1,46 @@
+{
+  "schema_version": "pha-artifact-mapping-v1",
+  "requirement_id": "REQ-员工提交活动报名并查看管理列表-7D70B1",
+  "baseline_id": "BASELINE-初始基线-2B4C0",
+  "rule_refs": [
+    {
+      "id": "RULE-报名提交后可查看-不得修改-D4E6C",
+      "revision": 1
+    },
+    {
+      "id": "RULE-记录-9CE81",
+      "revision": 1
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "ARTIFACT-REQ-员工提交活动报名并查看管理列表-7D70B1-R-CDD8A",
+      "type": "requirement-doc",
+      "path": "requirements/REQ-员工提交活动报名并查看管理列表-7D70B1/requirement.md",
+      "provider": "local-heuristic",
+      "state": "draft"
+    },
+    {
+      "id": "ARTIFACT-REQ-员工提交活动报名并查看管理列表-7D70B1-I-2D89D",
+      "type": "interaction-spec",
+      "path": "requirements/REQ-员工提交活动报名并查看管理列表-7D70B1/interaction-spec.json",
+      "provider": "local-heuristic",
+      "state": "draft"
+    },
+    {
+      "id": "ARTIFACT-REQ-员工提交活动报名并查看管理列表-7D70B1-P-2E6D0",
+      "type": "prototype",
+      "path": "requirements/REQ-员工提交活动报名并查看管理列表-7D70B1/artifacts/prototype.html",
+      "provider": "local-heuristic",
+      "state": "draft"
+    },
+    {
+      "id": "ARTIFACT-REQ-员工提交活动报名并查看管理列表-7D70B1-C-A6B67",
+      "type": "css-spec",
+      "path": "requirements/REQ-员工提交活动报名并查看管理列表-7D70B1/artifacts/css-spec.json",
+      "provider": "local-heuristic",
+      "state": "draft"
+    }
+  ],
+  "note": "页面级映射；节点级映射需在具备稳定节点标识的设计工具中建立。"
+}
