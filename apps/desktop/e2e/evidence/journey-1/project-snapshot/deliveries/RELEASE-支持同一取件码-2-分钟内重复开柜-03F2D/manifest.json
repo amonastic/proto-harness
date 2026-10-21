@@ -1,0 +1,108 @@
+{
+  "delivery_id": "RELEASE-支持同一取件码-2-分钟内重复开柜-03F2D",
+  "requirement_id": "REQ-支持同一取件码-2-分钟内重复开柜-1E14EF",
+  "baseline_id": "BASELINE-支持同一取件码-2-分钟内重复开柜-NEXT-69145",
+  "rule_refs": [
+    {
+      "id": "RULE-取件码-3FCA9",
+      "revision": 2
+    },
+    {
+      "id": "RULE-订单-7DBC3",
+      "revision": 2
+    }
+  ],
+  "created_at": "2026-10-21T14:34:17.635Z",
+  "display_snapshot": {
+    "captured_at": "2026-10-21T14:34:17.638Z",
+    "product": {
+      "id": "PRODUCT-社区驿站取件-F7B61C",
+      "name": "社区驿站取件",
+      "goal": "让门店店员在 2 分钟内可重复开柜，同时不改变订单签收状态"
+    },
+    "requirement": {
+      "id": "REQ-支持同一取件码-2-分钟内重复开柜-1E14EF",
+      "title": "支持同一取件码 2 分钟内重复开柜",
+      "goal": "同一取件码在 2 分钟内可重复打开原柜原格，不改变订单状态",
+      "revision": 6
+    },
+    "baseline": {
+      "id": "BASELINE-支持同一取件码-2-分钟内重复开柜-NEXT-69145",
+      "name": "支持同一取件码 2 分钟内重复开柜 · 下一版",
+      "status": "planned",
+      "activated_at": null,
+      "notes": "由需求 REQ-支持同一取件码-2-分钟内重复开柜-1E14EF 的裁决建立；未自动生效。 规则变更：RULE-取件码-3FCA9 r2、RULE-订单-7DBC3 r2"
+    },
+    "rules": [
+      {
+        "id": "RULE-取件码-3FCA9",
+        "revision": 2,
+        "statement": "同一取件码在 2 分钟内可重复开柜，不改变订单状态",
+        "constraints": [],
+        "knowledge_status": "confirmed",
+        "effective_state": "planned"
+      },
+      {
+        "id": "RULE-订单-7DBC3",
+        "revision": 2,
+        "statement": "重复开柜不得触发新的物流推送",
+        "constraints": [],
+        "knowledge_status": "confirmed",
+        "effective_state": "planned"
+      }
+    ],
+    "source_commit": null
+  },
+  "files": [
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-1E14EF-F4F6A",
+      "type": "requirement-doc",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-1E14EF/requirement.md",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-1E14EF/requirement.md",
+      "sha256": "b588cdd8ad5378dd892165a3acce4d9775a69d528f932b945b854af7167ff59c",
+      "size": 3634,
+      "size_label": "3.5 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-1E14EF-13BC1",
+      "type": "interaction-spec",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-1E14EF/interaction-spec.json",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-1E14EF/interaction-spec.json",
+      "sha256": "fcda30f58f01ca2bff04b43751ee3c5ad134af43289bc5ded38b99cd36331f7e",
+      "size": 5149,
+      "size_label": "5.0 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-1E14EF-FC34C",
+      "type": "prototype",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-1E14EF/artifacts/prototype.html",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-1E14EF/artifacts/prototype.html",
+      "sha256": "f291f66ee080465725a85a2db63fd45a430652ba4799b48b5fcc7180468eb1bd",
+      "size": 17136,
+      "size_label": "16.7 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-1E14EF-B82C2",
+      "type": "css-spec",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-1E14EF/artifacts/css-spec.json",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-1E14EF/artifacts/css-spec.json",
+      "sha256": "b4c950a891e5ec49aecac9990de87a71a5712b607151165be3d33103b3e3d413",
+      "size": 5243,
+      "size_label": "5.1 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-1E14EF-C80A0",
+      "type": "mapping",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-1E14EF/artifacts/mapping.json",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-1E14EF/artifacts/mapping.json",
+      "sha256": "c3506d6088b89a6e1b1999409f05e627059461157ec1cf5465e5b643f2204ccb",
+      "size": 1691,
+      "size_label": "1.7 KB",
+      "state": "draft"
+    }
+  ]
+}

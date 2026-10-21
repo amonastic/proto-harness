@@ -1,9 +1,9 @@
 # 安装产物端到端验证证据
 
 执行日期：2026-10-21（返修版安装产物）
-客户端版本：0.1.2
-源码提交：`4ad4f10a3edbe2ff6955e3572bca476b288a52af`
-安装产物：`apps/desktop/release/Proto-Harness-Agent-0.1.2-arm64.dmg`
+客户端版本：0.1.3
+源码提交：`860aec8289a6263ef353877dda9147d5b3b6e488`
+安装产物：`apps/desktop/release/Proto-Harness-Agent-0.1.3-arm64.dmg`
 验证方式：挂载 DMG → 将 `Proto Harness Agent.app` 复制到临时安装目录 → 直接启动安装副本 → 运行 `e2e/journeys.mjs`。
 签名状态：ad-hoc 签名，未使用 Developer ID，未公证。
 分析来源：本地规则分析（未调用真实模型；模型规格接入用 fake adapter 单测验证）。
@@ -31,7 +31,7 @@
 }
 ```
 
-单元测试：52 项全部通过，覆盖页面类型推断、模型两页规格进入产物、补答重绑、保留现行规则、交付冻结、并行计划基线、Git 二次提交，以及本轮新增的非破坏导出、展示快照、已应用提案补答、精确提交和字段/设置忠实度。
+单元测试：57 项全部通过，覆盖页面类型推断、模型两页规格进入产物、补答重绑、保留现行规则、交付冻结、并行计划基线、Git 二次提交，以及本轮新增的非破坏导出、展示快照、已应用提案补答、精确提交和字段/设置忠实度。
 
 ## 旅程一：新建产品
 
@@ -89,7 +89,11 @@
 - 已应用提案在事后补答非阻塞问题时保持 applied，不改变 planned 基线，不产生 `STALE_PROPOSAL`。
 - 应用内历史交付列表使用交付时的需求/基线快照，不随当前记录漂移。
 - Git 预暂存了未勾选文件时，提交只包含勾选且实际有变更的路径。
-- 模型三字段全部 `required:true` 时第三项保持必填；设置开关 false 显示关闭，A5 选中 A5；保留现行规则时被否决字段被过滤。
+- 模型三字段全部 `required:true` 时第三项保持必填；设置开关 false 显示关闭，A5 选中 A5；fields-only 设置保留 value；重复 page id 去重。
+- keep 裁决的字段过滤覆盖 settings groups、list/board columns 与 demo rows 键。
+- 0.1.1 形态（有 frozen_path、无 display_snapshot）交付拒绝重导并保留原导出；应用内列表使用冻结标题或旧版占位。
+- 已应用提案补答进入 resolved acceptance/core_flows，现有 artifacts 标记 stale；generated/reviewed 回到 analyzed 重新生成，delivered 保持冻结。
+- Git 重命名提交同时包含旧/新路径，未选暂存文件仍隔离。
 
 ## 重要断言
 

@@ -1,0 +1,123 @@
+{
+  "schema_version": "pha-requirement-v1",
+  "id": "REQ-员工提交活动报名并查看管理列表-1C11D3",
+  "product_id": "PRODUCT-运营活动台-E68CCF",
+  "title": "员工提交活动报名并查看管理列表",
+  "goal": "员工填写报名信息，管理员查看报名列表",
+  "raw_input": "员工填写姓名、部门、联系方式并提交报名；管理员查看报名列表。",
+  "baseline_id": "BASELINE-初始基线-4CD41",
+  "endpoint_refs": [
+    "EP-员工端-1AC23",
+    "EP-管理后台-3DB9F"
+  ],
+  "status": "delivered",
+  "scope": {
+    "in_scope": [
+      "员工提交活动报名并查看管理列表",
+      "员工相关规则与操作",
+      "记录相关规则与操作"
+    ],
+    "out_of_scope": [
+      "不改变未涉及对象、角色与端的既有行为"
+    ]
+  },
+  "impact": {
+    "actual": [
+      "更新「员工端」中与“员工提交活动报名并查看管理列表 员工填写报名信息…”相关的操作入口、状态反馈与说明",
+      "更新「管理后台」中与“员工提交活动报名并查看管理列表 员工填写报名信息…”相关的操作入口、状态反馈与说明"
+    ],
+    "verify": [
+      "核对配置端规则与消费端展示是否使用同一版本",
+      "核对历史数据、快照与已有交付是否受本次规则变化影响"
+    ],
+    "keep": [
+      "报名提交后仅可查看，不得修改",
+      "报名记录必须记录提交时间"
+    ]
+  },
+  "unknowns": [],
+  "acceptance": [
+    "空数据、异常与无权限场景有明确反馈，不出现无说明的中断",
+    "需求文档、交互规格与原型引用同一规则版本"
+  ],
+  "rule_refs": [
+    {
+      "id": "RULE-报名提交后可查看-不得修改-7ECD1",
+      "revision": 1
+    },
+    {
+      "id": "RULE-记录-78DE0",
+      "revision": 1
+    }
+  ],
+  "artifact_refs": [
+    "ARTIFACT-REQ-员工提交活动报名并查看管理列表-1C11D3-R-B7FA2",
+    "ARTIFACT-REQ-员工提交活动报名并查看管理列表-1C11D3-I-9F136",
+    "ARTIFACT-REQ-员工提交活动报名并查看管理列表-1C11D3-P-5EA93",
+    "ARTIFACT-REQ-员工提交活动报名并查看管理列表-1C11D3-C-63131",
+    "ARTIFACT-REQ-员工提交活动报名并查看管理列表-1C11D3-M-2E87B"
+  ],
+  "interaction_spec_ref": "requirements/REQ-员工提交活动报名并查看管理列表-1C11D3/interaction-spec.json",
+  "delivery_refs": [
+    "RELEASE-员工提交活动报名并查看管理列表-0B3AD"
+  ],
+  "analysis_source": "local-heuristic",
+  "next_step": "交付已导出，可继续创建新需求",
+  "revision": 7,
+  "checkpoints": [
+    {
+      "at": "2026-10-21T14:34:49.027Z",
+      "from": null,
+      "to": "draft",
+      "summary": "创建需求"
+    },
+    {
+      "at": "2026-10-21T14:34:49.033Z",
+      "from": "draft",
+      "to": "analyzing",
+      "summary": "开始需求分析"
+    },
+    {
+      "at": "2026-10-21T14:34:49.036Z",
+      "from": "analyzing",
+      "to": "analyzed",
+      "summary": "分析完成：识别到 2 个对象、0 条规则候选、0 处潜在冲突。分析来自本地规则引擎，不代表真实模型判断。"
+    },
+    {
+      "at": "2026-10-21T14:34:49.351Z",
+      "from": "analyzed",
+      "to": "generated",
+      "summary": "生成 5 项产物"
+    },
+    {
+      "at": "2026-10-21T14:34:51.750Z",
+      "from": "generated",
+      "to": "reviewed",
+      "summary": "评审通过：客户端评审通过"
+    },
+    {
+      "at": "2026-10-21T14:34:52.094Z",
+      "from": "reviewed",
+      "to": "delivered",
+      "summary": "导出交付版本 RELEASE-员工提交活动报名并查看管理列表-0B3AD"
+    },
+    {
+      "at": "2026-10-21T14:34:53.067Z",
+      "from": "delivered",
+      "to": "delivered",
+      "summary": "导出交付版本 RELEASE-员工提交活动报名并查看管理列表-0B3AD"
+    }
+  ],
+  "created_at": "2026-10-21T14:34:49.027Z",
+  "updated_at": "2026-10-21T14:34:53.067Z",
+  "decision_ref": null,
+  "resolved_analysis_ref": null,
+  "effective_title": null,
+  "effective_goal": null,
+  "spec_generation": {
+    "source": "local-heuristic",
+    "model": null,
+    "warning": null,
+    "page_count": 2
+  }
+}

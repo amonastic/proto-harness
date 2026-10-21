@@ -1,31 +1,31 @@
 {
   "label": "packaged",
-  "packaged_binary": "/tmp/pha-installed-012b/Proto Harness Agent.app/Contents/MacOS/Proto Harness Agent",
-  "started_at": "2026-10-21T12:42:52.028Z",
-  "finished_at": "2026-10-21T12:43:54.948Z",
-  "duration_ms": 62920,
+  "packaged_binary": "/tmp/pha-installed-013/Proto Harness Agent.app/Contents/MacOS/Proto Harness Agent",
+  "started_at": "2026-10-21T14:34:05.129Z",
+  "finished_at": "2026-10-21T14:35:08.166Z",
+  "duration_ms": 63037,
   "journeys": {
     "new_product": {
-      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j1-ROAlvb/projects/社区驿站取件",
-      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-DF80E4",
-      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-BD4A5",
+      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j1-cw3eow/projects/社区驿站取件",
+      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-1E14EF",
+      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-03F2D",
       "errors": []
     },
     "existing_project": {
-      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j2-9NLgsH/projects/社区驿站取件",
-      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-C85E45",
-      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-ACD30",
+      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j2-yDK9Mk/projects/社区驿站取件",
+      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-EC2C60",
+      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-E8C57",
       "errors": []
     },
     "distinct_requirement": {
-      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j3-FRqrgw/projects/运营活动台",
+      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j3-vgbsFY/projects/运营活动台",
       "requirementIds": [
-        "REQ-员工提交活动报名并查看管理列表-A3C493",
-        "REQ-报名提交后允许再次修改-44A28B"
+        "REQ-员工提交活动报名并查看管理列表-1C11D3",
+        "REQ-报名提交后允许再次修改-855570"
       ],
       "deliveryIds": [
-        "RELEASE-员工提交活动报名并查看管理列表-4311A",
-        "RELEASE-报名提交后允许再次修改-4AF0E"
+        "RELEASE-员工提交活动报名并查看管理列表-0B3AD",
+        "RELEASE-报名提交后允许再次修改-C243E"
       ],
       "errors": []
     }

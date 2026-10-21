@@ -1,0 +1,152 @@
+{
+  "schema_version": "pha-delivery-v1",
+  "id": "RELEASE-支持同一取件码-2-分钟内重复开柜-E8C57",
+  "product_id": "PRODUCT-社区驿站取件-D32C2D",
+  "requirement_id": "REQ-支持同一取件码-2-分钟内重复开柜-EC2C60",
+  "requirement_revision": 6,
+  "baseline_id": "BASELINE-支持同一取件码-2-分钟内重复开柜-NEXT-2E23B",
+  "rule_refs": [
+    {
+      "id": "RULE-PICKUP-REOPEN-B7C9",
+      "revision": 2
+    },
+    {
+      "id": "RULE-BILLING-PERIOD-30F9",
+      "revision": 1
+    },
+    {
+      "id": "RULE-PICKUP-LOG-3377",
+      "revision": 1
+    },
+    {
+      "id": "RULE-BILLING-EXPORT-A5AB",
+      "revision": 1
+    }
+  ],
+  "artifact_refs": [
+    "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-EC2C60-0026E",
+    "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-EC2C60-76573",
+    "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-EC2C60-F3700",
+    "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-EC2C60-6ABBB",
+    "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-EC2C60-AFF43"
+  ],
+  "manifest": [
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-EC2C60-0026E",
+      "type": "requirement-doc",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-EC2C60/requirement.md",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-EC2C60/requirement.md",
+      "sha256": "9461fc1c8917dc10787393535f4487b824dcfbeb4904cf794e69cf08f9541d08",
+      "size": 4588,
+      "size_label": "4.5 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-EC2C60-76573",
+      "type": "interaction-spec",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-EC2C60/interaction-spec.json",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-EC2C60/interaction-spec.json",
+      "sha256": "3a69a78abcc9f8f3670f7a9812bb7bb9fdbb6a7e4df1014a947ba15039381013",
+      "size": 6138,
+      "size_label": "6.0 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-EC2C60-F3700",
+      "type": "prototype",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-EC2C60/artifacts/prototype.html",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-EC2C60/artifacts/prototype.html",
+      "sha256": "61d5f9b485581c1e1a422d480aab389b15bd732c091fb25460a3870d35e84a3e",
+      "size": 17864,
+      "size_label": "17.4 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-EC2C60-6ABBB",
+      "type": "css-spec",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-EC2C60/artifacts/css-spec.json",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-EC2C60/artifacts/css-spec.json",
+      "sha256": "8bc0c82bb80459e6335509b2a4a566ce3ffaae90cfd9367ed03d147417e58125",
+      "size": 11323,
+      "size_label": "11.1 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-EC2C60-AFF43",
+      "type": "mapping",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-EC2C60/artifacts/mapping.json",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-EC2C60/artifacts/mapping.json",
+      "sha256": "e1b881329b315957340b492d967b7320ba699beb1394f43f78cc3f69ddfebdb9",
+      "size": 1843,
+      "size_label": "1.8 KB",
+      "state": "draft"
+    }
+  ],
+  "source_commit": null,
+  "display_snapshot": {
+    "captured_at": "2026-10-21T14:34:43.619Z",
+    "product": {
+      "id": "PRODUCT-社区驿站取件-D32C2D",
+      "name": "社区驿站取件",
+      "goal": "面向社区驿站的取件核销示例项目，用于演示已有规则、历史方案、页面与后续需求之间的关系。示例不含真实客户资料，业务阈值仅用于流程演示。"
+    },
+    "requirement": {
+      "id": "REQ-支持同一取件码-2-分钟内重复开柜-EC2C60",
+      "title": "支持同一取件码 2 分钟内重复开柜",
+      "goal": "同一取件码在 2 分钟内可重复打开原柜原格，不改变订单状态",
+      "revision": 6
+    },
+    "baseline": {
+      "id": "BASELINE-支持同一取件码-2-分钟内重复开柜-NEXT-2E23B",
+      "name": "支持同一取件码 2 分钟内重复开柜 · 下一版",
+      "status": "planned",
+      "activated_at": null,
+      "notes": "由需求 REQ-支持同一取件码-2-分钟内重复开柜-EC2C60 的裁决建立；未自动生效。 规则变更：RULE-PICKUP-REOPEN-B7C9 r2"
+    },
+    "rules": [
+      {
+        "id": "RULE-PICKUP-REOPEN-B7C9",
+        "revision": 2,
+        "statement": "同一取件码在 2 分钟内可重复开柜，不改变订单状态",
+        "constraints": [],
+        "knowledge_status": "confirmed",
+        "effective_state": "planned"
+      },
+      {
+        "id": "RULE-BILLING-PERIOD-30F9",
+        "revision": 1,
+        "statement": "月结账单必须按订单完成时间归入对应月份；历史账单必须使用生成时的快照，不得随当前订单状态重算",
+        "constraints": [],
+        "knowledge_status": "confirmed",
+        "effective_state": "current"
+      },
+      {
+        "id": "RULE-PICKUP-LOG-3377",
+        "revision": 1,
+        "statement": "每次开柜操作必须记录操作人、取件码、柜格与结果。",
+        "constraints": [],
+        "knowledge_status": "confirmed",
+        "effective_state": "current"
+      },
+      {
+        "id": "RULE-BILLING-EXPORT-A5AB",
+        "revision": 1,
+        "statement": "仅财务角色可以导出月结账单明细；运营角色可以查看汇总，不得导出客户级明细",
+        "constraints": [],
+        "knowledge_status": "confirmed",
+        "effective_state": "current"
+      }
+    ],
+    "source_commit": null
+  },
+  "status": "exported",
+  "created_at": "2026-10-21T14:34:43.617Z",
+  "updated_at": "2026-10-21T14:34:43.623Z",
+  "exported_at": "2026-10-21T14:34:43.623Z",
+  "export_path": "deliveries/RELEASE-支持同一取件码-2-分钟内重复开柜-E8C57/export",
+  "warnings": [
+    "本次交付使用 planned 基线：规则已确认但尚未切换为当前生效；接收者需知晓生效状态。",
+    "交付未绑定 Git 提交；如需追溯请先提交项目文件。"
+  ],
+  "last_export_error": null
+}
