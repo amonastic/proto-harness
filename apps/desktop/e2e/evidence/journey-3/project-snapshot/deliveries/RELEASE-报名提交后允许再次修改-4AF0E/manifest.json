@@ -1,0 +1,108 @@
+{
+  "delivery_id": "RELEASE-报名提交后允许再次修改-4AF0E",
+  "requirement_id": "REQ-报名提交后允许再次修改-44A28B",
+  "baseline_id": "BASELINE-初始基线-1489A",
+  "rule_refs": [
+    {
+      "id": "RULE-报名提交后可查看-不得修改-63CBE",
+      "revision": 1
+    },
+    {
+      "id": "RULE-记录-16731",
+      "revision": 1
+    }
+  ],
+  "created_at": "2026-10-21T12:43:49.027Z",
+  "display_snapshot": {
+    "captured_at": "2026-10-21T12:43:49.029Z",
+    "product": {
+      "id": "PRODUCT-运营活动台-FD0501",
+      "name": "运营活动台",
+      "goal": "让员工提交活动报名，管理员查看和管理报名记录"
+    },
+    "requirement": {
+      "id": "REQ-报名提交后允许再次修改-44A28B",
+      "title": "报名提交后允许再次修改",
+      "goal": "员工可以在报名提交后再次修改报名信息",
+      "revision": 7
+    },
+    "baseline": {
+      "id": "BASELINE-初始基线-1489A",
+      "name": "初始基线",
+      "status": "current",
+      "activated_at": "2026-10-21T12:43:31.838Z",
+      "notes": ""
+    },
+    "rules": [
+      {
+        "id": "RULE-报名提交后可查看-不得修改-63CBE",
+        "revision": 1,
+        "statement": "报名提交后仅可查看，不得修改",
+        "constraints": [],
+        "knowledge_status": "confirmed",
+        "effective_state": "current"
+      },
+      {
+        "id": "RULE-记录-16731",
+        "revision": 1,
+        "statement": "报名记录必须记录提交时间",
+        "constraints": [],
+        "knowledge_status": "confirmed",
+        "effective_state": "current"
+      }
+    ],
+    "source_commit": null
+  },
+  "files": [
+    {
+      "artifact_id": "ARTIFACT-REQ-报名提交后允许再次修改-44A28B-REQUI-EB773",
+      "type": "requirement-doc",
+      "path": "requirements/REQ-报名提交后允许再次修改-44A28B/requirement.md",
+      "frozen_path": "frozen/requirements/REQ-报名提交后允许再次修改-44A28B/requirement.md",
+      "sha256": "ebe2dcdbb52f28f1c8af3ac5dbc10a6925a7ff04faa76cae03288410374a34c7",
+      "size": 3085,
+      "size_label": "3.0 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-报名提交后允许再次修改-44A28B-INTER-DC6AC",
+      "type": "interaction-spec",
+      "path": "requirements/REQ-报名提交后允许再次修改-44A28B/interaction-spec.json",
+      "frozen_path": "frozen/requirements/REQ-报名提交后允许再次修改-44A28B/interaction-spec.json",
+      "sha256": "830bc80b95e179d6dd2d460f3b133c71006d48d3a2ac73d7d01190e4e0509f63",
+      "size": 7503,
+      "size_label": "7.3 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-报名提交后允许再次修改-44A28B-PROTO-3BA00",
+      "type": "prototype",
+      "path": "requirements/REQ-报名提交后允许再次修改-44A28B/artifacts/prototype.html",
+      "frozen_path": "frozen/requirements/REQ-报名提交后允许再次修改-44A28B/artifacts/prototype.html",
+      "sha256": "bccc4432a4e57df93594e60232100b3a6807a017f89ff726d630278e4c357297",
+      "size": 19975,
+      "size_label": "19.5 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-报名提交后允许再次修改-44A28B-CSS-S-33BDB",
+      "type": "css-spec",
+      "path": "requirements/REQ-报名提交后允许再次修改-44A28B/artifacts/css-spec.json",
+      "frozen_path": "frozen/requirements/REQ-报名提交后允许再次修改-44A28B/artifacts/css-spec.json",
+      "sha256": "f561040258221fa2256965ae98c9a6caadd9740038e533f26d6134fe367f9cbf",
+      "size": 5231,
+      "size_label": "5.1 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-报名提交后允许再次修改-44A28B-MAPPI-03919",
+      "type": "mapping",
+      "path": "requirements/REQ-报名提交后允许再次修改-44A28B/artifacts/mapping.json",
+      "frozen_path": "frozen/requirements/REQ-报名提交后允许再次修改-44A28B/artifacts/mapping.json",
+      "sha256": "55dffd73723bab3996c4f506b79dac8d4ab41f9e7491b7b7528a929fd1243f8e",
+      "size": 1597,
+      "size_label": "1.6 KB",
+      "state": "draft"
+    }
+  ]
+}

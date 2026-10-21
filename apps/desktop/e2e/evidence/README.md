@@ -2,7 +2,7 @@
 
 执行日期：2026-10-21（返修版安装产物）
 客户端版本：0.1.2
-源码提交：`311d18d2fbbf94971e619ffb873eb5a5933d7392`
+源码提交：`4ad4f10a3edbe2ff6955e3572bca476b288a52af`
 安装产物：`apps/desktop/release/Proto-Harness-Agent-0.1.2-arm64.dmg`
 验证方式：挂载 DMG → 将 `Proto Harness Agent.app` 复制到临时安装目录 → 直接启动安装副本 → 运行 `e2e/journeys.mjs`。
 签名状态：ad-hoc 签名，未使用 Developer ID，未公证。
@@ -87,6 +87,7 @@
 - 旧格式交付拒绝重导时，原有 `export/index.html` 与 `exported` 状态保留。
 - 基线从 planned 激活为 current 后重导历史交付，静态站仍显示交付时的 planned 快照。
 - 已应用提案在事后补答非阻塞问题时保持 applied，不改变 planned 基线，不产生 `STALE_PROPOSAL`。
+- 应用内历史交付列表使用交付时的需求/基线快照，不随当前记录漂移。
 - Git 预暂存了未勾选文件时，提交只包含勾选且实际有变更的路径。
 - 模型三字段全部 `required:true` 时第三项保持必填；设置开关 false 显示关闭，A5 选中 A5；保留现行规则时被否决字段被过滤。
 
