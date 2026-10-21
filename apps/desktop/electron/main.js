@@ -473,9 +473,13 @@ function registerIpc() {
       deliveries: store.listDeliveries().map((delivery) => {
         const requirement = store.getRequirement(delivery.requirement_id);
         const exportDir = path.join(store.deliveryDir(delivery.id), 'export');
+        const snapshot = delivery.display_snapshot || null;
         return {
           ...delivery,
-          requirement_title: requirement?.title || delivery.requirement_id,
+          requirement_title: snapshot?.requirement?.title || requirement?.title || delivery.requirement_id,
+          product_name: snapshot?.product?.name || null,
+          baseline_name: snapshot?.baseline?.name || null,
+          baseline_status: snapshot?.baseline?.status || null,
           export_exists: fs.existsSync(path.join(exportDir, 'index.html')),
           export_dir: exportDir
         };

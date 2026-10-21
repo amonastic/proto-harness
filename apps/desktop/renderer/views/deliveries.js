@@ -8,7 +8,7 @@ function deliveryCard(delivery) {
     <div class="top">
       <div>
         <div class="name">${fmt.escapeHtml(delivery.requirement_title || delivery.requirement_id)}</div>
-        <div class="meta"><span class="mono">${fmt.escapeHtml(delivery.id)}</span><span>${fmt.date(delivery.created_at)}</span><span>${(delivery.manifest || []).length} 个文件</span></div>
+        <div class="meta"><span class="mono">${fmt.escapeHtml(delivery.id)}</span><span>${fmt.date(delivery.created_at)}</span><span>${(delivery.manifest || []).length} 个文件</span>${delivery.baseline_name ? `<span>交付基线：${fmt.escapeHtml(delivery.baseline_name)}（${fmt.escapeHtml(delivery.baseline_status || '')}）</span>` : ''}</div>
       </div>
       <span class="badge ${delivery.status === 'exported' ? 'green' : delivery.status === 'failed' ? 'red' : 'gray'}">${fmt.escapeHtml(delivery.status)}</span>
     </div>
