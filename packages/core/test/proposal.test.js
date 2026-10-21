@@ -284,13 +284,16 @@ test('已应用提案不因事后补答非阻塞问题而重新打开', async ()
   applyDecision(store, decision.id);
   const adopted = store.getRequirement(requirement.id);
   const baselineBefore = adopted.baseline_id;
+  const firstArtifacts = await buildArtifactsForRequirement(store, requirement.id);
+  assert.equal(firstArtifacts.requirement.status, 'generated');
+  const withUnknown = store.getRequirement(requirement.id);
   store.saveRequirement({
-    ...adopted,
-    unknowns: [...(adopted.unknowns || []), {
+    ...withUnknown,
+    unknowns: [...(withUnknown.unknowns || []), {
       id: 'U-POST', question: '是否需要向店员发送通知？', why_blocking: '非阻塞的体验补充',
       blocking: false, answered: false, answer: ''
     }],
-    revision: adopted.revision + 1
+    revision: withUnknown.revision + 1
   });
   const answered = answerUnknown(store, {
     requirementId: requirement.id,
@@ -299,11 +302,17 @@ test('已应用提案不因事后补答非阻塞问题而重新打开', async ()
   });
   assert.equal(answered.status, 'analyzed');
   assert.equal(answered.baseline_id, baselineBefore);
+  assert.equal(answered.next_step, '补充信息已进入分析，请重新生成产物');
   const proposalAfter = store.getRequirementProposal(requirement.id);
   assert.equal(proposalAfter.status, 'applied');
   assert.equal(store.getDecision(decision.id).applied_at != null, true);
+  assert.ok(store.listArtifacts(requirement.id).every((artifact) => artifact.state === 'stale'));
   const resolved = JSON.parse(store.readRequirementFile(requirement.id, 'analysis-resolved.json'));
   assert.ok(resolved.post_decision_answers.some((item) => /通知/.test(item.question)));
+  assert.ok(resolved.acceptance.some((item) => /在结果页提示/.test(item)));
+  assert.ok(resolved.core_flows.some((item) => /在结果页提示/.test(item)));
   const generated = await buildArtifactsForRequirement(store, requirement.id);
   assert.equal(generated.requirement.status, 'generated');
+  assert.ok(generated.spec.post_decision_answers.some((item) => /通知/.test(item.question)));
+  assert.match(generated.prototypeHtml, /在结果页提示即可/);
 });

@@ -474,12 +474,23 @@ function registerIpc() {
         const requirement = store.getRequirement(delivery.requirement_id);
         const exportDir = path.join(store.deliveryDir(delivery.id), 'export');
         const snapshot = delivery.display_snapshot || null;
+        let frozenTitle = null;
+        const docEntry = (delivery.manifest || []).find((item) => item.type === 'requirement-doc' && item.frozen_path);
+        if (docEntry) {
+          try {
+            const markdown = fs.readFileSync(path.join(store.deliveryDir(delivery.id), docEntry.frozen_path), 'utf8');
+            frozenTitle = markdown.match(/^#\s+(.+)$/m)?.[1]?.trim() || null;
+          } catch {
+            frozenTitle = null;
+          }
+        }
         return {
           ...delivery,
-          requirement_title: snapshot?.requirement?.title || requirement?.title || delivery.requirement_id,
+          requirement_title: snapshot?.requirement?.title || frozenTitle || `旧版交付 ${delivery.requirement_id}`,
           product_name: snapshot?.product?.name || null,
           baseline_name: snapshot?.baseline?.name || null,
           baseline_status: snapshot?.baseline?.status || null,
+          legacy_snapshot: !snapshot,
           export_exists: fs.existsSync(path.join(exportDir, 'index.html')),
           export_dir: exportDir
         };

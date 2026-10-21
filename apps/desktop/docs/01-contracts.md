@@ -109,7 +109,7 @@
 ```
 
 - `recordDecision(proposal, chosen, reason)` 再次读取提案并校验 hash、需求修订、提案基准基线与该基线中的规则修订；不一致返回 `STALE_PROPOSAL`。其他计划基线中的新修订不影响基于现行基线的提案。
-- 补答阻塞未知项时，内核将问答写入提案 `confirmed_answers` 与规则约束，并以新的需求修订重绑提案哈希与基准，随后重新进入待裁决。若提案已应用，补答只更新需求与 resolved 分析，不重新打开提案、不改变基线。
+- 补答阻塞未知项时，内核将问答写入提案 `confirmed_answers` 与规则约束，并以新的需求修订重绑提案哈希与基准，随后重新进入待裁决。若提案已应用，补答写入 resolved 的 acceptance/core_flows，并将现有 artifacts 标记 stale：generated/reviewed 回到 analyzed 要求重新生成；delivered 保持历史交付冻结并提示新建需求。
 - `applyDecision(decisionId)` 幂等：已应用返回既有结果，不产生第二份修订。
 - 应用顺序：校验 → 写新规则修订 → 写决策 → 更新基线引用 → 标记受影响产物 `stale`。
 - 同一规则出现不同业务裁决时不自动合并；界面必须重新展示冲突。
@@ -141,7 +141,7 @@ interface RuntimeAdapter {
 ```
 
 - 所有返回先经过内核结构校验；失败写入 `.runtime/model-errors/<timestamp>.json`，任务保留 `blocked` 或回退到本地分析器并标注。
-- 模型显式给出的字段必填、选项默认值与设置开关值必须原样保留；保留现行规则时，被否决字段不得进入页面。
+- 模型显式给出的字段必填、选项默认值与设置开关值必须原样保留；保留现行规则时，被否决字段不得进入 form fields、settings groups、list/board columns 或 demo_rows 键。设置页仅有 fields 时从 fields 构造分组并保留 value；重复 page.id 必须去重。
 - 模型原始输出完整保存；界面摘要不得来自截断后的 200 字符。
 - API Key 只存 Electron `safeStorage`（Keychain），不写项目文件、日志、导出包。
 - 本地启发式分析器输出必须带 `source: "local-heuristic"`，界面显示「本地规则分析」。
@@ -202,7 +202,7 @@ interface RuntimeAdapter {
 
 ### 7.4 交付
 
-`delivery.json` + `manifest.json` + `frozen/` + `export/index.html` + 需求文档与原型。创建交付时把产物复制到 `frozen/`，并保存 `display_snapshot`（产品、需求、基线状态与规则版本）；manifest 记录原始路径、`frozen_path` 与 SHA-256。导出只读取并校验冻结副本与展示快照；修改活产物或激活基线后重新导出不得改变历史交付。导出先在临时目录完成并校验，成功后原子替换；失败时保留上次成功导出，不预先删除。缺资源或冻结内容被篡改时记录错误并保留原导出。
+`delivery.json` + `manifest.json` + `frozen/` + `export/index.html` + 需求文档与原型。创建交付时把产物复制到 `frozen/`，并保存 `display_snapshot`（产品、需求、基线状态与规则版本）；manifest 记录原始路径、`frozen_path` 与 SHA-256。导出只读取并校验冻结副本与展示快照；修改活产物或激活基线后重新导出不得改变历史交付。导出先在临时目录完成并校验，成功后原子替换；失败时保留上次成功导出，不预先删除。缺资源或冻结内容被篡改时记录错误并保留原导出。缺少 `display_snapshot` 的旧版交付拒绝重导，保留原导出，不静默回退当前记录。
 
 ## 8 导入契约
 

@@ -1,7 +1,7 @@
 {
   "name": "proto-harness-agent",
   "productName": "Proto Harness Agent",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "面向产品团队的本地 Agent 客户端：业务大脑、需求分析、原型与固定版本交付",
   "private": true,
   "license": "MIT",

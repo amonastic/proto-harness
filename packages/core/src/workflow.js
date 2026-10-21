@@ -221,7 +221,24 @@ export async function analyzeRequirement(store, { requirementId, adapter, budget
   if (!['draft', 'analyzed', 'blocked', 'awaiting_decision'].includes(requirement.status)) {
     throw fail('INVALID_INPUT', `当前状态 ${requirement.status} 不能重新分析`);
   }
-  const analyzing = checkpoint(requirement, 'analyzing', '开始需求分析');
+  for (const file of ['analysis-resolved.json', 'proposal.json']) {
+    try {
+      fs.rmSync(store.resolve(`requirements/${requirementId}/${file}`), { force: true });
+    } catch {
+      // 旧文件不存在或不可删除时继续；重新分析会生成新记录
+    }
+  }
+  for (const artifact of store.listArtifacts(requirementId)) {
+    if (artifact.state !== 'stale') store.saveArtifact({ ...artifact, state: 'stale' });
+  }
+  const requirementBase = {
+    ...requirement,
+    decision_ref: null,
+    resolved_analysis_ref: null,
+    effective_title: null,
+    effective_goal: null
+  };
+  const analyzing = checkpoint(requirementBase, 'analyzing', '开始需求分析');
   store.saveRequirement(analyzing);
   const context = resolveContext(store, {
     requirementId,
@@ -392,13 +409,55 @@ export function answerUnknown(store, { requirementId, unknownId, answer }) {
         answer: item.answer,
         blocking: Boolean(item.blocking)
       }));
+    let resolved = null;
     try {
-      const resolved = JSON.parse(store.readRequirementFile(requirementId, 'analysis-resolved.json'));
+      resolved = JSON.parse(store.readRequirementFile(requirementId, 'analysis-resolved.json'));
       resolved.confirmed_answers = confirmedAnswers;
       resolved.post_decision_answers = confirmedAnswers;
+      resolved.acceptance = [...new Set([
+        ...(resolved.acceptance || []),
+        ...confirmedAnswers.map((item) => `补充确认：${item.question} -> ${item.answer}`)
+      ])];
+      resolved.core_flows = [...new Set([
+        ...(resolved.core_flows || []),
+        ...confirmedAnswers.map((item) => `补充确认：${item.answer}`)
+      ])];
       store.saveRequirementFile(requirementId, 'analysis-resolved.json', resolved);
     } catch {
       // 没有 resolved 分析的旧任务只保留需求回答，不重开已应用提案
+    }
+    const artifacts = store.listArtifacts(requirementId);
+    for (const artifact of artifacts) {
+      if (artifact.state !== 'stale') store.saveArtifact({ ...artifact, state: 'stale' });
+    }
+    let finalStatus = updated.status;
+    let finalNext = updated.next_step;
+    if (artifacts.length > 0) {
+      if (['generated', 'reviewed'].includes(updated.status)) {
+        finalStatus = 'analyzed';
+        finalNext = '补充信息已进入分析，请重新生成产物';
+      } else if (updated.status === 'delivered') {
+        finalStatus = 'delivered';
+        finalNext = '补充信息已记录；历史交付保持冻结，如需更新请新建需求';
+      } else if (updated.status === 'analyzed') {
+        finalNext = '补充信息已进入分析，请重新生成产物';
+      }
+    }
+    if (resolved || artifacts.length > 0) {
+      const current = store.getRequirement(requirementId);
+      store.saveRequirement({
+        ...current,
+        status: finalStatus,
+        next_step: finalNext,
+        acceptance: resolved ? resolved.acceptance : current.acceptance,
+        revision: current.revision + 1,
+        updated_at: nowIso(),
+        checkpoints: [...(current.checkpoints || []), {
+          at: nowIso(), from: current.status, to: finalStatus,
+          summary: '事后补答进入 resolved 分析；现有产物标记待重新生成'
+        }]
+      });
+      store.rebuildIndex();
     }
   }
   return store.getRequirement(requirementId);

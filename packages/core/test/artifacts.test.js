@@ -229,3 +229,88 @@ test('保留现行规则时过滤被否决字段并保留允许字段', () => {
   assert.deepEqual(names, ['姓名', '手机号']);
   assert.ok(complete.pages[0].fields.every((field) => field.required === true));
 });
+
+test('fields-only 设置页保留关闭与选中值', () => {
+  const requirement = {
+    id: 'REQ-FIELDS-SETTINGS', title: '打印设置', goal: '配置打印',
+    raw_input: '配置打印。', endpoint_refs: [], baseline_id: 'B1', acceptance: [], unknowns: []
+  };
+  const modelSpec = {
+    source: 'model:fake',
+    pages: [{
+      id: 'PAGE-SETTINGS', type: 'settings', name: '打印设置',
+      fields: [
+        { name: '双面打印', type: 'switch', value: false },
+        { name: '纸张', type: 'select', value: 'A5', options: ['A4', 'A5'] }
+      ],
+      states: [{ name: '默认', behavior: '配置' }]
+    }]
+  };
+  const analysis = { source: 'local-heuristic', objects: [], roles: [], core_flows: [] };
+  const complete = completeInteractionSpec(modelSpec, { product, requirement, analysis, rules: [] });
+  const items = complete.pages[0].groups[0].items;
+  assert.equal(items.find((item) => item.name === '双面打印').value, false);
+  assert.equal(items.find((item) => item.name === '纸张').value, 'A5');
+  const html = renderPrototypeHtml({ product, requirement, spec: complete, tokens: defaultTokens() });
+  assert.match(html, /<span>关闭<\/span>/);
+  assert.doesNotMatch(html, /type="checkbox" checked/);
+  assert.match(html, /<option selected>A5<\/option>/);
+});
+
+test('重复页面 ID 在规格规范化时去重', () => {
+  const requirement = {
+    id: 'REQ-DUP-ID', title: '双页需求', goal: '两个页面',
+    raw_input: '两个页面。', endpoint_refs: [], baseline_id: 'B1', acceptance: [], unknowns: []
+  };
+  const modelSpec = {
+    source: 'model:fake',
+    pages: [
+      { id: 'PAGE-SAME', type: 'form', name: '表单', fields: [{ name: '姓名', required: true }], states: [{ name: '填写', behavior: '' }] },
+      { id: 'PAGE-SAME', type: 'list', name: '列表', columns: [{ name: '姓名' }], states: [{ name: '默认', behavior: '' }] }
+    ]
+  };
+  const analysis = { source: 'local-heuristic', objects: [], roles: [], core_flows: [] };
+  const complete = completeInteractionSpec(modelSpec, { product, requirement, analysis, rules: [] });
+  assert.equal(new Set(complete.pages.map((page) => page.id)).size, 2);
+  const html = renderPrototypeHtml({ product, requirement, spec: complete, tokens: defaultTokens() });
+  assert.equal((html.match(/data-page-panel=/g) || []).length, 2);
+});
+
+test('保留现行规则时设置项与列表列同样过滤被否决字段', () => {
+  const requirement = {
+    id: 'REQ-KEEP-STRUCT', title: '报名结构', goal: '允许身份证号',
+    raw_input: '员工填写姓名、手机号、身份证号。', endpoint_refs: [], baseline_id: 'B1', acceptance: [], unknowns: []
+  };
+  const analysis = {
+    decision: { action: 'keep', reason: '保留现行字段' },
+    effective_title: '按现行规则处理',
+    acceptance: ['只收姓名、手机号，禁止收身份证号'],
+    final_rules: [{ statement: '只收姓名、手机号，禁止收身份证号' }],
+    rejected_changes: [{ statement: '增加身份证号' }],
+    objects: [], roles: [], core_flows: []
+  };
+  const modelSpec = {
+    pages: [
+      {
+        id: 'SETTINGS', type: 'settings', name: '报名设置',
+        groups: [{ title: '字段范围', items: [
+          { name: '姓名', type: 'switch', value: true },
+          { name: '身份证号', type: 'switch', value: true }
+        ] }],
+        states: [{ name: '默认', behavior: '' }]
+      },
+      {
+        id: 'LIST', type: 'list', name: '报名列表',
+        columns: [{ name: '姓名' }, { name: '身份证号' }],
+        demo_rows: [{ 姓名: '林晓', 身份证号: '示例' }],
+        states: [{ name: '默认', behavior: '' }]
+      }
+    ]
+  };
+  const complete = completeInteractionSpec(modelSpec, { product, requirement, analysis, rules: [] });
+  const settings = complete.pages.find((page) => page.type === 'settings');
+  const list = complete.pages.find((page) => page.type === 'list');
+  assert.deepEqual(settings.groups[0].items.map((item) => item.name), ['姓名']);
+  assert.deepEqual(list.columns.map((column) => column.name), ['姓名']);
+  assert.deepEqual(Object.keys(list.demo_rows[0]), ['姓名']);
+});

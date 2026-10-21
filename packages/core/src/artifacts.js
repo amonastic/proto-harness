@@ -220,7 +220,7 @@ function settingsGroups(fields, text) {
     items: fields.map((field) => ({
       name: field.name,
       type: field.type,
-      value: field.type === 'switch' ? true : demoValue(field, 0),
+      value: field.value !== undefined ? field.value : (field.type === 'switch' ? true : demoValue(field, 0)),
       options: field.options || []
     }))
   }];
@@ -467,19 +467,24 @@ export function buildInteractionSpec({ product, requirement, analysis = {}, rule
       knowledge_status: rule.knowledge_status, effective_state: rule.effective_state
     })),
     evidence_refs: (analysis.evidence_refs || []).slice(0, 10),
+    post_decision_answers: analysis.post_decision_answers || [],
     pages,
     note: rules.length > 0 ? '页面行为必须与所列规则版本一致。' : '当前没有可引用的规则版本，需补充业务依据。'
   };
 }
 
-function filterFieldsForDecision(fields, analysis) {
-  if (analysis.decision?.action !== 'keep') return fields;
+function isFieldAllowedByDecision(name, analysis) {
+  if (!name || analysis.decision?.action !== 'keep') return true;
   const rejected = (analysis.rejected_changes || []).map((change) => change.statement).join(' ');
   const negativeRules = (analysis.final_rules || [])
     .flatMap((rule) => String(rule.statement || '').split(/[，,；;。]/))
     .filter((part) => /(禁止|不得|不能|不允许|不收|不采集|不收集)/.test(part))
     .join(' ');
-  return fields.filter((field) => !rejected.includes(field.name) && !negativeRules.includes(field.name));
+  return !rejected.includes(name) && !negativeRules.includes(name);
+}
+
+function filterFieldsForDecision(fields, analysis) {
+  return fields.filter((field) => isFieldAllowedByDecision(field.name, analysis));
 }
 
 function defaultStatesForType(type) {
@@ -503,6 +508,7 @@ export function completeInteractionSpec(spec, { product, requirement, analysis =
   const decisionNote = effectiveDecision
     ? `业务裁决：${{ adopt: '采用新口径', keep: '保留现行规则', conditional: '附加条件后采用' }[effectiveDecision.chosen?.action || effectiveDecision.action] || '已裁决'}。${effectiveDecision.reason || ''}${effectiveDecision.condition ? ` 条件：${effectiveDecision.condition}` : ''}`
     : '';
+  const seenPageIds = new Set();
   const pages = (spec.pages || []).map((page, index) => {
     const pageTextValue = [
       page.name,
@@ -525,9 +531,17 @@ export function completeInteractionSpec(spec, { product, requirement, analysis =
       ? page.columns
       : defaultColumns(fields, objects);
     const primaryAction = page.primary_action || (type === 'form' ? '提交' : type === 'settings' ? '保存设置' : type === 'board' ? '新建工单' : type === 'dashboard' ? '查看明细' : '新建记录');
+    const requestedId = page.id || `PAGE-${index + 1}`;
+    let pageId = requestedId;
+    let suffix = 2;
+    while (seenPageIds.has(pageId)) {
+      pageId = `${requestedId}-${suffix}`;
+      suffix += 1;
+    }
+    seenPageIds.add(pageId);
     const normal = {
       ...page,
-      id: page.id || `PAGE-${index + 1}`,
+      id: pageId,
       type,
       layout: page.layout || (type === 'board' ? 'board' : 'single'),
       name: page.name || `${requirement.title} · ${index + 1}`,
@@ -553,6 +567,21 @@ export function completeInteractionSpec(spec, { product, requirement, analysis =
     }
     if (type === 'settings' && (normal.groups || []).length === 0) {
       normal.groups = settingsGroups(fields, pageTextValue);
+    }
+    if (analysis.decision?.action === 'keep') {
+      normal.fields = filterFieldsForDecision(normal.fields, analysis);
+      normal.columns = (normal.columns || []).filter((column) => isFieldAllowedByDecision(column.name, analysis));
+      if ((normal.demo_rows || []).length > 0) {
+        normal.demo_rows = normal.demo_rows.map((row) => Object.fromEntries(
+          normal.columns.map((column) => [column.name, row[column.name] ?? ''])
+        ));
+      }
+      if ((normal.groups || []).length > 0) {
+        normal.groups = normal.groups.map((group) => ({
+          ...group,
+          items: (group.items || []).filter((item) => isFieldAllowedByDecision(item.name, analysis))
+        }));
+      }
     }
     if (type === 'dashboard' && (normal.metrics || []).length === 0) {
       normal.metrics = dashboardMetrics(objects, pageTextValue);
@@ -581,6 +610,7 @@ export function completeInteractionSpec(spec, { product, requirement, analysis =
       constraints: rule.constraints || [],
       knowledge_status: rule.knowledge_status, effective_state: rule.effective_state
     })),
+    post_decision_answers: spec.post_decision_answers || analysis.post_decision_answers || [],
     pages
   };
 }
@@ -1044,6 +1074,7 @@ export function renderPrototypeHtml({ product, requirement, spec, tokens = defau
     : '<p class="lede">暂无可引用规则版本。</p>';
   const acceptanceItems = [...new Set(pages.flatMap((page) => page.acceptance_refs || []))]
     .map((item) => `<li>${escapeHtml(item)}</li>`).join('');
+  const postAnswers = spec.post_decision_answers || [];
   const decision = spec.decision;
   const rejected = decision?.rejected_changes || [];
   const decisionBanner = decision
@@ -1078,6 +1109,7 @@ export function renderPrototypeHtml({ product, requirement, spec, tokens = defau
     <aside class="aside">
       <h2>业务依据</h2>
       ${ruleItems}
+      ${postAnswers.length ? `<h2>补充确认</h2><ul>${postAnswers.map((item) => `<li>${escapeHtml(item.question)}：${escapeHtml(item.answer)}</li>`).join('')}</ul>` : ''}
       <h2>页面结构</h2>
       <ul>${pages.map((page) => `<li>${escapeHtml(page.name)} · ${escapeHtml({ form: '表单', board: '看板', list: '列表', settings: '设置', dashboard: '概览', detail: '详情' }[page.type] || page.type)}</li>`).join('')}</ul>
       <h2>验收关注</h2>

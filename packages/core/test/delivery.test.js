@@ -145,3 +145,22 @@ test('基线激活后重导历史交付仍使用交付时展示快照', async ()
   assert.match(after, /本页使用交付创建时冻结的展示快照/);
   assert.equal((await deliveryCheck(store, delivery.id)).ok, true);
 });
+
+test('缺少展示快照的旧交付拒绝重导并保留原导出', async () => {
+  const { store, requirement } = await readyForDelivery();
+  const delivery = createDeliveryRecord(store, { requirementId: requirement.id });
+  const exported = exportDelivery(store, delivery.id);
+  const indexPath = path.join(exported.export_path, 'index.html');
+  const before = fs.readFileSync(indexPath, 'utf8');
+  store.saveDelivery({ ...delivery, status: 'exported', display_snapshot: null });
+  activateBaseline(store, delivery.baseline_id, { reason: '验证旧交付快照' });
+
+  await assert.rejects(
+    async () => exportDelivery(store, delivery.id),
+    (error) => error.code === 'DELIVERY_INCOMPLETE' && /展示快照/.test(error.message)
+  );
+  assert.equal(fs.readFileSync(indexPath, 'utf8'), before);
+  const after = store.getDelivery(delivery.id);
+  assert.equal(after.status, 'exported');
+  assert.ok(after.last_export_error);
+});

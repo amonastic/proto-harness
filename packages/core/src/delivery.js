@@ -153,11 +153,11 @@ function cssSpecHtml(cssSpec) {
   <table><thead><tr><th>类型</th><th>值</th><th>用途</th><th>来源</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-function snapshotForDelivery(store, delivery, requirement) {
+function snapshotForDelivery(delivery) {
   if (delivery.display_snapshot) return delivery.display_snapshot;
-  const baseline = store.getBaseline(delivery.baseline_id);
-  const rules = (delivery.rule_refs || []).map((ref) => store.getRule(ref.id, ref.revision)).filter(Boolean);
-  return buildDisplaySnapshot(store, requirement, baseline, rules, delivery.source_commit);
+  throw fail('DELIVERY_INCOMPLETE', '旧版交付缺少展示快照，无法安全重导；原导出已保留，请新建交付', {
+    delivery_id: delivery.id
+  });
 }
 
 function deliveryIndexHtml({ delivery, requirement, snapshot, cssSpec, warnings, requirementDocMarkdown = '' }) {
@@ -264,7 +264,7 @@ export function exportDelivery(store, deliveryId, { warnings = [] } = {}) {
     const requirementDocMarkdown = requirementDocEntry?.frozen_path
       ? fs.readFileSync(path.join(dir, requirementDocEntry.frozen_path), 'utf8')
       : '';
-    const snapshot = snapshotForDelivery(store, delivery, requirement);
+    const snapshot = snapshotForDelivery(delivery);
 
     // 在临时目录完成全部拼装与校验，成功后原子替换
     fs.rmSync(tempDir, { recursive: true, force: true });

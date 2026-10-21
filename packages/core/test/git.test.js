@@ -104,3 +104,28 @@ test('只提交用户选择的文件，不消费预暂存的其他文件', async
   assert.match(status, /not-selected\.md/);
   assert.ok(!status.split('\n').some((line) => line.trim().endsWith(' selected.md')));
 });
+
+test('重命名提交携带旧路径删除，且不影响预暂存的未选文件', async () => {
+  const root = tempRoot();
+  const { store } = onboard(root);
+  await gitInit(store.root);
+  fs.writeFileSync(path.join(store.root, 'old-name.md'), '# 旧名\n');
+  await gitCommit(store.root, { paths: ['old-name.md'], message: 'feat: 初始旧文件' });
+  execFileSync('git', ['-C', store.root, 'mv', 'old-name.md', 'new-name.md']);
+  fs.writeFileSync(path.join(store.root, 'not-selected.md'), '# 未选中\n');
+  execFileSync('git', ['-C', store.root, 'add', 'not-selected.md']);
+  const committed = await gitCommit(store.root, { paths: ['new-name.md'], message: 'feat: 重命名' });
+  assert.ok(committed.files.includes('new-name.md'));
+  assert.ok(committed.files.includes('old-name.md'));
+  const nameStatus = execFileSync('git', ['-C', store.root, 'show', '--name-status', '--format=', 'HEAD']).toString();
+  assert.match(nameStatus, /old-name\.md/);
+  assert.match(nameStatus, /new-name\.md/);
+  assert.equal(fs.existsSync(path.join(store.root, 'old-name.md')), false);
+  assert.equal(fs.existsSync(path.join(store.root, 'new-name.md')), true);
+  const filesInHead = execFileSync('git', ['-C', store.root, 'ls-tree', '-r', '--name-only', 'HEAD']).toString();
+  assert.doesNotMatch(filesInHead, /old-name\.md/);
+  assert.match(filesInHead, /new-name\.md/);
+  const status = execFileSync('git', ['-C', store.root, 'status', '--porcelain']).toString();
+  assert.match(status, /A  not-selected\.md/);
+  assert.doesNotMatch(status, /new-name\.md/);
+});

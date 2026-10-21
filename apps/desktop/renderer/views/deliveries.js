@@ -7,12 +7,13 @@ function deliveryCard(delivery) {
   return `<div class="delivery-card">
     <div class="top">
       <div>
-        <div class="name">${fmt.escapeHtml(delivery.requirement_title || delivery.requirement_id)}</div>
+        <div class="name">${fmt.escapeHtml(delivery.requirement_title || delivery.requirement_id)} ${delivery.legacy_snapshot ? '<span class="badge amber">旧版交付</span>' : ''}</div>
         <div class="meta"><span class="mono">${fmt.escapeHtml(delivery.id)}</span><span>${fmt.date(delivery.created_at)}</span><span>${(delivery.manifest || []).length} 个文件</span>${delivery.baseline_name ? `<span>交付基线：${fmt.escapeHtml(delivery.baseline_name)}（${fmt.escapeHtml(delivery.baseline_status || '')}）</span>` : ''}</div>
       </div>
       <span class="badge ${delivery.status === 'exported' ? 'green' : delivery.status === 'failed' ? 'red' : 'gray'}">${fmt.escapeHtml(delivery.status)}</span>
     </div>
     <div class="path">${fmt.escapeHtml(delivery.export_dir || '尚未导出')}</div>
+    ${delivery.legacy_snapshot ? '<div class="warn-box">该交付缺少展示快照，重新导出会被拒绝；原导出保持可用，请新建交付以获得冻结快照。</div>' : ''}
     ${(delivery.last_export_error || delivery.error) ? `<div class="error-box"><strong>上次导出未完成，历史导出未删除</strong>${fmt.escapeHtml((delivery.last_export_error || delivery.error).code || '')} ${fmt.escapeHtml((delivery.last_export_error || delivery.error).message || '')}</div>` : ''}
     ${(delivery.warnings || []).length ? `<div class="warn-box">${delivery.warnings.map((item) => fmt.escapeHtml(item)).join('<br>')}</div>` : ''}
     <div class="btn-row">

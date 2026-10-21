@@ -157,11 +157,11 @@
 
 `state`：`draft` / `needs_review` / `reviewed` / `stale`。规则变化时，受影响产物标记为 `stale`，阻止直接交付。
 
-交互规格页面新增 `type`：`form` / `list` / `board` / `settings` / `dashboard` / `detail`，并可用 `fields`、`columns`、`board_columns`、`groups`、`metrics`、`sections` 表达对应页面结构。`spec-generation.json` 记录本次规格来自模型还是本地回退，以及页数。
+交互规格页面新增 `type`：`form` / `list` / `board` / `settings` / `dashboard` / `detail`，并可用 `fields`、`columns`、`board_columns`、`groups`、`metrics`、`sections` 表达对应页面结构。page.id 必须唯一；keep 裁决会过滤 fields、columns、demo_rows 键与 settings items 中的被否决字段。`spec-generation.json` 记录本次规格来自模型还是本地回退，以及页数。
 
 ### Delivery
 
-`delivery.json` 保存需求修订、基线、规则引用、产物引用、manifest、来源提交、状态与警告，并保存 `display_snapshot`：交付时的产品、需求、基线状态与规则版本展示信息。创建交付时，产物会复制到 `deliveries/<id>/frozen/`；`manifest.json` 保存每个文件的原始路径、`frozen_path`、大小与 SHA-256。导出只读取冻结副本与展示快照并校验哈希；活产物或基线状态后续变化不会影响历史交付。导出先在临时目录完整拼装、校验，成功后原子替换旧导出；失败时保留上次成功导出。
+`delivery.json` 保存需求修订、基线、规则引用、产物引用、manifest、来源提交、状态与警告，并保存 `display_snapshot`：交付时的产品、需求、基线状态与规则版本展示信息。创建交付时，产物会复制到 `deliveries/<id>/frozen/`；`manifest.json` 保存每个文件的原始路径、`frozen_path`、大小与 SHA-256。导出只读取冻结副本与展示快照并校验哈希；活产物或基线状态后续变化不会影响历史交付。导出先在临时目录完整拼装、校验，成功后原子替换旧导出；失败时保留上次成功导出。旧版交付缺少 `display_snapshot` 时拒绝重导，不用当前记录重建展示。
 
 ## 3 来源与可迁移性
 

@@ -144,15 +144,38 @@ export async function gitCommit(root, { paths, message }) {
   await runGit(root, ['add', '--', ...safePaths]);
   const stagedRaw = await runGit(
     root,
-    ['diff', '--cached', '--name-only', '-z', '--', ...safePaths],
+    ['diff', '--cached', '--name-status', '-z', '--find-renames'],
     { allowFailure: true, trim: false }
   );
-  const stagedFiles = String(stagedRaw || '').split('\0').filter(Boolean);
-  if (stagedFiles.length === 0) throw fail('INVALID_INPUT', '所选文件没有可提交的变更');
-  await runGit(root, ['commit', '-m', String(message).trim(), '--', ...stagedFiles]);
+  const records = String(stagedRaw || '').split('\0').filter(Boolean);
+  const selected = safePaths.map((item) => item.replace(/\/+$/, ''));
+  const isSelected = (filePath) => selected.some((item) => (
+    filePath === item || filePath.startsWith(`${item}/`)
+  ));
+  const commitPaths = [];
+  for (let index = 0; index < records.length;) {
+    const status = records[index];
+    index += 1;
+    if (/^[RC]/.test(status)) {
+      const oldPath = records[index];
+      const newPath = records[index + 1];
+      index += 2;
+      if (isSelected(oldPath) || isSelected(newPath)) {
+        if (oldPath) commitPaths.push(oldPath);
+        if (newPath) commitPaths.push(newPath);
+      }
+    } else {
+      const filePath = records[index];
+      index += 1;
+      if (filePath && isSelected(filePath)) commitPaths.push(filePath);
+    }
+  }
+  const uniquePaths = [...new Set(commitPaths)];
+  if (uniquePaths.length === 0) throw fail('INVALID_INPUT', '所选文件没有可提交的变更');
+  await runGit(root, ['commit', '-m', String(message).trim(), '--', ...uniquePaths]);
   const hash = await runGit(root, ['rev-parse', '--short', 'HEAD'], { allowFailure: true });
   const status = await gitStatus(root);
-  return { hash, message: String(message).trim(), files: safePaths, status };
+  return { hash, message: String(message).trim(), files: uniquePaths, selected_paths: safePaths, status };
 }
 
 export async function gitPush(root) {
