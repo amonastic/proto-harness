@@ -1,0 +1,8 @@
+{
+  "name": "@proto-harness/runtime-adapter",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Proto Harness Agent 运行时适配器：OpenAI 兼容接口与本地规则分析",
+  "exports": "./src/index.js"
+}

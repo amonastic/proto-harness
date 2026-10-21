@@ -1,0 +1,28 @@
+{
+  "name": "proto-harness-agent",
+  "productName": "Proto Harness Agent",
+  "version": "0.1.0",
+  "description": "面向产品团队的本地 Agent 客户端：业务大脑、需求分析、原型与固定版本交付",
+  "private": true,
+  "license": "MIT",
+  "author": "amonastic",
+  "type": "module",
+  "main": "electron/main.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test ../../packages/core/test/*.test.js ../../packages/runtime-adapter/test/*.test.js",
+    "e2e": "node e2e/journeys.mjs",
+    "e2e:packaged": "node scripts/e2e-packaged.mjs",
+    "package": "node scripts/package.mjs",
+    "package:dir": "node scripts/package.mjs --dir",
+    "verify": "npm test && npm run e2e"
+  },
+  "devDependencies": {
+    "@electron/packager": "20.3.0",
+    "electron": "45.0.0",
+    "playwright-core": "1.64.1"
+  }
+}

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1B2A23"/>
+      <stop offset="0.55" stop-color="#16241E"/>
+      <stop offset="1" stop-color="#203A2E"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.72" cy="0.18" r="0.75">
+      <stop offset="0" stop-color="#7BC6A8" stop-opacity="0.20"/>
+      <stop offset="0.6" stop-color="#7BC6A8" stop-opacity="0.04"/>
+      <stop offset="1" stop-color="#7BC6A8" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+  <rect x="32" y="32" width="960" height="960" rx="224" fill="url(#bg)"/>
+  <rect x="32" y="32" width="960" height="960" rx="224" fill="url(#glow)"/>
+  <rect x="52" y="52" width="920" height="920" rx="208" fill="none" stroke="#F1EFE7" stroke-opacity="0.06" stroke-width="3"/>
+
+  <g fill="none" stroke="#F1EFE7" stroke-width="24" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 360 620 C 300 530 310 410 405 350 C 500 290 620 300 685 380" stroke-opacity="0.92"/>
+    <path d="M 470 590 C 520 660 620 690 700 650 C 790 605 790 490 720 430" stroke-opacity="0.92"/>
+    <path d="M 470 590 C 520 520 600 500 675 530" stroke-opacity="0.92"/>
+  </g>
+
+  <g fill="none" stroke="#F1EFE7" stroke-width="22">
+    <circle cx="340" cy="585" r="76"/>
+    <circle cx="705" cy="660" r="64"/>
+    <circle cx="715" cy="405" r="54" stroke-opacity="0.95"/>
+  </g>
+
+  <circle cx="715" cy="405" r="38" fill="#C98A3E"/>
+  <circle cx="340" cy="585" r="26" fill="#F1EFE7"/>
+  <circle cx="705" cy="660" r="22" fill="#F1EFE7"/>
+
+  <g fill="#F1EFE7" fill-opacity="0.72">
+    <circle cx="540" cy="505" r="14"/>
+    <circle cx="585" cy="565" r="10"/>
+    <circle cx="520" cy="565" r="8"/>
+  </g>
+</svg>

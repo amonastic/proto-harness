@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; frame-src pha-preview:; connect-src 'none'; object-src 'none'; base-uri 'none'">
+  <title>Proto Harness Agent</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="app" class="app-root">
+    <div class="boot-screen">
+      <span class="boot-mark">PHA</span>
+      <p>正在读取项目…</p>
+    </div>
+  </div>
+  <div id="drawer-root"></div>
+  <div id="dialog-root"></div>
+  <div id="toast-root" class="toast-root" aria-live="polite"></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

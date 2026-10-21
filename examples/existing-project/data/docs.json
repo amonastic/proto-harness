@@ -1,0 +1,18 @@
+{
+  "title": "取件核销需求说明",
+  "rules": [
+    {
+      "rule_key": "PICKUP-LOG",
+      "topic": "开柜日志",
+      "statement": "每次开柜操作必须记录操作人、取件码、柜格与结果。",
+      "status": "current",
+      "scope": "作业端 App"
+    }
+  ],
+  "pages": [
+    {
+      "path": "pages/pickup.html",
+      "name": "取件核销"
+    }
+  ]
+}

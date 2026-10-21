@@ -1,0 +1,8 @@
+{
+  "name": "@proto-harness/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Proto Harness Agent 业务内核：项目存储、业务大脑、提案裁决、需求工作流、产物与交付",
+  "exports": "./src/index.js"
+}

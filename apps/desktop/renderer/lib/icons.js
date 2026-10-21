@@ -1,0 +1,31 @@
+const wrap = (body, size = 18) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
+
+export const icons = {
+  home: (s) => wrap('<path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M9.5 21v-7h5v7"/>', s),
+  spark: (s) => wrap('<path d="M12 3v4"/><path d="M12 17v4"/><path d="M3 12h4"/><path d="M17 12h4"/><path d="m5.6 5.6 2.8 2.8"/><path d="m15.6 15.6 2.8 2.8"/><path d="m18.4 5.6-2.8 2.8"/><path d="m8.4 15.6-2.8 2.8"/><circle cx="12" cy="12" r="2.8"/>', s),
+  brain: (s) => wrap('<path d="M9.5 4.5a3 3 0 0 0-5 2.2c0 .6.2 1.2.5 1.7a3.2 3.2 0 0 0-.5 6.1 3 3 0 0 0 5 3.5V4.5Z"/><path d="M14.5 4.5a3 3 0 0 1 5 2.2c0 .6-.2 1.2-.5 1.7a3.2 3.2 0 0 1 .5 6.1 3 3 0 0 1-5 3.5V4.5Z"/><path d="M9.5 8.5h-2"/><path d="M14.5 8.5h2"/><path d="M9.5 14h-2"/><path d="M14.5 14h2"/>', s),
+  doc: (s) => wrap('<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 12h6"/><path d="M9 16h6"/>', s),
+  package: (s) => wrap('<path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4.5 7.8 7.5 4.3 7.5-4.3"/><path d="M12 12.1V21"/>', s),
+  settings: (s) => wrap('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4v-.2a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"/>', s),
+  plus: (s) => wrap('<path d="M12 5v14"/><path d="M5 12h14"/>', s),
+  folder: (s) => wrap('<path d="M3 6.5h6l2 2h10v10.5H3z"/><path d="M3 9h18"/>', s),
+  chevron: (s) => wrap('<path d="m9 6 6 6-6 6"/>', s),
+  close: (s) => wrap('<path d="m6 6 12 12"/><path d="m18 6-12 12"/>', s),
+  check: (s) => wrap('<path d="m4.5 12.5 5 5 10-11"/>', s),
+  alert: (s) => wrap('<path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5"/><path d="M12 17.2v.1"/>', s),
+  arrow: (s) => wrap('<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>', s),
+  arrowLeft: (s) => wrap('<path d="M19 12H5"/><path d="m11 18-6-6 6-6"/>', s),
+  git: (s) => wrap('<circle cx="6" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="8" r="2"/><path d="M6 8v8"/><path d="M8 6h4a4 4 0 0 1 4 4v0a2 2 0 0 0 2 2"/>', s),
+  eye: (s) => wrap('<path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.6"/>', s),
+  code: (s) => wrap('<path d="m8 7-5 5 5 5"/><path d="m16 7 5 5-5 5"/><path d="m13.5 4-3 16"/>', s),
+  palette: (s) => wrap('<path d="M12 3a9 9 0 1 0 0 18h1.2a1.8 1.8 0 0 0 1.4-3l-.2-.2a1.7 1.7 0 0 1 1.2-3h1.9A3.5 3.5 0 0 0 21 11.3 8.6 8.6 0 0 0 12 3Z"/><circle cx="7.5" cy="11" r=".8" fill="currentColor"/><circle cx="10" cy="7.5" r=".8" fill="currentColor"/><circle cx="15" cy="7.8" r=".8" fill="currentColor"/>', s),
+  external: (s) => wrap('<path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M18 14v5H5V6h5"/>', s),
+  refresh: (s) => wrap('<path d="M20 11a8 8 0 1 0-2.3 6.3"/><path d="M20 5v6h-6"/>', s),
+  play: (s) => wrap('<path d="m8 5 11 7-11 7V5Z"/>', s),
+  lock: (s) => wrap('<rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>', s),
+  info: (s) => wrap('<circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8v.1"/>', s),
+  model: (s) => wrap('<rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 9h6v6H9z"/><path d="M9 2v2"/><path d="M15 2v2"/><path d="M9 20v2"/><path d="M15 20v2"/><path d="M2 9h2"/><path d="M2 15h2"/><path d="M20 9h2"/><path d="M20 15h2"/>', s),
+  search: (s) => wrap('<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/>', s),
+  more: (s) => wrap('<circle cx="5" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="19" cy="12" r="1" fill="currentColor"/>', s),
+  shield: (s) => wrap('<path d="M12 3 5 6v5c0 4.5 3 7.6 7 10 4-2.4 7-5.5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/>', s)
+};
