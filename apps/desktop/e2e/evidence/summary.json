@@ -1,20 +1,20 @@
 {
   "label": "packaged",
-  "packaged_binary": "/tmp/pha-installed-final/Proto Harness Agent.app/Contents/MacOS/Proto Harness Agent",
-  "started_at": "2026-10-21T11:29:40.011Z",
-  "finished_at": "2026-10-21T11:30:10.752Z",
-  "duration_ms": 30741,
+  "packaged_binary": "/tmp/pha-installed-final2/Proto Harness Agent.app/Contents/MacOS/Proto Harness Agent",
+  "started_at": "2026-10-21T11:34:39.851Z",
+  "finished_at": "2026-10-21T11:35:08.143Z",
+  "duration_ms": 28292,
   "journeys": {
     "new_product": {
-      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j1-oqwg0p/projects/社区驿站取件",
-      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-C58748",
-      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-418C8",
+      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j1-nMTRj3/projects/社区驿站取件",
+      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-23437A",
+      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-4293F",
       "errors": []
     },
     "existing_project": {
-      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j2-ahkcdp/projects/社区驿站取件",
-      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-DF76D5",
-      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-AE93D",
+      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j2-EEWJMJ/projects/社区驿站取件",
+      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-05845B",
+      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-5A4AA",
       "errors": []
     }
   },

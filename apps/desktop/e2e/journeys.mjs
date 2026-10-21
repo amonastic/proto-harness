@@ -62,6 +62,7 @@ async function launch({ userData, projects }) {
   if (PACKAGED_BINARY) options.executablePath = PACKAGED_BINARY;
   const app = await electron.launch(options);
   const page = await app.firstWindow({ timeout: 45000 });
+  await page.waitForLoadState('domcontentloaded');
   const errors = [];
   page.on('pageerror', (error) => errors.push(`PAGEERROR ${error.message}`));
   page.on('console', (message) => {
@@ -74,7 +75,7 @@ async function shot(page, journey, name) {
   await page.waitForTimeout(500);
   const dir = path.join(EVIDENCE_DIR, journey);
   fs.mkdirSync(dir, { recursive: true });
-  await page.screenshot({ path: path.join(dir, `${name}.png`) });
+  await page.screenshot({ path: path.join(dir, `${name}.png`), animations: 'disabled', timeout: 60000 });
 }
 
 async function fillNewProduct(page) {
@@ -206,6 +207,7 @@ async function journeyOne() {
   let requirementId;
   let deliveryId;
   try {
+    await page.waitForSelector('[data-testid="home-new-product"]', { timeout: 30000 });
     await shot(page, 'journey-1', '01-home');
     await fillNewProduct(page);
     await shot(page, 'journey-1', '02-workbench');
