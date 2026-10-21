@@ -1,12 +1,12 @@
 # Proto Harness Agent 用户手册
 
-版本：0.1.1
+版本：0.1.2
 适用：macOS 13+，Apple Silicon（arm64）
 定位：本地优先的产品 Agent 客户端。业务规则、需求、裁决与交付保存在你自己的项目文件中。
 
 ## 1 安装
 
-1. 打开 `Proto Harness Agent-0.1.1-arm64.dmg`。
+1. 打开 `Proto Harness Agent-0.1.2-arm64.dmg`。
 2. 将 `Proto Harness Agent.app` 拖入 `Applications`。
 3. 推出磁盘映像，从「应用程序」打开。
 

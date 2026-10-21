@@ -84,3 +84,23 @@ test('提交后再次修改时，首个文件路径解析正确并可再次提�
   assert.ok(commit.hash);
   assert.equal((await gitStatus(store.root)).clean, true);
 });
+
+test('只提交用户选择的文件，不消费预暂存的其他文件', async () => {
+  const root = tempRoot();
+  const { store } = onboard(root);
+  await gitInit(store.root);
+  fs.writeFileSync(path.join(store.root, 'selected.md'), '# 选中\n');
+  fs.writeFileSync(path.join(store.root, 'not-selected.md'), '# 未选中\n');
+  execFileSync('git', ['-C', store.root, 'add', 'not-selected.md']);
+  const committed = await gitCommit(store.root, {
+    paths: ['selected.md'],
+    message: 'feat: 只提交选中文件'
+  });
+  assert.ok(committed.hash);
+  const committedFiles = execFileSync('git', ['-C', store.root, 'show', '--name-only', '--format=', 'HEAD'])
+    .toString().trim().split('\n').filter(Boolean);
+  assert.deepEqual(committedFiles, ['selected.md']);
+  const status = execFileSync('git', ['-C', store.root, 'status', '--porcelain']).toString();
+  assert.match(status, /not-selected\.md/);
+  assert.ok(!status.split('\n').some((line) => line.trim().endsWith(' selected.md')));
+});

@@ -142,9 +142,14 @@ export async function gitCommit(root, { paths, message }) {
   const inside = await runGit(root, ['rev-parse', '--is-inside-work-tree'], { allowFailure: true });
   if (inside !== 'true') throw fail('GIT_FAILED', '当前项目尚未初始化 Git');
   await runGit(root, ['add', '--', ...safePaths]);
-  const staged = await runGit(root, ['diff', '--cached', '--name-only'], { allowFailure: true });
-  if (!staged) throw fail('INVALID_INPUT', '所选文件没有可提交的变更');
-  await runGit(root, ['commit', '-m', String(message).trim()]);
+  const stagedRaw = await runGit(
+    root,
+    ['diff', '--cached', '--name-only', '-z', '--', ...safePaths],
+    { allowFailure: true, trim: false }
+  );
+  const stagedFiles = String(stagedRaw || '').split('\0').filter(Boolean);
+  if (stagedFiles.length === 0) throw fail('INVALID_INPUT', '所选文件没有可提交的变更');
+  await runGit(root, ['commit', '-m', String(message).trim(), '--', ...stagedFiles]);
   const hash = await runGit(root, ['rev-parse', '--short', 'HEAD'], { allowFailure: true });
   const status = await gitStatus(root);
   return { hash, message: String(message).trim(), files: safePaths, status };

@@ -270,3 +270,40 @@ test('条件采纳把生效条件写入规则范围与约束', async () => {
   assert.match(rule.scope, /仅适用于已完成签收的订单/);
   assert.ok(rule.constraints.includes('生效条件：仅适用于已完成签收的订单'));
 });
+
+test('已应用提案不因事后补答非阻塞问题而重新打开', async () => {
+  const root = tempRoot();
+  const { store, requirement, proposal } = await prepare(root);
+  const decision = recordDecision(store, {
+    requirementId: requirement.id,
+    proposalHash: proposal.proposal_hash,
+    baseRevision: proposal.base_revision,
+    action: 'adopt',
+    reason: '先采纳变更'
+  });
+  applyDecision(store, decision.id);
+  const adopted = store.getRequirement(requirement.id);
+  const baselineBefore = adopted.baseline_id;
+  store.saveRequirement({
+    ...adopted,
+    unknowns: [...(adopted.unknowns || []), {
+      id: 'U-POST', question: '是否需要向店员发送通知？', why_blocking: '非阻塞的体验补充',
+      blocking: false, answered: false, answer: ''
+    }],
+    revision: adopted.revision + 1
+  });
+  const answered = answerUnknown(store, {
+    requirementId: requirement.id,
+    unknownId: 'U-POST',
+    answer: '需要，在结果页提示即可'
+  });
+  assert.equal(answered.status, 'analyzed');
+  assert.equal(answered.baseline_id, baselineBefore);
+  const proposalAfter = store.getRequirementProposal(requirement.id);
+  assert.equal(proposalAfter.status, 'applied');
+  assert.equal(store.getDecision(decision.id).applied_at != null, true);
+  const resolved = JSON.parse(store.readRequirementFile(requirement.id, 'analysis-resolved.json'));
+  assert.ok(resolved.post_decision_answers.some((item) => /通知/.test(item.question)));
+  const generated = await buildArtifactsForRequirement(store, requirement.id);
+  assert.equal(generated.requirement.status, 'generated');
+});

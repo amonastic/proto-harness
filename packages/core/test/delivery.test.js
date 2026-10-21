@@ -5,7 +5,7 @@ import path from 'node:path';
 import { sha256File } from '../src/util.js';
 import {
   analyzeRequirement, recordDecision, applyDecision, buildArtifactsForRequirement,
-  reviewRequirement, createDeliveryRecord, exportDelivery, deliveryCheck
+  reviewRequirement, createDeliveryRecord, exportDelivery, deliveryCheck, activateBaseline
 } from '../src/index.js';
 import { createLocalAdapter } from '../../runtime-adapter/src/local.js';
 import { tempRoot, onboard, addRequirement } from './helpers.js';
@@ -104,4 +104,44 @@ test('交付创建后修改源产物，历史导出保持不变', async () => {
   assert.equal(fs.readFileSync(path.join(second.export_path, 'requirements', requirement.id, 'requirement.md'), 'utf8'), firstDoc);
   const check = deliveryCheck(store, delivery.id);
   assert.equal(check.ok, true);
+});
+
+test('旧格式交付拒绝重导时保留原有成功导出', async () => {
+  const { store, requirement } = await readyForDelivery();
+  const delivery = createDeliveryRecord(store, { requirementId: requirement.id });
+  const exported = exportDelivery(store, delivery.id);
+  const indexPath = path.join(exported.export_path, 'index.html');
+  const before = fs.readFileSync(indexPath, 'utf8');
+  const legacyManifest = delivery.manifest.map(({ frozen_path, ...rest }) => rest);
+  store.saveDelivery({ ...delivery, status: 'exported', manifest: legacyManifest });
+
+  await assert.rejects(
+    async () => exportDelivery(store, delivery.id),
+    (error) => error.code === 'DELIVERY_INCOMPLETE' && /冻结内容/.test(error.message)
+  );
+  assert.equal(fs.existsSync(indexPath), true);
+  assert.equal(fs.readFileSync(indexPath, 'utf8'), before);
+  const after = store.getDelivery(delivery.id);
+  assert.equal(after.status, 'exported');
+  assert.ok(after.last_export_error);
+});
+
+test('基线激活后重导历史交付仍使用交付时展示快照', async () => {
+  const { store, requirement } = await readyForDelivery();
+  const delivery = createDeliveryRecord(store, { requirementId: requirement.id });
+  const first = exportDelivery(store, delivery.id);
+  const indexPath = path.join(first.export_path, 'index.html');
+  const before = fs.readFileSync(indexPath, 'utf8');
+  assert.match(before, /planned 基线/);
+  assert.ok(delivery.display_snapshot.baseline.status === 'planned');
+
+  activateBaseline(store, delivery.baseline_id, { reason: '独立验证历史快照' });
+  assert.equal(store.getBaseline(delivery.baseline_id).status, 'current');
+
+  const second = exportDelivery(store, delivery.id);
+  const after = fs.readFileSync(path.join(second.export_path, 'index.html'), 'utf8');
+  assert.equal(after, before);
+  assert.match(after, /planned 基线/);
+  assert.match(after, /本页使用交付创建时冻结的展示快照/);
+  assert.equal((await deliveryCheck(store, delivery.id)).ok, true);
 });

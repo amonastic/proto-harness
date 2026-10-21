@@ -269,8 +269,10 @@ function commonPageFields({ requirement, analysis, endpoint, roles, decisionNote
 
 function buildPage({ type, name, requirement, analysis, endpoint, roles, rules, decisionNote, effectiveTitle, index, text }) {
   const objects = defaultObjects(analysis);
-  const explicitFields = extractExplicitFields(requirement.raw_input || text);
-  const fields = normalizedFields(explicitFields, objects);
+  const explicitFields = extractExplicitFields(
+    analysis.decision?.action === 'keep' ? text : (requirement.raw_input || text)
+  );
+  const fields = filterFieldsForDecision(normalizedFields(explicitFields, objects), analysis);
   const common = commonPageFields({
     requirement, analysis, endpoint, roles, decisionNote, effectiveTitle
   });
@@ -470,6 +472,16 @@ export function buildInteractionSpec({ product, requirement, analysis = {}, rule
   };
 }
 
+function filterFieldsForDecision(fields, analysis) {
+  if (analysis.decision?.action !== 'keep') return fields;
+  const rejected = (analysis.rejected_changes || []).map((change) => change.statement).join(' ');
+  const negativeRules = (analysis.final_rules || [])
+    .flatMap((rule) => String(rule.statement || '').split(/[，,；;。]/))
+    .filter((part) => /(禁止|不得|不能|不允许|不收|不采集|不收集)/.test(part))
+    .join(' ');
+  return fields.filter((field) => !rejected.includes(field.name) && !negativeRules.includes(field.name));
+}
+
 function defaultStatesForType(type) {
   if (type === 'form') {
     return [
@@ -499,16 +511,16 @@ export function completeInteractionSpec(spec, { product, requirement, analysis =
       ...(page.fields || []).map((field) => (typeof field === 'string' ? field : field.name))
     ].filter(Boolean).join(' ');
     const type = page.type || inferPageType(pageTextValue);
-    const fields = (page.fields || []).length > 0
+    const fields = filterFieldsForDecision((page.fields || []).length > 0
       ? page.fields.map((field) => (typeof field === 'string' ? { name: field } : field)).map((field, fieldIndex) => ({
           ...field,
           name: String(field.name || `字段${fieldIndex + 1}`),
           type: field.type || inferFieldType(field.name || ''),
-          required: field.required !== false && fieldIndex < 2,
+          required: typeof field.required === 'boolean' ? field.required : fieldIndex < 2,
           options: field.options || optionsFor(field.name || ''),
           placeholder: field.placeholder || `请输入${field.name || '内容'}`
         }))
-      : normalizedFields(extractExplicitFields(pageTextValue), objects);
+      : normalizedFields(extractExplicitFields(pageTextValue), objects), analysis);
     const columns = (page.columns || []).length > 0
       ? page.columns
       : defaultColumns(fields, objects);
@@ -941,9 +953,17 @@ function settingsHtml(page) {
     ${(group.items || []).map((item) => `<div class="setting-row">
       <div><strong>${escapeHtml(item.name)}</strong><span>演示配置项</span></div>
       ${item.type === 'switch'
-        ? '<label class="proto-switch"><input type="checkbox" checked><span>开启</span></label>'
+        ? (() => {
+            const enabled = !(item.value === false || item.value === 'false' || item.value === '关闭' || item.value === 0);
+            return `<label class="proto-switch"><input type="checkbox" ${enabled ? 'checked' : ''}><span>${enabled ? '开启' : '关闭'}</span></label>`;
+          })()
         : item.type === 'select'
-          ? `<select class="proto-input">${(item.options || []).map((option) => `<option>${escapeHtml(option)}</option>`).join('')}</select>`
+          ? (() => {
+              const options = (item.options || []).map((option) => String(option));
+              const value = item.value ?? options[0] ?? '';
+              const hasValue = options.includes(String(value));
+              return `<select class="proto-input">${options.map((option) => `<option ${String(option) === String(value) ? 'selected' : ''}>${escapeHtml(option)}</option>`).join('')}${!hasValue && value !== '' ? `<option selected>${escapeHtml(value)}</option>` : ''}</select>`;
+            })()
           : `<input class="proto-input" value="${escapeHtml(item.value ?? '')}">`}
     </div>`).join('')}
   </section>`).join('')}</div>

@@ -54,7 +54,7 @@ export function createProject({
     current_baseline_id: null,
     open_questions: openQuestions,
     source_roots: sourceRoots,
-    app_version: '0.1.1',
+    app_version: '0.1.2',
     created_at: createdAt,
     updated_at: createdAt,
     revision: 1
@@ -312,7 +312,8 @@ export function createArtifact({
 
 export function createDelivery({
   productId, requirementId, requirementRevision, baselineId, ruleRefs = [],
-  artifactRefs = [], manifest = [], sourceCommit = null, title = ''
+  artifactRefs = [], manifest = [], sourceCommit = null, title = '',
+  displaySnapshot = null
 }) {
   const createdAt = nowIso();
   return {
@@ -326,6 +327,7 @@ export function createDelivery({
     artifact_refs: artifactRefs,
     manifest,
     source_commit: sourceCommit,
+    display_snapshot: displaySnapshot,
     status: 'draft',
     created_at: createdAt,
     updated_at: createdAt

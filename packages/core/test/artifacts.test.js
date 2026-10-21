@@ -151,3 +151,81 @@ test('模型返回的两页交互规格进入产物生成，第二页不丢失',
   assert.match(generated.prototypeHtml, /林晓/);
   assert.equal(path.basename(generated.artifacts.find((item) => item.type === 'interaction-spec').path), 'interaction-spec.json');
 });
+
+test('保留模型显式必填与设置默认值', () => {
+  const requirement = {
+    id: 'REQ-FIDELITY', title: '活动报名配置', goal: '报名与打印设置',
+    raw_input: '员工填写报名信息。', endpoint_refs: [], baseline_id: 'B1', acceptance: [], unknowns: []
+  };
+  const modelSpec = {
+    source: 'model:fake',
+    pages: [
+      {
+        id: 'PAGE-FORM', type: 'form', name: '报名表单',
+        fields: [
+          { name: '姓名', type: 'text', required: true },
+          { name: '手机号', type: 'tel', required: true },
+          { name: '身份证号', type: 'text', required: true }
+        ],
+        states: [{ name: '填写', behavior: '填写' }]
+      },
+      {
+        id: 'PAGE-SETTINGS', type: 'settings', name: '打印设置',
+        groups: [{
+          title: '打印设置',
+          items: [
+            { name: '双面打印', type: 'switch', value: false },
+            { name: '纸张', type: 'select', value: 'A5', options: ['A4', 'A5'] }
+          ]
+        }],
+        states: [{ name: '默认', behavior: '配置' }]
+      }
+    ]
+  };
+  const analysis = { source: 'local-heuristic', objects: [], roles: [], core_flows: [] };
+  const complete = completeInteractionSpec(modelSpec, { product, requirement, analysis, rules: [] });
+  const form = complete.pages.find((page) => page.type === 'form');
+  assert.ok(form.fields.every((field) => field.required === true));
+  const html = renderPrototypeHtml({ product, requirement, spec: complete, tokens: defaultTokens() });
+  assert.match(html, /<span>关闭<\/span>/);
+  assert.doesNotMatch(html, /type="checkbox" checked/);
+  assert.match(html, /<option selected>A5<\/option>/);
+});
+
+test('保留现行规则时过滤被否决字段并保留允许字段', () => {
+  const requirement = {
+    id: 'REQ-KEEP-FIELDS', title: '报名字段调整', goal: '允许收集身份证号',
+    raw_input: '员工填写姓名、手机号、身份证号。', endpoint_refs: [], baseline_id: 'B1', acceptance: [], unknowns: []
+  };
+  const analysis = {
+    source: 'local-heuristic',
+    decision: { action: 'keep', reason: '保留现行字段范围' },
+    effective_title: '按现行规则处理',
+    effective_goal: '保留现行规则',
+    core_flows: ['按现行规则收集报名信息'],
+    scope: { in_scope: ['按现行规则处理'], out_of_scope: ['不采纳：增加身份证号'] },
+    acceptance: ['现行规则：只收姓名、手机号，禁止收身份证号'],
+    final_rules: [{ id: 'RULE-FIELDS', revision: 1, statement: '只收姓名、手机号，禁止收身份证号', constraints: [], effective_state: 'current' }],
+    rejected_changes: [{ statement: '增加身份证号' }],
+    objects: [{ name: '报名' }],
+    roles: [],
+    endpoints: []
+  };
+  const spec = buildInteractionSpec({ product, requirement, analysis, rules: [], decision: analysis.decision });
+  assert.doesNotMatch(JSON.stringify(spec.pages), /身份证号/);
+  const modelSpec = {
+    pages: [{
+      type: 'form', name: '报名表单',
+      fields: [
+        { name: '姓名', type: 'text', required: true },
+        { name: '手机号', type: 'tel', required: true },
+        { name: '身份证号', type: 'text', required: true }
+      ],
+      states: [{ name: '填写', behavior: '填写' }]
+    }]
+  };
+  const complete = completeInteractionSpec(modelSpec, { product, requirement, analysis, rules: [] });
+  const names = complete.pages[0].fields.map((field) => field.name);
+  assert.deepEqual(names, ['姓名', '手机号']);
+  assert.ok(complete.pages[0].fields.every((field) => field.required === true));
+});

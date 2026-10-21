@@ -321,9 +321,14 @@ export function answerUnknown(store, { requirementId, unknownId, answer }) {
   ));
   const blockingLeft = unknowns.filter((item) => item.blocking && !item.answer);
   const existingProposal = store.getRequirementProposal(requirementId);
+  const appliedProposal = Boolean(existingProposal && (existingProposal.status === 'applied' || requirement.decision_ref));
   let status = requirement.status;
   let nextStep = requirement.next_step;
-  if (blockingLeft.length > 0) {
+  if (appliedProposal) {
+    // 已应用提案不因事后补答重新打开；保持当前任务阶段
+    status = ['blocked', 'awaiting_decision'].includes(requirement.status) ? 'analyzed' : requirement.status;
+    nextStep = requirement.next_step || '生成需求与设计';
+  } else if (blockingLeft.length > 0) {
     status = 'blocked';
     nextStep = `还有 ${blockingLeft.length} 个阻塞未知项待回答`;
   } else if (existingProposal) {
@@ -347,7 +352,7 @@ export function answerUnknown(store, { requirementId, unknownId, answer }) {
   };
   store.saveRequirement(updated);
 
-  if (existingProposal) {
+  if (existingProposal && !appliedProposal) {
     const confirmedAnswers = unknowns
       .filter((item) => item.answer)
       .map((item) => ({
@@ -378,6 +383,23 @@ export function answerUnknown(store, { requirementId, unknownId, answer }) {
     delete rebased.applied_at;
     rebased.proposal_hash = hashProposal(rebased);
     store.saveRequirementProposal(requirementId, rebased);
+  } else if (appliedProposal) {
+    const confirmedAnswers = unknowns
+      .filter((item) => item.answer)
+      .map((item) => ({
+        id: item.id,
+        question: item.question,
+        answer: item.answer,
+        blocking: Boolean(item.blocking)
+      }));
+    try {
+      const resolved = JSON.parse(store.readRequirementFile(requirementId, 'analysis-resolved.json'));
+      resolved.confirmed_answers = confirmedAnswers;
+      resolved.post_decision_answers = confirmedAnswers;
+      store.saveRequirementFile(requirementId, 'analysis-resolved.json', resolved);
+    } catch {
+      // 没有 resolved 分析的旧任务只保留需求回答，不重开已应用提案
+    }
   }
   return store.getRequirement(requirementId);
 }

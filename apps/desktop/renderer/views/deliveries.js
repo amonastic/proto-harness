@@ -13,6 +13,7 @@ function deliveryCard(delivery) {
       <span class="badge ${delivery.status === 'exported' ? 'green' : delivery.status === 'failed' ? 'red' : 'gray'}">${fmt.escapeHtml(delivery.status)}</span>
     </div>
     <div class="path">${fmt.escapeHtml(delivery.export_dir || '尚未导出')}</div>
+    ${(delivery.last_export_error || delivery.error) ? `<div class="error-box"><strong>上次导出未完成，历史导出未删除</strong>${fmt.escapeHtml((delivery.last_export_error || delivery.error).code || '')} ${fmt.escapeHtml((delivery.last_export_error || delivery.error).message || '')}</div>` : ''}
     ${(delivery.warnings || []).length ? `<div class="warn-box">${delivery.warnings.map((item) => fmt.escapeHtml(item)).join('<br>')}</div>` : ''}
     <div class="btn-row">
       <button class="btn small primary" data-open-delivery="${fmt.escapeHtml(delivery.id)}" ${delivery.export_exists ? '' : 'disabled'}>${icons.folder(13)} 打开目录</button>
