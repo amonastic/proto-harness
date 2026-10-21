@@ -9,7 +9,7 @@
 已验证：
 
 - 36 项内核与适配器单元测试通过。
-- Playwright Electron 跑通「新建产品」与「接入已有项目」两条完整旅程，包含冲突裁决、planned/current 分离、产物生成、交付导出、重启恢复、Git 提交与推送、导入来源未被修改、导出无密钥。
+- Playwright Electron 跑通「新建产品」与「接入已有项目」两条完整旅程，包含冲突裁决、planned/current 分离、产物生成、交付导出、重启恢复、Git 提交与推送、从远端克隆第二工作副本恢复、导入来源未被修改、导出无密钥。
 - 打包产物从 DMG 安装副本启动并再次跑通两条旅程（见 `e2e/evidence/` 与最终交付报告）。
 
 未验证/未完成：
@@ -34,8 +34,9 @@ npm start
 
 ```bash
 cd apps/desktop
-npm test          # 内核 + 适配器单元测试
-npm run e2e       # Playwright Electron 两条旅程；证据写入 e2e/evidence/
+npm test            # 内核 + 适配器单元测试
+npm run e2e         # Playwright Electron 两条旅程；证据写入 e2e/evidence/
+npm run e2e:packaged # 使用 release/ 下的安装产物运行同样旅程
 ```
 
 E2E 使用临时项目目录，不会修改示例项目；会创建本地 bare Git 远端验证提交与推送。

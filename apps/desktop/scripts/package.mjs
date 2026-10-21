@@ -36,13 +36,18 @@ function sizeLabel(bytes) {
 }
 
 function directorySize(target) {
-  const stat = fs.statSync(target);
+  const stat = fs.lstatSync(target);
+  if (stat.isSymbolicLink()) return stat.size;
   if (!stat.isDirectory()) return stat.size;
   let total = 0;
   for (const entry of fs.readdirSync(target, { withFileTypes: true })) {
     total += directorySize(path.join(target, entry.name));
   }
   return total;
+}
+
+function copyBundlePreservingLinks(source, target) {
+  execFileSync('ditto', [source, target], { stdio: 'inherit' });
 }
 
 function prepareStage() {
@@ -152,7 +157,7 @@ async function main() {
   if (!DIR_ONLY) {
     rmrf(DMG_ROOT);
     fs.mkdirSync(DMG_ROOT, { recursive: true });
-    copyDir(bundlePath, path.join(DMG_ROOT, 'Proto Harness Agent.app'));
+    copyBundlePreservingLinks(bundlePath, path.join(DMG_ROOT, 'Proto Harness Agent.app'));
     fs.symlinkSync('/Applications', path.join(DMG_ROOT, 'Applications'));
     const dmgPath = path.join(RELEASE_DIR, `Proto-Harness-Agent-${appVersion}-arm64.dmg`);
     console.log('生成 DMG…');
