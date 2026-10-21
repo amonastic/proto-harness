@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>支持同一取件码 2 分钟内重复开柜 · 交互原型</title>
+<style>
+    :root {
+      --ink: #1D1D1B;
+      --muted: #6F6D66;
+      --paper: #F6F5F1;
+      --surface: #FFFFFF;
+      --accent: #1F6F5C;
+      --accent-soft: #E3EFEA;
+      --border: #E3E0D8;
+      --warning: #B5622A;
+      --danger: #A33A32;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--paper); color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .topbar {
+      height: 48px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; background: #1C1D1A; color: #F4F2EC; font-size: 12px;
+      letter-spacing: .08em;
+    }
+    .topbar .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+    .topbar .dot { width: 8px; height: 8px; border-radius: 50%; background: #7BC6A8; }
+    .badge { border: 1px solid rgba(255,255,255,.25); border-radius: 999px; padding: 3px 9px; color: #D8D5CC; }
+    main { max-width: 1180px; margin: 0 auto; padding: 34px 28px 48px; }
+    .eyebrow { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
+    h1 { font-size: 30px; line-height: 1.2; margin: 0 0 10px; letter-spacing: -.02em; }
+    .lede { margin: 0; color: var(--muted); max-width: 720px; line-height: 1.7; font-size: 14px; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 22px; margin-top: 28px; }
+    .panel, .aside { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+    .panel { overflow: hidden; }
+    .page-tabs, .state-tabs { display: flex; gap: 6px; padding: 14px 18px 0; flex-wrap: wrap; }
+    .tab {
+      border: 1px solid transparent; background: transparent; color: var(--muted);
+      border-radius: 8px; padding: 7px 12px; font-size: 12px; cursor: pointer;
+    }
+    .tab[aria-selected="true"] { background: var(--accent-soft); color: var(--accent); border-color: #C9E0D7; font-weight: 600; }
+    .page-body { padding: 22px; }
+    .state-block { display: none; }
+    .state-block.active { display: block; }
+    .toolbar { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 16px; }
+    .toolbar h2 { margin: 0; font-size: 16px; }
+    .toolbar .hint { color: var(--muted); font-size: 12px; }
+    .btn {
+      border: 1px solid var(--border); background: var(--surface); color: var(--ink);
+      padding: 9px 14px; border-radius: 9px; font-size: 13px; cursor: pointer;
+    }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn.danger { background: #FBEEEC; border-color: #E6C4BF; color: var(--danger); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; color: var(--muted); font-weight: 600; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding: 10px 8px; border-bottom: 1px solid var(--border); }
+    td { padding: 12px 8px; border-bottom: 1px solid #EFEDE6; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 11px; font-weight: 600; }
+    .pill.warn { background: #F7E9DE; color: var(--warning); }
+    .empty, .error { padding: 44px 24px; text-align: center; }
+    .empty h3, .error h3 { margin: 0 0 8px; font-size: 16px; }
+    .empty p, .error p { margin: 0 auto 18px; color: var(--muted); max-width: 420px; line-height: 1.7; font-size: 13px; }
+    .error { background: #FDF6F4; border-top: 1px solid #F0DAD5; }
+    .error h3 { color: var(--danger); }
+    .aside { padding: 20px; height: fit-content; }
+    .aside h2 { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+    .aside h2:not(:first-child) { margin-top: 22px; }
+    .rule { border-left: 2px solid var(--accent); padding: 2px 0 2px 10px; margin-bottom: 12px; }
+    .rule code { font-size: 10px; color: var(--muted); display: block; margin-bottom: 4px; }
+    .rule p { margin: 0; font-size: 12px; line-height: 1.6; }
+    .aside ul { margin: 0; padding-left: 16px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .footer-note { margin-top: 18px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+    @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="dot"></span> PROTO HARNESS AGENT</div>
+  <span class="badge">交互原型 · 演示数据</span>
+</header>
+<main>
+  <div class="eyebrow">社区驿站取件 / 支持同一取件码 2 分钟内重复开柜</div>
+  <h1>支持同一取件码 2 分钟内重复开柜</h1>
+  <p class="lede">在「管理后台」中完成“支持同一取件码 2 分钟内重复开柜”相关操作，并按当前基线规则给出可解释的结果。</p>
+  <div class="layout">
+    <section class="panel">
+      <div class="state-tabs" role="tablist"><button class="tab" role="tab" aria-selected="true" data-state="默认">默认</button><button class="tab" role="tab" aria-selected="false" data-state="空数据">空数据</button><button class="tab" role="tab" aria-selected="false" data-state="异常">异常</button></div>
+      <div class="page-body"><section class="state-block active" data-state-panel="默认">
+      <div class="toolbar"><h2>支持同一取件码 2 分钟内重复开柜</h2><span class="hint">系统读取当前基线中的适用规则并判断是否允许继续</span></div>
+      <div class="toolbar"><div><span class="pill">规则校验通过</span></div><div><button class="btn">查看详情</button> <button class="btn primary">支持同一取件码 2 分钟</button></div></div>
+      <table><thead><tr><th>取件码</th><th>订单</th></tr></thead><tbody><tr><td>示例记录 A</td><td>示例状态</td></tr><tr><td>示例记录 B</td><td>示例状态</td></tr></tbody></table>
+    </section><section class="state-block" data-state-panel="空数据">
+        <div class="empty"><h3>还没有可展示的记录</h3><p>没有可展示的业务记录时，说明空数据原因并提供主操作入口</p><button class="btn primary">发起操作</button></div>
+      </section><section class="state-block" data-state-panel="异常">
+        <div class="error"><h3>操作未完成</h3><p>存在待裁决冲突：新需求允许重复操作，而现行规则限制为一次或禁止重复</p><button class="btn danger">查看依据</button></div>
+      </section></div>
+    </section>
+    <aside class="aside">
+      <h2>业务依据</h2>
+      <div class="rule"><code>RULE-PICKUP-REOPEN-B7C9 · r2</code><p>同一取件码在 2 分钟内可重复开柜，不改变订单状态</p></div><div class="rule"><code>RULE-BILLING-PERIOD-30F9 · r1</code><p>月结账单必须按订单完成时间归入对应月份；历史账单必须使用生成时的快照，不得随当前订单状态重算</p></div><div class="rule"><code>RULE-PICKUP-LOG-3377 · r1</code><p>每次开柜操作必须记录操作人、取件码、柜格与结果。</p></div><div class="rule"><code>RULE-BILLING-EXPORT-A5AB · r1</code><p>仅财务角色可以导出月结账单明细；运营角色可以查看汇总，不得导出客户级明细</p></div>
+      <h2>验收关注</h2>
+      <ul><li>规则“同一取件码在 2 分钟内可重复开柜，不改变订单状态”在主要路径生效，并在界面或反馈中可被验证</li><li>规则“重复开柜不得触发新的物流推送”在主要路径生效，并在界面或反馈中可被验证</li><li>空数据、异常与无权限场景有明确反馈，不出现无说明的中断</li><li>需求文档、交互规格与原型引用同一规则版本</li></ul>
+      <p class="footer-note">原型用于表达预期行为与状态，不代表生产系统已完成。演示数据不可作为真实业务记录。</p>
+    </aside>
+  </div>
+</main>
+<script>
+(function () {
+  var tabs = document.querySelectorAll('[data-state]');
+  var panels = document.querySelectorAll('[data-state-panel]');
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (item) { item.setAttribute('aria-selected', String(item === tab)); });
+      panels.forEach(function (panel) {
+        panel.classList.toggle('active', panel.getAttribute('data-state-panel') === tab.getAttribute('data-state'));
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

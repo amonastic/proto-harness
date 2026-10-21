@@ -1,0 +1,32 @@
+{
+  "label": "packaged",
+  "packaged_binary": "/tmp/pha-installed-final/Proto Harness Agent.app/Contents/MacOS/Proto Harness Agent",
+  "started_at": "2026-10-21T11:29:40.011Z",
+  "finished_at": "2026-10-21T11:30:10.752Z",
+  "duration_ms": 30741,
+  "journeys": {
+    "new_product": {
+      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j1-oqwg0p/projects/社区驿站取件",
+      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-C58748",
+      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-418C8",
+      "errors": []
+    },
+    "existing_project": {
+      "projectDir": "/var/folders/f1/j8_0yng974z1ndlmgl3r_2jh0000gn/T/pha-e2e-j2-ahkcdp/projects/社区驿站取件",
+      "requirementId": "REQ-支持同一取件码-2-分钟内重复开柜-DF76D5",
+      "deliveryId": "RELEASE-支持同一取件码-2-分钟内重复开柜-AE93D",
+      "errors": []
+    }
+  },
+  "checks": {
+    "conflict_bound_decision": true,
+    "planned_current_separated": true,
+    "artifacts_generated": true,
+    "delivery_exported": true,
+    "restart_resumed": true,
+    "git_commit_and_push": true,
+    "second_copy_resumed": true,
+    "import_source_untouched": true,
+    "no_secrets_in_export": true
+  }
+}

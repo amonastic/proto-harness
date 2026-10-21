@@ -1,0 +1,49 @@
+{
+  "schema_version": "pha-baseline-v1",
+  "id": "BASELINE-导入基线-0E031",
+  "product_id": "PRODUCT-社区驿站取件-945B37",
+  "name": "导入基线",
+  "status": "current",
+  "rule_refs": [
+    {
+      "id": "RULE-PICKUP-REOPEN-B7C9",
+      "revision": 1
+    },
+    {
+      "id": "RULE-PICKUP-LOG-3377",
+      "revision": 1
+    },
+    {
+      "id": "RULE-BILLING-PERIOD-30F9",
+      "revision": 1
+    },
+    {
+      "id": "RULE-BILLING-EXPORT-A5AB",
+      "revision": 1
+    }
+  ],
+  "capability_refs": [
+    {
+      "id": "CAP-已导入能力-取件码开柜规则-CC84D",
+      "revision": 1
+    },
+    {
+      "id": "CAP-已导入能力-开柜日志-90FE7",
+      "revision": 1
+    },
+    {
+      "id": "CAP-已导入能力-月结账单归属-6740E",
+      "revision": 1
+    },
+    {
+      "id": "CAP-已导入能力-财务导出权限-CE957",
+      "revision": 1
+    }
+  ],
+  "formed_by": "import",
+  "activated_at": "2026-10-21T11:30:02.209Z",
+  "evidence_refs": [],
+  "notes": "",
+  "created_at": "2026-10-21T11:30:02.209Z",
+  "updated_at": "2026-10-21T11:30:02.209Z"
+}
