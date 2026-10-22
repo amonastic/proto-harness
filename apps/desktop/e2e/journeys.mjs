@@ -128,14 +128,25 @@ async function shot(page, journey, name) {
   await page.screenshot({ path: path.join(dir, `${name}.png`), animations: 'disabled', timeout: 60000 });
 }
 
+async function fillStable(page, selector, value, label = selector) {
+  const input = page.locator(selector);
+  await input.waitFor({ state: 'visible' });
+  await input.fill(value);
+  if ((await input.inputValue()) !== value) {
+    console.warn(`[e2e] ${label} 首次输入不完整，重填一次`);
+    await input.fill(value);
+  }
+  assert.equal(await input.inputValue(), value, `${label} 输入值不完整`);
+}
+
 async function fillNewProduct(page) {
   await page.waitForSelector('[data-testid="home-new-product"]');
   await page.click('[data-testid="home-new-product"]');
-  await page.fill('[data-testid="np-name"]', '社区驿站取件');
-  await page.fill('[data-testid="np-goal"]', '让门店店员在 2 分钟内可重复开柜，同时不改变订单签收状态');
-  await page.fill('[data-testid="np-audience"]', '门店店员、取件人');
-  await page.fill('[data-testid="np-constraints"]', '每个取件码仅可开柜一次\n重复开柜不得改变订单签收状态，不得触发新的物流推送');
-  await page.fill('[data-testid="np-endpoints"]', '作业端 App | 门店店员 | App\n管理后台 | 产品运营 | Web');
+  await fillStable(page, '[data-testid="np-name"]', '社区驿站取件', '产品名称');
+  await fillStable(page, '[data-testid="np-goal"]', '让门店店员在 2 分钟内可重复开柜，同时不改变订单签收状态', '产品目标');
+  await fillStable(page, '[data-testid="np-audience"]', '门店店员、取件人', '服务对象');
+  await fillStable(page, '[data-testid="np-constraints"]', '每个取件码仅可开柜一次\n重复开柜不得改变订单签收状态，不得触发新的物流推送', '产品约束');
+  await fillStable(page, '[data-testid="np-endpoints"]', '作业端 App | 门店店员 | App\n管理后台 | 产品运营 | Web', '端与角色');
   await page.click('[data-testid="np-analyze"]');
   await page.waitForSelector('[data-testid="np-rule-checkbox"]', { timeout: 20000 });
   const candidates = await page.locator('[data-testid="np-rule-checkbox"]').count();
@@ -147,16 +158,16 @@ async function fillNewProduct(page) {
 async function createRequirement(page, { title, goal, raw }) {
   await page.click('[data-testid="top-new-requirement"]');
   await page.waitForSelector('[data-testid="nr-title"]');
-  await page.fill('[data-testid="nr-title"]', title);
-  await page.fill('[data-testid="nr-goal"]', goal);
-  await page.fill('[data-testid="nr-raw"]', raw);
+  await fillStable(page, '[data-testid="nr-title"]', title, '需求标题');
+  await fillStable(page, '[data-testid="nr-goal"]', goal, '需求目标');
+  await fillStable(page, '[data-testid="nr-raw"]', raw, '需求原始输入');
   await page.click('[data-testid="nr-create"]');
 }
 
 async function decideAdopt(page, reason) {
   await page.waitForSelector('[data-testid="decision-submit"]', { timeout: 35000 });
   await page.click('[data-testid="decision-adopt"]');
-  await page.fill('[data-testid="decision-reason"]', reason);
+  await fillStable(page, '[data-testid="decision-reason"]', reason, '裁决理由');
   assert.equal(await page.locator('[data-testid="decision-submit"]').isDisabled(), false);
   await page.click('[data-testid="decision-submit"]');
   await page.waitForSelector('[data-testid="req-generate"]', { timeout: 25000 });
@@ -355,7 +366,7 @@ async function journeyOne() {
     await page.waitForSelector('[data-testid="git-init"]');
     await page.click('[data-testid="git-init"]');
     await page.waitForSelector('[data-testid="git-commit"]', { timeout: 20000 });
-    await page.fill('[data-testid="git-commit-message"]', 'feat: 新增取件码重复开柜需求与交付');
+    await fillStable(page, '[data-testid="git-commit-message"]', 'feat: 新增取件码重复开柜需求与交付', '提交信息');
     await page.click('[data-testid="git-commit"]');
     await page.waitForTimeout(1200);
     const bare = path.join(root, 'remote.git');
@@ -449,13 +460,13 @@ async function journeyTwo() {
   try {
     await page.waitForSelector('[data-testid="home-import-project"]');
     await page.click('[data-testid="home-import-project"]');
-    await page.fill('[data-testid="ip-source"]', SAMPLE_DIR);
+    await fillStable(page, '[data-testid="ip-source"]', SAMPLE_DIR, '已有项目目录');
     await page.click('[data-testid="ip-scan"]');
     await page.waitForSelector('[data-testid="ip-create"]', { timeout: 25000 });
     await shot(page, 'journey-2', '01-import-scan');
     assert.equal(await page.locator('.conflict-box').count(), 1);
     assert.equal(await page.locator('#ip-name').inputValue(), '社区驿站取件');
-    await page.fill('[data-testid="ip-conflict-reason"]', '以当前已评审口径为准，历史方案保留为已替代，不进入当前基线');
+    await fillStable(page, '[data-testid="ip-conflict-reason"]', '以当前已评审口径为准，历史方案保留为已替代，不进入当前基线', '导入裁决理由');
     await page.click('[data-testid="ip-create"]');
     await page.waitForSelector('[data-testid="top-new-requirement"]', { timeout: 30000 });
     projectDir = path.join(projects, '社区驿站取件');
@@ -480,9 +491,9 @@ async function journeyTwo() {
 
     await page.click('[data-testid="top-new-requirement"]');
     await page.waitForSelector('[data-testid="nr-title"]');
-    await page.fill('[data-testid="nr-title"]', '支持同一取件码 2 分钟内重复开柜');
-    await page.fill('[data-testid="nr-goal"]', '同一取件码在 2 分钟内可重复打开原柜原格，不改变订单状态');
-    await page.fill('[data-testid="nr-raw"]', '同一取件码在 2 分钟内可重复开柜，不改变订单状态。重复开柜不得触发新的物流推送。');
+    await fillStable(page, '[data-testid="nr-title"]', '支持同一取件码 2 分钟内重复开柜', '需求标题');
+    await fillStable(page, '[data-testid="nr-goal"]', '同一取件码在 2 分钟内可重复打开原柜原格，不改变订单状态', '需求目标');
+    await fillStable(page, '[data-testid="nr-raw"]', '同一取件码在 2 分钟内可重复开柜，不改变订单状态。重复开柜不得触发新的物流推送。', '需求原始输入');
     await page.click('[data-testid="nr-create"]');
     await page.waitForSelector('[data-testid="decision-submit"]', { timeout: 35000 });
     assert.match(await page.locator('.conflict-card').innerText(), /RULE-PICKUP-REOPEN/);
@@ -533,11 +544,11 @@ async function journeyThree() {
   try {
     await page.waitForSelector('[data-testid="home-new-product"]', { timeout: 30000 });
     await page.click('[data-testid="home-new-product"]');
-    await page.fill('[data-testid="np-name"]', '运营活动台');
-    await page.fill('[data-testid="np-goal"]', '让员工提交活动报名，管理员查看和管理报名记录');
-    await page.fill('[data-testid="np-audience"]', '员工、管理员');
-    await page.fill('[data-testid="np-constraints"]', '报名提交后仅可查看，不得修改\n报名记录必须记录提交时间');
-    await page.fill('[data-testid="np-endpoints"]', '员工端 | 员工 | Web\n管理后台 | 管理员 | Web');
+    await fillStable(page, '[data-testid="np-name"]', '运营活动台', '产品名称');
+    await fillStable(page, '[data-testid="np-goal"]', '让员工提交活动报名，管理员查看和管理报名记录', '产品目标');
+    await fillStable(page, '[data-testid="np-audience"]', '员工、管理员', '服务对象');
+    await fillStable(page, '[data-testid="np-constraints"]', '报名提交后仅可查看，不得修改\n报名记录必须记录提交时间', '产品约束');
+    await fillStable(page, '[data-testid="np-endpoints"]', '员工端 | 员工 | Web\n管理后台 | 管理员 | Web', '端与角色');
     await page.click('[data-testid="np-analyze"]');
     await page.waitForSelector('[data-testid="np-rule-checkbox"]', { timeout: 20000 });
     await page.click('[data-testid="np-create"]');
@@ -547,9 +558,9 @@ async function journeyThree() {
     // A：与取件码无关的真实需求，要求表单 + 管理列表
     await page.click('[data-testid="top-new-requirement"]');
     await page.waitForSelector('[data-testid="nr-title"]');
-    await page.fill('[data-testid="nr-title"]', '员工提交活动报名并查看管理列表');
-    await page.fill('[data-testid="nr-goal"]', '员工填写报名信息，管理员查看报名列表');
-    await page.fill('[data-testid="nr-raw"]', '员工填写姓名、部门、联系方式并提交报名；管理员查看报名列表。');
+    await fillStable(page, '[data-testid="nr-title"]', '员工提交活动报名并查看管理列表', '需求标题');
+    await fillStable(page, '[data-testid="nr-goal"]', '员工填写报名信息，管理员查看报名列表', '需求目标');
+    await fillStable(page, '[data-testid="nr-raw"]', '员工填写姓名、部门、联系方式并提交报名；管理员查看报名列表。', '需求原始输入');
     await page.click('[data-testid="nr-create"]');
     await page.waitForSelector('[data-testid="req-generate"]', { timeout: 35000 });
     reqAId = findRequirementId(projectDir, '员工提交活动报名并查看管理列表');
@@ -593,9 +604,9 @@ async function journeyThree() {
     // B：冲突 + 阻塞补答 + 保留现行规则
     await page.click('[data-testid="top-new-requirement"]');
     await page.waitForSelector('[data-testid="nr-title"]');
-    await page.fill('[data-testid="nr-title"]', '报名提交后允许再次修改');
-    await page.fill('[data-testid="nr-goal"]', '员工可以在报名提交后再次修改报名信息');
-    await page.fill('[data-testid="nr-raw"]', '报名提交后可以再次修改报名信息。');
+    await fillStable(page, '[data-testid="nr-title"]', '报名提交后允许再次修改', '需求标题');
+    await fillStable(page, '[data-testid="nr-goal"]', '员工可以在报名提交后再次修改报名信息', '需求目标');
+    await fillStable(page, '[data-testid="nr-raw"]', '报名提交后可以再次修改报名信息。', '需求原始输入');
     await page.click('[data-testid="nr-create"]');
     await page.waitForSelector('[data-testid="unknown-answer-0"]', { timeout: 35000 });
     await shot(page, 'journey-3', '05-b-blocked');
@@ -609,7 +620,7 @@ async function journeyThree() {
     await page.waitForSelector('[data-testid="decision-submit"]', { timeout: 30000 });
     await shot(page, 'journey-3', '06-b-keep-decision');
     await page.click('[data-testid="decision-keep"]');
-    await page.fill('[data-testid="decision-reason"]', '保持报名提交后不可修改的现行规则');
+    await fillStable(page, '[data-testid="decision-reason"]', '保持报名提交后不可修改的现行规则', '裁决理由');
     await page.click('[data-testid="decision-submit"]');
     await page.waitForSelector('[data-testid="req-generate"]', { timeout: 30000 });
     await page.click('[data-testid="req-generate"]');
@@ -634,13 +645,13 @@ async function journeyThree() {
     await page.waitForSelector('[data-testid="git-init"]', { timeout: 20000 });
     await page.click('[data-testid="git-init"]');
     await page.waitForSelector('[data-testid="git-commit"]', { timeout: 20000 });
-    await page.fill('[data-testid="git-commit-message"]', 'feat: 活动报名首版与保留现行规则');
+    await fillStable(page, '[data-testid="git-commit-message"]', 'feat: 活动报名首版与保留现行规则', '提交信息');
     await page.click('[data-testid="git-commit"]');
     await page.waitForTimeout(1500);
     fs.appendFileSync(path.join(projectDir, 'README.md'), '\n\n## 二次提交测试\n');
     await page.click('#delivery-refresh');
     await page.waitForSelector('[data-testid="git-commit"]', { timeout: 20000 });
-    await page.fill('[data-testid="git-commit-message"]', 'fix: 二次提交');
+    await fillStable(page, '[data-testid="git-commit-message"]', 'fix: 二次提交', '提交信息');
     await page.click('[data-testid="git-commit"]');
     await page.waitForTimeout(1500);
     const log = execFileSync('git', ['-C', projectDir, 'log', '--oneline']).toString().trim().split('\n');
