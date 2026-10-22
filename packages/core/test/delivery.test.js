@@ -106,6 +106,32 @@ test('交付创建后修改源产物，历史导出保持不变', async () => {
   assert.equal(check.ok, true);
 });
 
+test('原型预置密钥时导出失败并保留原有导出', async () => {
+  const { store, requirement, generated } = await readyForDelivery();
+  const prototype = generated.artifacts.find((item) => item.type === 'prototype');
+  const firstDelivery = createDeliveryRecord(store, { requirementId: requirement.id });
+  const first = exportDelivery(store, firstDelivery.id);
+  const firstIndex = fs.readFileSync(path.join(first.export_path, 'index.html'), 'utf8');
+  const firstPrototype = path.join(first.export_path, prototype.path);
+  const firstPrototypeHash = sha256File(firstPrototype);
+
+  fs.appendFileSync(store.resolve(prototype.path), '\n<!-- sk-1234567890abcdef -->\n');
+  const secondDelivery = createDeliveryRecord(store, { requirementId: requirement.id });
+  await assert.rejects(
+    async () => exportDelivery(store, secondDelivery.id),
+    (error) => error.code === 'DELIVERY_INCOMPLETE'
+      && /密钥/.test(error.message)
+      && (error.details?.secret_files || []).includes(prototype.path)
+  );
+  assert.equal(fs.readFileSync(path.join(first.export_path, 'index.html'), 'utf8'), firstIndex);
+  assert.equal(sha256File(firstPrototype), firstPrototypeHash);
+  assert.equal(store.getDelivery(firstDelivery.id).status, 'exported');
+  assert.equal(fs.existsSync(path.join(store.deliveryDir(secondDelivery.id), 'export')), false);
+  const failed = store.getDelivery(secondDelivery.id);
+  assert.equal(failed.status, 'failed');
+  assert.ok(failed.last_export_error);
+});
+
 test('旧格式交付拒绝重导时保留原有成功导出', async () => {
   const { store, requirement } = await readyForDelivery();
   const delivery = createDeliveryRecord(store, { requirementId: requirement.id });

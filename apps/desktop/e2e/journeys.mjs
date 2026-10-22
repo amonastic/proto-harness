@@ -64,11 +64,61 @@ async function launch({ userData, projects }) {
   const page = await app.firstWindow({ timeout: 45000 });
   await page.waitForLoadState('domcontentloaded');
   const errors = [];
-  page.on('pageerror', (error) => errors.push(`PAGEERROR ${error.message}`));
-  page.on('console', (message) => {
-    if (message.type() === 'error') errors.push(`CONSOLE ${message.text()}`);
+  const logs = [];
+  page.on('pageerror', (error) => {
+    const line = `PAGEERROR ${error.message}`;
+    logs.push(line);
+    errors.push(line);
   });
-  return { app, page, errors };
+  page.on('console', (message) => {
+    const line = `CONSOLE[${message.type()}] ${message.text()}`;
+    logs.push(line);
+    if (message.type() === 'error') errors.push(line);
+  });
+  return { app, page, errors, logs };
+}
+
+async function dumpFailure(page, journey, error, logs = []) {
+  try {
+    const dir = path.join(EVIDENCE_DIR, journey);
+    fs.mkdirSync(dir, { recursive: true });
+    const record = {
+      journey,
+      at: new Date().toISOString(),
+      message: error.message,
+      stack: error.stack || '',
+      url: null,
+      title: null,
+      body_excerpt: null,
+      screenshot: null,
+      screenshot_error: null,
+      console: logs.slice(-200)
+    };
+    try { record.url = page.url(); } catch (captureError) { record.url_error = captureError.message; }
+    try { record.title = await page.title(); } catch (captureError) { record.title_error = captureError.message; }
+    try {
+      const body = await page.locator('body').innerText({ timeout: 5000 });
+      record.body_excerpt = body.slice(0, 20000);
+    } catch (captureError) {
+      record.body_error = captureError.message;
+    }
+    try {
+      await page.screenshot({
+        path: path.join(dir, 'failure.png'),
+        animations: 'disabled',
+        timeout: 20000
+      });
+      record.screenshot = 'failure.png';
+    } catch (captureError) {
+      record.screenshot_error = captureError.message;
+    }
+    fs.writeFileSync(
+      path.join(dir, 'failure-diagnostics.json'),
+      `${JSON.stringify(record, null, 2)}\n`
+    );
+  } catch (diagnosticError) {
+    console.error(`[${journey}] 失败诊断写入失败：${diagnosticError.message}`);
+  }
 }
 
 async function shot(page, journey, name) {
@@ -247,7 +297,9 @@ async function journeyOne() {
   const root = freshRoot('j1');
   const projects = path.join(root, 'projects');
   const userData = path.join(root, 'user');
-  const { app, page, errors } = await launch({ userData, projects });
+  const { app, page, errors, logs } = await launch({ userData, projects });
+  let activePage = page;
+  let activeLogs = logs;
   let projectDir;
   let requirementId;
   let deliveryId;
@@ -357,6 +409,8 @@ async function journeyOne() {
     // 重启恢复
     await app.close();
     const second = await launch({ userData, projects });
+    activePage = second.page;
+    activeLogs = second.logs;
     try {
       await second.page.waitForSelector('[data-testid="project-card"]', { timeout: 20000 });
       await second.page.locator('[data-testid="project-card"]').first().click();
@@ -375,7 +429,7 @@ async function journeyOne() {
     }
     return { projectDir, requirementId, deliveryId, errors };
   } catch (error) {
-    await page.screenshot({ path: path.join(EVIDENCE_DIR, 'journey-1', 'failure.png') }).catch(() => {});
+    await dumpFailure(activePage, 'journey-1', error, activeLogs);
     error.message = `[journey-1] ${error.message}`;
     throw error;
   } finally {
@@ -388,7 +442,7 @@ async function journeyTwo() {
   const projects = path.join(root, 'projects');
   const userData = path.join(root, 'user');
   const before = hashTree(SAMPLE_DIR);
-  const { app, page, errors } = await launch({ userData, projects });
+  const { app, page, errors, logs } = await launch({ userData, projects });
   let projectDir;
   let requirementId;
   let deliveryId;
@@ -457,7 +511,7 @@ async function journeyTwo() {
     assert.deepEqual(errors, [], `控制台错误：${errors.join('\n')}`);
     return { projectDir, requirementId, deliveryId, errors };
   } catch (error) {
-    await page.screenshot({ path: path.join(EVIDENCE_DIR, 'journey-2', 'failure.png') }).catch(() => {});
+    await dumpFailure(page, 'journey-2', error, logs);
     error.message = `[journey-2] ${error.message}`;
     throw error;
   } finally {
@@ -470,7 +524,7 @@ async function journeyThree() {
   const root = freshRoot('j3');
   const projects = path.join(root, 'projects');
   const userData = path.join(root, 'user');
-  const { app, page, errors } = await launch({ userData, projects });
+  const { app, page, errors, logs } = await launch({ userData, projects });
   let projectDir;
   let reqAId;
   let reqBId;
@@ -598,7 +652,7 @@ async function journeyThree() {
     assert.deepEqual(errors, [], `控制台错误：${errors.join('\n')}`);
     return { projectDir, requirementIds: [reqAId, reqBId], deliveryIds: [deliveryA, deliveryB], errors };
   } catch (error) {
-    await page.screenshot({ path: path.join(EVIDENCE_DIR, 'journey-3', 'failure.png') }).catch(() => {});
+    await dumpFailure(page, 'journey-3', error, logs);
     error.message = `[journey-3] ${error.message}`;
     throw error;
   } finally {

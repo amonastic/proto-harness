@@ -209,6 +209,26 @@ function scanForSecrets(text) {
   return patterns.some((pattern) => pattern.test(text));
 }
 
+const TEXT_SCAN_EXTENSIONS = new Set(['.html', '.json', '.md', '.txt', '.css']);
+
+function findSecretFiles(root) {
+  const hits = [];
+  const queue = [root];
+  while (queue.length > 0) {
+    const dir = queue.pop();
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        queue.push(full);
+        continue;
+      }
+      if (!TEXT_SCAN_EXTENSIONS.has(path.extname(entry.name).toLowerCase())) continue;
+      if (scanForSecrets(fs.readFileSync(full, 'utf8'))) hits.push(path.relative(root, full));
+    }
+  }
+  return hits.sort();
+}
+
 export function exportDelivery(store, deliveryId, { warnings = [] } = {}) {
   const delivery = store.getDelivery(deliveryId);
   if (!delivery) throw fail('NOT_FOUND', '交付版本不存在');
@@ -285,9 +305,6 @@ export function exportDelivery(store, deliveryId, { warnings = [] } = {}) {
     const indexHtml = deliveryIndexHtml({
       delivery, requirement, snapshot, cssSpec, warnings: exportWarnings, requirementDocMarkdown
     });
-    if (scanForSecrets(indexHtml)) {
-      throw fail('DELIVERY_INCOMPLETE', '导出内容疑似包含密钥，已停止');
-    }
     fs.writeFileSync(path.join(tempDir, 'index.html'), indexHtml, 'utf8');
     atomicWriteJson(path.join(tempDir, 'manifest.json'), {
       delivery_id: delivery.id,
@@ -302,6 +319,10 @@ export function exportDelivery(store, deliveryId, { warnings = [] } = {}) {
       files: delivery.manifest,
       warnings: exportWarnings
     });
+    const secretFiles = findSecretFiles(tempDir);
+    if (secretFiles.length > 0) {
+      throw fail('DELIVERY_INCOMPLETE', '导出内容疑似包含密钥，已停止', { secret_files: secretFiles });
+    }
     const links = [...indexHtml.matchAll(/(?:href|src)="([^"]+)"/g)].map((match) => match[1])
       .filter((link) => !/^(https?:|#|data:)/.test(link));
     const brokenLinks = links.filter((link) => !fs.existsSync(path.join(tempDir, link)));
