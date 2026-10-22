@@ -1,6 +1,6 @@
 {
   "schema_version": "pha-project-v1",
-  "id": "PRODUCT-运营活动台-E68CCF",
+  "id": "PRODUCT-运营活动台-D0B374",
   "name": "运营活动台",
   "goal": "让员工提交活动报名，管理员查看和管理报名记录",
   "audience": "员工、管理员",
@@ -10,25 +10,25 @@
   ],
   "endpoints": [
     {
-      "id": "EP-员工端-1AC23",
+      "id": "EP-员工端-417B5",
       "name": "员工端",
       "role": "员工",
       "platform": "Web",
       "ui_standard": ""
     },
     {
-      "id": "EP-管理后台-3DB9F",
+      "id": "EP-管理后台-476A3",
       "name": "管理后台",
       "role": "管理员",
       "platform": "Web",
       "ui_standard": ""
     }
   ],
-  "current_baseline_id": "BASELINE-初始基线-4CD41",
+  "current_baseline_id": "BASELINE-初始基线-EB7B0",
   "open_questions": [],
   "source_roots": [],
-  "app_version": "0.1.3",
-  "created_at": "2026-10-21T14:34:45.079Z",
-  "updated_at": "2026-10-21T14:34:45.081Z",
+  "app_version": "0.1.4",
+  "created_at": "2026-10-22T02:43:19.118Z",
+  "updated_at": "2026-10-22T02:43:19.120Z",
   "revision": 2
 }

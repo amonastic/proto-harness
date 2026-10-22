@@ -1,0 +1,128 @@
+{
+  "schema_version": "pha-delivery-v1",
+  "id": "RELEASE-支持同一取件码-2-分钟内重复开柜-1DE18",
+  "product_id": "PRODUCT-社区驿站取件-1BC574",
+  "requirement_id": "REQ-支持同一取件码-2-分钟内重复开柜-D27E33",
+  "requirement_revision": 6,
+  "baseline_id": "BASELINE-支持同一取件码-2-分钟内重复开柜-NEXT-10CCF",
+  "rule_refs": [
+    {
+      "id": "RULE-取件码-38977",
+      "revision": 2
+    },
+    {
+      "id": "RULE-订单-42E5D",
+      "revision": 2
+    }
+  ],
+  "artifact_refs": [
+    "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-D27E33-36AC2",
+    "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-D27E33-2FA27",
+    "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-D27E33-3503A",
+    "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-D27E33-F62AD",
+    "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-D27E33-A2BF1"
+  ],
+  "manifest": [
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-D27E33-36AC2",
+      "type": "requirement-doc",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-D27E33/requirement.md",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-D27E33/requirement.md",
+      "sha256": "0b2317f453a39bbc422fb791ac738334ba7b8b69fa2c294ea7e622d474968066",
+      "size": 3634,
+      "size_label": "3.5 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-D27E33-2FA27",
+      "type": "interaction-spec",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-D27E33/interaction-spec.json",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-D27E33/interaction-spec.json",
+      "sha256": "3233d8953c9c6068aedae1bf9d7d6f7b9a7936d9a0f7c4bddc2f89fe4a33926a",
+      "size": 5149,
+      "size_label": "5.0 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-D27E33-3503A",
+      "type": "prototype",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-D27E33/artifacts/prototype.html",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-D27E33/artifacts/prototype.html",
+      "sha256": "1ffd8d2680a90c4a2cc81ecf5ee6743e8e47edac9917f3ebf1f7a9121a6ddd29",
+      "size": 17136,
+      "size_label": "16.7 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-D27E33-F62AD",
+      "type": "css-spec",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-D27E33/artifacts/css-spec.json",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-D27E33/artifacts/css-spec.json",
+      "sha256": "3596cfcf9d61cbded5008814e1e584d92bcb22a36f0b13cf60791329a381fb54",
+      "size": 5243,
+      "size_label": "5.1 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-支持同一取件码-2-分钟内重复开柜-D27E33-A2BF1",
+      "type": "mapping",
+      "path": "requirements/REQ-支持同一取件码-2-分钟内重复开柜-D27E33/artifacts/mapping.json",
+      "frozen_path": "frozen/requirements/REQ-支持同一取件码-2-分钟内重复开柜-D27E33/artifacts/mapping.json",
+      "sha256": "b205ecc13a130cf0de42db7237039a1c437d67bba6cc1113c74c9e302e69048d",
+      "size": 1691,
+      "size_label": "1.7 KB",
+      "state": "draft"
+    }
+  ],
+  "source_commit": null,
+  "display_snapshot": {
+    "captured_at": "2026-10-22T02:43:00.338Z",
+    "product": {
+      "id": "PRODUCT-社区驿站取件-1BC574",
+      "name": "社区驿站取件",
+      "goal": "让门店店员在 2 分钟内可重复开柜，同时不改变订单签收状态"
+    },
+    "requirement": {
+      "id": "REQ-支持同一取件码-2-分钟内重复开柜-D27E33",
+      "title": "支持同一取件码 2 分钟内重复开柜",
+      "goal": "同一取件码在 2 分钟内可重复打开原柜原格，不改变订单状态",
+      "revision": 6
+    },
+    "baseline": {
+      "id": "BASELINE-支持同一取件码-2-分钟内重复开柜-NEXT-10CCF",
+      "name": "支持同一取件码 2 分钟内重复开柜 · 下一版",
+      "status": "planned",
+      "activated_at": null,
+      "notes": "由需求 REQ-支持同一取件码-2-分钟内重复开柜-D27E33 的裁决建立；未自动生效。 规则变更：RULE-取件码-38977 r2、RULE-订单-42E5D r2"
+    },
+    "rules": [
+      {
+        "id": "RULE-取件码-38977",
+        "revision": 2,
+        "statement": "同一取件码在 2 分钟内可重复开柜，不改变订单状态",
+        "constraints": [],
+        "knowledge_status": "confirmed",
+        "effective_state": "planned"
+      },
+      {
+        "id": "RULE-订单-42E5D",
+        "revision": 2,
+        "statement": "重复开柜不得触发新的物流推送",
+        "constraints": [],
+        "knowledge_status": "confirmed",
+        "effective_state": "planned"
+      }
+    ],
+    "source_commit": null
+  },
+  "status": "exported",
+  "created_at": "2026-10-22T02:43:00.337Z",
+  "updated_at": "2026-10-22T02:43:00.342Z",
+  "exported_at": "2026-10-22T02:43:00.342Z",
+  "export_path": "deliveries/RELEASE-支持同一取件码-2-分钟内重复开柜-1DE18/export",
+  "warnings": [
+    "本次交付使用 planned 基线：规则已确认但尚未切换为当前生效；接收者需知晓生效状态。",
+    "交付未绑定 Git 提交；如需追溯请先提交项目文件。"
+  ],
+  "last_export_error": null
+}

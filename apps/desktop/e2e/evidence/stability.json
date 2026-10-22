@@ -1,0 +1,47 @@
+{
+  "artifact": "apps/desktop/release/Proto-Harness-Agent-0.1.4-arm64.dmg",
+  "dmg_sha256": "b2a02f2efb0bf4dc8381cc6f43f3bc8974be07aa32d983b3d84f23c072cecc35",
+  "install_copy": "/tmp/pha-e2e-install-0.1.4-final/Proto Harness Agent.app",
+  "source_commit": "08b0ec86c2327a14758ee5d8f3d41c9fc8d75ada",
+  "label": "packaged",
+  "zero_failure_streak": 5,
+  "wait_fallback_triggered": false,
+  "input_refill_triggered": false,
+  "runs": [
+    {
+      "run": 1,
+      "status": "passed",
+      "duration_seconds": 52,
+      "log": "stability/run-1.log",
+      "log_sha256": "1728bca426774c52a160b78f51e440b102a3c10f10c10c6fbfad67efc8ad3d1f"
+    },
+    {
+      "run": 2,
+      "status": "passed",
+      "duration_seconds": 51,
+      "log": "stability/run-2.log",
+      "log_sha256": "ed88a5faa89a64ed6d2cd914ff2c939c7c09a41e11cadb1d7d9244c80cf5e059"
+    },
+    {
+      "run": 3,
+      "status": "passed",
+      "duration_seconds": 51,
+      "log": "stability/run-3.log",
+      "log_sha256": "04b5ca149b1bbbf14633356c7b2f783c498fa221b98ad20a76bd39564d438f95"
+    },
+    {
+      "run": 4,
+      "status": "passed",
+      "duration_seconds": 50,
+      "log": "stability/run-4.log",
+      "log_sha256": "f190fbd4e991bd7ae41fe4f1d3de2ffbdaf774b1379e092d79877b4e1fd7969c"
+    },
+    {
+      "run": 5,
+      "status": "passed",
+      "duration_seconds": 51,
+      "log": "stability/run-5.log",
+      "log_sha256": "eb9763f410dd3eef29eb817d5ffc90ed0243340944b88f6a493974aec0e93a1e"
+    }
+  ]
+}

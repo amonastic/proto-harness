@@ -1,0 +1,126 @@
+{
+  "source": "local-heuristic",
+  "summary": "业务裁决采纳新口径：业务确认允许 2 分钟内重复开柜，但不改变订单签收状态",
+  "objects": [
+    {
+      "name": "取件码",
+      "key_fields": [],
+      "relations": [],
+      "reason": "从输入与来源材料中识别到的业务对象",
+      "evidence_refs": []
+    },
+    {
+      "name": "订单",
+      "key_fields": [],
+      "relations": [],
+      "reason": "从输入与来源材料中识别到的业务对象",
+      "evidence_refs": []
+    }
+  ],
+  "roles": [
+    {
+      "name": "门店店员",
+      "endpoint": "作业端 App",
+      "reason": "从角色词与端描述中识别"
+    },
+    {
+      "name": "产品运营",
+      "endpoint": "管理后台",
+      "reason": "从角色词与端描述中识别"
+    }
+  ],
+  "endpoints": [
+    {
+      "name": "作业端 App",
+      "role": "门店店员",
+      "platform": "App",
+      "id": "EP-作业端-APP-37766"
+    },
+    {
+      "name": "管理后台",
+      "role": "产品运营",
+      "platform": "Web",
+      "id": "EP-管理后台-FD412"
+    }
+  ],
+  "core_flows": [
+    "在「作业端 App」发起与取件码相关的操作",
+    "系统读取当前基线中的适用规则并判断是否允许继续",
+    "按判断结果完成操作或给出明确阻断原因",
+    "保存本次操作结果与业务状态，供后续查询与核对"
+  ],
+  "scope": {
+    "in_scope": [
+      "支持同一取件码 2 分钟内重复开柜",
+      "取件码相关规则与操作",
+      "订单相关规则与操作"
+    ],
+    "out_of_scope": [
+      "不改变未涉及对象、角色与端的既有行为"
+    ]
+  },
+  "impact": {
+    "actual": [
+      "更新「作业端 App」中与“支持同一取件码 2 分钟内重复开柜 同一取件码在…”相关的操作入口、状态反馈与说明",
+      "更新「管理后台」中与“支持同一取件码 2 分钟内重复开柜 同一取件码在…”相关的操作入口、状态反馈与说明"
+    ],
+    "verify": [
+      "核对配置端规则与消费端展示是否使用同一版本",
+      "核对历史数据、快照与已有交付是否受本次规则变化影响"
+    ],
+    "keep": [
+      "每个取件码仅可开柜一次",
+      "重复开柜不得改变订单签收状态，不得触发新的物流推送"
+    ]
+  },
+  "acceptance": [
+    "规则“同一取件码在 2 分钟内可重复开柜，不改变订单状态”在主要路径生效，并在界面或反馈中可被验证",
+    "规则“重复开柜不得触发新的物流推送”在主要路径生效，并在界面或反馈中可被验证",
+    "空数据、异常与无权限场景有明确反馈，不出现无说明的中断",
+    "需求文档、交互规格与原型引用同一规则版本",
+    "规则 RULE-取件码-38977 r2：同一取件码在 2 分钟内可重复开柜，不改变订单状态",
+    "规则 RULE-订单-42E5D r2：重复开柜不得触发新的物流推送"
+  ],
+  "unknowns": [],
+  "rule_proposals": [],
+  "conflicts": [],
+  "evidence_refs": [],
+  "proposal_reason": "需求与现行规则存在冲突，需先完成业务裁决",
+  "interaction_hints": {
+    "primary_page_name": "支持同一取件码 2 分钟内重复开柜",
+    "states": [
+      "默认",
+      "空数据",
+      "异常/无权限"
+    ]
+  },
+  "decision": {
+    "id": "DECISION-REQ-支持同一取件码-2-分钟内重复开柜-D27E33-377D6",
+    "action": "adopt",
+    "reason": "业务确认允许 2 分钟内重复开柜，但不改变订单签收状态",
+    "condition": "",
+    "at": "2026-10-22T02:42:57.681Z"
+  },
+  "final_rules": [
+    {
+      "id": "RULE-取件码-38977",
+      "revision": 2,
+      "statement": "同一取件码在 2 分钟内可重复开柜，不改变订单状态",
+      "constraints": [],
+      "effective_state": "planned",
+      "knowledge_status": "confirmed"
+    },
+    {
+      "id": "RULE-订单-42E5D",
+      "revision": 2,
+      "statement": "重复开柜不得触发新的物流推送",
+      "constraints": [],
+      "effective_state": "planned",
+      "knowledge_status": "confirmed"
+    }
+  ],
+  "confirmed_answers": [],
+  "rejected_changes": [],
+  "effective_title": "支持同一取件码 2 分钟内重复开柜",
+  "effective_goal": "同一取件码在 2 分钟内可重复打开原柜原格，不改变订单状态"
+}

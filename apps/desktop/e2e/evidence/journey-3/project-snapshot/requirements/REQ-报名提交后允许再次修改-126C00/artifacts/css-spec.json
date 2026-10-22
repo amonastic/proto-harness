@@ -1,0 +1,186 @@
+{
+  "schema_version": "pha-css-spec-v1",
+  "requirement_id": "REQ-报名提交后允许再次修改-126C00",
+  "generated_at": "2026-10-22T02:43:35.103Z",
+  "note": "origin 区分声明（declared）、模板默认（template）与浏览器计算值（computed）。首版没有 computed 值；static-scan 表示从源码静态读取。",
+  "entries": [
+    {
+      "kind": "color",
+      "value": "#1D1D1B",
+      "usage": "主文本与标题",
+      "component_id": "COMPONENT-TOKENS",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "design/tokens.json",
+      "token_name": "ink"
+    },
+    {
+      "kind": "color",
+      "value": "#6F6D66",
+      "usage": "次要说明",
+      "component_id": "COMPONENT-TOKENS",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "design/tokens.json",
+      "token_name": "muted"
+    },
+    {
+      "kind": "color",
+      "value": "#F6F5F1",
+      "usage": "页面背景",
+      "component_id": "COMPONENT-TOKENS",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "design/tokens.json",
+      "token_name": "paper"
+    },
+    {
+      "kind": "color",
+      "value": "#FFFFFF",
+      "usage": "内容卡片",
+      "component_id": "COMPONENT-TOKENS",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "design/tokens.json",
+      "token_name": "surface"
+    },
+    {
+      "kind": "color",
+      "value": "#1F6F5C",
+      "usage": "主操作与当前状态",
+      "component_id": "COMPONENT-TOKENS",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "design/tokens.json",
+      "token_name": "accent"
+    },
+    {
+      "kind": "color",
+      "value": "#E3EFEA",
+      "usage": "选中背景与轻提示",
+      "component_id": "COMPONENT-TOKENS",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "design/tokens.json",
+      "token_name": "accent-soft"
+    },
+    {
+      "kind": "color",
+      "value": "#E3E0D8",
+      "usage": "分隔线与卡片描边",
+      "component_id": "COMPONENT-TOKENS",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "design/tokens.json",
+      "token_name": "border"
+    },
+    {
+      "kind": "color",
+      "value": "#B5622A",
+      "usage": "待裁决与风险提醒",
+      "component_id": "COMPONENT-TOKENS",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "design/tokens.json",
+      "token_name": "warning"
+    },
+    {
+      "kind": "color",
+      "value": "#A33A32",
+      "usage": "错误与破坏性操作",
+      "component_id": "COMPONENT-TOKENS",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "design/tokens.json",
+      "token_name": "danger"
+    },
+    {
+      "kind": "font",
+      "value": "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", sans-serif",
+      "usage": "页面正文",
+      "component_id": "COMPONENT-TOKENS",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "design/tokens.json",
+      "token_name": "正文"
+    },
+    {
+      "kind": "font",
+      "value": "ui-monospace, SFMono-Regular, Menlo, monospace",
+      "usage": "规则 ID、版本号与数据",
+      "component_id": "COMPONENT-TOKENS",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "design/tokens.json",
+      "token_name": "数据与编号"
+    },
+    {
+      "kind": "radius",
+      "value": "14px",
+      "usage": "内容卡片与原型面板",
+      "component_id": "COMPONENT-TOKENS",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "design/tokens.json",
+      "token_name": "卡片"
+    },
+    {
+      "kind": "radius",
+      "value": "9px",
+      "usage": "按钮与输入框",
+      "component_id": "COMPONENT-TOKENS",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "design/tokens.json",
+      "token_name": "控件"
+    },
+    {
+      "kind": "spacing",
+      "value": "32px",
+      "usage": "页面外边距",
+      "component_id": "COMPONENT-TOKENS",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "design/tokens.json",
+      "token_name": "页面"
+    },
+    {
+      "kind": "spacing",
+      "value": "20px",
+      "usage": "卡片之间",
+      "component_id": "COMPONENT-TOKENS",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "design/tokens.json",
+      "token_name": "区块"
+    },
+    {
+      "kind": "spacing",
+      "value": "8px",
+      "usage": "控件内部",
+      "component_id": "COMPONENT-TOKENS",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "design/tokens.json",
+      "token_name": "紧凑"
+    },
+    {
+      "kind": "color",
+      "value": "#1F6F5C",
+      "usage": "原型主操作按钮默认态",
+      "component_id": "COMPONENT-PRIMARY-ACTION",
+      "state": "default",
+      "origin": "template",
+      "source_ref": "artifacts/prototype.html"
+    },
+    {
+      "kind": "color",
+      "value": "#A33A32",
+      "usage": "原型错误与阻断反馈",
+      "component_id": "COMPONENT-ERROR",
+      "state": "error",
+      "origin": "template",
+      "source_ref": "artifacts/prototype.html"
+    }
+  ]
+}

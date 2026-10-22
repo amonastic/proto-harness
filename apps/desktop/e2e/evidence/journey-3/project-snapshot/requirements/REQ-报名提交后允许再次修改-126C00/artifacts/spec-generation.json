@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-22T02:43:35.103Z",
+  "source": "local-heuristic",
+  "model": null,
+  "warning": null,
+  "page_count": 2,
+  "pages": [
+    {
+      "id": "PAGE-FORM-1",
+      "name": "按现行规则处理 · 提交",
+      "type": "form"
+    },
+    {
+      "id": "PAGE-LIST-2",
+      "name": "按现行规则处理 · 管理",
+      "type": "list"
+    }
+  ]
+}

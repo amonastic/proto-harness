@@ -1,0 +1,127 @@
+{
+  "schema_version": "pha-delivery-v1",
+  "id": "RELEASE-员工提交活动报名并查看管理列表-F45CD",
+  "product_id": "PRODUCT-运营活动台-D0B374",
+  "requirement_id": "REQ-员工提交活动报名并查看管理列表-5C8603",
+  "requirement_revision": 5,
+  "baseline_id": "BASELINE-初始基线-EB7B0",
+  "rule_refs": [
+    {
+      "id": "RULE-报名提交后可查看-不得修改-67CA1",
+      "revision": 1
+    },
+    {
+      "id": "RULE-记录-BECA4",
+      "revision": 1
+    }
+  ],
+  "artifact_refs": [
+    "ARTIFACT-REQ-员工提交活动报名并查看管理列表-5C8603-R-DE217",
+    "ARTIFACT-REQ-员工提交活动报名并查看管理列表-5C8603-I-1448B",
+    "ARTIFACT-REQ-员工提交活动报名并查看管理列表-5C8603-P-835A2",
+    "ARTIFACT-REQ-员工提交活动报名并查看管理列表-5C8603-C-CD476",
+    "ARTIFACT-REQ-员工提交活动报名并查看管理列表-5C8603-M-96B33"
+  ],
+  "manifest": [
+    {
+      "artifact_id": "ARTIFACT-REQ-员工提交活动报名并查看管理列表-5C8603-R-DE217",
+      "type": "requirement-doc",
+      "path": "requirements/REQ-员工提交活动报名并查看管理列表-5C8603/requirement.md",
+      "frozen_path": "frozen/requirements/REQ-员工提交活动报名并查看管理列表-5C8603/requirement.md",
+      "sha256": "a005d88ecd6d97bddf9123fc44dc7f463dacb579e893de78004b8136e59f7217",
+      "size": 2965,
+      "size_label": "2.9 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-员工提交活动报名并查看管理列表-5C8603-I-1448B",
+      "type": "interaction-spec",
+      "path": "requirements/REQ-员工提交活动报名并查看管理列表-5C8603/interaction-spec.json",
+      "frozen_path": "frozen/requirements/REQ-员工提交活动报名并查看管理列表-5C8603/interaction-spec.json",
+      "sha256": "359dafb8450cd00c86a1154824ef42b32d2e7d39114bee1a5e15e8b0ee24aeea",
+      "size": 8400,
+      "size_label": "8.2 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-员工提交活动报名并查看管理列表-5C8603-P-835A2",
+      "type": "prototype",
+      "path": "requirements/REQ-员工提交活动报名并查看管理列表-5C8603/artifacts/prototype.html",
+      "frozen_path": "frozen/requirements/REQ-员工提交活动报名并查看管理列表-5C8603/artifacts/prototype.html",
+      "sha256": "6446409becda29e0bd1b69d2e277ea07e19f584cb1293d2d194f6df219e5db10",
+      "size": 20727,
+      "size_label": "20.2 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-员工提交活动报名并查看管理列表-5C8603-C-CD476",
+      "type": "css-spec",
+      "path": "requirements/REQ-员工提交活动报名并查看管理列表-5C8603/artifacts/css-spec.json",
+      "frozen_path": "frozen/requirements/REQ-员工提交活动报名并查看管理列表-5C8603/artifacts/css-spec.json",
+      "sha256": "4c4496bcf1147b6b4cb1fccff416d35db97385c95a099e4ac51b0038f87f3b36",
+      "size": 5243,
+      "size_label": "5.1 KB",
+      "state": "draft"
+    },
+    {
+      "artifact_id": "ARTIFACT-REQ-员工提交活动报名并查看管理列表-5C8603-M-96B33",
+      "type": "mapping",
+      "path": "requirements/REQ-员工提交活动报名并查看管理列表-5C8603/artifacts/mapping.json",
+      "frozen_path": "frozen/requirements/REQ-员工提交活动报名并查看管理列表-5C8603/artifacts/mapping.json",
+      "sha256": "ef542d904895581f3ac01ac9f57515da85c6a0a13497b3c3a2249cea34f1f496",
+      "size": 1689,
+      "size_label": "1.6 KB",
+      "state": "draft"
+    }
+  ],
+  "source_commit": null,
+  "display_snapshot": {
+    "captured_at": "2026-10-22T02:43:26.028Z",
+    "product": {
+      "id": "PRODUCT-运营活动台-D0B374",
+      "name": "运营活动台",
+      "goal": "让员工提交活动报名，管理员查看和管理报名记录"
+    },
+    "requirement": {
+      "id": "REQ-员工提交活动报名并查看管理列表-5C8603",
+      "title": "员工提交活动报名并查看管理列表",
+      "goal": "员工填写报名信息，管理员查看报名列表",
+      "revision": 5
+    },
+    "baseline": {
+      "id": "BASELINE-初始基线-EB7B0",
+      "name": "初始基线",
+      "status": "current",
+      "activated_at": "2026-10-22T02:43:19.120Z",
+      "notes": ""
+    },
+    "rules": [
+      {
+        "id": "RULE-报名提交后可查看-不得修改-67CA1",
+        "revision": 1,
+        "statement": "报名提交后仅可查看，不得修改",
+        "constraints": [],
+        "knowledge_status": "confirmed",
+        "effective_state": "current"
+      },
+      {
+        "id": "RULE-记录-BECA4",
+        "revision": 1,
+        "statement": "报名记录必须记录提交时间",
+        "constraints": [],
+        "knowledge_status": "confirmed",
+        "effective_state": "current"
+      }
+    ],
+    "source_commit": null
+  },
+  "status": "exported",
+  "created_at": "2026-10-22T02:43:26.026Z",
+  "updated_at": "2026-10-22T02:43:26.966Z",
+  "exported_at": "2026-10-22T02:43:26.966Z",
+  "export_path": "deliveries/RELEASE-员工提交活动报名并查看管理列表-F45CD/export",
+  "warnings": [
+    "交付未绑定 Git 提交；如需追溯请先提交项目文件。"
+  ],
+  "last_export_error": null
+}
